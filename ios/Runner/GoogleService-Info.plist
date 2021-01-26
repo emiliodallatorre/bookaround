@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>619087397678-narv4931t4dckbb2v5445u2r79lb48rs.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.619087397678-narv4931t4dckbb2v5445u2r79lb48rs</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>619087397678-h9ckku3ab1coi53cmp373dl28oqsfu2i.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAbhuWaVWurV0sIlTmevbMd4f78TxTq35g</string>
+	<key>GCM_SENDER_ID</key>
+	<string>619087397678</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>it.emiliodallatorre.bookaround</string>
+	<key>PROJECT_ID</key>
+	<string>bookaround-firebase</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bookaround-firebase.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:619087397678:ios:c96751de5732d8be52b0bf</string>
+</dict>
+</plist>

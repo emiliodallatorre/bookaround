@@ -29,7 +29,7 @@ class SplashScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text(References.appName, style: GoogleFonts.lobsterTextTheme().headline2),
+            Text(References.appName, style: GoogleFonts.lobster(textStyle: Theme.of(context).textTheme.headline5.copyWith(fontSize: 64.0))),
             CircularProgressIndicator(),
           ],
         ),
