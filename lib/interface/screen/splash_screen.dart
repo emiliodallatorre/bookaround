@@ -1,6 +1,8 @@
 import 'package:bookaround/interface/screen/login_screen.dart';
+import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/helper/init_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreen extends StatelessWidget {
   static const String route = "/splashScreen";
@@ -22,6 +24,16 @@ class SplashScreen extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context) {
-    return Center(child: CircularProgressIndicator());
+    return SafeArea(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(References.appName, style: GoogleFonts.lobsterTextTheme().headline2),
+            CircularProgressIndicator(),
+          ],
+        ),
+      ),
+    );
   }
 }
