@@ -15,8 +15,11 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_localizations:
+    sdk: flutter
+
   # Grafica
-  cupertino_icons: ^1.0.2
+  # cupertino_icons: ^1.0.2
   code_field: ^1.22.0
 
   # Firebase
@@ -24,6 +27,13 @@ dependencies:
   firebase_auth: ^0.20.0+1
   firebase_core: ^0.7.0
   cloud_functions: ^0.9.0
+
+  # Logica
+  provider: ^4.3.3
+
+
+dependency_overrides:
+  intl: ^0.16.1
 
 
 dev_dependencies:

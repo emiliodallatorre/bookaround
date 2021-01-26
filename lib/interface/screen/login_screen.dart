@@ -1,34 +1,93 @@
+import 'package:bookaround/generated/l10n.dart';
+import 'package:bookaround/resources/helper/auth_helper.dart';
+import 'package:code_field/code_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   static const String route = "/loginScreen";
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  LoginType loginType = LoginType.SIGN_IN;
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildBody(context),
+    return ChangeNotifierProvider(
+      create: (BuildContext context) => LoginScreenState(),
+      builder: (BuildContext context, Widget child) => Scaffold(body: _buildBody(context)),
     );
   }
 
   Widget _buildBody(BuildContext context) {
-    return Column(
-      children: [
-        TextField(
-          keyboardType: TextInputType.phone,
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Consumer<LoginScreenState>(
+          builder: (BuildContext context, LoginScreenState state, Widget child) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("🦊 " + S.current.login, style: Theme.of(context).textTheme.headline5),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: state.loginStep == LoginStep.SIGN_IN
+                      ? TextField(
+                          controller: state.numberController,
+                          keyboardType: TextInputType.phone,
+                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                          decoration: InputDecoration(labelText: S.current.phoneNumber, prefixText: "+39"),
+                        )
+                      : InputCodeField(
+                          control: state.codeController,
+                          autofocus: true,
+                          decoration: InputCodeDecoration(textStyle: Theme.of(context).textTheme.headline5),
+                        ),
+                ),
+                ElevatedButton(
+                  child: Text(S.current.proceed),
+                  onPressed: () {
+                    switch (state.loginStep) {
+                      case LoginStep.SIGN_IN:
+                        AuthHelper.sendSmsCode("+39" + state.numberController.text, context);
+                        break;
+                      case LoginStep.INSERT_CODE:
+                        state.loginWithCredential();
+                        break;
+                      case LoginStep.ERROR:
+                        // TODO: Handle this case.
+                        break;
+                    }
+                  },
+                ),
+              ],
+            );
+          },
         ),
-      ],
+      ),
     );
   }
 }
 
-enum LoginType { SIGN_IN, SIGN_UP }
+enum LoginStep { SIGN_IN, INSERT_CODE, ERROR }
+
+class LoginScreenState extends ChangeNotifier {
+  LoginStep loginStep = LoginStep.SIGN_IN;
+
+  TextEditingController numberController = TextEditingController();
+  InputCodeControl codeController = InputCodeControl();
+
+  String verificationCode;
+
+  void setLoginStep(LoginStep newLoginStep) {
+    this.loginStep = newLoginStep;
+
+    notifyListeners();
+  }
+
+  void setVerificationCode(String verificationCode) {
+    this.verificationCode = verificationCode;
+
+    notifyListeners();
+  }
+
+  Future<void> loginWithCredential() => AuthHelper.loginWithCredential(this.verificationCode, this.codeController.value);
+}

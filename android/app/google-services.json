@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "619087397678",
+    "project_id": "bookaround-firebase",
+    "storage_bucket": "bookaround-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619087397678:android:eee2e0dddb6eb80c52b0bf",
+        "android_client_info": {
+          "package_name": "it.emiliodallatorre.bookaround"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619087397678-h9ckku3ab1coi53cmp373dl28oqsfu2i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "it.emiliodallatorre.bookaround",
+            "certificate_hash": "4ee10d89c8cfb758aa8f680f23d56e793f920dbd"
+          }
+        },
+        {
+          "client_id": "619087397678-7c4b2suho49decd0nsp6aj680ubieckd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzdPJMZe2WKjGyypsbQtj0tOVHeh3MmyE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619087397678-7c4b2suho49decd0nsp6aj680ubieckd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
