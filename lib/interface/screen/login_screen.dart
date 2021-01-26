@@ -1,4 +1,5 @@
 import 'package:bookaround/generated/l10n.dart';
+import 'package:bookaround/interface/screen/home_screen.dart';
 import 'package:bookaround/resources/helper/auth_helper.dart';
 import 'package:code_field/code_field.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,25 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (BuildContext context) => LoginScreenState(),
-      builder: (BuildContext context, Widget child) => Scaffold(body: _buildBody(context)),
+      builder: (BuildContext context, Widget child) => WillPopScope(
+          onWillPop: () {
+            LoginScreenState state = Provider.of<LoginScreenState>(context, listen: false);
+
+            Future<bool> pop = Future.value(false);
+
+            switch (state.loginStep) {
+              case LoginStep.SIGN_IN:
+                pop = Future.value(true);
+                break;
+              case LoginStep.INSERT_CODE:
+              case LoginStep.ERROR:
+                state.setLoginStep(LoginStep.SIGN_IN);
+                break;
+            }
+
+            return pop;
+          },
+          child: Scaffold(body: _buildBody(context))),
     );
   }
 
@@ -50,7 +69,7 @@ class LoginScreen extends StatelessWidget {
                         AuthHelper.sendSmsCode("+39" + state.numberController.text, context);
                         break;
                       case LoginStep.INSERT_CODE:
-                        state.loginWithCredential();
+                        state.loginWithCredential(context);
                         break;
                       case LoginStep.ERROR:
                         // TODO: Handle this case.
@@ -89,5 +108,8 @@ class LoginScreenState extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> loginWithCredential() => AuthHelper.loginWithCredential(this.verificationCode, this.codeController.value);
+  Future<void> loginWithCredential(BuildContext context) async {
+    await AuthHelper.loginWithCredential(this.verificationCode, this.codeController.value);
+    Navigator.of(context).pushReplacementNamed(HomeScreen.route);
+  }
 }

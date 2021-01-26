@@ -7,7 +7,14 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    InitHelper.initialize().whenComplete(() => Navigator.of(context).pushReplacementNamed(LoginScreen.route));
+    DateTime firstFrame = DateTime.now();
+    InitHelper.initialize().whenComplete(() async {
+      // Fa durare la splash screen almeno 4 secondi.
+      Duration elapsedTime = DateTime.now().difference(firstFrame);
+      if (elapsedTime < Duration(seconds: 4)) await Future.delayed(Duration(seconds: 4) - elapsedTime);
+
+      Navigator.of(context).pushReplacementNamed(LoginScreen.route);
+    });
 
     return Scaffold(
       body: _buildBody(context),

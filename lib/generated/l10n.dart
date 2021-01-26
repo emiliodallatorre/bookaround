@@ -45,21 +45,31 @@ class S {
     );
   }
 
-  /// `Procedi`
+  /// `Proceed`
   String get proceed {
     return Intl.message(
-      'Procedi',
+      'Proceed',
       name: 'proceed',
       desc: '',
       args: [],
     );
   }
 
-  /// `Accedi`
+  /// `Login`
   String get login {
     return Intl.message(
-      'Accedi',
+      'Login',
       name: 'login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This code is not working, try again`
+  String get wrongCode {
+    return Intl.message(
+      'This code is not working, try again',
+      name: 'wrongCode',
       desc: '',
       args: [],
     );

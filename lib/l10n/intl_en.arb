@@ -1,5 +1,6 @@
 {
   "phoneNumber": "Phone number",
-  "proceed": "Procedi",
-  "login": "Accedi"
+  "proceed": "Proceed",
+  "login": "Login",
+  "wrongCode": "This code is not working, try again"
 }

@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static _notInlinedMessages(_) => <String, Function> {
     "login" : MessageLookupByLibrary.simpleMessage("Accedi"),
     "phoneNumber" : MessageLookupByLibrary.simpleMessage("Numero di telefono"),
-    "proceed" : MessageLookupByLibrary.simpleMessage("Procedi")
+    "proceed" : MessageLookupByLibrary.simpleMessage("Procedi"),
+    "wrongCode" : MessageLookupByLibrary.simpleMessage("Questo codice non è corretto, riprova")
   };
 }

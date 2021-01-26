@@ -1,5 +1,6 @@
 {
   "phoneNumber": "Numero di telefono",
   "proceed": "Procedi",
-  "login": "Accedi"
+  "login": "Accedi",
+  "wrongCode": "Questo codice non è corretto, riprova"
 }

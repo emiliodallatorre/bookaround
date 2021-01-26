@@ -14,9 +14,9 @@ class AuthHelper {
         // TODO: Implementare meglio.
       },
       verificationFailed: (FirebaseAuthException e) {
-        debugPrint("La verifica non è andata a buon fine!");
+        debugPrint("La verifica automatica non è andata a buon fine!");
 
-        Provider.of<LoginScreenState>(context, listen: false).setLoginStep(LoginStep.ERROR);
+        // Provider.of<LoginScreenState>(context, listen: false).setLoginStep(LoginStep.ERROR);
       },
       codeSent: (String verificationId, int resendToken) {
         debugPrint("Il codice è stato spedito!");
@@ -25,7 +25,7 @@ class AuthHelper {
         Provider.of<LoginScreenState>(context, listen: false).setVerificationCode(verificationId);
       },
       codeAutoRetrievalTimeout: (String verificationId) {
-        debugPrint("BOOOH!");
+        debugPrint("È passato il tempo massimo per la verifica automatica.");
       },
     );
   }
