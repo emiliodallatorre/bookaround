@@ -22,11 +22,18 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "buyBooks" : MessageLookupByLibrary.simpleMessage("Searching"),
+    "city" : MessageLookupByLibrary.simpleMessage("City"),
+    "editProfile" : MessageLookupByLibrary.simpleMessage("Edit profile"),
     "login" : MessageLookupByLibrary.simpleMessage("Login"),
+    "logout" : MessageLookupByLibrary.simpleMessage("Logout"),
+    "name" : MessageLookupByLibrary.simpleMessage("Name"),
     "noBooks" : MessageLookupByLibrary.simpleMessage("There aren\'t any book here yet, add one with the \"add\" button...!"),
     "phoneNumber" : MessageLookupByLibrary.simpleMessage("Phone number"),
     "proceed" : MessageLookupByLibrary.simpleMessage("Proceed"),
+    "requiredField" : MessageLookupByLibrary.simpleMessage("This field is required"),
+    "save" : MessageLookupByLibrary.simpleMessage("Save"),
     "sellBooks" : MessageLookupByLibrary.simpleMessage("My books"),
+    "surname" : MessageLookupByLibrary.simpleMessage("Surname"),
     "wrongCode" : MessageLookupByLibrary.simpleMessage("This code is not working, try again")
   };
 }

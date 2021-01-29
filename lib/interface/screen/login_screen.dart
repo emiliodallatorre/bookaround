@@ -1,5 +1,6 @@
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/screen/home_screen.dart';
+import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/helper/auth_helper.dart';
 import 'package:bookaround/resources/helper/init_helper.dart';
 import 'package:code_field/code_field.dart';
@@ -46,7 +47,7 @@ class LoginScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("🦊 " + S.current.login, style: Theme.of(context).textTheme.headline5),
+                Text(References.fox + " " + S.current.login, style: Theme.of(context).textTheme.headline5),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: state.loginStep == LoginStep.SIGN_IN

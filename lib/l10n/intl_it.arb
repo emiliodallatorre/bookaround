@@ -5,5 +5,12 @@
   "wrongCode": "Questo codice non è corretto, riprova",
   "sellBooks": "I miei libri",
   "buyBooks": "Le mie ricerche",
-  "noBooks": "Non c'è ancora nessun libro in questa sezione, aggiungilo con l'apposito pulsante...!"
+  "noBooks": "Non c'è ancora nessun libro in questa sezione, aggiungilo con l'apposito pulsante...!",
+  "logout": "Logout",
+  "editProfile": "Modifica profilo",
+  "name": "Nome",
+  "surname": "Cognome",
+  "city": "Città",
+  "save": "Salva",
+  "requiredField": "Questo campo è necessario"
 }

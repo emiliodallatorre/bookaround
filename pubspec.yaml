@@ -36,6 +36,10 @@ dependencies:
   # Modelli
   json_annotation: ^3.1.1
 
+  # Utilità
+  form_field_validator: ^1.0.1
+  cached_network_image: ^2.5.0
+
 
 dev_dependencies:
   flutter_test:

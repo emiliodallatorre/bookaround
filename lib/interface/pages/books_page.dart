@@ -27,7 +27,7 @@ class BooksPage extends StatelessWidget {
           return Center(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Text(S.current.noBooks, style: Theme.of(context).textTheme.bodyText1),
+              child: Text(S.current.noBooks, style: Theme.of(context).textTheme.bodyText1, textAlign: TextAlign.center),
             ),
           );
         }

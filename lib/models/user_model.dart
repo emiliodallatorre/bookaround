@@ -9,7 +9,8 @@ part 'user_model.g.dart';
 class UserModel extends ChangeNotifier {
   String uid;
   String phoneNumber;
-  String name, surname;
+  String name, surname, city;
+  String profileImageUrl;
 
   @JsonKey(ignore: true)
   DocumentReference reference;
@@ -19,11 +20,14 @@ class UserModel extends ChangeNotifier {
     this.phoneNumber,
     this.name,
     this.surname,
+    this.city,
+    this.profileImageUrl,
+    this.reference,
   });
 
   bool get isLogged => this.uid != null;
 
-  String get displayName => this.name + " " + this.displayName;
+  String get displayName => this.name + " " + this.surname;
 
   @override
   String toString() => "Utente $uid.";
@@ -45,6 +49,7 @@ class UserModel extends ChangeNotifier {
     this.phoneNumber = updatedUser.phoneNumber;
     this.name = updatedUser.name;
     this.surname = updatedUser.surname;
+    this.city = updatedUser.city;
 
     this.reference = updatedUserReference;
 

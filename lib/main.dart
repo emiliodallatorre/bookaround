@@ -1,6 +1,7 @@
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/screen/home_screen.dart';
 import 'package:bookaround/interface/screen/login_screen.dart';
+import 'package:bookaround/interface/screen/profile_editor_screen.dart';
 import 'package:bookaround/interface/screen/splash_screen.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
@@ -22,10 +23,7 @@ class Bookaround extends StatelessWidget {
       ],
       builder: (BuildContext context, Widget child) => MaterialApp(
         title: References.appName,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          textTheme: GoogleFonts.poppinsTextTheme()
-        ),
+        theme: ThemeData(primarySwatch: Colors.teal, textTheme: GoogleFonts.poppinsTextTheme()),
         initialRoute: SplashScreen.route,
         supportedLocales: S.delegate.supportedLocales,
         localizationsDelegates: <LocalizationsDelegate>[
@@ -39,6 +37,7 @@ class Bookaround extends StatelessWidget {
           SplashScreen.route: (BuildContext context) => SplashScreen(),
           LoginScreen.route: (BuildContext context) => LoginScreen(),
           HomeScreen.route: (BuildContext context) => HomeScreen(),
+          ProfileEditorScreen.route: (BuildContext context) => ProfileEditorScreen(),
         },
       ),
     );
