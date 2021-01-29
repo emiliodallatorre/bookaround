@@ -31,6 +31,7 @@ dependencies:
 
   # Logica
   provider: ^4.3.3
+  rxdart: ^0.25.0
 
   # Modelli
   json_annotation: ^3.1.1

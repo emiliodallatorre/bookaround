@@ -4,5 +4,6 @@
   "login": "Accedi",
   "wrongCode": "Questo codice non è corretto, riprova",
   "sellBooks": "I miei libri",
-  "buyBooks": "Le mie ricerche"
+  "buyBooks": "Le mie ricerche",
+  "noBooks": "Non c'è ancora nessun libro in questa sezione, aggiungilo con l'apposito pulsante...!"
 }

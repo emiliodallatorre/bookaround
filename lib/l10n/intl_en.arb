@@ -4,5 +4,6 @@
   "login": "Login",
   "wrongCode": "This code is not working, try again",
   "sellBooks": "My books",
-  "buyBooks": "Searching"
+  "buyBooks": "Searching",
+  "noBooks": "There aren't any book here yet, add one with the \"add\" button...!"
 }

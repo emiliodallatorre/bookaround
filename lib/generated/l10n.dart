@@ -94,6 +94,16 @@ class S {
       args: [],
     );
   }
+
+  /// `There aren't any book here yet, add one with the "add" button...!`
+  String get noBooks {
+    return Intl.message(
+      'There aren\'t any book here yet, add one with the "add" button...!',
+      name: 'noBooks',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

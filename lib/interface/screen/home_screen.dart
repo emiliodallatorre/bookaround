@@ -1,4 +1,5 @@
 import 'package:bookaround/generated/l10n.dart';
+import 'package:bookaround/interface/pages/books_page.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget buildBody(BuildContext context) {
-    return Text(Provider.of<UserModel>(context).uid);
+    return IndexedStack(
+      children: [
+        BooksPage(),
+      ],
+    );
   }
 
   BottomAppBar buildBottomNavigationBar(BuildContext context) {
@@ -51,7 +56,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return FloatingActionButton(
       child: Icon(Icons.add),
       onPressed: () {
-        // TODO: Implementare.
+        if (selectedIndex == 0) {
+          // TODO: Aggiungere libri con camera.
+        } else if (selectedIndex == 1) {
+          // TODO: Aggiungere libri alla ricerca.
+        }
       },
     );
   }
