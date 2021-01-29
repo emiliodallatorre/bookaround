@@ -71,8 +71,7 @@ class LoginScreen extends StatelessWidget {
                       case LoginStep.INSERT_CODE:
                         state.loginWithCredential(context);
                         break;
-                      case LoginStep.ERROR:
-                        // TODO: Handle this case.
+                      default:
                         break;
                     }
                   },
@@ -96,8 +95,12 @@ class LoginScreenState extends ChangeNotifier {
 
   String verificationCode;
 
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   void setLoginStep(LoginStep newLoginStep) {
     this.loginStep = newLoginStep;
+
+    if(newLoginStep == LoginStep.ERROR) scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(S.current.wrongCode)));
 
     notifyListeners();
   }

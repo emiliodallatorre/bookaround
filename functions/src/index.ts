@@ -7,7 +7,6 @@ admin.initializeApp();
 // Funzioni di "./users".
 export const createUserInDatabase = users.createUserInDatabase;
 export const deleteUserInDatabase = users.deleteUserInDatabase;
-export const setUserType = users.setUserType;
 export const deleteUser = users.deleteUser;
 
 // Funzioni di "./chat".
