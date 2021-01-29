@@ -1,9 +1,15 @@
-import * as functions from "firebase-functions";
+import * as admin from 'firebase-admin';
+import * as users from './users';
+import * as chat from './chat'
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+admin.initializeApp();
+
+// Funzioni di "./users".
+export const createUserInDatabase = users.createUserInDatabase;
+export const deleteUserInDatabase = users.deleteUserInDatabase;
+export const setUserType = users.setUserType;
+export const deleteUser = users.deleteUser;
+
+// Funzioni di "./chat".
+export const getChatId = chat.getChatId;
+export const updateChatModel = chat.updateChatModel;
