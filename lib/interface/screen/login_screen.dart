@@ -14,24 +14,24 @@ class LoginScreen extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (BuildContext context) => LoginScreenState(),
       builder: (BuildContext context, Widget child) => WillPopScope(
-          onWillPop: () {
-            LoginScreenState state = Provider.of<LoginScreenState>(context, listen: false);
+        onWillPop: () {
+          LoginScreenState state = Provider.of<LoginScreenState>(context, listen: false);
 
-            Future<bool> pop = Future.value(false);
+          Future<bool> pop = Future.value(false);
 
-            switch (state.loginStep) {
-              case LoginStep.SIGN_IN:
-                pop = Future.value(true);
-                break;
-              case LoginStep.INSERT_CODE:
-              case LoginStep.ERROR:
-                state.setLoginStep(LoginStep.SIGN_IN);
-                break;
-            }
+          switch (state.loginStep) {
+            case LoginStep.SIGN_IN:
+              pop = Future.value(true);
+              break;
+            case LoginStep.INSERT_CODE:
+              state.setLoginStep(LoginStep.SIGN_IN);
+              break;
+          }
 
-            return pop;
-          },
-          child: Scaffold(body: _buildBody(context))),
+          return pop;
+        },
+        child: Scaffold(key: Provider.of<LoginScreenState>(context).scaffoldKey, body: _buildBody(context)),
+      ),
     );
   }
 
@@ -71,8 +71,6 @@ class LoginScreen extends StatelessWidget {
                       case LoginStep.INSERT_CODE:
                         state.loginWithCredential(context);
                         break;
-                      default:
-                        break;
                     }
                   },
                 ),
@@ -85,7 +83,7 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-enum LoginStep { SIGN_IN, INSERT_CODE, ERROR }
+enum LoginStep { SIGN_IN, INSERT_CODE }
 
 class LoginScreenState extends ChangeNotifier {
   LoginStep loginStep = LoginStep.SIGN_IN;
@@ -100,8 +98,6 @@ class LoginScreenState extends ChangeNotifier {
   void setLoginStep(LoginStep newLoginStep) {
     this.loginStep = newLoginStep;
 
-    if(newLoginStep == LoginStep.ERROR) scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(S.current.wrongCode)));
-
     notifyListeners();
   }
 
@@ -112,7 +108,12 @@ class LoginScreenState extends ChangeNotifier {
   }
 
   Future<void> loginWithCredential(BuildContext context) async {
-    await AuthHelper.loginWithCredential(this.verificationCode, this.codeController.value);
-    Navigator.of(context).pushReplacementNamed(HomeScreen.route);
+    try {
+      await AuthHelper.loginWithCredential(this.verificationCode, this.codeController.value);
+      Navigator.of(context).pushReplacementNamed(HomeScreen.route);
+    } catch (e) {
+      scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(S.current.wrongCode)));
+      codeController.clear();
+    }
   }
 }

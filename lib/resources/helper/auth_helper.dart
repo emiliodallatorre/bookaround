@@ -28,8 +28,6 @@ class AuthHelper {
         debugPrint("È passato il tempo massimo per la verifica automatica.");
       },
     );
-
-    debugPrint("AAA");
   }
 
   static Future<void> loginWithCredential(String verificationId, String smsCode) async {
