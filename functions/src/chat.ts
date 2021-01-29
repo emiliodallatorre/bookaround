@@ -1,5 +1,6 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
+import { getUser } from "./users";
 
 
 /// Restituisce la corretta [chatId] all'utente che la chiede.
@@ -82,8 +83,10 @@ export const updateChatModel = functions.firestore.document('/chat/{chatId}/mess
 
     // Aggiorniamo la chat.
     await parentChat.update({ "lastMessageDateTime": dateString, lastMessage: message })
-
     console.log("Aggiorno l'ultimo messaggio inviato.")
+
+    // Inviamo le dovute notifiche.
+    await sendMessageNotification(snapshot)
 });
 
 
@@ -100,6 +103,27 @@ async function createChat(participants: string[]): Promise<string> {
     )
 
     return chatId
+}
+
+
+// Invia una notifica per un messaggio.
+async function sendMessageNotification(message: functions.firestore.QueryDocumentSnapshot) {
+    const recipients: string[] = ((await (message.ref.parent.parent as admin.firestore.DocumentReference).get()).data() as admin.firestore.DocumentData)["participants"]
+
+    const senderUser = await getUser(message.data()["senderUid"])
+
+    const payload = {
+        notification: {
+            title: senderUser["displayName"],
+            body: message.data()["body"],
+            sound: "default",
+        },
+    }
+
+    for (const recipient of recipients)
+        await admin.messaging().sendToTopic(recipient, payload)
+
+    console.log("Ho inviato le dovute notifiche.")
 }
 
 

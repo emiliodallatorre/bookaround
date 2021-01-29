@@ -19,19 +19,23 @@ export const deleteUserInDatabase = functions.auth.user().onDelete(async (user) 
 export const deleteUser = functions.https.onCall(async (data, context) => {
     const uid: string = data["uid"];
 
-    //@ts-ignore
+    // @ts-ignore
     if (context.auth.uid !== uid) {
-        console.log("Qualcuno sta tentando di giocare con gli account degli altri.");
+        console.log("Qualcuno gioca a cancellare gli account degli altri...");
         return;
     }
 
     const reference: admin.firestore.DocumentReference = admin.firestore().collection("users").doc(uid);
     const userData = (await reference.get()).data()
 
-    if (userData !== undefined) {
+    if (userData !== undefined) if (userData["userType"] === null) {
         await reference.delete();
         await admin.auth().deleteUser(uid);
 
         console.log("Ho eliminato un'account perché incompleto.");
     } else console.log("Non ho eliminato un account perché era completo.");
 });
+
+export async function getUser(uid: string): Promise<admin.firestore.DocumentData> {
+    return (await admin.firestore().collection("users").doc(uid).get()).data() as admin.firestore.DocumentData
+}
