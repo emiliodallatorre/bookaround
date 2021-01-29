@@ -74,6 +74,26 @@ class S {
       args: [],
     );
   }
+
+  /// `My books`
+  String get sellBooks {
+    return Intl.message(
+      'My books',
+      name: 'sellBooks',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Searching`
+  String get buyBooks {
+    return Intl.message(
+      'Searching',
+      name: 'buyBooks',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

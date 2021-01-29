@@ -2,5 +2,7 @@
   "phoneNumber": "Numero di telefono",
   "proceed": "Procedi",
   "login": "Accedi",
-  "wrongCode": "Questo codice non è corretto, riprova"
+  "wrongCode": "Questo codice non è corretto, riprova",
+  "sellBooks": "I miei libri",
+  "buyBooks": "Le mie ricerche"
 }

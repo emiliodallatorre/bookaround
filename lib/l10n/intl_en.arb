@@ -2,5 +2,7 @@
   "phoneNumber": "Phone number",
   "proceed": "Proceed",
   "login": "Login",
-  "wrongCode": "This code is not working, try again"
+  "wrongCode": "This code is not working, try again",
+  "sellBooks": "My books",
+  "buyBooks": "Searching"
 }
