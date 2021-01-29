@@ -1,6 +1,7 @@
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/screen/home_screen.dart';
 import 'package:bookaround/resources/helper/auth_helper.dart';
+import 'package:bookaround/resources/helper/init_helper.dart';
 import 'package:code_field/code_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -110,6 +111,8 @@ class LoginScreenState extends ChangeNotifier {
   Future<void> loginWithCredential(BuildContext context) async {
     try {
       await AuthHelper.loginWithCredential(this.verificationCode, this.codeController.value);
+      await InitHelper(context).initializeUser();
+
       Navigator.of(context).pushReplacementNamed(HomeScreen.route);
     } catch (e) {
       scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(S.current.wrongCode)));

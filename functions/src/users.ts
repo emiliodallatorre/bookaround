@@ -28,7 +28,7 @@ export const deleteUser = functions.https.onCall(async (data, context) => {
     const reference: admin.firestore.DocumentReference = admin.firestore().collection("users").doc(uid);
     const userData = (await reference.get()).data()
 
-    if (userData !== undefined) if (userData["userType"] === null) {
+    if (userData !== undefined) {
         await reference.delete();
         await admin.auth().deleteUser(uid);
 

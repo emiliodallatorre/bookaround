@@ -21,6 +21,10 @@ class UserModel extends ChangeNotifier {
     this.surname,
   });
 
+  bool get isLogged => this.uid != null;
+
+  String get displayName => this.name + " " + this.displayName;
+
   @override
   String toString() => "Utente $uid.";
 
