@@ -32,54 +32,76 @@ class LoginScreen extends StatelessWidget {
 
           return pop;
         },
-        child: Scaffold(key: Provider.of<LoginScreenState>(context).scaffoldKey, body: _buildBody(context)),
+        child: Scaffold(
+          key: Provider.of<LoginScreenState>(context).scaffoldKey,
+          body: _buildBody(context),
+        ),
       ),
     );
   }
 
   Widget _buildBody(BuildContext context) {
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Consumer<LoginScreenState>(
-          builder: (BuildContext context, LoginScreenState state, Widget child) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+      child: Stack(
+        children: [
+          Consumer<LoginScreenState>(
+            builder: (BuildContext context, LoginScreenState state, Widget child) => Stack(
               children: [
-                Text(References.fox + " " + S.current.login, style: Theme.of(context).textTheme.headline5),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: state.loginStep == LoginStep.SIGN_IN
-                      ? TextField(
-                          controller: state.numberController,
-                          keyboardType: TextInputType.phone,
-                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                          decoration: InputDecoration(labelText: S.current.phoneNumber, prefixText: "+39"),
-                        )
-                      : InputCodeField(
-                          control: state.codeController,
-                          autofocus: true,
-                          decoration: InputCodeDecoration(textStyle: Theme.of(context).textTheme.headline5),
-                        ),
+                Align(
+                  alignment: AlignmentDirectional.topStart,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child: Visibility(
+                      visible: state.loginStep == LoginStep.INSERT_CODE,
+                      child: IconButton(
+                        icon: Icon(Icons.arrow_back_ios),
+                        onPressed: () => state.setLoginStep(LoginStep.SIGN_IN),
+                      ),
+                    ),
+                  ),
                 ),
-                ElevatedButton(
-                  child: Text(S.current.proceed),
-                  onPressed: () {
-                    switch (state.loginStep) {
-                      case LoginStep.SIGN_IN:
-                        AuthHelper.sendSmsCode("+39" + state.numberController.text, context);
-                        break;
-                      case LoginStep.INSERT_CODE:
-                        state.loginWithCredential(context);
-                        break;
-                    }
-                  },
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(References.fox + " " + S.current.login, style: Theme.of(context).textTheme.headline5),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: state.loginStep == LoginStep.SIGN_IN
+                            ? TextField(
+                                controller: state.numberController,
+                                keyboardType: TextInputType.phone,
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                decoration: InputDecoration(labelText: S.current.phoneNumber, prefixText: "+39"),
+                              )
+                            : InputCodeField(
+                                control: state.codeController,
+                                autofocus: true,
+                                decoration: InputCodeDecoration(textStyle: Theme.of(context).textTheme.headline5),
+                              ),
+                      ),
+                      ElevatedButton(
+                        child: Text(S.current.proceed),
+                        onPressed: () {
+                          switch (state.loginStep) {
+                            case LoginStep.SIGN_IN:
+                              AuthHelper.sendSmsCode("+39" + state.numberController.text, context);
+                              break;
+                            case LoginStep.INSERT_CODE:
+                              state.loginWithCredential(context);
+                              break;
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ],
-            );
-          },
-        ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -116,6 +138,7 @@ class LoginScreenState extends ChangeNotifier {
 
       Navigator.of(context).pushReplacementNamed(HomeScreen.route);
     } catch (e) {
+      debugPrint(e.toString());
       scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(S.current.wrongCode)));
       codeController.clear();
     }
