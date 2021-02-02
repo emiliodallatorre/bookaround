@@ -4,6 +4,7 @@ import 'package:bookaround/interface/screen/profile_editor_screen.dart';
 import 'package:bookaround/interface/widget/user_avatar.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
+import 'package:bookaround/resources/helper/init_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -82,14 +83,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Spacer(),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: EdgeInsets.only(left: 16.0, bottom: MediaQuery.of(context).viewPadding.bottom),
             child: Column(
               children: [
                 TextButton(
                   child: Text(S.current.logout),
-                  onPressed: () {
-                    // TODO: Implementare.
-                  },
+                  onPressed: () async => await InitHelper(context).deinitialize(),
                 ),
               ],
             ),

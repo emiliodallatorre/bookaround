@@ -40,7 +40,9 @@ class UserModel extends ChangeNotifier {
     final DocumentReference updatedUserReference = References.usersCollection.doc(uid ?? this.uid);
 
     UserModel updatedUser;
-    if (uid != null)
+    if (empty)
+      updatedUser = UserModel();
+    else if (uid != null)
       updatedUser = UserModel.fromJson((await updatedUserReference.get()).data());
     else
       updatedUser = UserModel();

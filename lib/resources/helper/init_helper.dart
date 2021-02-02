@@ -1,6 +1,8 @@
+import 'package:bookaround/interface/screen/login_screen.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
@@ -31,5 +33,13 @@ class InitHelper {
       debugPrint("L'utente non è loggato.");
       return false;
     }
+  }
+
+  Future<void> deinitialize() async {
+    Navigator.of(context).pushNamedAndRemoveUntil(LoginScreen.route, (route) => false);
+
+    await FirebaseAuth.instance.signOut();
+    await FirebaseMessaging.instance.deleteToken();
+    await Provider.of<UserModel>(context, listen: false).updateFromServer(uid: null, empty: true);
   }
 }

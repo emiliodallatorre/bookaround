@@ -1,5 +1,6 @@
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/screen/home_screen.dart';
+import 'package:bookaround/interface/screen/profile_editor_screen.dart';
 import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/helper/auth_helper.dart';
 import 'package:bookaround/resources/helper/init_helper.dart';
@@ -136,7 +137,7 @@ class LoginScreenState extends ChangeNotifier {
       await AuthHelper.loginWithCredential(this.verificationCode, this.codeController.value);
       await InitHelper(context).initializeUser();
 
-      Navigator.of(context).pushReplacementNamed(HomeScreen.route);
+      Navigator.of(context).pushReplacementNamed(ProfileEditorScreen.route);
     } catch (e) {
       debugPrint(e.toString());
       scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(S.current.wrongCode)));
