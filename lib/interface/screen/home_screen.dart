@@ -40,18 +40,14 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  BottomAppBar buildBottomNavigationBar(BuildContext context) {
-    return BottomAppBar(
-      shape: CircularNotchedRectangle(),
-      clipBehavior: Clip.antiAlias,
-      child: BottomNavigationBar(
-        currentIndex: selectedIndex,
-        onTap: (int newIndex) => setState(() => selectedIndex = newIndex),
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: S.current.sellBooks),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: S.current.buyBooks),
-        ],
-      ),
+  BottomNavigationBar buildBottomNavigationBar(BuildContext context) {
+    return BottomNavigationBar(
+      currentIndex: selectedIndex,
+      onTap: (int newIndex) => setState(() => selectedIndex = newIndex),
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: S.current.sellBooks),
+        BottomNavigationBarItem(icon: Icon(Icons.search), label: S.current.buyBooks),
+      ],
     );
   }
 
