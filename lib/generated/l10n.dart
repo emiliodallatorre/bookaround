@@ -174,6 +174,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Stop`
+  String get cancelScan {
+    return Intl.message(
+      'Stop',
+      name: 'cancelScan',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

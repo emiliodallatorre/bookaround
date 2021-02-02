@@ -4,6 +4,7 @@ import 'package:bookaround/interface/screen/profile_editor_screen.dart';
 import 'package:bookaround/interface/widget/user_avatar.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
+import 'package:bookaround/resources/helper/barcode_helper.dart';
 import 'package:bookaround/resources/helper/init_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -55,9 +56,11 @@ class _HomeScreenState extends State<HomeScreen> {
   FloatingActionButton buildFloatingActionButton(BuildContext context) {
     return FloatingActionButton(
       child: Icon(Icons.add),
-      onPressed: () {
+      onPressed: () async {
         if (selectedIndex == 0) {
           // TODO: Aggiungere libri con camera.
+          await BarcodeHelper.readBarcode(context);
+
         } else if (selectedIndex == 1) {
           // TODO: Aggiungere libri alla ricerca.
         }

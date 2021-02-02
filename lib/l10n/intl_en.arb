@@ -12,5 +12,6 @@
   "surname": "Surname",
   "city": "City",
   "save": "Save",
-  "requiredField": "This field is required"
+  "requiredField": "This field is required",
+  "cancelScan": "Stop"
 }
