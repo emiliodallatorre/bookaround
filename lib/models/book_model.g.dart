@@ -11,10 +11,13 @@ BookModel _$BookModelFromJson(Map<String, dynamic> json) {
     id: json['id'] as String,
     isbn: json['isbn'] as String,
     title: json['title'] as String,
-    author: json['author'] as String,
+    author: (json['author'] as List)?.map((e) => e as String)?.toList(),
     coverUrl: json['coverUrl'] as String,
     type: _$enumDecodeNullable(_$BookTypeEnumMap, json['type']),
     userUid: json['userUid'] as String,
+    addedDateTime: json['addedDateTime'] == null
+        ? null
+        : DateTime.parse(json['addedDateTime'] as String),
   );
 }
 
@@ -26,6 +29,7 @@ Map<String, dynamic> _$BookModelToJson(BookModel instance) => <String, dynamic>{
       'coverUrl': instance.coverUrl,
       'type': _$BookTypeEnumMap[instance.type],
       'userUid': instance.userUid,
+      'addedDateTime': instance.addedDateTime?.toIso8601String(),
     };
 
 T _$enumDecode<T>(

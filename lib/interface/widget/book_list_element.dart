@@ -10,7 +10,7 @@ class BookListElement extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(book.title),
-      subtitle: Text(book.author),
+      subtitle: Text(book.authorString),
     );
   }
 }

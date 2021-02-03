@@ -17,6 +17,8 @@ class BookModel {
   @JsonKey(ignore: true)
   DocumentReference reference;
 
+  String get authorString => this.author.reduce((value, element) => "$value, $element");
+
   BookModel({
     this.id,
     this.isbn,
