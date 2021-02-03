@@ -25,6 +25,8 @@ class Bookaround extends StatelessWidget {
       builder: (BuildContext context, Widget child) => MaterialApp(
         title: References.appName,
         theme: ThemeData(primarySwatch: Colors.teal, textTheme: GoogleFonts.poppinsTextTheme()),
+        darkTheme: ThemeData(primarySwatch: Colors.teal, textTheme: GoogleFonts.poppinsTextTheme(), brightness: Brightness.dark),
+        themeMode: ThemeMode.dark,
         initialRoute: SplashScreen.route,
         supportedLocales: S.delegate.supportedLocales,
         localizationsDelegates: <LocalizationsDelegate>[
