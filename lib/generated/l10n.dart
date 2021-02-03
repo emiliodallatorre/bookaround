@@ -214,6 +214,16 @@ class S {
       args: [],
     );
   }
+
+  /// `An error occurred with this book`
+  String get bookError {
+    return Intl.message(
+      'An error occurred with this book',
+      name: 'bookError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

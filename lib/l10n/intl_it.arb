@@ -16,5 +16,6 @@
   "cancelScan": "Stop",
   "highlight": "Il libro presenta segni di evidenziatore",
   "pencil": "Il libro è stato annotato in matita",
-  "pen": "Sul libro è stata utilizzata la penna o altro marcatore indelebile"
+  "pen": "Sul libro è stata utilizzata la penna o altro marcatore indelebile",
+  "bookError": "C'è stato un errore con questo libro"
 }

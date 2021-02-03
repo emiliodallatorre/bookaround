@@ -21,6 +21,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "bookError" : MessageLookupByLibrary.simpleMessage("An error occurred with this book"),
     "buyBooks" : MessageLookupByLibrary.simpleMessage("Searching"),
     "cancelScan" : MessageLookupByLibrary.simpleMessage("Stop"),
     "city" : MessageLookupByLibrary.simpleMessage("City"),

@@ -52,9 +52,10 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
               Expanded(
                 flex: 2,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(book.title, style: Theme.of(context).textTheme.headline6),
-                    Text(book.authorString, style: Theme.of(context).textTheme.caption),
+                    Text(book.authorString, style: Theme.of(context).textTheme.bodyText1),
                   ],
                 ),
               ),

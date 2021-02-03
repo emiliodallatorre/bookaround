@@ -20,17 +20,21 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   int selectedIndex = 0;
+  bool working = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(title: Text(References.appName)),
       drawer: buildDrawer(context),
       body: buildBody(context),
       extendBody: true,
       bottomNavigationBar: buildBottomNavigationBar(context),
-      floatingActionButton: buildFloatingActionButton(context),
+      floatingActionButton: buildFloatingActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
@@ -45,28 +49,45 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  BottomNavigationBar buildBottomNavigationBar(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: selectedIndex,
-      onTap: (int newIndex) => setState(() => selectedIndex = newIndex),
-      items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: S.current.sellBooks),
-        BottomNavigationBarItem(icon: Icon(Icons.search), label: S.current.buyBooks),
+  Column buildBottomNavigationBar(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Visibility(
+          visible: working,
+          child: LinearProgressIndicator(),
+        ),
+        BottomNavigationBar(
+          currentIndex: selectedIndex,
+          onTap: (int newIndex) => setState(() => selectedIndex = newIndex),
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: S.current.sellBooks),
+            BottomNavigationBarItem(icon: Icon(Icons.search), label: S.current.buyBooks),
+          ],
+        ),
       ],
     );
   }
 
-  FloatingActionButton buildFloatingActionButton(BuildContext context) {
+  FloatingActionButton buildFloatingActionButton() {
     return FloatingActionButton(
       child: Icon(Icons.add),
       onPressed: () async {
         if (selectedIndex == 0) {
-          final String isbn = await BarcodeHelper.readBarcode(context);
+          setState(() => working = true);
 
-          if (isbn != null) {
-            BookModel book = await BookHelper.createBookSell(isbn, Provider.of<UserModel>(context, listen: false).uid);
-            Navigator.of(context).pushNamed(BookEditorScreen.route, arguments: book);
+          try {
+            final String isbn = await BarcodeHelper.readBarcode(context);
+
+            if (isbn != null) {
+              BookModel book = await BookHelper.createBookSell(isbn, Provider.of<UserModel>(context, listen: false).uid);
+              Navigator.of(context).pushNamed(BookEditorScreen.route, arguments: book);
+            }
+          } catch (e) {
+            scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(S.current.bookError)));
           }
+
+          setState(() => working = false);
         } else if (selectedIndex == 1) {
           // TODO: Aggiungere libri alla ricerca.
         }
