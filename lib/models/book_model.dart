@@ -8,10 +8,11 @@ class BookModel {
   final String id;
   final String isbn;
   final String title;
-  final String author;
+  final List<String> author;
   final String coverUrl;
   final BookType type;
   final String userUid;
+  final DateTime addedDateTime;
 
   @JsonKey(ignore: true)
   DocumentReference reference;
@@ -24,6 +25,7 @@ class BookModel {
     this.coverUrl,
     this.type,
     this.userUid,
+    this.addedDateTime,
     this.reference,
   });
 

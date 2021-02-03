@@ -128,7 +128,7 @@ async function sendMessageNotification(message: functions.firestore.QueryDocumen
 
 
 /// Crea una stringa casualmente generata.
-function randomString(length: number): string {
+export function randomString(length: number): string {
     const chars: string = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     let result: string = '';
     for (let i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
