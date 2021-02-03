@@ -30,9 +30,15 @@ export const createBookSell = functions.https.onCall(async (data, context) => {
         type: "SELLING",
         userUid: userUid,
         addedDateTime: new Date().toISOString(),
+        highlighting: true,
+        pen: true,
+        pencil: true,
+        note: "",
     }
 
     await admin.firestore().collection("books").doc(bookId).set(bookModel)
 
     console.log("Creato il libro", isbn, "in vendita per conto di", userUid, ".")
+
+    return JSON.stringify(bookModel)
 })

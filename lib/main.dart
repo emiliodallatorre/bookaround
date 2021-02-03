@@ -1,4 +1,5 @@
 import 'package:bookaround/generated/l10n.dart';
+import 'package:bookaround/interface/screen/book_editor_screen.dart';
 import 'package:bookaround/interface/screen/home_screen.dart';
 import 'package:bookaround/interface/screen/login_screen.dart';
 import 'package:bookaround/interface/screen/profile_editor_screen.dart';
@@ -38,6 +39,7 @@ class Bookaround extends StatelessWidget {
           LoginScreen.route: (BuildContext context) => LoginScreen(),
           HomeScreen.route: (BuildContext context) => HomeScreen(),
           ProfileEditorScreen.route: (BuildContext context) => ProfileEditorScreen(),
+          BookEditorScreen.route: (BuildContext context) => BookEditorScreen(),
         },
       ),
     );

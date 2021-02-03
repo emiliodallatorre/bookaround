@@ -24,4 +24,5 @@ class BooksBloc {
   }
 }
 
-BooksBloc bookBloc = BooksBloc();
+final BooksBloc bookBloc = BooksBloc();
+final BooksBloc sellBooksBloc = BooksBloc();

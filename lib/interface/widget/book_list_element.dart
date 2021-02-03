@@ -11,6 +11,7 @@ class BookListElement extends StatelessWidget {
     return ListTile(
       title: Text(book.title),
       subtitle: Text(book.authorString),
+      leading: Image.network(book.coverUrl),
     );
   }
 }

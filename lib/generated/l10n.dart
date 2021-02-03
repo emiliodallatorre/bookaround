@@ -184,6 +184,36 @@ class S {
       args: [],
     );
   }
+
+  /// `The book presents colored highlighting`
+  String get highlight {
+    return Intl.message(
+      'The book presents colored highlighting',
+      name: 'highlight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The book presents pencil signs`
+  String get pencil {
+    return Intl.message(
+      'The book presents pencil signs',
+      name: 'pencil',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The book has stuff written with pen`
+  String get pen {
+    return Intl.message(
+      'The book has stuff written with pen',
+      name: 'pen',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

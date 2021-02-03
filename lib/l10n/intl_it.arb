@@ -13,5 +13,8 @@
   "city": "Città",
   "save": "Salva",
   "requiredField": "Questo campo è necessario",
-  "cancelScan": "Stop"
+  "cancelScan": "Stop",
+  "highlight": "Il libro presenta segni di evidenziatore",
+  "pencil": "Il libro è stato annotato in matita",
+  "pen": "Sul libro è stata utilizzata la penna o altro marcatore indelebile"
 }
