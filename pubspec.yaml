@@ -55,6 +55,9 @@ dev_dependencies:
   json_serializable: ^3.5.1
   build_runner: ^1.11.0
 
+  # flutter pub run flutter_launcher_icons:main
+  flutter_launcher_icons: ^0.8.1
+
 
 flutter:
   uses-material-design: true
@@ -67,3 +70,8 @@ flutter:
 
 flutter_intl:
   enabled: true
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/ic_launcher.png"
