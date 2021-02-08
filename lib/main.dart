@@ -8,7 +8,6 @@ import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -24,9 +23,16 @@ class Bookaround extends StatelessWidget {
       ],
       builder: (BuildContext context, Widget child) => MaterialApp(
         title: References.appName,
-        theme: ThemeData(primarySwatch: Colors.teal, textTheme: GoogleFonts.poppinsTextTheme()),
-        darkTheme: ThemeData(primarySwatch: Colors.teal, textTheme: GoogleFonts.poppinsTextTheme(), brightness: Brightness.dark),
-        themeMode: ThemeMode.dark,
+        theme: ThemeData(primarySwatch: Colors.teal, fontFamily: "Poppins"),
+        darkTheme: ThemeData(
+          fontFamily: "Poppins",
+          brightness: Brightness.dark,
+          primarySwatch: Colors.orange,
+          accentColor: Colors.orange[500],
+          toggleableActiveColor: Colors.orange[500],
+          textSelectionColor: Colors.orange[200],
+        ),
+        themeMode: ThemeMode.system,
         initialRoute: SplashScreen.route,
         supportedLocales: S.delegate.supportedLocales,
         localizationsDelegates: <LocalizationsDelegate>[

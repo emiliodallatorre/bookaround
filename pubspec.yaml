@@ -43,6 +43,9 @@ dependencies:
   cached_network_image: ^2.5.0
   flutter_barcode_scanner: ^1.0.2
 
+  # Localizzazione
+  google_place: ^0.3.3
+
 
 dev_dependencies:
   flutter_test:
@@ -59,27 +62,7 @@ flutter:
   fonts:
     - family: Poppins
       fonts:
-        - asset: assets/fonts/Poppins/Poppins-Thin.ttf
-          weight: 100
-
-        - asset: assets/fonts/Poppins/Poppins-Thin.ttf
-          weight: 100
-
-
-        - asset: assets/fonts/Poppins/Poppins-Thin.ttf
-          weight: 100
-
-        - asset: assets/fonts/Poppins/Poppins-Thin.ttf
-          weight: 100
-
-        - asset: assets/fonts/Poppins/Poppins-Thin.ttf
-          weight: 100
-
-        - asset: assets/fonts/Poppins/Poppins-Thin.ttf
-          weight: 100
-
-        - asset: assets/fonts/Poppins/Poppins-Thin.ttf
-          weight: 100
+        - asset: assets/fonts/Poppins/Poppins-Regular.ttf
 
 
 flutter_intl:
