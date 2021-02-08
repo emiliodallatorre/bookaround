@@ -44,7 +44,12 @@ dependencies:
   flutter_barcode_scanner: ^1.0.2
 
   # Localizzazione
-  google_place: ^0.3.3
+  flutter_google_places: ^0.2.6
+  google_maps_webservice: ^0.0.19
+
+
+dependency_overrides:
+  rxdart: ^0.25.0
 
 
 dev_dependencies:

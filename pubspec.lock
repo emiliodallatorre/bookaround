@@ -342,6 +342,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
+  flutter_google_places:
+    dependency: "direct main"
+    description:
+      name: flutter_google_places
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.6"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
@@ -392,13 +399,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.2"
-  google_place:
+  google_maps_webservice:
     dependency: "direct main"
     description:
-      name: google_place
+      name: google_maps_webservice
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.3"
+    version: "0.0.19"
   graphs:
     dependency: transitive
     description:

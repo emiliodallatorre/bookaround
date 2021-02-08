@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "logout" : MessageLookupByLibrary.simpleMessage("Logout"),
     "name" : MessageLookupByLibrary.simpleMessage("Name"),
     "noBooks" : MessageLookupByLibrary.simpleMessage("There aren\'t any book here yet, add one with the \"add\" button...!"),
+    "note" : MessageLookupByLibrary.simpleMessage("Note"),
     "pen" : MessageLookupByLibrary.simpleMessage("The book has stuff written with pen"),
     "pencil" : MessageLookupByLibrary.simpleMessage("The book presents pencil signs"),
     "phoneNumber" : MessageLookupByLibrary.simpleMessage("Phone number"),
@@ -39,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "save" : MessageLookupByLibrary.simpleMessage("Save"),
     "sellBooks" : MessageLookupByLibrary.simpleMessage("My books"),
     "surname" : MessageLookupByLibrary.simpleMessage("Surname"),
+    "whereIsBook" : MessageLookupByLibrary.simpleMessage("Where is this book?"),
     "wrongCode" : MessageLookupByLibrary.simpleMessage("This code is not working, try again")
   };
 }

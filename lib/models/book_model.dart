@@ -1,3 +1,5 @@
+import 'package:bookaround/models/location_model.dart';
+import 'package:bookaround/resources/helper/location_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -18,6 +20,9 @@ class BookModel extends ChangeNotifier {
   bool highlighting, pencil, pen;
   String note;
 
+  @JsonKey(toJson: LocationHelper.locationToJson)
+  LocationModel location;
+
   @JsonKey(ignore: true)
   DocumentReference reference;
 
@@ -37,6 +42,7 @@ class BookModel extends ChangeNotifier {
     this.pencil,
     this.pen,
     this.note,
+    this.location,
   });
 
   @override

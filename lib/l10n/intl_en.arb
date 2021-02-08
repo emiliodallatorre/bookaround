@@ -17,5 +17,7 @@
   "highlight": "The book presents colored highlighting",
   "pencil": "The book presents pencil signs",
   "pen": "The book has stuff written with pen",
-  "bookError": "An error occurred with this book"
+  "bookError": "An error occurred with this book",
+  "whereIsBook": "Where is this book?",
+  "note": "Note"
 }

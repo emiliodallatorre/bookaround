@@ -224,6 +224,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Where is this book?`
+  String get whereIsBook {
+    return Intl.message(
+      'Where is this book?',
+      name: 'whereIsBook',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Note`
+  String get note {
+    return Intl.message(
+      'Note',
+      name: 'note',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

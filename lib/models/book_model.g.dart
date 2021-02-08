@@ -22,6 +22,9 @@ BookModel _$BookModelFromJson(Map<String, dynamic> json) {
     pencil: json['pencil'] as bool,
     pen: json['pen'] as bool,
     note: json['note'] as String,
+    location: json['location'] == null
+        ? null
+        : LocationModel.fromJson(json['location'] as Map<String, dynamic>),
   );
 }
 
@@ -38,6 +41,7 @@ Map<String, dynamic> _$BookModelToJson(BookModel instance) => <String, dynamic>{
       'pencil': instance.pencil,
       'pen': instance.pen,
       'note': instance.note,
+      'location': LocationHelper.locationToJson(instance.location),
     };
 
 T _$enumDecode<T>(
