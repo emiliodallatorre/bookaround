@@ -244,6 +244,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Add`
+  String get add {
+    return Intl.message(
+      'Add',
+      name: 'add',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Book not found`
+  String get bookNotFoundError {
+    return Intl.message(
+      'Book not found',
+      name: 'bookNotFoundError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Manual add`
+  String get manualAdd {
+    return Intl.message(
+      'Manual add',
+      name: 'manualAdd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Book title`
+  String get title {
+    return Intl.message(
+      'Book title',
+      name: 'title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Authors, separated by a comma`
+  String get authors {
+    return Intl.message(
+      'Authors, separated by a comma',
+      name: 'authors',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ISBN`
+  String get isbn {
+    return Intl.message(
+      'ISBN',
+      name: 'isbn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Responsible use`
+  String get responsibleUse {
+    return Intl.message(
+      'Responsible use',
+      name: 'responsibleUse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `When you manually define this ISBN data, you are accepting that the users who - by now - will scan this ISBN, will use this data.\nWe cannot check every book insertion: please, insert this data correctly.`
+  String get responsibleUseExtended {
+    return Intl.message(
+      'When you manually define this ISBN data, you are accepting that the users who - by now - will scan this ISBN, will use this data.\nWe cannot check every book insertion: please, insert this data correctly.',
+      name: 'responsibleUseExtended',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

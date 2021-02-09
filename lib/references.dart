@@ -8,6 +8,7 @@ class References {
 
   static CollectionReference usersCollection = FirebaseFirestore.instance.collection("users");
   static CollectionReference booksCollection = FirebaseFirestore.instance.collection("books");
+  static CollectionReference isbnsCollection = FirebaseFirestore.instance.collection("isbns");
 
   static const String googleApiKey = "AIzaSyDTMDGyTZOPkaesYHW4vYfVMhUHafc8nl0";
 }

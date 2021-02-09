@@ -21,14 +21,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "add" : MessageLookupByLibrary.simpleMessage("Aggiungi"),
+    "authors" : MessageLookupByLibrary.simpleMessage("Autori, separati da una virgola"),
     "bookError" : MessageLookupByLibrary.simpleMessage("C\'è stato un errore con questo libro"),
+    "bookNotFoundError" : MessageLookupByLibrary.simpleMessage("Libro non trovato"),
     "buyBooks" : MessageLookupByLibrary.simpleMessage("Le mie ricerche"),
     "cancelScan" : MessageLookupByLibrary.simpleMessage("Stop"),
     "city" : MessageLookupByLibrary.simpleMessage("Città"),
     "editProfile" : MessageLookupByLibrary.simpleMessage("Modifica profilo"),
     "highlight" : MessageLookupByLibrary.simpleMessage("Il libro presenta segni di evidenziatore"),
+    "isbn" : MessageLookupByLibrary.simpleMessage("ISBN"),
     "login" : MessageLookupByLibrary.simpleMessage("Accedi"),
     "logout" : MessageLookupByLibrary.simpleMessage("Logout"),
+    "manualAdd" : MessageLookupByLibrary.simpleMessage("Aggiunta manuale"),
     "name" : MessageLookupByLibrary.simpleMessage("Nome"),
     "noBooks" : MessageLookupByLibrary.simpleMessage("Non c\'è ancora nessun libro in questa sezione, aggiungilo con l\'apposito pulsante...!"),
     "note" : MessageLookupByLibrary.simpleMessage("Note"),
@@ -37,9 +42,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "phoneNumber" : MessageLookupByLibrary.simpleMessage("Numero di telefono"),
     "proceed" : MessageLookupByLibrary.simpleMessage("Procedi"),
     "requiredField" : MessageLookupByLibrary.simpleMessage("Questo campo è necessario"),
+    "responsibleUse" : MessageLookupByLibrary.simpleMessage("Uso responsabile"),
+    "responsibleUseExtended" : MessageLookupByLibrary.simpleMessage("Nel definire manualmente i dati di questo ISBN, accetti che gli utenti che dopo di te lo scansioneranno, possano attingere ai dati che ora inserirai.\nNon abbiamo la possibilità di controllare che ogni libro venga inserito correttamente: per favore, inserisci questi dati con cura."),
     "save" : MessageLookupByLibrary.simpleMessage("Salva"),
     "sellBooks" : MessageLookupByLibrary.simpleMessage("I miei libri"),
     "surname" : MessageLookupByLibrary.simpleMessage("Cognome"),
+    "title" : MessageLookupByLibrary.simpleMessage("Titolo del libro"),
     "whereIsBook" : MessageLookupByLibrary.simpleMessage("Dove si trova il libro?"),
     "wrongCode" : MessageLookupByLibrary.simpleMessage("Questo codice non è corretto, riprova")
   };

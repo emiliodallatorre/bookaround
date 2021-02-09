@@ -19,5 +19,13 @@
   "pen": "The book has stuff written with pen",
   "bookError": "An error occurred with this book",
   "whereIsBook": "Where is this book?",
-  "note": "Note"
+  "note": "Note",
+  "add": "Add",
+  "bookNotFoundError": "Book not found",
+  "manualAdd": "Manual add",
+  "title": "Book title",
+  "authors": "Authors, separated by a comma",
+  "isbn": "ISBN",
+  "responsibleUse": "Responsible use",
+  "responsibleUseExtended": "When you manually define this ISBN data, you are accepting that the users who - by now - will scan this ISBN, will use this data.\nWe cannot check every book insertion: please, insert this data correctly."
 }

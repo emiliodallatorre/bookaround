@@ -1,11 +1,13 @@
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/pages/books_page.dart';
 import 'package:bookaround/interface/screen/book_editor_screen.dart';
+import 'package:bookaround/interface/screen/isbn_editor_screen.dart';
 import 'package:bookaround/interface/screen/profile_editor_screen.dart';
 import 'package:bookaround/interface/widget/user_avatar.dart';
 import 'package:bookaround/models/book_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
+import 'package:bookaround/resources/errors/book_not_found_error.dart';
 import 'package:bookaround/resources/helper/barcode_helper.dart';
 import 'package:bookaround/resources/helper/book_helper.dart';
 import 'package:bookaround/resources/helper/init_helper.dart';
@@ -76,18 +78,33 @@ class _HomeScreenState extends State<HomeScreen> {
         if (selectedIndex == 0) {
           setState(() => working = true);
 
+          String isbn;
           try {
-            final String isbn = await BarcodeHelper.readBarcode(context);
+            isbn = await BarcodeHelper.readBarcode(context);
 
+            // L'utente ha scansionato un codice.
             if (isbn != null) {
+              // Il libro esiste nel database.
               BookModel book = await BookHelper.createBookSell(isbn, Provider.of<UserModel>(context, listen: false).uid);
               Navigator.of(context).pushNamed(BookEditorScreen.route, arguments: book);
             }
-          } catch (e) {
-            scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(S.current.bookError)));
-          }
+          } on BookNotFoundError {
+            // Il libro non esiste nel database.
+            setState(() => working = false);
 
-          setState(() => working = false);
+            scaffoldKey.currentState.showSnackBar(SnackBar(
+              content: Text(S.current.bookNotFoundError),
+              action: SnackBarAction(
+                label: S.current.add,
+                onPressed: () => Navigator.of(context).pushNamed(IsbnEditorScreen.route, arguments: isbn),
+              ),
+            ));
+          } catch (e) {
+            // È comparso un errore sconosciuto.
+            scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(S.current.bookError)));
+
+            setState(() => working = false);
+          }
         } else if (selectedIndex == 1) {
           // TODO: Aggiungere libri alla ricerca.
         }

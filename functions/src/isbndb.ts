@@ -18,6 +18,12 @@ export const createBookSell = functions.https.onCall(async (data, context) => {
     }
 
     const response: Response = await fetch(apiUrl, { headers: headers });
+    if (response.status !== 200) {
+        console.log("Il libro", isbn, "non è nel database.");
+        return;
+    }
+
+
     const book = (await response.json())["book"]
 
     const bookId: string = randomString(20)

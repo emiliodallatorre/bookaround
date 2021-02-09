@@ -42,6 +42,7 @@ dependencies:
   form_field_validator: ^1.0.1
   cached_network_image: ^2.5.0
   flutter_barcode_scanner: ^1.0.2
+  random_string: ^2.1.0
 
   # Localizzazione
   flutter_google_places: ^0.2.6

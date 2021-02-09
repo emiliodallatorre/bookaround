@@ -21,14 +21,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "add" : MessageLookupByLibrary.simpleMessage("Add"),
+    "authors" : MessageLookupByLibrary.simpleMessage("Authors, separated by a comma"),
     "bookError" : MessageLookupByLibrary.simpleMessage("An error occurred with this book"),
+    "bookNotFoundError" : MessageLookupByLibrary.simpleMessage("Book not found"),
     "buyBooks" : MessageLookupByLibrary.simpleMessage("Searching"),
     "cancelScan" : MessageLookupByLibrary.simpleMessage("Stop"),
     "city" : MessageLookupByLibrary.simpleMessage("City"),
     "editProfile" : MessageLookupByLibrary.simpleMessage("Edit profile"),
     "highlight" : MessageLookupByLibrary.simpleMessage("The book presents colored highlighting"),
+    "isbn" : MessageLookupByLibrary.simpleMessage("ISBN"),
     "login" : MessageLookupByLibrary.simpleMessage("Login"),
     "logout" : MessageLookupByLibrary.simpleMessage("Logout"),
+    "manualAdd" : MessageLookupByLibrary.simpleMessage("Manual add"),
     "name" : MessageLookupByLibrary.simpleMessage("Name"),
     "noBooks" : MessageLookupByLibrary.simpleMessage("There aren\'t any book here yet, add one with the \"add\" button...!"),
     "note" : MessageLookupByLibrary.simpleMessage("Note"),
@@ -37,9 +42,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "phoneNumber" : MessageLookupByLibrary.simpleMessage("Phone number"),
     "proceed" : MessageLookupByLibrary.simpleMessage("Proceed"),
     "requiredField" : MessageLookupByLibrary.simpleMessage("This field is required"),
+    "responsibleUse" : MessageLookupByLibrary.simpleMessage("Responsible use"),
+    "responsibleUseExtended" : MessageLookupByLibrary.simpleMessage("When you manually define this ISBN data, you are accepting that the users who - by now - will scan this ISBN, will use this data.\nWe cannot check every book insertion: please, insert this data correctly."),
     "save" : MessageLookupByLibrary.simpleMessage("Save"),
     "sellBooks" : MessageLookupByLibrary.simpleMessage("My books"),
     "surname" : MessageLookupByLibrary.simpleMessage("Surname"),
+    "title" : MessageLookupByLibrary.simpleMessage("Book title"),
     "whereIsBook" : MessageLookupByLibrary.simpleMessage("Where is this book?"),
     "wrongCode" : MessageLookupByLibrary.simpleMessage("This code is not working, try again")
   };

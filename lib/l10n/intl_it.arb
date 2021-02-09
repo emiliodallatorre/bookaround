@@ -19,5 +19,13 @@
   "pen": "Sul libro è stata utilizzata la penna o altro marcatore indelebile",
   "bookError": "C'è stato un errore con questo libro",
   "whereIsBook": "Dove si trova il libro?",
-  "note": "Note"
+  "note": "Note",
+  "add": "Aggiungi",
+  "bookNotFoundError": "Libro non trovato",
+  "manualAdd": "Aggiunta manuale",
+  "title": "Titolo del libro",
+  "authors": "Autori, separati da una virgola",
+  "isbn": "ISBN",
+  "responsibleUse": "Uso responsabile",
+  "responsibleUseExtended": "Nel definire manualmente i dati di questo ISBN, accetti che gli utenti che dopo di te lo scansioneranno, possano attingere ai dati che ora inserirai.\nNon abbiamo la possibilità di controllare che ogni libro venga inserito correttamente: per favore, inserisci questi dati con cura."
 }

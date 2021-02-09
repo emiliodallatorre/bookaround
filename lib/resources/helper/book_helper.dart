@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bookaround/models/book_model.dart';
 import 'package:bookaround/references.dart';
+import 'package:bookaround/resources/errors/book_not_found_error.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,9 @@ class BookHelper {
   static Future<BookModel> createBookSell(String isbn, String currentUserUid) async {
     final FirebaseFunctions functions = FirebaseFunctions.instance;
     final HttpsCallableResult result = await functions.httpsCallable("createBookSell").call({"uid": currentUserUid, "isbn": isbn});
+
+    if (result.data == null) throw BookNotFoundError();
+
     final BookModel response = BookModel.fromJson(jsonDecode(result.data));
     response.reference = References.booksCollection.doc(response.id);
 
