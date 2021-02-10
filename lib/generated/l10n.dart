@@ -334,6 +334,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Choose image source`
+  String get chooseSource {
+    return Intl.message(
+      'Choose image source',
+      name: 'chooseSource',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please, take or upload a photo of the cover of the book you are inserting. This will be publicly visible.`
+  String get chooseSourceExtended {
+    return Intl.message(
+      'Please, take or upload a photo of the cover of the book you are inserting. This will be publicly visible.',
+      name: 'chooseSourceExtended',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera`
+  String get sourceCamera {
+    return Intl.message(
+      'Camera',
+      name: 'sourceCamera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gallery`
+  String get sourceGallery {
+    return Intl.message(
+      'Gallery',
+      name: 'sourceGallery',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

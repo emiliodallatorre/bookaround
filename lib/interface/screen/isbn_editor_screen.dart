@@ -1,10 +1,15 @@
+import 'dart:io';
+
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/models/isbn_model.dart';
 import 'package:bookaround/models/user_model.dart';
+import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/helper/author_helper.dart';
 import 'package:bookaround/resources/helper/isbn_helper.dart';
+import 'package:bookaround/resources/helper/upload_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:random_string/random_string.dart';
 
@@ -20,8 +25,7 @@ class _IsbnEditorScreenState extends State<IsbnEditorScreen> {
 
   IsbnModel isbn;
   bool shownFirstFrame = false;
-
-  Image bookCover;
+  bool working = false;
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +63,43 @@ class _IsbnEditorScreenState extends State<IsbnEditorScreen> {
       persistentFooterButtons: [
         ElevatedButton(
           child: Text(S.current.save),
-          onPressed: () {
+          onPressed: () async {
             if (formKey.currentState.validate()) {
               formKey.currentState.save();
 
-              if(bookCover == null) bookCover = Image
+              if (isbn.coverUrl == null) {
+                ImageSource wantedSource = await showDialog<ImageSource>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title: Text(S.current.chooseSource),
+                    content: Text(S.current.chooseSourceExtended),
+                    actions: [
+                      ElevatedButton(
+                        child: Text(S.current.sourceCamera),
+                        onPressed: () => Navigator.of(context).pop(ImageSource.camera),
+                      ),
+                      ElevatedButton(
+                        child: Text(S.current.sourceGallery),
+                        onPressed: () => Navigator.of(context).pop(ImageSource.gallery),
+                      ),
+                    ],
+                  ),
+                );
 
-              // IsbnHelper.createIsbn(isbn);
+                // L'utente non ha selezionato con cosa acquisire l'immagine.
+                if (wantedSource == null) return;
+
+                PickedFile pickedFile = await ImagePicker().getImage(source: wantedSource);
+
+                // L'utente non ha infine acquisito l'immagine.
+                if (pickedFile == null) return;
+
+                setState(() => working = true);
+                isbn.coverUrl = await UploadHelper.uploadFile(References.bookCovers, File(pickedFile.path), isbn.isbn);
+                setState(() => working = false);
+              }
+
+              IsbnHelper.createIsbn(isbn);
             }
           },
         ),
@@ -82,7 +116,11 @@ class _IsbnEditorScreenState extends State<IsbnEditorScreen> {
             key: formKey,
             child: Column(
               children: [
-                if(bookCover != null) Image(image: bookCover.image),
+                if (isbn.coverUrl != null)
+                  AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: Image.network(isbn.coverUrl, fit: BoxFit.contain),
+                  ),
                 TextFormField(
                   decoration: InputDecoration(labelText: S.current.title),
                   onSaved: (String value) => isbn.title = value,

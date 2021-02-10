@@ -28,5 +28,9 @@
   "wrongField": "This field is not filled correctly",
   "isbn": "ISBN",
   "responsibleUse": "Responsible use",
-  "responsibleUseExtended": "When you manually define this ISBN data, you are accepting that the users who - by now - will scan this ISBN, will use this data.\nWe cannot check every book insertion: please, insert this data correctly."
+  "responsibleUseExtended": "When you manually define this ISBN data, you are accepting that the users who - by now - will scan this ISBN, will use this data.\nWe cannot check every book insertion: please, insert this data correctly.",
+  "chooseSource": "Choose image source",
+  "chooseSourceExtended": "Please, take or upload a photo of the cover of the book you are inserting. This will be publicly visible.",
+  "sourceCamera": "Camera",
+  "sourceGallery": "Gallery"
 }
