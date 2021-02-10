@@ -12,7 +12,7 @@ IsbnModel _$IsbnModelFromJson(Map<String, dynamic> json) {
     isbn: json['isbn'] as String,
     title: json['title'] as String,
     authors: (json['authors'] as List)?.map((e) => e as String)?.toList(),
-    coverUrl: json['coverUrl'] as String,
+    image: json['image'] as String,
     authorUid: json['authorUid'] as String,
   );
 }
@@ -22,6 +22,6 @@ Map<String, dynamic> _$IsbnModelToJson(IsbnModel instance) => <String, dynamic>{
       'isbn': instance.isbn,
       'title': instance.title,
       'authors': instance.authors,
-      'coverUrl': instance.coverUrl,
+      'image': instance.image,
       'authorUid': instance.authorUid,
     };

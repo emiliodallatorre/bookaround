@@ -1,5 +1,4 @@
 import 'package:bookaround/interface/screen/login_screen.dart';
-import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +35,7 @@ class AuthHelper {
     final PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
     final UserCredential credential = await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
 
-    while(!(await References.usersCollection.doc(credential.user.uid).get()).exists) {
+    while (!(await References.usersCollection.doc(credential.user.uid).get()).exists) {
       await Future.delayed(Duration(seconds: 2));
     }
 

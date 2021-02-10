@@ -8,7 +8,7 @@ class IsbnModel {
   final String isbn;
   String title;
   List<String> authors;
-  String coverUrl;
+  String image;
   final String authorUid;
 
   IsbnModel({
@@ -16,13 +16,12 @@ class IsbnModel {
     this.isbn,
     this.title,
     this.authors,
-    this.coverUrl,
+    this.image,
     this.authorUid,
   });
 
   @override
   String toString() => "Isbn $isbn.";
-
 
   factory IsbnModel.fromJson(Map<String, dynamic> parsedJson) => _$IsbnModelFromJson(parsedJson);
 

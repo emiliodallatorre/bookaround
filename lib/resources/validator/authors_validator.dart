@@ -6,5 +6,4 @@ class AuthorsValidator extends TextFieldValidator {
 
   @override
   bool isValid(String value) => AuthorHelper.parseAuthors(value).isNotEmpty;
-
 }

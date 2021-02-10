@@ -6,7 +6,7 @@ class BookProvider {
   static Future<List<BookModel>> getUserBooks(String uid) async {
     List<DocumentSnapshot> rawBooks = (await References.booksCollection.where("userUid", isEqualTo: uid).get()).docs;
     List<BookModel> books = <BookModel>[];
-    
+
     rawBooks.forEach((DocumentSnapshot rawBook) {
       BookModel book = BookModel.fromJson(rawBook.data());
       book.reference = rawBook.reference;

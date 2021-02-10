@@ -1,5 +1,4 @@
 import 'package:bookaround/generated/l10n.dart';
-import 'package:bookaround/interface/screen/home_screen.dart';
 import 'package:bookaround/interface/screen/profile_editor_screen.dart';
 import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/helper/auth_helper.dart';

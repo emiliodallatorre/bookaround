@@ -25,7 +25,6 @@ class SplashScreen extends StatelessWidget {
         else
           Navigator.of(context).pushReplacementNamed(LoginScreen.route);
       });
-
     });
 
     return Scaffold(

@@ -67,7 +67,7 @@ class _IsbnEditorScreenState extends State<IsbnEditorScreen> {
             if (formKey.currentState.validate()) {
               formKey.currentState.save();
 
-              if (isbn.coverUrl == null) {
+              if (isbn.image == null) {
                 ImageSource wantedSource = await showDialog<ImageSource>(
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
@@ -95,7 +95,7 @@ class _IsbnEditorScreenState extends State<IsbnEditorScreen> {
                 if (pickedFile == null) return;
 
                 setState(() => working = true);
-                isbn.coverUrl = await UploadHelper.uploadFile(References.bookCovers, File(pickedFile.path), isbn.isbn);
+                isbn.image = await UploadHelper.uploadFile(References.bookCovers, File(pickedFile.path), isbn.isbn);
                 setState(() => working = false);
               }
 
@@ -116,10 +116,10 @@ class _IsbnEditorScreenState extends State<IsbnEditorScreen> {
             key: formKey,
             child: Column(
               children: [
-                if (isbn.coverUrl != null)
+                if (isbn.image != null)
                   AspectRatio(
                     aspectRatio: 16 / 9,
-                    child: Image.network(isbn.coverUrl, fit: BoxFit.contain),
+                    child: Image.network(isbn.image, fit: BoxFit.contain),
                   ),
                 TextFormField(
                   decoration: InputDecoration(labelText: S.current.title),

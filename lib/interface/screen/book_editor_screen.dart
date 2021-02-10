@@ -126,7 +126,6 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
                 TextFormField(
                   decoration: InputDecoration(labelText: S.current.note, alignLabelWithHint: true),
                   textInputAction: TextInputAction.done,
-
                   onSaved: (String value) => setState(() => book.note = value),
                   minLines: 4,
                   maxLines: 4,

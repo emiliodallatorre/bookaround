@@ -3,5 +3,5 @@ import 'package:bookaround/resources/provider/book_provider.dart';
 
 class Repository {
   /// Funzioni da BookProvider.
-  static Future<List<BookModel>> getUserBooks(String uid) async =>await  BookProvider.getUserBooks(uid);
+  static Future<List<BookModel>> getUserBooks(String uid) async => await BookProvider.getUserBooks(uid);
 }
