@@ -295,6 +295,16 @@ class S {
     );
   }
 
+  /// `This field is not filled correctly`
+  String get wrongField {
+    return Intl.message(
+      'This field is not filled correctly',
+      name: 'wrongField',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `ISBN`
   String get isbn {
     return Intl.message(

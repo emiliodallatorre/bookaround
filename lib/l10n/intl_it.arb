@@ -25,6 +25,7 @@
   "manualAdd": "Aggiunta manuale",
   "title": "Titolo del libro",
   "authors": "Autori, separati da una virgola",
+  "wrongField": "Inserisci correttamente questo dato",
   "isbn": "ISBN",
   "responsibleUse": "Uso responsabile",
   "responsibleUseExtended": "Nel definire manualmente i dati di questo ISBN, accetti che gli utenti che dopo di te lo scansioneranno, possano attingere ai dati che ora inserirai.\nNon abbiamo la possibilità di controllare che ogni libro venga inserito correttamente: per favore, inserisci questi dati con cura."

@@ -49,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "surname" : MessageLookupByLibrary.simpleMessage("Surname"),
     "title" : MessageLookupByLibrary.simpleMessage("Book title"),
     "whereIsBook" : MessageLookupByLibrary.simpleMessage("Where is this book?"),
-    "wrongCode" : MessageLookupByLibrary.simpleMessage("This code is not working, try again")
+    "wrongCode" : MessageLookupByLibrary.simpleMessage("This code is not working, try again"),
+    "wrongField" : MessageLookupByLibrary.simpleMessage("This field is not filled correctly")
   };
 }

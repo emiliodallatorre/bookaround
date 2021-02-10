@@ -6,9 +6,9 @@ part 'isbn_model.g.dart';
 class IsbnModel {
   final String id;
   final String isbn;
-  final String title;
-  final List<String> authors;
-  final String coverUrl;
+  String title;
+  List<String> authors;
+  String coverUrl;
   final String authorUid;
 
   IsbnModel({

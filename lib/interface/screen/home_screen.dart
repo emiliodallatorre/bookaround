@@ -80,7 +80,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
           String isbn;
           try {
-            isbn = await BarcodeHelper.readBarcode(context);
+            // isbn = await BarcodeHelper.readBarcode(context);
+            isbn = "97888089199222";
 
             // L'utente ha scansionato un codice.
             if (isbn != null) {
