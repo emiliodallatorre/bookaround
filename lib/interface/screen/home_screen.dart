@@ -8,6 +8,7 @@ import 'package:bookaround/models/book_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/errors/book_not_found_error.dart';
+import 'package:bookaround/resources/helper/barcode_helper.dart';
 import 'package:bookaround/resources/helper/book_helper.dart';
 import 'package:bookaround/resources/helper/init_helper.dart';
 import 'package:flutter/material.dart';
