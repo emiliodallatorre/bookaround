@@ -17,14 +17,19 @@ export const createBookSell = functions.https.onCall(async (data, context) => {
         "Authorization": key,
     }
 
+    let book
     const response: Response = await fetch(apiUrl, { headers: headers });
     if (response.status !== 200) {
-        console.log("Il libro", isbn, "non è nel database.");
-        return;
-    }
+        console.log("Il libro", isbn, "non è nel database. Controllo nel database personale.");
 
-
-    const book = (await response.json())["book"]
+        const query = await admin.firestore().collection("isbns").where("isbn", "==", isbn).get()
+        if (query.docs.length == 0)
+            console.log("Il libro non è neanche nel nostro database.");
+        else {
+            console.log("Il libro c'è nel nostro database.");
+            book = query.docs[0].data();
+        }
+    } else book = (await response.json())["book"];
 
     const bookId: string = randomString(20)
     const bookModel = {
