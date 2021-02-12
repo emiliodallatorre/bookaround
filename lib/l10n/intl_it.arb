@@ -33,5 +33,10 @@
   "chooseSourceExtended": "Per favore, acquisisci o seleziona una sorgente per l'immagine di copertina del libro. Quest'immagine sarà pubblicamente visibile.",
   "sourceCamera": "Fotocamera",
   "sourceGallery": "Galleria",
-  "addImage": "Aggiungi immagine"
+  "addImage": "Aggiungi immagine",
+  "proximitySearch": "Ricerca di prossimità",
+  "enableProximityBooks": "Vuoi abilitare la ricerca di prossimità?\nTi sarà utile per trovare i libri che cerchi vicino a te.\nSe non attiverai questa funzionalità ora, potrai sempre farlo nelle impostazioni dell'app.",
+  "nearbyBooks": "Libri nei dintorni",
+  "enable": "Abilita",
+  "undo": "Annulla"
 }

@@ -33,5 +33,10 @@
   "chooseSourceExtended": "Please, take or upload a photo of the cover of the book you are inserting. This will be publicly visible.",
   "sourceCamera": "Camera",
   "sourceGallery": "Gallery",
-  "addImage": "Add image"
+  "addImage": "Add image",
+  "proximitySearch": "Proximity search",
+  "enableProximityBooks": "Do you want to enable proximity search?\nYou will be able to find nearby books.\nIf you won't enable it, you'll be able to enable it later in app settings.",
+  "nearbyBooks": "Nearby books",
+  "enable": "Enable",
+  "undo": "Undo"
 }

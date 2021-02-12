@@ -384,6 +384,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Proximity search`
+  String get proximitySearch {
+    return Intl.message(
+      'Proximity search',
+      name: 'proximitySearch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to enable proximity search?\nYou will be able to find nearby books.\nIf you won't enable it, you'll be able to enable it later in app settings.`
+  String get enableProximityBooks {
+    return Intl.message(
+      'Do you want to enable proximity search?\nYou will be able to find nearby books.\nIf you won\'t enable it, you\'ll be able to enable it later in app settings.',
+      name: 'enableProximityBooks',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nearby books`
+  String get nearbyBooks {
+    return Intl.message(
+      'Nearby books',
+      name: 'nearbyBooks',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enable`
+  String get enable {
+    return Intl.message(
+      'Enable',
+      name: 'enable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Undo`
+  String get undo {
+    return Intl.message(
+      'Undo',
+      name: 'undo',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

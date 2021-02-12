@@ -5,6 +5,7 @@ import 'package:bookaround/interface/screen/isbn_editor_screen.dart';
 import 'package:bookaround/interface/screen/login_screen.dart';
 import 'package:bookaround/interface/screen/profile_editor_screen.dart';
 import 'package:bookaround/interface/screen/splash_screen.dart';
+import 'package:bookaround/models/settings_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class Bookaround extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (BuildContext context) => UserModel()),
+        ChangeNotifierProvider(create: (BuildContext context) => SettingsModel()),
       ],
       builder: (BuildContext context, Widget child) => MaterialApp(
         title: References.appName,

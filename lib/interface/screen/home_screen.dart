@@ -5,6 +5,7 @@ import 'package:bookaround/interface/screen/isbn_editor_screen.dart';
 import 'package:bookaround/interface/screen/profile_editor_screen.dart';
 import 'package:bookaround/interface/widget/user_avatar.dart';
 import 'package:bookaround/models/book_model.dart';
+import 'package:bookaround/models/settings_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/errors/book_not_found_error.dart';
@@ -61,7 +62,34 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         BottomNavigationBar(
           currentIndex: selectedIndex,
-          onTap: (int newIndex) => setState(() => selectedIndex = newIndex),
+          onTap: (int newIndex) async {
+            setState(() => selectedIndex = newIndex);
+
+            if (newIndex == 1) if (Provider.of<SettingsModel>(context, listen: false).proximitySearchEnabled == null) {
+              bool wantsProximitySearch = await showDialog<bool>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: Text(S.current.proximitySearch),
+                  content: Text(S.current.enableProximityBooks),
+                  actions: [
+                    TextButton(
+                      child: Text(S.current.undo),
+                      onPressed: () => Navigator.of(context).pop(false),
+                    ),
+                    ElevatedButton(
+                      child: Text(S.current.enable),
+                      onPressed: () => Navigator.of(context).pop(true),
+                    ),
+                  ],
+                ),
+              );
+
+              if (wantsProximitySearch != null) {
+                Provider.of<SettingsModel>(context, listen: false).proximitySearchEnabled = wantsProximitySearch;
+                Provider.of<SettingsModel>(context, listen: false).updateInMemory();
+              }
+            }
+          },
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: S.current.sellBooks),
             BottomNavigationBarItem(icon: Icon(Icons.search), label: S.current.buyBooks),

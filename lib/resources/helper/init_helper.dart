@@ -1,4 +1,5 @@
 import 'package:bookaround/interface/screen/login_screen.dart';
+import 'package:bookaround/models/settings_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,6 +22,8 @@ class InitHelper {
     bool isLogged = await initializeUser();
     // TODO: Reimplementare.
     // if (isLogged) await NotificationsHelper.initializeNotifications(Provider.of<UserModel>(context, listen: false));
+
+    await Provider.of<SettingsModel>(context, listen: false).updateFromMemory();
   }
 
   Future<void> initializeFirebase() async => await Firebase.initializeApp();
