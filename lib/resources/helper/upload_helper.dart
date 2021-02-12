@@ -13,4 +13,11 @@ class UploadHelper {
     debugPrint("Caricato il file con nome \"$fileName\" sullo storage.");
     return downloadUrl;
   }
+
+  static Future<void> deleteUpload(String referenceUrl) async {
+    Reference reference = FirebaseStorage.instance.refFromURL(referenceUrl);
+    await reference.delete();
+
+    debugPrint("Eliminato il file nel link.");
+  }
 }

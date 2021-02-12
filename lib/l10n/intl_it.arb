@@ -32,5 +32,6 @@
   "chooseSource": "Scegli sorgente immagine",
   "chooseSourceExtended": "Per favore, acquisisci o seleziona una sorgente per l'immagine di copertina del libro. Quest'immagine sarà pubblicamente visibile.",
   "sourceCamera": "Fotocamera",
-  "sourceGallery": "Galleria"
+  "sourceGallery": "Galleria",
+  "addImage": "Aggiungi immagine"
 }

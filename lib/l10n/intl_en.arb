@@ -32,5 +32,6 @@
   "chooseSource": "Choose image source",
   "chooseSourceExtended": "Please, take or upload a photo of the cover of the book you are inserting. This will be publicly visible.",
   "sourceCamera": "Camera",
-  "sourceGallery": "Gallery"
+  "sourceGallery": "Gallery",
+  "addImage": "Add image"
 }

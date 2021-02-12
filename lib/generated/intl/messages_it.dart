@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "add" : MessageLookupByLibrary.simpleMessage("Aggiungi"),
+    "addImage" : MessageLookupByLibrary.simpleMessage("Aggiungi immagine"),
     "authors" : MessageLookupByLibrary.simpleMessage("Autori, separati da una virgola"),
     "bookError" : MessageLookupByLibrary.simpleMessage("C\'è stato un errore con questo libro"),
     "bookNotFoundError" : MessageLookupByLibrary.simpleMessage("Libro non trovato"),
