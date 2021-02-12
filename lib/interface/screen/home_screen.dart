@@ -13,6 +13,7 @@ import 'package:bookaround/resources/errors/book_not_found_error.dart';
 import 'package:bookaround/resources/helper/barcode_helper.dart';
 import 'package:bookaround/resources/helper/book_helper.dart';
 import 'package:bookaround/resources/helper/init_helper.dart';
+import 'package:bookaround/resources/provider/location_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -88,6 +89,8 @@ class _HomeScreenState extends State<HomeScreen> {
               if (wantsProximitySearch != null) {
                 Provider.of<SettingsModel>(context, listen: false).proximitySearchEnabled = wantsProximitySearch;
                 Provider.of<SettingsModel>(context, listen: false).updateInMemory();
+
+                if (wantsProximitySearch) Provider.of<LocationProvider>(context, listen: false).isOk();
               }
             }
           },
