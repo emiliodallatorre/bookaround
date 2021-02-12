@@ -23,7 +23,7 @@ export const createBookSell = functions.https.onCall(async (data, context) => {
         console.log("Il libro", isbn, "non è nel database. Controllo nel database personale.");
 
         const query = await admin.firestore().collection("isbns").where("isbn", "==", isbn).get()
-        if (query.docs.length == 0) {
+        if (query.docs.length === 0) {
             console.log("Il libro non è neanche nel nostro database.");
             return;
         }
