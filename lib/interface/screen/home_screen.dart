@@ -1,5 +1,6 @@
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/pages/books_page.dart';
+import 'package:bookaround/interface/pages/search_page.dart';
 import 'package:bookaround/interface/screen/book_editor_screen.dart';
 import 'package:bookaround/interface/screen/isbn_editor_screen.dart';
 import 'package:bookaround/interface/screen/profile_editor_screen.dart';
@@ -47,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
       index: selectedIndex,
       children: [
         BooksPage(),
-        Container(color: Colors.purple),
+        SearchPage(),
       ],
     );
   }

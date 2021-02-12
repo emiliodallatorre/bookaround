@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsModel extends ChangeNotifier {
   bool proximitySearchEnabled;
   bool firstStart;
   DateTime lastUpdateTime;
+
+  Location lastKnownLocation;
 
   SettingsModel({
     this.proximitySearchEnabled,

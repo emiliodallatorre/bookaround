@@ -1,5 +1,5 @@
-import 'package:bookaround/models/location_model.dart';
+import 'package:bookaround/models/place_model.dart';
 
 class LocationHelper {
-  static Map<String, dynamic> locationToJson(LocationModel location) => location.toJson();
+  static Map<String, dynamic> locationToJson(PlaceModel location) => location.toJson();
 }

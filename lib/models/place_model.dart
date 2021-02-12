@@ -1,16 +1,16 @@
 import 'package:google_maps_webservice/places.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'location_model.g.dart';
+part 'place_model.g.dart';
 
 @JsonSerializable()
-class LocationModel {
+class PlaceModel {
   final String id;
   final String description;
   final String placeId;
   final String placeReference;
 
-  LocationModel({
+  PlaceModel({
     this.id,
     this.description,
     this.placeId,
@@ -20,14 +20,14 @@ class LocationModel {
   @override
   String toString() => "Libro $id.";
 
-  factory LocationModel.fromPrediction(Prediction prediction) => LocationModel(
+  factory PlaceModel.fromPrediction(Prediction prediction) => PlaceModel(
         id: prediction.id,
         description: prediction.description,
         placeId: prediction.placeId,
         placeReference: prediction.reference,
       );
 
-  factory LocationModel.fromJson(Map<String, dynamic> parsedJson) => _$LocationModelFromJson(parsedJson);
+  factory PlaceModel.fromJson(Map<String, dynamic> parsedJson) => _$LocationModelFromJson(parsedJson);
 
   Map<String, dynamic> toJson() => _$LocationModelToJson(this);
 }

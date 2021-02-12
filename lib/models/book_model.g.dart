@@ -24,7 +24,7 @@ BookModel _$BookModelFromJson(Map<String, dynamic> json) {
     note: json['note'] as String,
     location: json['location'] == null
         ? null
-        : LocationModel.fromJson(json['location'] as Map<String, dynamic>),
+        : PlaceModel.fromJson(json['location'] as Map<String, dynamic>),
   )..locationData = json['locationData'] as Map<String, dynamic>;
 }
 

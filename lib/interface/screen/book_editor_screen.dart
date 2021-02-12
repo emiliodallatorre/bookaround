@@ -1,7 +1,7 @@
 import 'package:bookaround/bloc/book_bloc.dart';
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/models/book_model.dart';
-import 'package:bookaround/models/location_model.dart';
+import 'package:bookaround/models/place_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/helper/book_helper.dart';
@@ -120,7 +120,7 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
                       debugPrint("Il libro si trova a ${prediction.description}.");
                       locationController.text = prediction.description;
 
-                      book.location = LocationModel.fromPrediction(prediction);
+                      book.location = PlaceModel.fromPrediction(prediction);
                       book.locationData = await GeocodingHelper.decodeAddress(book.location.description);
 
                       setState(() {});

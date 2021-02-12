@@ -1,4 +1,4 @@
-import 'package:bookaround/models/location_model.dart';
+import 'package:bookaround/models/place_model.dart';
 import 'package:bookaround/resources/helper/location_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ class BookModel extends ChangeNotifier {
   String note;
 
   @JsonKey(toJson: LocationHelper.locationToJson)
-  LocationModel location;
+  PlaceModel location;
 
   Map<String, dynamic> locationData;
 

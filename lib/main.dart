@@ -8,6 +8,7 @@ import 'package:bookaround/interface/screen/splash_screen.dart';
 import 'package:bookaround/models/settings_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
+import 'package:bookaround/resources/provider/location_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +24,7 @@ class Bookaround extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (BuildContext context) => UserModel()),
         ChangeNotifierProvider(create: (BuildContext context) => SettingsModel()),
+        ChangeNotifierProvider(create: (BuildContext context) => LocationProvider()),
       ],
       builder: (BuildContext context, Widget child) => MaterialApp(
         title: References.appName,
