@@ -88,6 +88,8 @@ class _HomeScreenState extends State<HomeScreen> {
               // Il libro esiste nel database.
               BookModel book = await BookHelper.createBookSell(isbn, Provider.of<UserModel>(context, listen: false).uid);
               Navigator.of(context).pushNamed(BookEditorScreen.route, arguments: book);
+
+              setState(() => working = false);
             }
           } on BookNotFoundError {
             // Il libro non esiste nel database.

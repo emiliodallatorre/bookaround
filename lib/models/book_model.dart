@@ -2,6 +2,7 @@ import 'package:bookaround/models/location_model.dart';
 import 'package:bookaround/resources/helper/location_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:geoflutterfire/geoflutterfire.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'book_model.g.dart';
@@ -22,6 +23,8 @@ class BookModel extends ChangeNotifier {
 
   @JsonKey(toJson: LocationHelper.locationToJson)
   LocationModel location;
+
+  Map<String, dynamic> locationData;
 
   @JsonKey(ignore: true)
   DocumentReference reference;

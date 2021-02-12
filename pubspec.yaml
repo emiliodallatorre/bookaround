@@ -49,6 +49,12 @@ dependencies:
   # Localizzazione
   flutter_google_places: ^0.2.6
   google_maps_webservice: ^0.0.19
+  geoflutterfire:
+    git:
+      url: git://github.com/emiliodallatorre/GeoFlutterFire.git
+      ref: update_deps
+  geocoder: ^0.2.1
+  google_maps_flutter: ^1.2.0
 
   # File
   image_picker: ^0.6.7+22

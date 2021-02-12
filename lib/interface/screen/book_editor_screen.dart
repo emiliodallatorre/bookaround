@@ -5,6 +5,7 @@ import 'package:bookaround/models/location_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/helper/book_helper.dart';
+import 'package:bookaround/resources/helper/geocoding_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -109,7 +110,6 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
                       context: context,
                       apiKey: References.googleApiKey,
                       mode: Mode.overlay,
-                      // Mode.fullscreen
                       language: "it",
                       components: [
                         Component(Component.country, "it"),
@@ -119,7 +119,11 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
                     if (prediction != null) {
                       debugPrint("Il libro si trova a ${prediction.description}.");
                       locationController.text = prediction.description;
-                      setState(() => book.location = LocationModel.fromPrediction(prediction));
+
+                      book.location = LocationModel.fromPrediction(prediction);
+                      book.locationData = await GeocodingHelper.decodeAddress(book.location.description);
+
+                      setState(() {});
                     }
                   },
                 ),

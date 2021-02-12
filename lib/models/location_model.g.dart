@@ -15,7 +15,8 @@ LocationModel _$LocationModelFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$LocationModelToJson(LocationModel instance) => <String, dynamic>{
+Map<String, dynamic> _$LocationModelToJson(LocationModel instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'description': instance.description,
       'placeId': instance.placeId,
