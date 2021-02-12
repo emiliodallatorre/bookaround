@@ -21,6 +21,8 @@ class SearchPage extends StatelessWidget {
                   target: LatLng(locationProvider.lastKnownLocation.latitude, locationProvider.lastKnownLocation.longitude),
                   zoom: 10.0,
                 ),
+                myLocationEnabled: true,
+                myLocationButtonEnabled: true,
                 onCameraMove: (CameraPosition newCameraPosition) {
                   debugPrint(newCameraPosition.zoom.toString());
                 },
