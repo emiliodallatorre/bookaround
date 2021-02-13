@@ -42,6 +42,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "name" : MessageLookupByLibrary.simpleMessage("Name"),
     "nearbyBooks" : MessageLookupByLibrary.simpleMessage("Nearby books"),
     "noBooks" : MessageLookupByLibrary.simpleMessage("There aren\'t any book here yet, add one with the \"add\" button...!"),
+    "noResults" : MessageLookupByLibrary.simpleMessage("We didn\'t find anything with this query, please retry within the next days: some users could decide to sell this book in the future!"),
+    "noSearch" : MessageLookupByLibrary.simpleMessage("Type something to start a new search..."),
     "note" : MessageLookupByLibrary.simpleMessage("Note"),
     "pen" : MessageLookupByLibrary.simpleMessage("The book has stuff written with pen"),
     "pencil" : MessageLookupByLibrary.simpleMessage("The book presents pencil signs"),

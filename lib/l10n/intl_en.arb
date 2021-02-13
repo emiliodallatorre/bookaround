@@ -39,5 +39,7 @@
   "nearbyBooks": "Nearby books",
   "enable": "Enable",
   "undo": "Undo",
-  "searchBook": "Search a book..."
+  "searchBook": "Search a book...",
+  "noResults": "We didn't find anything with this query, please retry within the next days: some users could decide to sell this book in the future!",
+  "noSearch": "Type something to start a new search..."
 }

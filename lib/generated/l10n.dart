@@ -444,6 +444,26 @@ class S {
       args: [],
     );
   }
+
+  /// `We didn't find anything with this query, please retry within the next days: some users could decide to sell this book in the future!`
+  String get noResults {
+    return Intl.message(
+      'We didn\'t find anything with this query, please retry within the next days: some users could decide to sell this book in the future!',
+      name: 'noResults',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type something to start a new search...`
+  String get noSearch {
+    return Intl.message(
+      'Type something to start a new search...',
+      name: 'noSearch',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

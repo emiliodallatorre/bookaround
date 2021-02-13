@@ -39,5 +39,7 @@
   "nearbyBooks": "Libri nei dintorni",
   "enable": "Abilita",
   "undo": "Annulla",
-  "searchBook": "Cerca un libro..."
+  "searchBook": "Cerca un libro...",
+  "noResults": "Non abbiamo trovato nessun libro con questa query, riprova nei prossimi giorni: può darsi che qualche utente metta in vendita questo testo in futuro!",
+  "noSearch": "Scrivi qualcosa per iniziare una nuova ricerca..."
 }

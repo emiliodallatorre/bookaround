@@ -11,6 +11,13 @@ class IsbnModel {
   String image;
   final String authorUid;
 
+  String get authorString {
+    if (this.authors == null || (this.authors?.isEmpty ?? false))
+      return "";
+    else
+      return this.authors.reduce((value, element) => "$value, $element") ?? "";
+  }
+
   IsbnModel({
     this.id,
     this.isbn,
