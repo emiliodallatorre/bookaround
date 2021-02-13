@@ -52,6 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "responsibleUse" : MessageLookupByLibrary.simpleMessage("Responsible use"),
     "responsibleUseExtended" : MessageLookupByLibrary.simpleMessage("When you manually define this ISBN data, you are accepting that the users who - by now - will scan this ISBN, will use this data.\nWe cannot check every book insertion: please, insert this data correctly."),
     "save" : MessageLookupByLibrary.simpleMessage("Save"),
+    "searchBook" : MessageLookupByLibrary.simpleMessage("Search a book..."),
     "sellBooks" : MessageLookupByLibrary.simpleMessage("My books"),
     "sourceCamera" : MessageLookupByLibrary.simpleMessage("Camera"),
     "sourceGallery" : MessageLookupByLibrary.simpleMessage("Gallery"),

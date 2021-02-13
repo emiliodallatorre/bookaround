@@ -38,5 +38,6 @@
   "enableProximityBooks": "Vuoi abilitare la ricerca di prossimità?\nTi sarà utile per trovare i libri che cerchi vicino a te.\nSe non attiverai questa funzionalità ora, potrai sempre farlo nelle impostazioni dell'app.",
   "nearbyBooks": "Libri nei dintorni",
   "enable": "Abilita",
-  "undo": "Annulla"
+  "undo": "Annulla",
+  "searchBook": "Cerca un libro..."
 }

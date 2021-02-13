@@ -4,6 +4,7 @@ import 'package:bookaround/interface/pages/search_page.dart';
 import 'package:bookaround/interface/screen/book_editor_screen.dart';
 import 'package:bookaround/interface/screen/isbn_editor_screen.dart';
 import 'package:bookaround/interface/screen/profile_editor_screen.dart';
+import 'package:bookaround/interface/screen/search_screen.dart';
 import 'package:bookaround/interface/widget/user_avatar.dart';
 import 'package:bookaround/models/book_model.dart';
 import 'package:bookaround/models/settings_model.dart';
@@ -37,10 +38,12 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text(References.appName),
         actions: [
-          if (selectedIndex == 1)
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {},
+            Visibility(
+              visible: selectedIndex == 1,
+              child: IconButton(
+                icon: Icon(Icons.search),
+                onPressed: () => Navigator.of(context).pushNamed(SearchScreen.route),
+              ),
             ),
         ],
       ),
