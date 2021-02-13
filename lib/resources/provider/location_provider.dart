@@ -46,7 +46,7 @@ class LocationProvider extends ChangeNotifier {
     PermissionStatus permissionStatus = await locator.hasPermission();
     if (permissionStatus == PermissionStatus.denied) {
       permissionStatus = await locator.requestPermission();
-      if (permissionStatus != PermissionStatus.granted)
+      if (permissionStatus == PermissionStatus.granted)
         return;
       else
         throw "Permessi per la geolocalizzazione rifiutati.";

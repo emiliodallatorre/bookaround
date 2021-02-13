@@ -12,7 +12,7 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool proximity = Provider.of<SettingsModel>(context).proximitySearchEnabled;
-    if (proximity ?? false) Provider.of<LocationProvider>(context, listen: false).isOk();
+    if (proximity ?? false) Provider.of<LocationProvider>(context).isOk();
 
     return Consumer<LocationProvider>(
       builder: (BuildContext context, LocationProvider locationProvider, Widget child) => ListView(
