@@ -1,4 +1,5 @@
 import 'package:bookaround/models/book_model.dart';
+import 'package:bookaround/references.dart';
 import 'package:flutter/material.dart';
 
 class BookListElement extends StatelessWidget {
@@ -11,7 +12,11 @@ class BookListElement extends StatelessWidget {
     return ListTile(
       title: Text(book.title),
       subtitle: Text(book.authorString),
-      leading: Image.network(book.coverUrl),
+      leading: Image.network(
+        book.coverUrl,
+        // Ignora i potenziali errori di immagine.
+        errorBuilder: (BuildContext context, Object object, StackTrace stackTrace) => Image.network(References.noCover),
+      ),
     );
   }
 }

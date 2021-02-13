@@ -34,7 +34,16 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: AppBar(title: Text(References.appName)),
+      appBar: AppBar(
+        title: Text(References.appName),
+        actions: [
+          if (selectedIndex == 1)
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {},
+            ),
+        ],
+      ),
       drawer: buildDrawer(context),
       body: buildBody(context),
       extendBody: true,

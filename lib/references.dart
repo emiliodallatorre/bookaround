@@ -12,4 +12,6 @@ class References {
   static Reference bookCovers = FirebaseStorage.instance.ref("bookCovers/");
 
   static const String googleApiKey = "AIzaSyDTMDGyTZOPkaesYHW4vYfVMhUHafc8nl0";
+
+  static const String noCover = "https://firebasestorage.googleapis.com/v0/b/bookaround-firebase.appspot.com/o/noCover.jpg?alt=media&token=2dc45426-45cf-4333-93a1-dd3e9ed415b2";
 }
