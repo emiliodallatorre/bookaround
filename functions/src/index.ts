@@ -16,3 +16,4 @@ export const updateChatModel = chat.updateChatModel;
 
 // Funzioni di "./isbndb".
 export const createBookSell = isbndb.createBookSell;
+export const findBook = isbndb.findBook;
