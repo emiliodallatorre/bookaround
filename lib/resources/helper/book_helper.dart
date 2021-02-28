@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bookaround/models/book_model.dart';
 import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/errors/book_not_found_error.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
 
@@ -23,5 +24,15 @@ class BookHelper {
   static Future<void> updateBook(BookModel book) async {
     await book.reference.update(book.toJson());
     debugPrint("Aggiornato il libro ${book.id}.");
+  }
+
+  /// Crea un documento di ricerca di un certo libro.
+  static Future<BookModel> createBookSearch(BookModel book) async {
+    final DocumentReference bookReference = References.booksCollection.doc(book.id);
+    await bookReference.set(book.toJson());
+
+    book.reference = bookReference;
+
+    return book;
   }
 }

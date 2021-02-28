@@ -44,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "noBooks" : MessageLookupByLibrary.simpleMessage("Non c\'è ancora nessun libro in questa sezione, aggiungilo con l\'apposito pulsante...!"),
     "noResults" : MessageLookupByLibrary.simpleMessage("Non abbiamo trovato nessun libro con questa query, riprova nei prossimi giorni: può darsi che qualche utente metta in vendita questo testo in futuro!"),
     "noSearch" : MessageLookupByLibrary.simpleMessage("Scrivi qualcosa per iniziare una nuova ricerca..."),
+    "noSearchBooks" : MessageLookupByLibrary.simpleMessage("Al momento non hai ancora aggiunto alcun libro alla tua lista di ricerca, aggiungine uno col pulsante \"Cerca\" in alto a destra...!"),
     "note" : MessageLookupByLibrary.simpleMessage("Note"),
     "pen" : MessageLookupByLibrary.simpleMessage("Sul libro è stata utilizzata la penna o altro marcatore indelebile"),
     "pencil" : MessageLookupByLibrary.simpleMessage("Il libro è stato annotato in matita"),

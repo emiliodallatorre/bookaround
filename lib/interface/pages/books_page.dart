@@ -1,6 +1,7 @@
 import 'package:bookaround/bloc/book_bloc.dart';
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/widget/book_list_element.dart';
+import 'package:bookaround/interface/widget/centered_text.dart';
 import 'package:bookaround/models/book_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:flutter/material.dart';
@@ -24,13 +25,8 @@ class BooksPage extends StatelessWidget {
                 itemCount: booksSnapshot.data.length,
                 itemBuilder: (BuildContext context, int index) => BookListElement(book: booksSnapshot.data.elementAt(index)),
               );
-
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(S.current.noBooks, style: Theme.of(context).textTheme.bodyText1, textAlign: TextAlign.center),
-              ),
-            );
+            else
+              return CenteredText(label: S.current.noBooks);
           }
 
           sellBooksBloc.getUserBooks(Provider.of<UserModel>(context).uid, this.type);

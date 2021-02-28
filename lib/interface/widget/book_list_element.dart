@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 
 class BookListElement extends StatelessWidget {
   final BookModel book;
+  final Color color;
 
-  const BookListElement({Key key, @required this.book}) : super(key: key);
+  const BookListElement({Key key, @required this.book, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,9 @@ class BookListElement extends StatelessWidget {
           placeholder: (BuildContext context, String imageUrl) => Center(child: CircularProgressIndicator()),
         ),
       ),
+      trailing: this.color == null
+          ? null
+          : Icon(Icons.circle, color: this.color),
     );
   }
 }

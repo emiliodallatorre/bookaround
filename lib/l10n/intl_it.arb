@@ -41,5 +41,6 @@
   "undo": "Annulla",
   "searchBook": "Cerca un libro...",
   "noResults": "Non abbiamo trovato nessun libro con questa query, riprova nei prossimi giorni: può darsi che qualche utente metta in vendita questo testo in futuro!",
-  "noSearch": "Scrivi qualcosa per iniziare una nuova ricerca..."
+  "noSearch": "Scrivi qualcosa per iniziare una nuova ricerca...",
+  "noSearchBooks": "Al momento non hai ancora aggiunto alcun libro alla tua lista di ricerca, aggiungine uno col pulsante \"Cerca\" in alto a destra...!"
 }

@@ -464,6 +464,16 @@ class S {
       args: [],
     );
   }
+
+  /// `You haven't added any book to your search list yet, add one with the search button on the right...!`
+  String get noSearchBooks {
+    return Intl.message(
+      'You haven\'t added any book to your search list yet, add one with the search button on the right...!',
+      name: 'noSearchBooks',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
