@@ -27,11 +27,16 @@ class SearchPage extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<List<BookModel>> booksSnapshot) {
           if (booksSnapshot.hasData) {
             if (booksSnapshot.data.isNotEmpty) {
-              bool proximity = Provider.of<SettingsModel>(context).proximitySearchEnabled;
-              if (proximity ?? false) Provider.of<LocationProvider>(context).isOk();
+              bool proximity = Provider.of<SettingsModel>(context, listen: false).proximitySearchEnabled;
+              if (proximity ?? false) Provider.of<LocationProvider>(context, listen: false).isOk();
 
-              Map<String, Color> bookColors = <String, Color>{};
-              booksSnapshot.data.forEach((element) => bookColors[element.isbn] = Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0));
+              Map<String, HSVColor> bookColors = <String, HSVColor>{};
+              booksSnapshot.data.forEach((element) => bookColors[element.isbn] = HSVColor.fromAHSV(1.0, Random().nextDouble() * 360.0, 1.0, 1.0));
+              debugPrint("Assegnati i colori randomici.");
+
+              debugPrint(bookColors.toString());
+
+              Provider.of<LocationProvider>(context, listen: false).getNearbyBooks(booksSnapshot.data.map((e) => e.isbn).toList());
 
               return Consumer<LocationProvider>(
                 builder: (BuildContext context, LocationProvider locationProvider, Widget child) => ListView(
@@ -42,22 +47,30 @@ class SearchPage extends StatelessWidget {
                         child: AspectRatio(
                           aspectRatio: 4 / 3,
                           child: GoogleMap(
-                              initialCameraPosition: CameraPosition(
-                                target: LatLng(locationProvider.lastKnownLocation.latitude, locationProvider.lastKnownLocation.longitude),
-                                zoom: 11.0,
-                              ),
-                              myLocationEnabled: true,
-                              myLocationButtonEnabled: true,
-                              markers: locationProvider.nearbyBooks
-                                  ?.map((e) => Marker(markerId: MarkerId(e.id), position: LatLng(e.modelizedLocation.latitude, e.modelizedLocation.longitude)))
-                                  ?.toSet(),
-                              onMapCreated: (GoogleMapController controller) {
-                                if (Theme.of(context).brightness == Brightness.light)
-                                  controller.setMapStyle(MapStyles.lightMap);
-                                else
-                                  controller.setMapStyle(MapStyles.darkMap);
-                              },
-                              gestureRecognizers: Set()..add(Factory<PanGestureRecognizer>(() => PanGestureRecognizer()))),
+                            initialCameraPosition: CameraPosition(
+                              target: LatLng(locationProvider.lastKnownLocation.latitude, locationProvider.lastKnownLocation.longitude),
+                              zoom: 11.0,
+                            ),
+                            myLocationEnabled: true,
+                            myLocationButtonEnabled: true,
+                            markers: locationProvider.nearbyBooks
+                                    ?.map(
+                                      (e) => Marker(
+                                        markerId: MarkerId(e.id),
+                                        position: LatLng(e.modelizedLocation.latitude, e.modelizedLocation.longitude),
+                                        icon: BitmapDescriptor.defaultMarkerWithHue(bookColors[e.isbn].hue),
+                                      ),
+                                    )
+                                    ?.toSet() ??
+                                <Marker>[].toSet(),
+                            onMapCreated: (GoogleMapController controller) {
+                              if (Theme.of(context).brightness == Brightness.light)
+                                controller.setMapStyle(MapStyles.lightMap);
+                              else
+                                controller.setMapStyle(MapStyles.darkMap);
+                            },
+                            gestureRecognizers: Set()..add(Factory<PanGestureRecognizer>(() => PanGestureRecognizer())),
+                          ),
                         ),
                       ),
                     ListView.builder(
@@ -66,7 +79,7 @@ class SearchPage extends StatelessWidget {
                       itemCount: booksSnapshot.data.length,
                       itemBuilder: (BuildContext context, int index) => BookListElement(
                         book: booksSnapshot.data.elementAt(index),
-                        color: bookColors[booksSnapshot.data.elementAt(index).isbn],
+                        color: bookColors[booksSnapshot.data.elementAt(index).isbn].toColor(),
                       ),
                     ),
                   ],

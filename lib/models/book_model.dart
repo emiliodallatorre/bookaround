@@ -51,7 +51,7 @@ class BookModel extends ChangeNotifier {
   });
 
   @override
-  String toString() => "Libro $id.";
+  String toString() => "Libro $id, isbn: $isbn.";
 
   factory BookModel.fromJson(Map<String, dynamic> parsedJson) => _$BookModelFromJson(parsedJson);
 

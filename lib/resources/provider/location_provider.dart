@@ -11,11 +11,10 @@ class LocationProvider extends ChangeNotifier {
   LocationData lastKnownLocation;
   bool wasOk = false;
 
-  Future<bool> isOk() async {
+  Future<bool> isOk([List<String> wanted]) async {
     try {
       await getPermissionStatus();
       await getLocation();
-      getNearbyBooks();
 
       wasOk = true;
       return true;
@@ -56,7 +55,7 @@ class LocationProvider extends ChangeNotifier {
   Geoflutterfire geoflutterfire = Geoflutterfire();
   List<BookModel> nearbyBooks;
 
-  Future<void> getNearbyBooks() async {
+  Future<void> getNearbyBooks(List<String> wanted) async {
     var queryRef = References.booksCollection;
     var stream = geoflutterfire.collection(collectionRef: queryRef).within(
           center: GeoFirePoint(lastKnownLocation.latitude, lastKnownLocation.longitude),
@@ -64,6 +63,12 @@ class LocationProvider extends ChangeNotifier {
           field: "locationData",
         );
 
-    stream.listen((List<DocumentSnapshot> rawNearbyBooks) => this.nearbyBooks = rawNearbyBooks.map((e) => BookModel.fromJson(e.data())..reference = e.reference).toList());
+    stream.listen((List<DocumentSnapshot> rawNearbyBooks) {
+      List<BookModel> foundBooks = rawNearbyBooks.map((e) => BookModel.fromJson(e.data())..reference = e.reference).toList();
+
+      if (wanted != null) foundBooks.removeWhere((element) => !wanted.contains(element.isbn));
+
+      this.nearbyBooks = foundBooks;
+    });
   }
 }
