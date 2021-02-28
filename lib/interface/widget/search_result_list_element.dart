@@ -1,8 +1,13 @@
 import 'package:bookaround/generated/l10n.dart';
+import 'package:bookaround/models/book_model.dart';
 import 'package:bookaround/models/isbn_model.dart';
+import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
+import 'package:bookaround/resources/helper/book_helper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:random_string/random_string.dart';
 
 class SearchResultListElement extends StatelessWidget {
   final IsbnModel isbn;
@@ -29,6 +34,24 @@ class SearchResultListElement extends StatelessWidget {
           errorWidget: (BuildContext context, String stackTrace, dynamic error) => CachedNetworkImage(imageUrl: References.noCover),
           placeholder: (BuildContext context, String imageUrl) => Center(child: CircularProgressIndicator()),
         ),
+      ),
+      trailing: IconButton(
+        icon: Icon(Icons.add),
+        onPressed: () async {
+          BookModel searchingBook = BookModel(
+            isbn: this.isbn.isbn,
+            addedDateTime: DateTime.now(),
+            authors: this.isbn.authors,
+            title: this.isbn.title,
+            coverUrl: this.isbn.image,
+            id: randomAlphaNumeric(20),
+            userUid: Provider.of<UserModel>(context, listen: false).uid,
+            type: BookType.LOOKING,
+          );
+
+          await BookHelper.createBookSearch(searchingBook);
+          Navigator.of(context).pop();
+        },
       ),
     );
   }
