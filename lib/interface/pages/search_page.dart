@@ -30,12 +30,9 @@ class SearchPage extends StatelessWidget {
               bool proximity = Provider.of<SettingsModel>(context, listen: false).proximitySearchEnabled;
               if (proximity ?? false) Provider.of<LocationProvider>(context, listen: false).isOk();
 
+              // Assegna i colori a caso.
               Map<String, HSVColor> bookColors = <String, HSVColor>{};
               booksSnapshot.data.forEach((element) => bookColors[element.isbn] = HSVColor.fromAHSV(1.0, Random().nextDouble() * 360.0, 1.0, 1.0));
-              debugPrint("Assegnati i colori randomici.");
-
-              debugPrint(bookColors.toString());
-
               Provider.of<LocationProvider>(context, listen: false).getNearbyBooks(booksSnapshot.data.map((e) => e.isbn).toList());
 
               return Consumer<LocationProvider>(

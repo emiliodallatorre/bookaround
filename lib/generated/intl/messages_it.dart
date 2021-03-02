@@ -49,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pen" : MessageLookupByLibrary.simpleMessage("Sul libro è stata utilizzata la penna o altro marcatore indelebile"),
     "pencil" : MessageLookupByLibrary.simpleMessage("Il libro è stato annotato in matita"),
     "phoneNumber" : MessageLookupByLibrary.simpleMessage("Numero di telefono"),
+    "present" : MessageLookupByLibrary.simpleMessage("Presente"),
     "proceed" : MessageLookupByLibrary.simpleMessage("Procedi"),
     "proximitySearch" : MessageLookupByLibrary.simpleMessage("Ricerca di prossimità"),
     "requiredField" : MessageLookupByLibrary.simpleMessage("Questo campo è necessario"),
@@ -62,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "surname" : MessageLookupByLibrary.simpleMessage("Cognome"),
     "title" : MessageLookupByLibrary.simpleMessage("Titolo del libro"),
     "undo" : MessageLookupByLibrary.simpleMessage("Annulla"),
+    "usage" : MessageLookupByLibrary.simpleMessage("Utilizzo"),
     "whereIsBook" : MessageLookupByLibrary.simpleMessage("Dove si trova il libro?"),
     "wrongCode" : MessageLookupByLibrary.simpleMessage("Questo codice non è corretto, riprova"),
     "wrongField" : MessageLookupByLibrary.simpleMessage("Inserisci correttamente questo dato")

@@ -1,5 +1,6 @@
 import 'package:bookaround/bloc/book_bloc.dart';
 import 'package:bookaround/generated/l10n.dart';
+import 'package:bookaround/interface/widget/book_cover.dart';
 import 'package:bookaround/models/book_model.dart';
 import 'package:bookaround/models/place_model.dart';
 import 'package:bookaround/models/user_model.dart';
@@ -59,26 +60,7 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
   Widget _buildBody(BuildContext context) {
     return ListView(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          child: Row(
-            children: [
-              Expanded(child: Image.network(book.coverUrl)),
-              VerticalDivider(),
-              Expanded(
-                flex: 2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(book.title, style: Theme.of(context).textTheme.headline6),
-                    Text(book.authorString, style: Theme.of(context).textTheme.bodyText1),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        Divider(indent: 16.0, endIndent: 16.0),
+        BookCover(book: book),
         CheckboxListTile(
           value: book.pencil,
           onChanged: (bool value) => setState(() => book.pencil = value),

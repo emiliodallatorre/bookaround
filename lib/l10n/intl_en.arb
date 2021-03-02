@@ -42,6 +42,7 @@
   "searchBook": "Search a book...",
   "noResults": "We didn't find anything with this query, please retry within the next days: some users could decide to sell this book in the future!",
   "noSearch": "Type something to start a new search...",
-  "noSearchBooks": "You haven't added any book to your search list yet, add one with the search button on the right...!"
-
+  "noSearchBooks": "You haven't added any book to your search list yet, add one with the search button on the right...!",
+  "usage": "Usage",
+  "present": "Present"
 }

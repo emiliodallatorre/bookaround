@@ -1,3 +1,4 @@
+import 'package:bookaround/interface/screen/book_screen.dart';
 import 'package:bookaround/models/book_model.dart';
 import 'package:bookaround/references.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -23,9 +24,8 @@ class BookListElement extends StatelessWidget {
           placeholder: (BuildContext context, String imageUrl) => Center(child: CircularProgressIndicator()),
         ),
       ),
-      trailing: this.color == null
-          ? null
-          : Icon(Icons.circle, color: this.color),
+      trailing: this.color == null ? null : Icon(Icons.circle, color: this.color),
+      onTap: () => Navigator.of(context).pushNamed(BookScreen.route, arguments: this.book),
     );
   }
 }

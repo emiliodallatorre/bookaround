@@ -474,6 +474,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Usage`
+  String get usage {
+    return Intl.message(
+      'Usage',
+      name: 'usage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Present`
+  String get present {
+    return Intl.message(
+      'Present',
+      name: 'present',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

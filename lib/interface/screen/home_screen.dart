@@ -38,13 +38,13 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text(References.appName),
         actions: [
-            Visibility(
-              visible: selectedIndex == 1,
-              child: IconButton(
-                icon: Icon(Icons.search),
-                onPressed: () => Navigator.of(context).pushNamed(SearchScreen.route),
-              ),
+          Visibility(
+            visible: selectedIndex == 1,
+            child: IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () => Navigator.of(context).pushNamed(SearchScreen.route),
             ),
+          ),
         ],
       ),
       drawer: buildDrawer(context),
@@ -134,7 +134,8 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.of(context).pushNamed(BookEditorScreen.route, arguments: book);
 
               setState(() => working = false);
-            }
+            } else
+              setState(() => working = false);
           } on BookNotFoundError {
             // Il libro non esiste nel database.
             setState(() => working = false);
