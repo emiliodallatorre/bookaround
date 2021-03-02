@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:bookaround/bloc/book_bloc.dart';
 import 'package:bookaround/generated/l10n.dart';
+import 'package:bookaround/interface/screen/book_screen.dart';
 import 'package:bookaround/interface/widget/book_list_element.dart';
 import 'package:bookaround/interface/widget/centered_text.dart';
 import 'package:bookaround/map_styles.dart';
@@ -52,10 +53,14 @@ class SearchPage extends StatelessWidget {
                             myLocationButtonEnabled: true,
                             markers: locationProvider.nearbyBooks
                                     ?.map(
-                                      (e) => Marker(
-                                        markerId: MarkerId(e.id),
-                                        position: LatLng(e.modelizedLocation.latitude, e.modelizedLocation.longitude),
-                                        icon: BitmapDescriptor.defaultMarkerWithHue(bookColors[e.isbn].hue),
+                                      (BookModel book) => Marker(
+                                        markerId: MarkerId(book.id),
+                                        position: LatLng(book.modelizedLocation.latitude, book.modelizedLocation.longitude),
+                                        icon: BitmapDescriptor.defaultMarkerWithHue(bookColors[book.isbn].hue),
+                                        onTap: () async {
+                                          await Future.delayed(Duration(milliseconds: 256));
+                                          Navigator.of(context).pushNamed(BookScreen.route, arguments: book);
+                                        },
                                       ),
                                     )
                                     ?.toSet() ??
