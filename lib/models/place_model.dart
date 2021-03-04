@@ -27,7 +27,7 @@ class PlaceModel {
         placeReference: prediction.reference,
       );
 
-  factory PlaceModel.fromJson(Map<String, dynamic> parsedJson) => _$LocationModelFromJson(parsedJson);
+  factory PlaceModel.fromJson(Map<String, dynamic> parsedJson) => _$PlaceModelFromJson(parsedJson);
 
-  Map<String, dynamic> toJson() => _$LocationModelToJson(this);
+  Map<String, dynamic> toJson() => _$PlaceModelToJson(this);
 }

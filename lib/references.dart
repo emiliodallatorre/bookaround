@@ -6,6 +6,7 @@ class References {
   static const String fox = "🦊";
 
   static CollectionReference usersCollection = FirebaseFirestore.instance.collection("users");
+  static CollectionReference chatsCollection = FirebaseFirestore.instance.collection("chats");
   static CollectionReference booksCollection = FirebaseFirestore.instance.collection("books");
   static CollectionReference isbnsCollection = FirebaseFirestore.instance.collection("isbns");
 
