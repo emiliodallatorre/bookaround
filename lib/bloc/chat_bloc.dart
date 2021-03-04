@@ -1,5 +1,6 @@
 import 'package:bookaround/models/messaging/chat_model.dart';
 import 'package:bookaround/models/user_model.dart';
+import 'package:bookaround/resources/helper/chat_helper.dart';
 import 'package:bookaround/resources/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
