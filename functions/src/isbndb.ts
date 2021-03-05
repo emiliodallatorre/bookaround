@@ -17,8 +17,9 @@ export const createBookSell = functions.https.onCall(async (data, context) => {
     }
 
     const bookId: string = randomString(20)
-    const bookModel = {
+    const bookModel: BookModel = {
         id: bookId,
+        isbn13: book["isbn13"],
         isbn: book["isbn"],
         title: book["title"],
         authors: book["authors"],
@@ -56,3 +57,19 @@ export const findBook = functions.https.onCall(async (data, context) => {
     result = result.concat(resultsFromFirebase, resultsFromIsbndb);
     return JSON.stringify(result);
 })
+
+interface BookModel {
+    id: string,
+    isbn13: string,
+    isbn: string,
+    title: string,
+    authors: string,
+    coverUrl: string,
+    type: string,
+    userUid: string,
+    addedDateTime: string,
+    highlighting: boolean,
+    pen: boolean,
+    pencil: boolean,
+    note: string,
+}

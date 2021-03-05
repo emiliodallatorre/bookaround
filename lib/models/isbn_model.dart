@@ -5,7 +5,7 @@ part 'isbn_model.g.dart';
 @JsonSerializable()
 class IsbnModel {
   final String id;
-  final String isbn;
+  final String isbn, isbn13;
   String title;
   List<String> authors;
   String image;
@@ -21,6 +21,7 @@ class IsbnModel {
   IsbnModel({
     this.id,
     this.isbn,
+    this.isbn13,
     this.title,
     this.authors,
     this.image,

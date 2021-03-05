@@ -10,7 +10,7 @@ part 'book_model.g.dart';
 @JsonSerializable()
 class BookModel extends ChangeNotifier {
   final String id;
-  final String isbn;
+  final String isbn, isbn13;
   final String title;
   final List<String> authors;
   final String coverUrl;
@@ -36,6 +36,7 @@ class BookModel extends ChangeNotifier {
   BookModel({
     this.id,
     this.isbn,
+    this.isbn13,
     this.title,
     this.authors,
     this.coverUrl,
@@ -51,7 +52,7 @@ class BookModel extends ChangeNotifier {
   });
 
   @override
-  String toString() => "Libro $id, isbn: $isbn.";
+  String toString() => "Libro $id, isbn: $isbn13.";
 
   factory BookModel.fromJson(Map<String, dynamic> parsedJson) => _$BookModelFromJson(parsedJson);
 

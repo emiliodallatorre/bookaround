@@ -66,7 +66,7 @@ class LocationProvider extends ChangeNotifier {
     stream.listen((List<DocumentSnapshot> rawNearbyBooks) {
       List<BookModel> foundBooks = rawNearbyBooks.map((e) => BookModel.fromJson(e.data())..reference = e.reference).toList();
 
-      if (wanted != null) foundBooks.removeWhere((element) => !wanted.contains(element.isbn));
+      if (wanted != null) foundBooks.removeWhere((element) => !wanted.contains(element.isbn13));
 
       this.nearbyBooks = foundBooks;
     });

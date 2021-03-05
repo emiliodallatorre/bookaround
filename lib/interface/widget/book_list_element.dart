@@ -25,7 +25,7 @@ class BookListElement extends StatelessWidget {
         ),
       ),
       trailing: this.color == null ? null : Icon(Icons.circle, color: this.color),
-      onTap: () => Navigator.of(context).pushNamed(BookScreen.route, arguments: this.book),
+      onTap: this.book.type == BookType.LOOKING ? null : () => Navigator.of(context).pushNamed(BookScreen.route, arguments: this.book),
     );
   }
 }

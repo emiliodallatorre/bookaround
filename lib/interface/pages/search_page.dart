@@ -33,8 +33,8 @@ class SearchPage extends StatelessWidget {
 
               // Assegna i colori a caso.
               Map<String, HSVColor> bookColors = <String, HSVColor>{};
-              booksSnapshot.data.forEach((element) => bookColors[element.isbn] = HSVColor.fromAHSV(1.0, Random().nextDouble() * 360.0, 1.0, 1.0));
-              Provider.of<LocationProvider>(context, listen: false).getNearbyBooks(booksSnapshot.data.map((e) => e.isbn).toList());
+              booksSnapshot.data.forEach((element) => bookColors[element.isbn13] = HSVColor.fromAHSV(1.0, Random().nextDouble() * 360.0, 1.0, 1.0));
+              Provider.of<LocationProvider>(context, listen: false).getNearbyBooks(booksSnapshot.data.map((BookModel book) => book.isbn13).toList());
 
               return Consumer<LocationProvider>(
                 builder: (BuildContext context, LocationProvider locationProvider, Widget child) => ListView(
@@ -56,7 +56,7 @@ class SearchPage extends StatelessWidget {
                                       (BookModel book) => Marker(
                                         markerId: MarkerId(book.id),
                                         position: LatLng(book.modelizedLocation.latitude, book.modelizedLocation.longitude),
-                                        icon: BitmapDescriptor.defaultMarkerWithHue(bookColors[book.isbn].hue),
+                                        icon: BitmapDescriptor.defaultMarkerWithHue(bookColors[book.isbn13].hue),
                                         onTap: () async {
                                           await Future.delayed(Duration(milliseconds: 256));
                                           Navigator.of(context).pushNamed(BookScreen.route, arguments: book);
@@ -81,7 +81,7 @@ class SearchPage extends StatelessWidget {
                       itemCount: booksSnapshot.data.length,
                       itemBuilder: (BuildContext context, int index) => BookListElement(
                         book: booksSnapshot.data.elementAt(index),
-                        color: bookColors[booksSnapshot.data.elementAt(index).isbn].toColor(),
+                        color: bookColors[booksSnapshot.data.elementAt(index).isbn13].toColor(),
                       ),
                     ),
                   ],

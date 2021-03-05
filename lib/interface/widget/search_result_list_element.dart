@@ -1,3 +1,4 @@
+import 'package:bookaround/bloc/book_bloc.dart';
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/models/book_model.dart';
 import 'package:bookaround/models/isbn_model.dart';
@@ -23,7 +24,7 @@ class SearchResultListElement extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (this.isbn.authorString.isNotEmpty) Text(this.isbn.authorString),
-          Text(S.current.isbn + ": " + this.isbn.isbn),
+          Text(S.current.isbn + ": " + this.isbn.isbn13),
         ],
       ),
       leading: AspectRatio(
@@ -40,6 +41,7 @@ class SearchResultListElement extends StatelessWidget {
         onPressed: () async {
           BookModel searchingBook = BookModel(
             isbn: this.isbn.isbn,
+            isbn13: this.isbn.isbn13,
             addedDateTime: DateTime.now(),
             authors: this.isbn.authors,
             title: this.isbn.title,
@@ -50,6 +52,8 @@ class SearchResultListElement extends StatelessWidget {
           );
 
           await BookHelper.createBookSearch(searchingBook);
+          await sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid, BookType.LOOKING);
+
           Navigator.of(context).pop();
         },
       ),
