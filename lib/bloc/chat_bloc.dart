@@ -10,7 +10,7 @@ class ChatsBloc {
 
   ChatsBloc(this.currentUser);
 
-  final _chatsFetcher = PublishSubject<List<ChatModel>>();
+  final PublishSubject<List<ChatModel>> _chatsFetcher = PublishSubject<List<ChatModel>>();
 
   Stream<List<ChatModel>> get chats => _chatsFetcher.stream;
 

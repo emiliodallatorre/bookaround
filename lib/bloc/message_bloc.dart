@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:bookaround/models/messaging/message_model.dart';
 import 'package:bookaround/models/messaging/chat_model.dart';
+import 'package:bookaround/models/messaging/message_model.dart';
 import 'package:bookaround/resources/helper/chat_helper.dart';
 import 'package:bookaround/resources/repository.dart';
+import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
 class MessagesBloc {
@@ -10,7 +10,7 @@ class MessagesBloc {
 
   MessagesBloc(this.chat);
 
-  final _messagesFetcher = PublishSubject<List<MessageModel>>();
+  final PublishSubject<List<MessageModel>> _messagesFetcher = PublishSubject<List<MessageModel>>();
 
   Stream<List<MessageModel>> get messages => _messagesFetcher.stream;
 

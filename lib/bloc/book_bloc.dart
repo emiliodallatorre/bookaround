@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
 class BooksBloc {
-  final _booksFetcher = PublishSubject<List<BookModel>>();
+  final PublishSubject<List<BookModel>> _booksFetcher = PublishSubject<List<BookModel>>();
 
   Stream<List<BookModel>> get books => _booksFetcher.stream;
 
