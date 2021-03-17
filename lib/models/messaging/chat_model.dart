@@ -1,7 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:json_annotation/json_annotation.dart';
 import 'package:bookaround/models/messaging/message_model.dart';
 import 'package:bookaround/models/user_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'chat_model.g.dart';
 
@@ -19,6 +19,8 @@ class ChatModel {
   List<UserModel> participantsUsers;
 
   CollectionReference get messagesReference => reference.collection("messages");
+
+  UserModel get recipient => participantsUsers.single;
 
   ChatModel({
     this.id,

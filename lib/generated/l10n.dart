@@ -504,6 +504,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Chat`
+  String get chats {
+    return Intl.message(
+      'Chat',
+      name: 'chats',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have any chat yet.\nHere will appear the chats you'll start with other users.`
+  String get noChats {
+    return Intl.message(
+      'You don\'t have any chat yet.\nHere will appear the chats you\'ll start with other users.',
+      name: 'noChats',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

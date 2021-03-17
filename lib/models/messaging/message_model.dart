@@ -15,6 +15,9 @@ class MessageModel {
   @JsonKey(ignore: true)
   DocumentReference reference;
 
+  // TODO: Modificare nel caso dei media allegati.
+  String get displayableBody => body;
+
   MessageModel({
     this.id,
     this.senderUid,

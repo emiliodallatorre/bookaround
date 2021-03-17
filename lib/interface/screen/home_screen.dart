@@ -1,5 +1,6 @@
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/pages/books_page.dart';
+import 'package:bookaround/interface/pages/chat_page.dart';
 import 'package:bookaround/interface/pages/search_page.dart';
 import 'package:bookaround/interface/screen/book_editor_screen.dart';
 import 'package:bookaround/interface/screen/isbn_editor_screen.dart';
@@ -52,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
       extendBody: true,
       bottomNavigationBar: buildBottomNavigationBar(context),
       floatingActionButton: buildFloatingActionButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
@@ -61,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
       index: selectedIndex,
       children: [
         BooksPage(),
+        ChatPage(),
         SearchPage(),
       ],
     );
@@ -79,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
           onTap: (int newIndex) async {
             setState(() => selectedIndex = newIndex);
 
-            if (newIndex == 1) if (Provider.of<SettingsModel>(context, listen: false).proximitySearchEnabled == null) {
+            if (newIndex == 2) if (Provider.of<SettingsModel>(context, listen: false).proximitySearchEnabled == null) {
               bool wantsProximitySearch = await showDialog<bool>(
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
@@ -108,6 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: S.current.sellBooks),
+            BottomNavigationBarItem(icon: Icon(Icons.chat), label: S.current.chats),
             BottomNavigationBarItem(icon: Icon(Icons.search), label: S.current.buyBooks),
           ],
         ),

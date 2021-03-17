@@ -45,5 +45,7 @@
   "noSearchBooks": "You haven't added any book to your search list yet, add one with the search button on the right...!",
   "usage": "Usage",
   "present": "Present",
-  "soldBy": "Sold by"
+  "soldBy": "Sold by",
+  "chats": "Chat",
+  "noChats": "You don't have any chat yet.\nHere will appear the chats you'll start with other users."
 }

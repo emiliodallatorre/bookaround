@@ -45,5 +45,7 @@
   "noSearchBooks": "Al momento non hai ancora aggiunto alcun libro alla tua lista di ricerca, aggiungine uno col pulsante \"Cerca\" in alto a destra...!",
   "usage": "Utilizzo",
   "present": "Presente",
-  "soldBy": "Venduto da"
+  "soldBy": "Venduto da",
+  "chats": "Conversazioni",
+  "noChats": "Non hai ancora alcuna conversazione.\nCompariranno qui quelle che avvierai con gli altri utenti."
 }

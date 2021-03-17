@@ -5,10 +5,10 @@ import 'package:bookaround/resources/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
-class ChatsBloc {
+class ChatBloc {
   final UserModel currentUser;
 
-  ChatsBloc(this.currentUser);
+  ChatBloc(this.currentUser);
 
   final PublishSubject<List<ChatModel>> _chatsFetcher = PublishSubject<List<ChatModel>>();
 
@@ -34,3 +34,5 @@ class ChatsBloc {
     _chatsFetcher.close();
   }
 }
+
+
