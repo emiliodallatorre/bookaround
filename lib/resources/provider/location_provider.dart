@@ -1,5 +1,6 @@
 import 'package:bookaround/models/book_model.dart';
 import 'package:bookaround/references.dart';
+import 'package:bookaround/resources/provider/user_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geoflutterfire/geoflutterfire.dart';
@@ -63,8 +64,15 @@ class LocationProvider extends ChangeNotifier {
           field: "locationData",
         );
 
-    stream.listen((List<DocumentSnapshot> rawNearbyBooks) {
-      List<BookModel> foundBooks = rawNearbyBooks.map((e) => BookModel.fromJson(e.data())..reference = e.reference).toList();
+    stream.listen((List<DocumentSnapshot> rawNearbyBooks) async {
+      List<BookModel> foundBooks = <BookModel>[];
+      for(int index = 0; index < rawNearbyBooks.length; index++) {
+        BookModel bookModel = BookModel.fromJson(rawNearbyBooks.elementAt(index).data());
+        bookModel.reference = rawNearbyBooks.elementAt(index).reference;
+        bookModel.user = await UserProvider.getUserByUid(bookModel.userUid);
+
+        foundBooks.add(bookModel);
+      }
 
       if (wanted != null) foundBooks.removeWhere((element) => !wanted.contains(element.isbn13));
 

@@ -494,6 +494,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Sold by`
+  String get soldBy {
+    return Intl.message(
+      'Sold by',
+      name: 'soldBy',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -44,5 +44,6 @@
   "noSearch": "Type something to start a new search...",
   "noSearchBooks": "You haven't added any book to your search list yet, add one with the search button on the right...!",
   "usage": "Usage",
-  "present": "Present"
+  "present": "Present",
+  "soldBy": "Sold by"
 }

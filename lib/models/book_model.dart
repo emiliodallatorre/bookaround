@@ -1,4 +1,5 @@
 import 'package:bookaround/models/place_model.dart';
+import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/resources/helper/location_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,9 @@ class BookModel extends ChangeNotifier {
   Map<String, dynamic> locationData;
 
   LatLng get modelizedLocation => LatLng((locationData["geopoint"] as GeoPoint).latitude, (locationData["geopoint"] as GeoPoint).longitude);
+
+  @JsonKey(ignore: true)
+  UserModel user;
 
   @JsonKey(ignore: true)
   DocumentReference reference;

@@ -1,7 +1,10 @@
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/widget/book_cover.dart';
 import 'package:bookaround/models/book_model.dart';
+import 'package:bookaround/models/user_model.dart';
+import 'package:bookaround/references.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BookScreen extends StatelessWidget {
   static const String route = "/bookScreen";
@@ -53,6 +56,31 @@ class BookScreen extends StatelessWidget {
         ),
         if (book.note.isNotEmpty) Text(S.current.note, style: Theme.of(context).textTheme.caption),
         if (book.note.isNotEmpty) Text(book.note),
+        if (book.userUid != Provider.of<UserModel>(context).uid) _buildSellerInfo(context),
+        _buildSellerInfo(context),
+      ],
+    );
+  }
+
+  Widget _buildSellerInfo(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Divider(),
+        Text(S.current.soldBy, style: Theme.of(context).textTheme.headline4),
+        Row(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(book.user.displayName, style: Theme.of(context).textTheme.headline6),
+                Text(book.user.city, style: Theme.of(context).textTheme.caption),
+              ],
+            ),
+          ],
+        ),
       ],
     );
   }
