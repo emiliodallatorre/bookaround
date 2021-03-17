@@ -28,7 +28,7 @@ class BookScreen extends StatelessWidget {
           onPressed: () async {
             final ChatModel chat = await ChatProvider.getChat(book.userUid, Provider.of<UserModel>(context, listen: false).uid);
 
-            if(chat != null) {
+            if (chat != null) {
               Navigator.of(context).pushNamed(ChatScreen.route);
             }
           },
@@ -39,41 +39,47 @@ class BookScreen extends StatelessWidget {
 
   Widget _buildBody(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
       children: [
-        BookCover(book: book, horizontalPadding: false),
-        Row(
-          children: [
-            Expanded(
-              child: Column(
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            children: [
+              BookCover(book: book, horizontalPadding: false),
+              Row(
                 children: [
-                  Row(
-                    children: [
-                      Expanded(child: Text(S.current.pencil)),
-                      Checkbox(value: book.pencil, onChanged: null),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(child: Text(S.current.pen)),
-                      Checkbox(value: book.pen, onChanged: null),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(child: Text(S.current.highlight)),
-                      Checkbox(value: book.highlighting, onChanged: null),
-                    ],
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(child: Text(S.current.pencil)),
+                            Checkbox(value: book.pencil, onChanged: null),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(child: Text(S.current.pen)),
+                            Checkbox(value: book.pen, onChanged: null),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(child: Text(S.current.highlight)),
+                            Checkbox(value: book.highlighting, onChanged: null),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
-            ),
-          ],
+              if (book.note.isNotEmpty) Text(S.current.note, style: Theme.of(context).textTheme.caption),
+              if (book.note.isNotEmpty) Text(book.note),
+              if (book.userUid != Provider.of<UserModel>(context).uid) _buildSellerInfo(context),
+              _buildSellerInfo(context),
+            ],
+          ),
         ),
-        if (book.note.isNotEmpty) Text(S.current.note, style: Theme.of(context).textTheme.caption),
-        if (book.note.isNotEmpty) Text(book.note),
-        if (book.userUid != Provider.of<UserModel>(context).uid) _buildSellerInfo(context),
-        _buildSellerInfo(context),
       ],
     );
   }
