@@ -5,6 +5,7 @@ import 'package:bookaround/models/messaging/chat_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/provider/user_provider.dart';
+import 'package:flutter/material.dart';
 
 class ChatProvider {
   static Future<ChatModel> getChat(List<String> participantUids, String currentUserUid) async {
@@ -56,6 +57,7 @@ class ChatProvider {
 
     chats.sort((b, a) => a.lastMessageDateTime.compareTo(b.lastMessageDateTime));
 
+    debugPrint("Trovate ${chats.length} chat.");
     return chats;
   }
 }
