@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "editProfile" : MessageLookupByLibrary.simpleMessage("Edit profile"),
     "enable" : MessageLookupByLibrary.simpleMessage("Enable"),
     "enableProximityBooks" : MessageLookupByLibrary.simpleMessage("Do you want to enable proximity search?\nYou will be able to find nearby books.\nIf you won\'t enable it, you\'ll be able to enable it later in app settings."),
+    "getInTouchWithSeller" : MessageLookupByLibrary.simpleMessage("Get in touch with the seller"),
     "highlight" : MessageLookupByLibrary.simpleMessage("The book presents colored highlighting"),
     "isbn" : MessageLookupByLibrary.simpleMessage("ISBN"),
     "login" : MessageLookupByLibrary.simpleMessage("Login"),

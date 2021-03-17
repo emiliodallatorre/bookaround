@@ -1,9 +1,13 @@
 import 'package:bookaround/generated/l10n.dart';
+import 'package:bookaround/interface/screen/chat_screen.dart';
 import 'package:bookaround/interface/widget/book_cover.dart';
+import 'package:bookaround/map_styles.dart';
 import 'package:bookaround/models/book_model.dart';
+import 'package:bookaround/models/messaging/chat_model.dart';
 import 'package:bookaround/models/user_model.dart';
-import 'package:bookaround/references.dart';
+import 'package:bookaround/resources/provider/chat_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
 class BookScreen extends StatelessWidget {
@@ -18,6 +22,18 @@ class BookScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: _buildBody(context),
+      persistentFooterButtons: [
+        ElevatedButton(
+          child: Text(S.current.getInTouchWithSeller),
+          onPressed: () async {
+            final ChatModel chat = await ChatProvider.getChat(book.userUid, Provider.of<UserModel>(context, listen: false).uid);
+
+            if(chat != null) {
+              Navigator.of(context).pushNamed(ChatScreen.route);
+            }
+          },
+        ),
+      ],
     );
   }
 
@@ -80,6 +96,25 @@ class BookScreen extends StatelessWidget {
               ],
             ),
           ],
+        ),
+        Divider(),
+        SizedBox(
+          width: double.infinity,
+          child: AspectRatio(
+            aspectRatio: 4 / 3,
+            child: GoogleMap(
+              initialCameraPosition: CameraPosition(target: book.modelizedLocation, zoom: 12.0),
+              myLocationEnabled: true,
+              myLocationButtonEnabled: false,
+              markers: <Marker>[Marker(markerId: MarkerId(book.id), position: book.modelizedLocation)].toSet(),
+              onMapCreated: (GoogleMapController controller) {
+                if (Theme.of(context).brightness == Brightness.light)
+                  controller.setMapStyle(MapStyles.lightMap);
+                else
+                  controller.setMapStyle(MapStyles.darkMap);
+              },
+            ),
+          ),
         ),
       ],
     );

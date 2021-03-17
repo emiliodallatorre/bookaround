@@ -47,5 +47,6 @@
   "present": "Presente",
   "soldBy": "Venduto da",
   "chats": "Conversazioni",
-  "noChats": "Non hai ancora alcuna conversazione.\nCompariranno qui quelle che avvierai con gli altri utenti."
+  "noChats": "Non hai ancora alcuna conversazione.\nCompariranno qui quelle che avvierai con gli altri utenti.",
+  "getInTouchWithSeller": "Contatta il venditore"
 }

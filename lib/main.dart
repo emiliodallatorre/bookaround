@@ -1,6 +1,7 @@
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/screen/book_editor_screen.dart';
 import 'package:bookaround/interface/screen/book_screen.dart';
+import 'package:bookaround/interface/screen/chat_screen.dart';
 import 'package:bookaround/interface/screen/home_screen.dart';
 import 'package:bookaround/interface/screen/isbn_editor_screen.dart';
 import 'package:bookaround/interface/screen/login_screen.dart';
@@ -58,6 +59,7 @@ class Bookaround extends StatelessWidget {
           IsbnEditorScreen.route: (BuildContext context) => IsbnEditorScreen(),
           SearchScreen.route: (BuildContext context) => SearchScreen(),
           BookScreen.route: (BuildContext context) => BookScreen(),
+          ChatScreen.route: (BuildContext context) => ChatScreen(),
         },
       ),
     );

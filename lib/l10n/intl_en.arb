@@ -47,5 +47,7 @@
   "present": "Present",
   "soldBy": "Sold by",
   "chats": "Chat",
-  "noChats": "You don't have any chat yet.\nHere will appear the chats you'll start with other users."
+  "noChats": "You don't have any chat yet.\nHere will appear the chats you'll start with other users.",
+  "getInTouchWithSeller": "Get in touch with the seller"
+
 }

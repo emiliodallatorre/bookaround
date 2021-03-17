@@ -524,6 +524,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Get in touch with the seller`
+  String get getInTouchWithSeller {
+    return Intl.message(
+      'Get in touch with the seller',
+      name: 'getInTouchWithSeller',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -10,7 +10,7 @@ class Repository {
   static Future<List<BookModel>> getUserBooks(String uid) async => await BookProvider.getUserBooks(uid);
 
   /// Funzioni da ChatProvider.
-  static Future<ChatModel> getChat(List<String> participantUids, String currentUserUid) async => await ChatProvider.getChat(participantUids, currentUserUid);
+  static Future<ChatModel> getChat(String recipientUid, String currentUserUid) async => await ChatProvider.getChat(recipientUid, currentUserUid);
 
   static Future<List<MessageModel>> getChatMessages(ChatModel chat) async => await ChatProvider.getChatMessages(chat);
 

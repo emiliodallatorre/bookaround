@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final ChatBloc chatsBloc = ChatBloc(Provider.of<UserModel>(context, listen: false))..getUserChats();
+    final ChatBloc chatsBloc = ChatBloc(Provider.of<UserModel>(context, listen: false))..getUserChats()..listenForChats();
 
     return StreamBuilder<List<ChatModel>>(
       stream: chatsBloc.chats,

@@ -25,7 +25,7 @@ export const getChatId = functions.https.onCall(async (data, context) => {
 
     console.log("Cerco la chat fra", chatParticipants, ".")
 
-    const possibleChats: admin.firestore.QueryDocumentSnapshot[] = (await admin.firestore().collection("chat").where("participants", "array-contains-any", chatParticipants).get()).docs
+    const possibleChats: admin.firestore.QueryDocumentSnapshot[] = (await admin.firestore().collection("chats").where("participants", "array-contains-any", chatParticipants).get()).docs
 
     console.log("Ho trovato", possibleChats.length, "possibili chat.")
 
@@ -73,7 +73,7 @@ export const getChatId = functions.https.onCall(async (data, context) => {
 
 
 /// Aggiorna il modello della chat.
-export const updateChatModel = functions.firestore.document('/chat/{chatId}/messages/{messageId}').onCreate(async (snapshot, context) => {
+export const updateChatModel = functions.firestore.document('/chats/{chatId}/messages/{messageId}').onCreate(async (snapshot, context) => {
     const parentChat: admin.firestore.DocumentReference = snapshot.ref.parent.parent as admin.firestore.DocumentReference
 
     // Aggiorno la data di invio del messaggio.
@@ -94,7 +94,7 @@ export const updateChatModel = functions.firestore.document('/chat/{chatId}/mess
 async function createChat(participants: string[]): Promise<string> {
     const chatId: string = randomString(20)
 
-    await admin.firestore().collection("chat").doc(chatId).set(
+    await admin.firestore().collection("chats").doc(chatId).set(
         {
             "id": chatId,
             "creationDateTime": new Date().toISOString(),
