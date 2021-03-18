@@ -77,6 +77,7 @@ class BookScreen extends StatelessWidget {
               if (book.note.isNotEmpty) Text(book.note),
               if (book.userUid != Provider.of<UserModel>(context).uid) _buildSellerInfo(context),
               _buildSellerInfo(context),
+              SizedBox(height: 16.0),
             ],
           ),
         ),
