@@ -44,7 +44,7 @@ dependencies:
   form_field_validator: ^1.1.0
   cached_network_image: ^3.0.0-nullsafety
   flutter_barcode_scanner: ^2.0.0-nullsafety.0
-  random_string: ^2.1.0
+  random_string: ^2.2.0-nullsafety
   shared_preferences: ^2.0.5
 
   # Localizzazione
@@ -55,7 +55,7 @@ dependencies:
   #     url: git://github.com/emiliodallatorre/GeoFlutterFire.git
   #     ref: update_deps
   geoflutterfire: ^3.0.0-nullsafety.1
-  geocoder: ^0.2.1
+  flutter_geocoder: ^0.2.2-nullsafety
   google_maps_flutter: ^2.0.1
   location: ^4.1.1
 
