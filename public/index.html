@@ -7,6 +7,7 @@
     margin: 0;
   }
 
+
   .bgimg {
     background-image: url('background.jpg');
     height: 100%;
@@ -16,6 +17,7 @@
     color: white;
     font-family: "Poppins";
     font-size: 25px;
+    background-image: brightness(50%);
   }
 
   .topleft {
@@ -42,6 +44,29 @@
     margin: auto;
     width: 40%;
   }
+
+  h1 {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  #demo {
+    background-color: rgba(0, 0, 0, 0.6);
+    font-size: 30px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+
+  @media only screen and (max-width: 600px) {
+    .bottomleft {
+      position: absolute;
+      bottom: 0;
+      left: 16px;
+      font-size: xx-large;
+    }
+  }
 </style>
 
 <body>
@@ -55,7 +80,7 @@
     <div class="middle">
       <h1>COMING SOON</h1>
       <hr>
-      <p id="demo" style="font-size:30px"></p>
+      <p id="demo"></p>
     </div>
     <div class="bottomleft">
       <p>Bookaround</p>
