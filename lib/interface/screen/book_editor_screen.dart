@@ -8,7 +8,7 @@ import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/helper/book_helper.dart';
 import 'package:bookaround/resources/helper/geocoding_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_google_places/flutter_google_places.dart';
+import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:provider/provider.dart';

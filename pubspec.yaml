@@ -22,48 +22,47 @@ dependencies:
   # Grafica
   # cupertino_icons: ^1.0.2
   code_field: ^1.22.0
-  google_fonts: ^1.1.2
+  google_fonts: ^2.0.0
 
   # Firebase
-  cloud_firestore: ^0.16.0
-  firebase_auth: ^0.20.0+1
-  firebase_core: ^0.7.0
-  cloud_functions: ^0.9.0
-  firebase_messaging: ^8.0.0-dev.14
-  firebase_storage: ^7.0.0
-  firebase_crashlytics: ^0.4.0+1
+  cloud_firestore: ^1.0.1
+  firebase_auth: ^1.0.1
+  firebase_core: ^1.0.1
+  cloud_functions: ^1.0.0
+  firebase_messaging: ^9.0.0
+  firebase_storage: ^8.0.0
+  firebase_crashlytics: ^1.0.0
 
   # Logica
-  provider: ^4.3.3
-  rxdart: ^0.25.0
+  provider: ^5.0.0
+  rxdart: ^0.26.0
 
   # Modelli
-  json_annotation: ^3.1.1
+  json_annotation: ^4.0.0
 
   # Utilità
-  form_field_validator: ^1.0.1
-  cached_network_image: ^2.5.0
-  flutter_barcode_scanner: ^1.0.2
+  form_field_validator: ^1.1.0
+  cached_network_image: ^3.0.0-nullsafety
+  flutter_barcode_scanner: ^2.0.0-nullsafety.0
   random_string: ^2.1.0
-  shared_preferences: ^0.5.12+4
+  shared_preferences: ^2.0.5
 
   # Localizzazione
-  flutter_google_places: ^0.2.6
+  flutter_google_places_hoc081098: ^1.0.0-nullsafety.0
   google_maps_webservice: ^0.0.19
-  geoflutterfire:
-    git:
-      url: git://github.com/emiliodallatorre/GeoFlutterFire.git
-      ref: update_deps
+  # geoflutterfire:
+  #   git:
+  #     url: git://github.com/emiliodallatorre/GeoFlutterFire.git
+  #     ref: update_deps
+  geoflutterfire: ^3.0.0-nullsafety.1
   geocoder: ^0.2.1
-  google_maps_flutter: ^1.2.0
-  location: ^3.2.4
+  google_maps_flutter: ^2.0.1
+  location: ^4.1.1
 
   # File
-  image_picker: ^0.6.7+22
+  image_picker: ^0.7.3
 
 
-dependency_overrides:
-  rxdart: ^0.25.0
 
 
 dev_dependencies:
@@ -71,11 +70,11 @@ dev_dependencies:
     sdk: flutter
 
   # flutter pub run build_runner build --delete-conflicting-outputs
-  json_serializable: ^3.5.1
-  build_runner: ^1.11.0
+  json_serializable: ^4.0.3
+  build_runner: ^1.12.2
 
   # flutter pub run flutter_launcher_icons:main
-  flutter_launcher_icons: ^0.8.1
+  flutter_launcher_icons: ^0.9.0
 
 
 flutter:
