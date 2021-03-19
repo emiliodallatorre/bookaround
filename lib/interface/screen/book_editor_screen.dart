@@ -129,7 +129,7 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
       formKey.currentState!.save();
 
       await BookHelper.updateBook(book!);
-      await sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, BookType.SELLING);
+      await sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!);
 
       saved = true;
 

@@ -1,83 +1,45 @@
-import 'package:bookaround/models/book_model.dart';
-import 'package:bookaround/references.dart';
-import 'package:bookaround/resources/provider/user_provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:geoflutterfire/geoflutterfire.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
-// TODO: Rivedere del tutto.
 class LocationProvider extends ChangeNotifier {
-  Location locator = Location.instance;
+  final Location location = Location();
 
-  LocationData? lastKnownLocation;
-  bool wasOk = false;
+  PermissionStatus? permissionStatus;
+  LatLng? lastKnownLocation;
 
-  Future<bool> isOk([List<String>? wanted]) async {
+  /// Wrapper per lo stato dei permessi.
+  Future<PermissionStatus> getPermissionStatus() async {
+    PermissionStatus permissionStatus = await this.location.hasPermission();
+    if (permissionStatus == PermissionStatus.granted)
+      // Tutto ok
+      this.permissionStatus = permissionStatus;
+    else {
+      // Il permesso può dover essere richiesto
+      permissionStatus = await requestLocationPermission();
+      this.permissionStatus = permissionStatus;
+    }
+
+    notifyListeners();
+    return permissionStatus;
+  }
+
+  /// Wrapper per la richiesta dei permessi.
+  Future<PermissionStatus> requestLocationPermission() async => await location.requestPermission();
+
+  /// Restituisce la location o null in caso di errori.
+  Future<LatLng?> getLocation() async {
     try {
-      await getPermissionStatus();
-      await getLocation();
+      final LocationData locationData = await location.getLocation();
+      final LatLng lastKnownLocation = LatLng(locationData.latitude!, locationData.longitude!);
 
-      wasOk = true;
-      return true;
+      this.lastKnownLocation = lastKnownLocation;
+      notifyListeners();
+      return lastKnownLocation;
     } catch (e) {
       debugPrint(e.toString());
 
-      wasOk = false;
-      return false;
+      return null;
     }
-  }
-
-  Future<void> getLocation() async {
-    lastKnownLocation = await Location.instance.getLocation();
-
-    notifyListeners();
-  }
-
-  Future<void> getPermissionStatus() async {
-    bool _serviceEnabled = await locator.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await locator.requestService();
-      if (!_serviceEnabled)
-        return;
-      else
-        throw "Geolocalizzazione disattivata.";
-    }
-
-    PermissionStatus permissionStatus = await locator.hasPermission();
-    if (permissionStatus == PermissionStatus.denied) {
-      permissionStatus = await locator.requestPermission();
-      if (permissionStatus == PermissionStatus.granted)
-        return;
-      else
-        throw "Permessi per la geolocalizzazione rifiutati.";
-    }
-  }
-
-  Geoflutterfire geoflutterfire = Geoflutterfire();
-  List<BookModel>? nearbyBooks;
-
-  Future<void> getNearbyBooks(List<String>? wanted) async {
-    var queryRef = References.booksCollection;
-    var stream = geoflutterfire.collection(collectionRef: queryRef).within(
-          center: GeoFirePoint(lastKnownLocation!.latitude!, lastKnownLocation!.longitude!),
-          radius: 10,
-          field: "locationData",
-        );
-
-    stream.listen((List<DocumentSnapshot> rawNearbyBooks) async {
-      List<BookModel> foundBooks = <BookModel>[];
-      for (int index = 0; index < rawNearbyBooks.length; index++) {
-        BookModel bookModel = BookModel.fromJson(rawNearbyBooks.elementAt(index).data()!);
-        bookModel.reference = rawNearbyBooks.elementAt(index).reference;
-        bookModel.user = await UserProvider.getUserByUid(bookModel.userUid!);
-
-        foundBooks.add(bookModel);
-      }
-
-      if (wanted != null) foundBooks.removeWhere((element) => !wanted.contains(element.sureIsbn));
-
-      this.nearbyBooks = foundBooks;
-    });
   }
 }

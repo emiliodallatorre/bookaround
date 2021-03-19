@@ -52,7 +52,7 @@ class SearchResultListElement extends StatelessWidget {
           );
 
           await BookHelper.createBookSearch(searchingBook);
-          await sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, BookType.LOOKING);
+          await sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!);
 
           Navigator.of(context).pop();
         },

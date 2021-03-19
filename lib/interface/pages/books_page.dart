@@ -15,7 +15,7 @@ class BooksPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
-      onRefresh: () async => await sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, this.type),
+      onRefresh: () async => await sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!),
       child: StreamBuilder<List<BookModel>>(
         stream: sellBooksBloc.books,
         builder: (BuildContext context, AsyncSnapshot<List<BookModel>> booksSnapshot) {
@@ -29,7 +29,7 @@ class BooksPage extends StatelessWidget {
               return CenteredText(label: S.current.noBooks);
           }
 
-          sellBooksBloc.getUserBooks(Provider.of<UserModel>(context).uid!, this.type);
+          sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!);
           return Center(child: CircularProgressIndicator());
         },
       ),

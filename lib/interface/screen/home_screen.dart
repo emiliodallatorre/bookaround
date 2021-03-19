@@ -104,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Provider.of<SettingsModel>(context, listen: false).proximitySearchEnabled = wantsProximitySearch;
                 Provider.of<SettingsModel>(context, listen: false).updateInMemory();
 
-                if (wantsProximitySearch) Provider.of<LocationProvider>(context, listen: false).isOk();
+                if (wantsProximitySearch) Provider.of<LocationProvider>(context, listen: false).requestLocationPermission();
               }
             }
           },

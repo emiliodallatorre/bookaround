@@ -39,7 +39,6 @@ class InitHelper {
         return true;
       }
     } catch (e) {
-      rethrow;
       debugPrint(e.toString());
       debugPrint("L'utente non è loggato.");
       return false;
