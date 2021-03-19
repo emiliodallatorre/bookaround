@@ -78,36 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         BottomNavigationBar(
           currentIndex: selectedIndex,
-          onTap: (int newIndex) async {
-            setState(() => selectedIndex = newIndex);
-
-            if (newIndex == 2) if (Provider.of<SettingsModel>(context, listen: false).proximitySearchEnabled == null) {
-              bool? wantsProximitySearch = await showDialog<bool>(
-                context: context,
-                builder: (BuildContext context) => AlertDialog(
-                  title: Text(S.current.proximitySearch),
-                  content: Text(S.current.enableProximityBooks),
-                  actions: [
-                    TextButton(
-                      child: Text(S.current.undo),
-                      onPressed: () => Navigator.of(context).pop(false),
-                    ),
-                    ElevatedButton(
-                      child: Text(S.current.enable),
-                      onPressed: () => Navigator.of(context).pop(true),
-                    ),
-                  ],
-                ),
-              );
-
-              if (wantsProximitySearch != null) {
-                Provider.of<SettingsModel>(context, listen: false).proximitySearchEnabled = wantsProximitySearch;
-                Provider.of<SettingsModel>(context, listen: false).updateInMemory();
-
-                if (wantsProximitySearch) Provider.of<LocationProvider>(context, listen: false).requestLocationPermission();
-              }
-            }
-          },
+          onTap: (int newIndex) => setState(() => selectedIndex = newIndex),
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: S.current.sellBooks),
             BottomNavigationBarItem(icon: Icon(Icons.chat), label: S.current.chats),

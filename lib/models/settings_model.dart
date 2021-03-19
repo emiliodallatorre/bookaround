@@ -21,7 +21,7 @@ class SettingsModel extends ChangeNotifier {
   Future<void> updateFromMemory() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
-    this.proximitySearchEnabled = preferences.getBool("proximitySearchEnabled") ?? false;
+    this.proximitySearchEnabled = preferences.getBool("proximitySearchEnabled") ?? null;
     this.firstStart = preferences.getBool("firstStart") ?? true;
     this.lastUpdateTime = DateTime.fromMillisecondsSinceEpoch(preferences.getInt("lastUpdateTime") ?? DateTime.now().millisecondsSinceEpoch);
 
