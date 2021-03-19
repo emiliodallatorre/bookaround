@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Bookaround ha bisogno del tuo permesso per accedere alla posizione del tuo dispositivo.</string>
+	<string>Bookaround utilizza la tua posizione per mostrare i libri in vendita intorno a te.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Bookaround ha bisogno del tuo permesso per accedere alla posizione del tuo dispositivo.</string>
+	<string>Bookaround utilizza la tua posizione per mostrare i libri in vendita intorno a te.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Bookaround ha bisogno del tuo permesso per utilizzare il microfono del tuo dispositivo.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
