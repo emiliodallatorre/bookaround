@@ -36,7 +36,12 @@ class SearchPage extends StatelessWidget {
                 builder: (BuildContext context, LocationProvider locationProvider, Widget? child) {
                   if (locationProvider.permissionStatus == null)
                     locationProvider.getPermissionStatus();
-                  else if (locationProvider.permissionStatus == PermissionStatus.granted) locationProvider.getLocation();
+                  else if (locationProvider.permissionStatus == PermissionStatus.granted) {
+                    if (locationProvider.lastKnownLocation == null)
+                      locationProvider.getLocation();
+                    else
+                      searchBookBloc.getNearbyBooks(locationProvider.lastKnownLocation!, Provider.of<UserModel>(context, listen: false).uid!);
+                  }
 
                   return ListView(
                     children: [
