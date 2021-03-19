@@ -33,9 +33,11 @@ class _IsbnEditorScreenState extends State<IsbnEditorScreen> {
   @override
   Widget build(BuildContext context) {
     if (isbn == null) {
+      String isbnIdentifier = ModalRoute.of(context)!.settings.arguments as String;
       isbn = IsbnModel(
         id: randomAlphaNumeric(20),
-        isbn: ModalRoute.of(context)!.settings.arguments as String,
+        isbn: isbnIdentifier.length == 10 ? isbnIdentifier : null,
+        isbn13: isbnIdentifier.length == 13 ? isbnIdentifier : null,
         authorUid: Provider.of<UserModel>(context, listen: false).uid,
       );
 
@@ -74,7 +76,7 @@ class _IsbnEditorScreenState extends State<IsbnEditorScreen> {
               await IsbnHelper.createIsbn(isbn!);
 
               // Il libro ora esiste nel database.
-              BookModel book = await BookHelper.createBookSell(isbn!.isbn!, Provider.of<UserModel>(context, listen: false).uid!);
+              BookModel book = await BookHelper.createBookSell(isbn!.sureIsbn, Provider.of<UserModel>(context, listen: false).uid!);
               Navigator.of(context).pushReplacementNamed(BookEditorScreen.route, arguments: book);
             }
           },
@@ -147,7 +149,7 @@ class _IsbnEditorScreenState extends State<IsbnEditorScreen> {
                   textCapitalization: TextCapitalization.words,
                 ),
                 TextFormField(
-                  initialValue: isbn!.isbn,
+                  initialValue: isbn!.sureIsbn,
                   decoration: InputDecoration(labelText: S.current.isbn),
                   enabled: false,
                   readOnly: true,
@@ -189,7 +191,7 @@ class _IsbnEditorScreenState extends State<IsbnEditorScreen> {
       if (pickedFile == null) return;
 
       setState(() => working = true);
-      isbn!.image = await UploadHelper.uploadFile(References.bookCovers, File(pickedFile.path), isbn!.isbn!);
+      isbn!.image = await UploadHelper.uploadFile(References.bookCovers, File(pickedFile.path), isbn!.sureIsbn);
       setState(() => working = false);
     }
   }

@@ -58,6 +58,8 @@ class UserModel extends ChangeNotifier {
     // TODO: Implementare.
     // if(initNotifications) await NotificationsHelper.initializeNotifications(this);
 
+    debugPrint(updatedUser.toJson().toString());
+
     notifyListeners();
   }
 

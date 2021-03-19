@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(References.appName),
         actions: [
           Visibility(
-            visible: selectedIndex == 1,
+            visible: selectedIndex == 2,
             child: IconButton(
               icon: Icon(Icons.search),
               onPressed: () => Navigator.of(context).pushNamed(SearchScreen.route),
@@ -156,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             setState(() => working = false);
           }
-        } else if (selectedIndex == 1) {
+        } else if (selectedIndex == 2) {
           // TODO: Aggiungere libri alla ricerca.
         }
       },

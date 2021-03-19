@@ -34,10 +34,13 @@ class InitHelper {
       if (uid == null)
         throw ("Utente non loggato!");
       else {
+        debugPrint("L'uid dell'utente è $uid.");
         await Provider.of<UserModel>(context, listen: false).updateFromServer(uid: uid);
         return true;
       }
     } catch (e) {
+      rethrow;
+      debugPrint(e.toString());
       debugPrint("L'utente non è loggato.");
       return false;
     }

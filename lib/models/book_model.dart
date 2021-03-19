@@ -37,6 +37,8 @@ class BookModel extends ChangeNotifier {
 
   String get authorString => this.authors!.reduce((value, element) => "$value, $element");
 
+  String get sureIsbn => this.isbn13 ?? this.isbn ?? "";
+
   BookModel({
     this.id,
     this.isbn,

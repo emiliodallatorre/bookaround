@@ -24,7 +24,7 @@ class SearchResultListElement extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (this.isbn!.authorString.isNotEmpty) Text(this.isbn!.authorString),
-          Text(S.current.isbn + ": " + this.isbn!.isbn13!),
+          Text(S.current.isbn + ": " + this.isbn!.sureIsbn),
         ],
       ),
       leading: AspectRatio(

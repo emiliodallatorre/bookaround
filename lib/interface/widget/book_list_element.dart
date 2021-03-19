@@ -24,7 +24,7 @@ class BookListElement extends StatelessWidget {
           placeholder: (BuildContext context, String imageUrl) => Center(child: CircularProgressIndicator()),
         ),
       ),
-      trailing: Icon(Icons.circle, color: this.color),
+      trailing: color == null ? null : Icon(Icons.circle, color: this.color),
       onTap: this.book!.type == BookType.LOOKING ? null : () => Navigator.of(context).pushNamed(BookScreen.route, arguments: this.book),
     );
   }

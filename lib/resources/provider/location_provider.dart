@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:geoflutterfire/geoflutterfire.dart';
 import 'package:location/location.dart';
 
+// TODO: Rivedere del tutto.
 class LocationProvider extends ChangeNotifier {
   Location locator = Location.instance;
 
@@ -74,7 +75,7 @@ class LocationProvider extends ChangeNotifier {
         foundBooks.add(bookModel);
       }
 
-      if (wanted != null) foundBooks.removeWhere((element) => !wanted.contains(element.isbn13));
+      if (wanted != null) foundBooks.removeWhere((element) => !wanted.contains(element.sureIsbn));
 
       this.nearbyBooks = foundBooks;
     });

@@ -138,6 +138,7 @@ class LoginScreenState extends ChangeNotifier {
 
       Navigator.of(context).pushReplacementNamed(ProfileEditorScreen.route);
     } catch (e) {
+      rethrow;
       debugPrint(e.toString());
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(S.current.wrongCode)));
       codeController.clear();

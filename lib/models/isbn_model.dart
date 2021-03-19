@@ -9,7 +9,7 @@ class IsbnModel {
   String? title;
   List<String>? authors;
   String? image;
-  final String ?authorUid;
+  final String? authorUid;
 
   String get authorString {
     if (this.authors!.isEmpty)
@@ -17,6 +17,8 @@ class IsbnModel {
     else
       return this.authors!.reduce((value, element) => "$value, $element");
   }
+
+  String get sureIsbn => this.isbn13 ?? this.isbn ?? "";
 
   IsbnModel({
     this.id,
