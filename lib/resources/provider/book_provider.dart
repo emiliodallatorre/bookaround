@@ -16,4 +16,4 @@ class BookProvider {
 
     return books;
   }
- }
+}

@@ -9,18 +9,10 @@ part of 'chat_model.dart';
 ChatModel _$ChatModelFromJson(Map<String, dynamic> json) {
   return ChatModel(
     id: json['id'] as String?,
-    creationDateTime: json['creationDateTime'] == null
-        ? null
-        : DateTime.parse(json['creationDateTime'] as String),
-    lastMessageDateTime: json['lastMessageDateTime'] == null
-        ? null
-        : DateTime.parse(json['lastMessageDateTime'] as String),
-    participants: (json['participants'] as List<dynamic>?)
-        ?.map((e) => e as String)
-        .toList(),
-    lastMessage: json['lastMessage'] == null
-        ? null
-        : MessageModel.fromJson(json['lastMessage'] as Map<String, dynamic>),
+    creationDateTime: json['creationDateTime'] == null ? null : DateTime.parse(json['creationDateTime'] as String),
+    lastMessageDateTime: json['lastMessageDateTime'] == null ? null : DateTime.parse(json['lastMessageDateTime'] as String),
+    participants: (json['participants'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    lastMessage: json['lastMessage'] == null ? null : MessageModel.fromJson(json['lastMessage'] as Map<String, dynamic>),
   );
 }
 

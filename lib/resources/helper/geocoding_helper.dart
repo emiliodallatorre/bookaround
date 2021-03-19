@@ -10,7 +10,6 @@ class GeocodingHelper {
     List<Address> locations = await Geocoder.google(References.googleApiKey).findAddressesFromQuery(address);
     if (locations.isEmpty) throw "Indirizzo non trovato.";
 
-
     return GeoFirePoint(locations.first.coordinates.latitude!, locations.first.coordinates.longitude!).data;
   }
 }

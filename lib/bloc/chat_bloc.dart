@@ -34,5 +34,3 @@ class ChatBloc {
     _chatsFetcher.close();
   }
 }
-
-

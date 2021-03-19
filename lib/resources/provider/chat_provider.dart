@@ -14,7 +14,7 @@ class ChatProvider {
     final FirebaseFunctions functions = FirebaseFunctions.instance;
     final HttpsCallableResult result = await functions.httpsCallable("getChatId").call({"uid": currentUserUid, "participants": participantUids});
     debugPrint(result.data.toString());
-    final String chatId = result.data as  String;
+    final String chatId = result.data as String;
 
     return await getChatById(chatId, currentUserUid);
   }
