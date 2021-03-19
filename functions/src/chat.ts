@@ -114,7 +114,7 @@ async function sendMessageNotification(message: functions.firestore.QueryDocumen
 
     const payload = {
         notification: {
-            title: senderUser["displayName"],
+            title: senderUser["name"] + " " + senderUser["surname"],
             body: message.data()["body"],
             sound: "default",
         },
