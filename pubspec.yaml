@@ -21,7 +21,8 @@ dependencies:
 
   # Grafica
   # cupertino_icons: ^1.0.2
-  code_field: ^1.22.0
+  code_field:
+    git: https://github.com/emiliodallatorre/code_field.git
   google_fonts: ^2.0.0
 
   # Firebase
