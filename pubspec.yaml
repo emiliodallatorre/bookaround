@@ -47,6 +47,7 @@ dependencies:
   flutter_barcode_scanner: ^2.0.0-nullsafety.0
   random_string: ^2.2.0-nullsafety
   shared_preferences: ^2.0.5
+  timeago: ^3.0.2
 
   # Localizzazione
   flutter_google_places_hoc081098: ^1.0.0-nullsafety.0
@@ -62,8 +63,6 @@ dependencies:
 
   # File
   image_picker: ^0.7.3
-
-
 
 
 dev_dependencies:

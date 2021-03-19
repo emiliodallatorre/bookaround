@@ -2,6 +2,7 @@ import 'package:bookaround/models/messaging/message_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:timeago/timeago.dart';
 
 class Message extends StatelessWidget {
   final MessageModel? message;
@@ -11,17 +12,24 @@ class Message extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Row(
         children: [
           if (iAmTheSender(context)) Spacer(),
           Expanded(
             flex: 3,
             child: Container(
-              color: Theme.of(context).backgroundColor,
+              color: Theme.of(context).backgroundColor.withOpacity(iAmTheSender(context) ? 1.0 : 0.5),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(this.message!.body!),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(this.message!.body!),
+                    SizedBox(height: 4.0),
+                    Align(alignment: AlignmentDirectional.bottomEnd, child: Text(format(this.message!.sentDateTime!), style: Theme.of(context).textTheme.caption)),
+                  ],
+                ),
               ),
             ),
           ),

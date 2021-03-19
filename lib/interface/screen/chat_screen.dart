@@ -51,7 +51,7 @@ class ChatScreen extends StatelessWidget {
                     reverse: true,
                     itemCount: messagesSnapshot.data!.length,
                     itemBuilder: (BuildContext context, int index) => Message(message: messagesSnapshot.data!.elementAt(index)),
-                    separatorBuilder: (BuildContext context, int index) => SizedBox(height: 16.0),
+                    separatorBuilder: (BuildContext context, int index) => SizedBox(height: 8.0),
                   );
               }
 
@@ -59,8 +59,8 @@ class ChatScreen extends StatelessWidget {
             },
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
+        SafeArea(
+          minimum: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
           child: TextField(
             controller: _messageController,
             decoration: InputDecoration(

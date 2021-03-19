@@ -19,7 +19,7 @@ class InitHelper {
 
     await initializeCrashlytics();
 
-    // bool isLogged = await initializeUser();
+    bool isLogged = await initializeUser();
     // TODO: Reimplementare.
     // if (isLogged) await NotificationsHelper.initializeNotifications(Provider.of<UserModel>(context, listen: false));
 
