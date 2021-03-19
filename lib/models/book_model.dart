@@ -10,32 +10,32 @@ part 'book_model.g.dart';
 
 @JsonSerializable()
 class BookModel extends ChangeNotifier {
-  final String id;
-  final String isbn, isbn13;
-  final String title;
-  final List<String> authors;
-  final String coverUrl;
-  final BookType type;
-  final String userUid;
-  final DateTime addedDateTime;
+  final String? id;
+  final String? isbn, isbn13;
+  final String? title;
+  final List<String>? authors;
+  final String? coverUrl;
+  final BookType? type;
+  final String? userUid;
+  final DateTime? addedDateTime;
 
-  bool highlighting, pencil, pen;
-  String note;
+  bool? highlighting, pencil, pen;
+  String? note;
 
   @JsonKey(toJson: LocationHelper.locationToJson)
-  PlaceModel location;
+  PlaceModel? location;
 
-  Map<String, dynamic> locationData;
+  Map<String, dynamic>? locationData;
 
-  LatLng get modelizedLocation => LatLng((locationData["geopoint"] as GeoPoint).latitude, (locationData["geopoint"] as GeoPoint).longitude);
-
-  @JsonKey(ignore: true)
-  UserModel user;
+  LatLng get modelizedLocation => LatLng((locationData!["geopoint"] as GeoPoint).latitude, (locationData!["geopoint"] as GeoPoint).longitude);
 
   @JsonKey(ignore: true)
-  DocumentReference reference;
+  UserModel? user;
 
-  String get authorString => this.authors.reduce((value, element) => "$value, $element");
+  @JsonKey(ignore: true)
+  DocumentReference? reference;
+
+  String get authorString => this.authors!.reduce((value, element) => "$value, $element");
 
   BookModel({
     this.id,

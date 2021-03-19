@@ -8,10 +8,10 @@ part of 'place_model.dart';
 
 PlaceModel _$PlaceModelFromJson(Map<String, dynamic> json) {
   return PlaceModel(
-    id: json['id'] as String,
-    description: json['description'] as String,
-    placeId: json['placeId'] as String,
-    placeReference: json['placeReference'] as String,
+    id: json['id'] as String?,
+    description: json['description'] as String?,
+    placeId: json['placeId'] as String?,
+    placeReference: json['placeReference'] as String?,
   );
 }
 

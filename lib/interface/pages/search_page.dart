@@ -19,34 +19,34 @@ import 'package:provider/provider.dart';
 class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid, BookType.LOOKING);
+    searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, BookType.LOOKING);
 
     return RefreshIndicator(
-      onRefresh: () => searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid, BookType.LOOKING),
+      onRefresh: () => searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, BookType.LOOKING),
       child: StreamBuilder<List<BookModel>>(
         stream: searchBookBloc.books,
         builder: (BuildContext context, AsyncSnapshot<List<BookModel>> booksSnapshot) {
           if (booksSnapshot.hasData) {
-            if (booksSnapshot.data.isNotEmpty) {
-              bool proximity = Provider.of<SettingsModel>(context, listen: false).proximitySearchEnabled;
-              if (proximity ?? false) Provider.of<LocationProvider>(context, listen: false).isOk();
+            if (booksSnapshot.data!.isNotEmpty) {
+              bool proximity = Provider.of<SettingsModel>(context, listen: false).proximitySearchEnabled ?? false;
+              if (proximity) Provider.of<LocationProvider>(context, listen: false).isOk();
 
               // Assegna i colori a caso.
               Map<String, HSVColor> bookColors = <String, HSVColor>{};
-              booksSnapshot.data.forEach((element) => bookColors[element.isbn13] = HSVColor.fromAHSV(1.0, Random().nextDouble() * 360.0, 1.0, 1.0));
-              Provider.of<LocationProvider>(context, listen: false).getNearbyBooks(booksSnapshot.data.map((BookModel book) => book.isbn13).toList());
+              booksSnapshot.data!.forEach((element) => bookColors[element.isbn13!] = HSVColor.fromAHSV(1.0, Random().nextDouble() * 360.0, 1.0, 1.0));
+              Provider.of<LocationProvider>(context, listen: false).getNearbyBooks(booksSnapshot.data!.map((BookModel book) => book.isbn13!).toList());
 
               return Consumer<LocationProvider>(
-                builder: (BuildContext context, LocationProvider locationProvider, Widget child) => ListView(
+                builder: (BuildContext context, LocationProvider locationProvider, Widget? child) => ListView(
                   children: [
-                    if ((proximity ?? false) && locationProvider.wasOk)
+                    if (proximity && locationProvider.wasOk)
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: AspectRatio(
                           aspectRatio: 4 / 3,
                           child: GoogleMap(
                             initialCameraPosition: CameraPosition(
-                              target: LatLng(locationProvider.lastKnownLocation.latitude, locationProvider.lastKnownLocation.longitude),
+                              target: LatLng(locationProvider.lastKnownLocation!.latitude!, locationProvider.lastKnownLocation!.longitude!),
                               zoom: 11.0,
                             ),
                             myLocationEnabled: true,
@@ -54,16 +54,16 @@ class SearchPage extends StatelessWidget {
                             markers: locationProvider.nearbyBooks
                                     ?.map(
                                       (BookModel book) => Marker(
-                                        markerId: MarkerId(book.id),
+                                        markerId: MarkerId(book.id!),
                                         position: LatLng(book.modelizedLocation.latitude, book.modelizedLocation.longitude),
-                                        icon: BitmapDescriptor.defaultMarkerWithHue(bookColors[book.isbn13].hue),
+                                        icon: BitmapDescriptor.defaultMarkerWithHue(bookColors[book.isbn13]!.hue),
                                         onTap: () async {
                                           await Future.delayed(Duration(milliseconds: 256));
                                           Navigator.of(context).pushNamed(BookScreen.route, arguments: book);
                                         },
                                       ),
                                     )
-                                    ?.toSet() ??
+                                    .toSet() ??
                                 <Marker>[].toSet(),
                             onMapCreated: (GoogleMapController controller) {
                               if (Theme.of(context).brightness == Brightness.light)
@@ -78,10 +78,10 @@ class SearchPage extends StatelessWidget {
                     ListView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: booksSnapshot.data.length,
+                      itemCount: booksSnapshot.data!.length,
                       itemBuilder: (BuildContext context, int index) => BookListElement(
-                        book: booksSnapshot.data.elementAt(index),
-                        color: bookColors[booksSnapshot.data.elementAt(index).isbn13].toColor(),
+                        book: booksSnapshot.data!.elementAt(index),
+                        color: bookColors[booksSnapshot.data!.elementAt(index).isbn13]!.toColor(),
                       ),
                     ),
                   ],

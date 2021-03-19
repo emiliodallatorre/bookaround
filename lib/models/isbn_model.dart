@@ -4,18 +4,18 @@ part 'isbn_model.g.dart';
 
 @JsonSerializable()
 class IsbnModel {
-  final String id;
-  final String isbn, isbn13;
-  String title;
-  List<String> authors;
-  String image;
-  final String authorUid;
+  final String? id;
+  final String? isbn, isbn13;
+  String? title;
+  List<String>? authors;
+  String? image;
+  final String ?authorUid;
 
   String get authorString {
-    if (this.authors == null || (this.authors?.isEmpty ?? false))
+    if (this.authors!.isEmpty)
       return "";
     else
-      return this.authors.reduce((value, element) => "$value, $element") ?? "";
+      return this.authors!.reduce((value, element) => "$value, $element");
   }
 
   IsbnModel({

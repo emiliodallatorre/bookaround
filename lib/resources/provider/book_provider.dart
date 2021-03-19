@@ -8,7 +8,7 @@ class BookProvider {
     List<BookModel> books = <BookModel>[];
 
     rawBooks.forEach((DocumentSnapshot rawBook) {
-      BookModel book = BookModel.fromJson(rawBook.data());
+      BookModel book = BookModel.fromJson(rawBook.data()!);
       book.reference = rawBook.reference;
 
       books.add(book);

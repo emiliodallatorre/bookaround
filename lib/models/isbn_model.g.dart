@@ -8,13 +8,14 @@ part of 'isbn_model.dart';
 
 IsbnModel _$IsbnModelFromJson(Map<String, dynamic> json) {
   return IsbnModel(
-    id: json['id'] as String,
-    isbn: json['isbn'] as String,
-    isbn13: json['isbn13'] as String,
-    title: json['title'] as String,
-    authors: (json['authors'] as List)?.map((e) => e as String)?.toList(),
-    image: json['image'] as String,
-    authorUid: json['authorUid'] as String,
+    id: json['id'] as String?,
+    isbn: json['isbn'] as String?,
+    isbn13: json['isbn13'] as String?,
+    title: json['title'] as String?,
+    authors:
+        (json['authors'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    image: json['image'] as String?,
+    authorUid: json['authorUid'] as String?,
   );
 }
 

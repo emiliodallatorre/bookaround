@@ -4,10 +4,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class BookCover extends StatelessWidget {
-  final BookModel book;
+  final BookModel? book;
   final bool horizontalPadding;
 
-  const BookCover({Key key, @required this.book, this.horizontalPadding = true}) : super(key: key);
+  const BookCover({Key? key, @required this.book, this.horizontalPadding = true}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class BookCover extends StatelessWidget {
                 child: AspectRatio(
                   aspectRatio: 1.0,
                   child: CachedNetworkImage(
-                    imageUrl: this.book.coverUrl,
+                    imageUrl: this.book!.coverUrl!,
                     // Ignora i potenziali errori di immagine.
                     errorWidget: (BuildContext context, String stackTrace, dynamic error) => CachedNetworkImage(imageUrl: References.noCover),
                     placeholder: (BuildContext context, String imageUrl) => Center(child: CircularProgressIndicator()),
@@ -34,8 +34,8 @@ class BookCover extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(this.book.title, style: Theme.of(context).textTheme.headline6),
-                    Text(this.book.authorString, style: Theme.of(context).textTheme.bodyText1),
+                    Text(this.book!.title!, style: Theme.of(context).textTheme.headline6),
+                    Text(this.book!.authorString, style: Theme.of(context).textTheme.bodyText1),
                   ],
                 ),
               ),

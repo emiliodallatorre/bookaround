@@ -14,7 +14,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     DateTime firstFrame = DateTime.now();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
       await InitHelper(context).initialize().whenComplete(() async {
         // Fa durare la splash screen almeno 4 secondi.
         Duration elapsedTime = DateTime.now().difference(firstFrame);
@@ -38,7 +38,7 @@ class SplashScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text(References.appName, style: GoogleFonts.lobster(textStyle: Theme.of(context).textTheme.headline5.copyWith(fontSize: 64.0))),
+            Text(References.appName, style: GoogleFonts.lobster(textStyle: Theme.of(context).textTheme.headline5!.copyWith(fontSize: 64.0))),
             CircularProgressIndicator(),
           ],
         ),

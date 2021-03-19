@@ -19,7 +19,7 @@ class InitHelper {
 
     await initializeCrashlytics();
 
-    bool isLogged = await initializeUser();
+    // bool isLogged = await initializeUser();
     // TODO: Reimplementare.
     // if (isLogged) await NotificationsHelper.initializeNotifications(Provider.of<UserModel>(context, listen: false));
 
@@ -30,7 +30,7 @@ class InitHelper {
 
   Future<bool> initializeUser() async {
     try {
-      final String uid = FirebaseAuth.instance.currentUser.uid;
+      final String? uid = FirebaseAuth.instance.currentUser?.uid;
       if (uid == null)
         throw ("Utente non loggato!");
       else {

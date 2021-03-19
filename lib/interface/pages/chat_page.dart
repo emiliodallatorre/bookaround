@@ -15,12 +15,12 @@ class ChatPage extends StatelessWidget {
       stream: chatsBloc.chats,
       builder: (BuildContext context, AsyncSnapshot<List<ChatModel>> chatsSnapshot) {
         if (chatsSnapshot.hasData) {
-          if (chatsSnapshot.data.isNotEmpty)
+          if (chatsSnapshot.data!.isNotEmpty)
             return ListView.builder(
-              itemCount: chatsSnapshot.data.length,
+              itemCount: chatsSnapshot.data!.length,
               itemBuilder: (BuildContext context, int index) => ListTile(
-                title: Text(chatsSnapshot.data.elementAt(index).recipient.displayName),
-                subtitle: Text(chatsSnapshot.data.elementAt(index).lastMessage.displayableBody),
+                title: Text(chatsSnapshot.data!.elementAt(index).recipient.displayName),
+                subtitle: Text(chatsSnapshot.data!.elementAt(index).lastMessage!.displayableBody),
               ),
             );
           else

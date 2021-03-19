@@ -15,7 +15,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (BuildContext context) => LoginScreenState(),
-      builder: (BuildContext context, Widget child) => WillPopScope(
+      builder: (BuildContext context, Widget? child) => WillPopScope(
         onWillPop: () {
           LoginScreenState state = Provider.of<LoginScreenState>(context, listen: false);
 
@@ -45,7 +45,7 @@ class LoginScreen extends StatelessWidget {
       child: Stack(
         children: [
           Consumer<LoginScreenState>(
-            builder: (BuildContext context, LoginScreenState state, Widget child) => Stack(
+            builder: (BuildContext context, LoginScreenState state, Widget? child) => Stack(
               children: [
                 Align(
                   alignment: AlignmentDirectional.topStart,
@@ -115,7 +115,7 @@ class LoginScreenState extends ChangeNotifier {
   TextEditingController numberController = TextEditingController();
   InputCodeControl codeController = InputCodeControl();
 
-  String verificationCode;
+  String? verificationCode;
 
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -133,13 +133,13 @@ class LoginScreenState extends ChangeNotifier {
 
   Future<void> loginWithCredential(BuildContext context) async {
     try {
-      await AuthHelper.loginWithCredential(this.verificationCode, this.codeController.value);
+      await AuthHelper.loginWithCredential(this.verificationCode!, this.codeController.value);
       await InitHelper(context).initializeUser();
 
       Navigator.of(context).pushReplacementNamed(ProfileEditorScreen.route);
     } catch (e) {
       debugPrint(e.toString());
-      scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(S.current.wrongCode)));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(S.current.wrongCode)));
       codeController.clear();
     }
   }

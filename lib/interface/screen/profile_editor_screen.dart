@@ -21,7 +21,7 @@ class ProfileEditorScreen extends StatelessWidget {
 
   Widget _buildBody(BuildContext context) {
     return Consumer<UserModel>(
-      builder: (BuildContext context, UserModel currentUser, Widget child) => SafeArea(
+      builder: (BuildContext context, UserModel currentUser, Widget? child) => SafeArea(
         child: Column(
           children: [
             Expanded(
@@ -37,19 +37,19 @@ class ProfileEditorScreen extends StatelessWidget {
                         TextFormField(
                           decoration: InputDecoration(labelText: S.current.name),
                           initialValue: currentUser.name,
-                          onSaved: (String value) => currentUser.name = value,
+                          onSaved: (String? value) => currentUser.name = value!,
                           validator: RequiredValidator(errorText: S.current.requiredField),
                         ),
                         TextFormField(
                           decoration: InputDecoration(labelText: S.current.surname),
                           initialValue: currentUser.surname,
-                          onSaved: (String value) => currentUser.surname = value,
+                          onSaved: (String? value) => currentUser.surname = value!,
                           validator: RequiredValidator(errorText: S.current.requiredField),
                         ),
                         TextFormField(
                           decoration: InputDecoration(labelText: S.current.city),
                           initialValue: currentUser.city,
-                          onSaved: (String value) => currentUser.city = value,
+                          onSaved: (String? value) => currentUser.city = value!,
                           validator: RequiredValidator(errorText: S.current.requiredField),
                         ),
                         TextFormField(
@@ -67,12 +67,12 @@ class ProfileEditorScreen extends StatelessWidget {
             ElevatedButton(
               child: Text(S.current.save),
               onPressed: () async {
-                if (_formKey.currentState.validate()) {
-                  _formKey.currentState.save();
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
 
                   await currentUser.updateOnServer();
 
-                  if (ModalRoute.of(context).isFirst)
+                  if (ModalRoute.of(context)!.isFirst)
                     Navigator.of(context).pushReplacementNamed(HomeScreen.route);
                   else
                     Navigator.of(context).pop();

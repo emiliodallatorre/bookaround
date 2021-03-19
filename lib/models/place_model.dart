@@ -5,10 +5,10 @@ part 'place_model.g.dart';
 
 @JsonSerializable()
 class PlaceModel {
-  final String id;
-  final String description;
-  final String placeId;
-  final String placeReference;
+  final String? id;
+  final String? description;
+  final String? placeId;
+  final String? placeReference;
 
   PlaceModel({
     this.id,

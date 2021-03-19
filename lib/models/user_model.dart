@@ -7,13 +7,13 @@ part 'user_model.g.dart';
 
 @JsonSerializable()
 class UserModel extends ChangeNotifier {
-  String uid;
-  String phoneNumber;
-  String name, surname, city;
-  String profileImageUrl;
+  String? uid;
+  String? phoneNumber;
+  String? name, surname, city;
+  String? profileImageUrl;
 
   @JsonKey(ignore: true)
-  DocumentReference reference;
+  DocumentReference? reference;
 
   UserModel({
     this.uid,
@@ -27,7 +27,7 @@ class UserModel extends ChangeNotifier {
 
   bool get isLogged => this.uid != null;
 
-  String get displayName => this.name + " " + this.surname;
+  String get displayName => this.name! + " " + this.surname!;
 
   @override
   String toString() => "Utente $uid.";
@@ -43,7 +43,7 @@ class UserModel extends ChangeNotifier {
     if (empty)
       updatedUser = UserModel();
     else if (uid != null)
-      updatedUser = UserModel.fromJson((await updatedUserReference.get()).data());
+      updatedUser = UserModel.fromJson((await updatedUserReference.get()).data()!);
     else
       updatedUser = UserModel();
 
@@ -61,7 +61,7 @@ class UserModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateOnServer() => this.reference.update(this.toJson()).whenComplete(notifyListeners);
+  Future<void> updateOnServer() => this.reference!.update(this.toJson()).whenComplete(notifyListeners);
 
   void signOut() => updateFromServer(uid: null);
 }

@@ -20,21 +20,21 @@ class ChatProvider {
 
   static Future<ChatModel> getChatById(String chatId, String currentUserUid) async {
     final DocumentSnapshot rawChat = await References.chatsCollection.doc(chatId).get();
-    final ChatModel chat = ChatModel.fromJson(rawChat.data());
+    final ChatModel chat = ChatModel.fromJson(rawChat.data()!);
 
     chat.reference = rawChat.reference;
-    chat.participants.removeWhere((String participantUid) => participantUid == currentUserUid);
+    chat.participants!.removeWhere((String participantUid) => participantUid == currentUserUid);
     chat.participantsUsers = <UserModel>[];
-    for (String uid in chat.participants) chat.participantsUsers.add(await UserProvider.getUserByUid(uid));
+    for (String uid in chat.participants!) chat.participantsUsers!.add(await UserProvider.getUserByUid(uid));
 
     return chat;
   }
 
   static Future<List<MessageModel>> getChatMessages(ChatModel chat) async {
     final List<DocumentSnapshot> rawMessages = (await chat.messagesReference.get()).docs;
-    final List<MessageModel> messages = rawMessages.map((DocumentSnapshot rawMessage) => MessageModel.fromJson(rawMessage.data())..reference = rawMessage.reference).toList();
+    final List<MessageModel> messages = rawMessages.map((DocumentSnapshot rawMessage) => MessageModel.fromJson(rawMessage.data()!)..reference = rawMessage.reference).toList();
 
-    messages.sort((b, a) => a.sentDateTime.compareTo(b.sentDateTime));
+    messages.sort((b, a) => a.sentDateTime!.compareTo(b.sentDateTime!));
 
     return messages;
   }
@@ -44,20 +44,20 @@ class ChatProvider {
     final List<ChatModel> chats = <ChatModel>[];
 
     for (int index = 0; index < rawChats.length; index++) {
-      ChatModel chat = ChatModel.fromJson(rawChats.elementAt(index).data());
+      ChatModel chat = ChatModel.fromJson(rawChats.elementAt(index).data()!);
 
       // Ignoriamo le chat vuote di cui abbiamo solo un id.
       if (chat.lastMessage == null) continue;
 
       chat.reference = rawChats.elementAt(index).reference;
-      chat.participants.removeWhere((String participantUid) => participantUid == user.uid);
+      chat.participants!.removeWhere((String participantUid) => participantUid == user.uid);
       chat.participantsUsers = <UserModel>[];
-      for (String uid in chat.participants) chat.participantsUsers.add(await UserProvider.getUserByUid(uid));
+      for (String uid in chat.participants!) chat.participantsUsers!.add(await UserProvider.getUserByUid(uid));
 
       chats.add(chat);
     }
 
-    chats.sort((b, a) => a.lastMessageDateTime.compareTo(b.lastMessageDateTime));
+    chats.sort((b, a) => a.lastMessageDateTime!.compareTo(b.lastMessageDateTime!));
 
     debugPrint("Trovate ${chats.length} chat.");
     return chats;

@@ -3,15 +3,15 @@ import 'package:location/location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsModel extends ChangeNotifier {
-  bool proximitySearchEnabled;
+  bool? proximitySearchEnabled;
   bool firstStart;
-  DateTime lastUpdateTime;
+  DateTime? lastUpdateTime;
 
-  Location lastKnownLocation;
+  Location? lastKnownLocation;
 
   SettingsModel({
     this.proximitySearchEnabled,
-    this.firstStart,
+    this.firstStart = true,
     this.lastUpdateTime,
   });
 
@@ -21,7 +21,7 @@ class SettingsModel extends ChangeNotifier {
   Future<void> updateFromMemory() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
-    this.proximitySearchEnabled = preferences.getBool("proximitySearchEnabled");
+    this.proximitySearchEnabled = preferences.getBool("proximitySearchEnabled") ?? false;
     this.firstStart = preferences.getBool("firstStart") ?? true;
     this.lastUpdateTime = DateTime.fromMillisecondsSinceEpoch(preferences.getInt("lastUpdateTime") ?? DateTime.now().millisecondsSinceEpoch);
 
@@ -31,7 +31,7 @@ class SettingsModel extends ChangeNotifier {
   Future<void> updateInMemory() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
-    if (this.proximitySearchEnabled != null) await preferences.setBool("proximitySearchEnabled", this.proximitySearchEnabled);
+    if (this.proximitySearchEnabled != null) await preferences.setBool("proximitySearchEnabled", this.proximitySearchEnabled!);
     await preferences.setBool("firstStart", this.firstStart);
     await preferences.setInt("lastUpdateTime", DateTime.now().millisecondsSinceEpoch);
 

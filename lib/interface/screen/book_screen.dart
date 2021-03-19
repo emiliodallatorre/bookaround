@@ -13,11 +13,11 @@ import 'package:provider/provider.dart';
 class BookScreen extends StatelessWidget {
   static const String route = "/bookScreen";
 
-  BookModel book;
+  BookModel? _book;
 
   @override
   Widget build(BuildContext context) {
-    if (book == null) book = ModalRoute.of(context).settings.arguments;
+    if (_book == null) _book = ModalRoute.of(context)!.settings.arguments as BookModel;
 
     return Scaffold(
       appBar: AppBar(),
@@ -26,7 +26,7 @@ class BookScreen extends StatelessWidget {
         ElevatedButton(
           child: Text(S.current.getInTouchWithSeller),
           onPressed: () async {
-            final ChatModel chat = await ChatProvider.getChat(book.userUid, Provider.of<UserModel>(context, listen: false).uid);
+            final ChatModel? chat = await ChatProvider.getChat(_book!.userUid!, Provider.of<UserModel>(context, listen: false).uid!);
 
             if (chat != null) {
               Navigator.of(context).pushNamed(ChatScreen.route);
@@ -44,7 +44,7 @@ class BookScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             children: [
-              BookCover(book: book, horizontalPadding: false),
+              BookCover(book: _book!, horizontalPadding: false),
               Row(
                 children: [
                   Expanded(
@@ -53,19 +53,19 @@ class BookScreen extends StatelessWidget {
                         Row(
                           children: [
                             Expanded(child: Text(S.current.pencil)),
-                            Checkbox(value: book.pencil, onChanged: null),
+                            Checkbox(value: _book!.pencil, onChanged: null),
                           ],
                         ),
                         Row(
                           children: [
                             Expanded(child: Text(S.current.pen)),
-                            Checkbox(value: book.pen, onChanged: null),
+                            Checkbox(value: _book!.pen, onChanged: null),
                           ],
                         ),
                         Row(
                           children: [
                             Expanded(child: Text(S.current.highlight)),
-                            Checkbox(value: book.highlighting, onChanged: null),
+                            Checkbox(value: _book!.highlighting, onChanged: null),
                           ],
                         ),
                       ],
@@ -73,9 +73,9 @@ class BookScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              if (book.note.isNotEmpty) Text(S.current.note, style: Theme.of(context).textTheme.caption),
-              if (book.note.isNotEmpty) Text(book.note),
-              if (book.userUid != Provider.of<UserModel>(context).uid) _buildSellerInfo(context),
+              if (_book!.note!.isNotEmpty) Text(S.current.note, style: Theme.of(context).textTheme.caption),
+              if (_book!.note!.isNotEmpty) Text(_book!.note!),
+              if (_book!.userUid != Provider.of<UserModel>(context).uid) _buildSellerInfo(context),
               _buildSellerInfo(context),
               SizedBox(height: 16.0),
             ],
@@ -98,8 +98,8 @@ class BookScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(book.user.displayName, style: Theme.of(context).textTheme.headline6),
-                Text(book.user.city, style: Theme.of(context).textTheme.caption),
+                Text(_book!.user!.displayName, style: Theme.of(context).textTheme.headline6),
+                Text(_book!.user!.city!, style: Theme.of(context).textTheme.caption),
               ],
             ),
           ],
@@ -110,10 +110,10 @@ class BookScreen extends StatelessWidget {
           child: AspectRatio(
             aspectRatio: 4 / 3,
             child: GoogleMap(
-              initialCameraPosition: CameraPosition(target: book.modelizedLocation, zoom: 12.0),
+              initialCameraPosition: CameraPosition(target: _book!.modelizedLocation, zoom: 12.0),
               myLocationEnabled: true,
               myLocationButtonEnabled: false,
-              markers: <Marker>[Marker(markerId: MarkerId(book.id), position: book.modelizedLocation)].toSet(),
+              markers: <Marker>[Marker(markerId: MarkerId(_book!.id!), position: _book!.modelizedLocation)].toSet(),
               onMapCreated: (GoogleMapController controller) {
                 if (Theme.of(context).brightness == Brightness.light)
                   controller.setMapStyle(MapStyles.lightMap);

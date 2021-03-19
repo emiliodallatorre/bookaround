@@ -7,20 +7,20 @@ part 'chat_model.g.dart';
 
 @JsonSerializable()
 class ChatModel {
-  final String id;
-  final DateTime creationDateTime, lastMessageDateTime;
-  final List<String> participants;
-  final MessageModel lastMessage;
+  final String? id;
+  final DateTime? creationDateTime, lastMessageDateTime;
+  final List<String>? participants;
+  final MessageModel? lastMessage;
 
   @JsonKey(ignore: true)
-  DocumentReference reference;
+  DocumentReference? reference;
 
   @JsonKey(ignore: true)
-  List<UserModel> participantsUsers;
+  List<UserModel>? participantsUsers;
 
-  CollectionReference get messagesReference => reference.collection("messages");
+  CollectionReference get messagesReference => reference!.collection("messages");
 
-  UserModel get recipient => participantsUsers.single;
+  UserModel get recipient => participantsUsers!.single;
 
   ChatModel({
     this.id,

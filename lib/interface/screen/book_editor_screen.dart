@@ -21,7 +21,7 @@ class BookEditorScreen extends StatefulWidget {
 }
 
 class _BookEditorScreenState extends State<BookEditorScreen> {
-  BookModel book;
+  BookModel? book;
   TextEditingController locationController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -29,7 +29,7 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (book == null) book = ModalRoute.of(context).settings.arguments;
+    if (book == null) book = ModalRoute.of(context)!.settings.arguments as BookModel;
 
     return WillPopScope(
       onWillPop: () async {
@@ -60,20 +60,20 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
   Widget _buildBody(BuildContext context) {
     return ListView(
       children: [
-        BookCover(book: book),
+        BookCover(book: book!),
         CheckboxListTile(
-          value: book.pencil,
-          onChanged: (bool value) => setState(() => book.pencil = value),
+          value: book!.pencil,
+          onChanged: (bool? value) => setState(() => book!.pencil = value!),
           title: Text(S.current.pencil),
         ),
         CheckboxListTile(
-          value: book.highlighting,
-          onChanged: (bool value) => setState(() => book.highlighting = value),
+          value: book!.highlighting,
+          onChanged: (bool? value) => setState(() => book!.highlighting = value!),
           title: Text(S.current.highlight),
         ),
         CheckboxListTile(
-          value: book.pen,
-          onChanged: (bool value) => setState(() => book.pen = value),
+          value: book!.pen,
+          onChanged: (bool? value) => setState(() => book!.pen = value!),
           title: Text(S.current.pen),
         ),
         Form(
@@ -88,7 +88,7 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
                   controller: locationController,
                   decoration: InputDecoration(labelText: S.current.whereIsBook),
                   onTap: () async {
-                    Prediction prediction = await PlacesAutocomplete.show(
+                    Prediction? prediction = await PlacesAutocomplete.show(
                       context: context,
                       apiKey: References.googleApiKey,
                       mode: Mode.overlay,
@@ -100,10 +100,10 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
 
                     if (prediction != null) {
                       debugPrint("Il libro si trova a ${prediction.description}.");
-                      locationController.text = prediction.description;
+                      locationController.text = prediction.description!;
 
-                      book.location = PlaceModel.fromPrediction(prediction);
-                      book.locationData = await GeocodingHelper.decodeAddress(book.location.description);
+                      book!.location = PlaceModel.fromPrediction(prediction);
+                      book!.locationData = await GeocodingHelper.decodeAddress(book!.location!.description!);
 
                       setState(() {});
                     }
@@ -112,7 +112,7 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
                 TextFormField(
                   decoration: InputDecoration(labelText: S.current.note, alignLabelWithHint: true),
                   textInputAction: TextInputAction.done,
-                  onSaved: (String value) => setState(() => book.note = value),
+                  onSaved: (String? value) => setState(() => book!.note = value!),
                   minLines: 4,
                   maxLines: 4,
                 ),
@@ -125,11 +125,11 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
   }
 
   Future<bool> saveBook() async {
-    if (formKey.currentState.validate()) {
-      formKey.currentState.save();
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
 
-      await BookHelper.updateBook(book);
-      await sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid, BookType.SELLING);
+      await BookHelper.updateBook(book!);
+      await sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, BookType.SELLING);
 
       saved = true;
 

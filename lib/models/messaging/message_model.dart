@@ -5,18 +5,18 @@ part 'message_model.g.dart';
 
 @JsonSerializable()
 class MessageModel {
-  String id;
-  String senderUid;
-  String body;
-  DateTime sentDateTime, receivedDateTime;
-  MessageType messageType;
-  String videoThumbUrl;
+  String? id;
+  String? senderUid;
+  String? body;
+  DateTime? sentDateTime, receivedDateTime;
+  MessageType? messageType;
+  String? videoThumbUrl;
 
   @JsonKey(ignore: true)
-  DocumentReference reference;
+  DocumentReference? reference;
 
   // TODO: Modificare nel caso dei media allegati.
-  String get displayableBody => body;
+  String get displayableBody => body!;
 
   MessageModel({
     this.id,

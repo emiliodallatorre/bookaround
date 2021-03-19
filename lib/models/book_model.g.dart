@@ -8,25 +8,26 @@ part of 'book_model.dart';
 
 BookModel _$BookModelFromJson(Map<String, dynamic> json) {
   return BookModel(
-    id: json['id'] as String,
-    isbn: json['isbn'] as String,
-    isbn13: json['isbn13'] as String,
-    title: json['title'] as String,
-    authors: (json['authors'] as List)?.map((e) => e as String)?.toList(),
-    coverUrl: json['coverUrl'] as String,
+    id: json['id'] as String?,
+    isbn: json['isbn'] as String?,
+    isbn13: json['isbn13'] as String?,
+    title: json['title'] as String?,
+    authors:
+        (json['authors'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    coverUrl: json['coverUrl'] as String?,
     type: _$enumDecodeNullable(_$BookTypeEnumMap, json['type']),
-    userUid: json['userUid'] as String,
+    userUid: json['userUid'] as String?,
     addedDateTime: json['addedDateTime'] == null
         ? null
         : DateTime.parse(json['addedDateTime'] as String),
-    highlighting: json['highlighting'] as bool,
-    pencil: json['pencil'] as bool,
-    pen: json['pen'] as bool,
-    note: json['note'] as String,
+    highlighting: json['highlighting'] as bool?,
+    pencil: json['pencil'] as bool?,
+    pen: json['pen'] as bool?,
+    note: json['note'] as String?,
     location: json['location'] == null
         ? null
         : PlaceModel.fromJson(json['location'] as Map<String, dynamic>),
-  )..locationData = json['locationData'] as Map<String, dynamic>;
+  )..locationData = json['locationData'] as Map<String, dynamic>?;
 }
 
 Map<String, dynamic> _$BookModelToJson(BookModel instance) => <String, dynamic>{
@@ -47,36 +48,41 @@ Map<String, dynamic> _$BookModelToJson(BookModel instance) => <String, dynamic>{
       'locationData': instance.locationData,
     };
 
-T _$enumDecode<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
+K _$enumDecode<K, V>(
+  Map<K, V> enumValues,
+  Object? source, {
+  K? unknownValue,
 }) {
   if (source == null) {
-    throw ArgumentError('A value must be provided. Supported values: '
-        '${enumValues.values.join(', ')}');
+    throw ArgumentError(
+      'A value must be provided. Supported values: '
+      '${enumValues.values.join(', ')}',
+    );
   }
 
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
-
-  if (value == null && unknownValue == null) {
-    throw ArgumentError('`$source` is not one of the supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-  return value ?? unknownValue;
+  return enumValues.entries.singleWhere(
+    (e) => e.value == source,
+    orElse: () {
+      if (unknownValue == null) {
+        throw ArgumentError(
+          '`$source` is not one of the supported values: '
+          '${enumValues.values.join(', ')}',
+        );
+      }
+      return MapEntry(unknownValue, enumValues.values.first);
+    },
+  ).key;
 }
 
-T _$enumDecodeNullable<T>(
-  Map<T, dynamic> enumValues,
+K? _$enumDecodeNullable<K, V>(
+  Map<K, V> enumValues,
   dynamic source, {
-  T unknownValue,
+  K? unknownValue,
 }) {
   if (source == null) {
     return null;
   }
-  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
+  return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
 }
 
 const _$BookTypeEnumMap = {

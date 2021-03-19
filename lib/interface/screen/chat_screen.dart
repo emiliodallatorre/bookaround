@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 class ChatScreen extends StatelessWidget {
   static const String route = "/chatScreen";
 
-  ChatModel chat;
+  ChatModel? _chat;
 
   @override
   Widget build(BuildContext context) {
-    if (chat == null) chat = ModalRoute.of(context).settings.arguments;
+    if (_chat == null) _chat = ModalRoute.of(context)!.settings.arguments as ChatModel;
 
     return Scaffold(
       appBar: AppBar(

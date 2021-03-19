@@ -12,8 +12,8 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (BuildContext context) => SearchScreenState(Provider.of<UserModel>(context, listen: false).uid),
-      builder: (BuildContext context, Widget child) => Scaffold(
+      create: (BuildContext context) => SearchScreenState(Provider.of<UserModel>(context, listen: false).uid!),
+      builder: (BuildContext context, Widget? child) => Scaffold(
         appBar: AppBar(
           title: TextField(
             style: TextStyle(color: Colors.white),
@@ -33,7 +33,7 @@ class SearchScreen extends StatelessWidget {
 
   Widget _buildBody(BuildContext context) {
     return Consumer<SearchScreenState>(
-      builder: (BuildContext context, SearchScreenState currentState, Widget child) {
+      builder: (BuildContext context, SearchScreenState currentState, Widget? child) {
         if (currentState.state == SearchState.UNINITIALIZED)
           return Center(
             child: Padding(
@@ -44,7 +44,7 @@ class SearchScreen extends StatelessWidget {
         else {
           if (currentState.results == null)
             return Center(child: CircularProgressIndicator());
-          else if (currentState.results.isEmpty)
+          else if (currentState.results!.isEmpty)
             return Center(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -53,8 +53,8 @@ class SearchScreen extends StatelessWidget {
             );
           else
             return ListView.builder(
-              itemCount: currentState.results.length,
-              itemBuilder: (BuildContext context, int index) => SearchResultListElement(isbn: currentState.results.elementAt(index)),
+              itemCount: currentState.results!.length,
+              itemBuilder: (BuildContext context, int index) => SearchResultListElement(isbn: currentState.results!.elementAt(index)),
             );
         }
       },
@@ -68,7 +68,7 @@ class SearchScreenState extends ChangeNotifier {
   SearchScreenState(this.currentUserUid);
 
   SearchState state = SearchState.UNINITIALIZED;
-  List<IsbnModel> results;
+  List<IsbnModel>? results;
 
   Future<void> findBooks(String query) async {
     debugPrint("Comincio a cercare \"$query\".");

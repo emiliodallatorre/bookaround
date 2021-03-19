@@ -29,7 +29,7 @@ class Bookaround extends StatelessWidget {
         ChangeNotifierProvider(create: (BuildContext context) => SettingsModel()),
         ChangeNotifierProvider(create: (BuildContext context) => LocationProvider()),
       ],
-      builder: (BuildContext context, Widget child) => MaterialApp(
+      builder: (BuildContext context, Widget? child) => MaterialApp(
         title: References.appName,
         theme: ThemeData(primarySwatch: Colors.teal, fontFamily: "Poppins"),
         darkTheme: ThemeData(
@@ -38,7 +38,9 @@ class Bookaround extends StatelessWidget {
           primarySwatch: Colors.orange,
           accentColor: Colors.orange[500],
           toggleableActiveColor: Colors.orange[500],
-          textSelectionColor: Colors.orange[200],
+          textSelectionTheme: TextSelectionThemeData(
+            selectionColor: Colors.orange[200],
+          ),
         ),
         themeMode: ThemeMode.system,
         initialRoute: SplashScreen.route,

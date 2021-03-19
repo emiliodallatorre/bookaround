@@ -82,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
             setState(() => selectedIndex = newIndex);
 
             if (newIndex == 2) if (Provider.of<SettingsModel>(context, listen: false).proximitySearchEnabled == null) {
-              bool wantsProximitySearch = await showDialog<bool>(
+              bool? wantsProximitySearch = await showDialog<bool>(
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
                   title: Text(S.current.proximitySearch),
@@ -125,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
         if (selectedIndex == 0) {
           setState(() => working = true);
 
-          String isbn;
+          String? isbn;
           try {
             isbn = await BarcodeHelper.readBarcode(context);
             // isbn = "97888089199222";
@@ -133,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // L'utente ha scansionato un codice.
             if (isbn != null) {
               // Il libro esiste nel database.
-              BookModel book = await BookHelper.createBookSell(isbn, Provider.of<UserModel>(context, listen: false).uid);
+              BookModel book = await BookHelper.createBookSell(isbn, Provider.of<UserModel>(context, listen: false).uid!);
               Navigator.of(context).pushNamed(BookEditorScreen.route, arguments: book);
 
               setState(() => working = false);
@@ -143,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // Il libro non esiste nel database.
             setState(() => working = false);
 
-            scaffoldKey.currentState.showSnackBar(SnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(S.current.bookNotFoundError),
               action: SnackBarAction(
                 label: S.current.add,
@@ -152,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ));
           } catch (e) {
             // È comparso un errore sconosciuto.
-            scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(S.current.bookError)));
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(S.current.bookError)));
 
             setState(() => working = false);
           }
@@ -169,10 +169,10 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Consumer<UserModel>(
-            builder: (BuildContext context, UserModel currentUser, Widget child) => UserAccountsDrawerHeader(
+            builder: (BuildContext context, UserModel currentUser, Widget? child) => UserAccountsDrawerHeader(
               currentAccountPicture: UserAvatar(user: currentUser),
               accountName: Text(currentUser.displayName),
-              accountEmail: Text(currentUser.phoneNumber),
+              accountEmail: Text(currentUser.phoneNumber!),
             ),
           ),
           ListTile(

@@ -13,7 +13,7 @@ class UserProvider {
   }
 
   static UserModel _deserializeUser(DocumentSnapshot rawUser) {
-    UserModel user = UserModel.fromJson(rawUser.data());
+    UserModel user = UserModel.fromJson(rawUser.data()!);
     user.reference = rawUser.reference;
 
     return user;

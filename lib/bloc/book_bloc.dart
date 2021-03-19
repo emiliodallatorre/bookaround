@@ -8,7 +8,7 @@ class BooksBloc {
 
   Stream<List<BookModel>> get books => _booksFetcher.stream;
 
-  Future<List<BookModel>> getUserBooks(String userUid, [BookType type]) async {
+  Future<List<BookModel>> getUserBooks(String userUid, [BookType? type]) async {
     List<BookModel> books = await Repository.getUserBooks(userUid);
 
     if (type != null) books.removeWhere((element) => element.type != type);

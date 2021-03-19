@@ -21,7 +21,7 @@ class AuthHelper {
 
         // Provider.of<LoginScreenState>(context, listen: false).setLoginStep(LoginStep.ERROR);
       },
-      codeSent: (String verificationId, int resendToken) {
+      codeSent: (String verificationId, int? resendToken) {
         debugPrint("Il codice è stato spedito!");
         Provider.of<LoginScreenState>(context, listen: false).setVerificationCode(verificationId);
       },
@@ -32,10 +32,10 @@ class AuthHelper {
   }
 
   static Future<void> loginWithCredential(String verificationId, String smsCode) async {
-    final PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
+    final AuthCredential phoneAuthCredential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
     final UserCredential credential = await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
 
-    while (!(await References.usersCollection.doc(credential.user.uid).get()).exists) {
+    while (!(await References.usersCollection.doc(credential.user!.uid).get()).exists) {
       await Future.delayed(Duration(seconds: 2));
     }
 

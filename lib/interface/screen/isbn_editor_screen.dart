@@ -26,7 +26,7 @@ class IsbnEditorScreen extends StatefulWidget {
 class _IsbnEditorScreenState extends State<IsbnEditorScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  IsbnModel isbn;
+  IsbnModel? isbn;
   bool shownFirstFrame = false;
   bool working = false;
 
@@ -35,11 +35,11 @@ class _IsbnEditorScreenState extends State<IsbnEditorScreen> {
     if (isbn == null) {
       isbn = IsbnModel(
         id: randomAlphaNumeric(20),
-        isbn: ModalRoute.of(context).settings.arguments as String,
+        isbn: ModalRoute.of(context)!.settings.arguments as String,
         authorUid: Provider.of<UserModel>(context, listen: false).uid,
       );
 
-      WidgetsBinding.instance.addPostFrameCallback((_) {
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
         if (!shownFirstFrame) {
           shownFirstFrame = true;
 
@@ -67,14 +67,14 @@ class _IsbnEditorScreenState extends State<IsbnEditorScreen> {
         ElevatedButton(
           child: Text(S.current.save),
           onPressed: () async {
-            if (formKey.currentState.validate()) {
-              formKey.currentState.save();
+            if (formKey.currentState!.validate()) {
+              formKey.currentState!.save();
 
               await askUserForImage();
-              await IsbnHelper.createIsbn(isbn);
+              await IsbnHelper.createIsbn(isbn!);
 
               // Il libro ora esiste nel database.
-              BookModel book = await BookHelper.createBookSell(isbn.isbn, Provider.of<UserModel>(context, listen: false).uid);
+              BookModel book = await BookHelper.createBookSell(isbn!.isbn!, Provider.of<UserModel>(context, listen: false).uid!);
               Navigator.of(context).pushReplacementNamed(BookEditorScreen.route, arguments: book);
             }
           },
@@ -95,13 +95,13 @@ class _IsbnEditorScreenState extends State<IsbnEditorScreen> {
               children: [
                 AspectRatio(
                   aspectRatio: 4 / 3,
-                  child: isbn.image != null
+                  child: isbn!.image != null
                       ? Stack(
                           fit: StackFit.passthrough,
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(top: 16.0),
-                              child: Image.network(isbn.image, fit: BoxFit.contain),
+                              child: Image.network(isbn!.image!, fit: BoxFit.contain),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 16.0),
@@ -112,10 +112,10 @@ class _IsbnEditorScreenState extends State<IsbnEditorScreen> {
                                   child: Icon(Icons.delete_forever),
                                   onPressed: () async {
                                     setState(() => working = true);
-                                    await UploadHelper.deleteUpload(isbn.image);
+                                    await UploadHelper.deleteUpload(isbn!.image!);
                                     setState(() {
                                       working = false;
-                                      isbn.image = null;
+                                      isbn!.image = null;
                                     });
                                   },
                                 ),
@@ -137,17 +137,17 @@ class _IsbnEditorScreenState extends State<IsbnEditorScreen> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(labelText: S.current.title),
-                  onSaved: (String value) => isbn.title = value,
+                  onSaved: (String? value) => isbn!.title = value!,
                   validator: RequiredValidator(errorText: S.current.requiredField),
                 ),
                 TextFormField(
                   decoration: InputDecoration(labelText: S.current.authors),
-                  onSaved: (String value) => isbn.authors = AuthorHelper.parseAuthors(value),
+                  onSaved: (String? value) => isbn!.authors = AuthorHelper.parseAuthors(value),
                   validator: RequiredValidator(errorText: S.current.wrongField),
                   textCapitalization: TextCapitalization.words,
                 ),
                 TextFormField(
-                  initialValue: isbn.isbn,
+                  initialValue: isbn!.isbn,
                   decoration: InputDecoration(labelText: S.current.isbn),
                   enabled: false,
                   readOnly: true,
@@ -161,8 +161,8 @@ class _IsbnEditorScreenState extends State<IsbnEditorScreen> {
   }
 
   Future<void> askUserForImage() async {
-    if (isbn.image == null) {
-      ImageSource wantedSource = await showDialog<ImageSource>(
+    if (isbn!.image == null) {
+      ImageSource? wantedSource = await showDialog<ImageSource>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
           title: Text(S.current.chooseSource),
@@ -183,13 +183,13 @@ class _IsbnEditorScreenState extends State<IsbnEditorScreen> {
       // L'utente non ha selezionato con cosa acquisire l'immagine.
       if (wantedSource == null) return;
 
-      PickedFile pickedFile = await ImagePicker().getImage(source: wantedSource);
+      PickedFile? pickedFile = await ImagePicker().getImage(source: wantedSource);
 
       // L'utente non ha infine acquisito l'immagine.
       if (pickedFile == null) return;
 
       setState(() => working = true);
-      isbn.image = await UploadHelper.uploadFile(References.bookCovers, File(pickedFile.path), isbn.isbn);
+      isbn!.image = await UploadHelper.uploadFile(References.bookCovers, File(pickedFile.path), isbn!.isbn!);
       setState(() => working = false);
     }
   }
