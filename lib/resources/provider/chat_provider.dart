@@ -9,11 +9,12 @@ import 'package:flutter/material.dart';
 
 class ChatProvider {
   static Future<ChatModel> getChat(String recipientUid, String currentUserUid) async {
-    final List<String> participantUids = <String>[recipientUid];
+    final List<String> participantUids = <String>[recipientUid, currentUserUid];
 
     final FirebaseFunctions functions = FirebaseFunctions.instance;
     final HttpsCallableResult result = await functions.httpsCallable("getChatId").call({"uid": currentUserUid, "participants": participantUids});
-    final String chatId = result.data as String;
+    debugPrint(result.data.toString());
+    final String chatId = result.data as  String;
 
     return await getChatById(chatId, currentUserUid);
   }

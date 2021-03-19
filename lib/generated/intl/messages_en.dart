@@ -45,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "nearbyBooks" : MessageLookupByLibrary.simpleMessage("Nearby books"),
     "noBooks" : MessageLookupByLibrary.simpleMessage("There aren\'t any book here yet, add one with the \"add\" button...!"),
     "noChats" : MessageLookupByLibrary.simpleMessage("You don\'t have any chat yet.\nHere will appear the chats you\'ll start with other users."),
+    "noMessages" : MessageLookupByLibrary.simpleMessage("No message in this chat, send one to start!"),
     "noResults" : MessageLookupByLibrary.simpleMessage("We didn\'t find anything with this query, please retry within the next days: some users could decide to sell this book in the future!"),
     "noSearch" : MessageLookupByLibrary.simpleMessage("Type something to start a new search..."),
     "noSearchBooks" : MessageLookupByLibrary.simpleMessage("You haven\'t added any book to your search list yet, add one with the search button on the right...!"),
@@ -52,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pen" : MessageLookupByLibrary.simpleMessage("The book has stuff written with pen"),
     "pencil" : MessageLookupByLibrary.simpleMessage("The book presents pencil signs"),
     "phoneNumber" : MessageLookupByLibrary.simpleMessage("Phone number"),
+    "position" : MessageLookupByLibrary.simpleMessage("Location"),
     "present" : MessageLookupByLibrary.simpleMessage("Present"),
     "proceed" : MessageLookupByLibrary.simpleMessage("Proceed"),
     "proximitySearch" : MessageLookupByLibrary.simpleMessage("Proximity search"),
@@ -69,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "undo" : MessageLookupByLibrary.simpleMessage("Undo"),
     "usage" : MessageLookupByLibrary.simpleMessage("Usage"),
     "whereIsBook" : MessageLookupByLibrary.simpleMessage("Where is this book?"),
+    "writeAMessage" : MessageLookupByLibrary.simpleMessage("Write a message..."),
     "wrongCode" : MessageLookupByLibrary.simpleMessage("This code is not working, try again"),
     "wrongField" : MessageLookupByLibrary.simpleMessage("This field is not filled correctly")
   };

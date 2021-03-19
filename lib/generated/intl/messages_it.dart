@@ -45,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "nearbyBooks" : MessageLookupByLibrary.simpleMessage("Libri nei dintorni"),
     "noBooks" : MessageLookupByLibrary.simpleMessage("Non c\'è ancora nessun libro in questa sezione, aggiungilo con l\'apposito pulsante...!"),
     "noChats" : MessageLookupByLibrary.simpleMessage("Non hai ancora alcuna conversazione.\nCompariranno qui quelle che avvierai con gli altri utenti."),
+    "noMessages" : MessageLookupByLibrary.simpleMessage("Nessun messaggio in questa chat, scrivine uno per iniziare!"),
     "noResults" : MessageLookupByLibrary.simpleMessage("Non abbiamo trovato nessun libro con questa query, riprova nei prossimi giorni: può darsi che qualche utente metta in vendita questo testo in futuro!"),
     "noSearch" : MessageLookupByLibrary.simpleMessage("Scrivi qualcosa per iniziare una nuova ricerca..."),
     "noSearchBooks" : MessageLookupByLibrary.simpleMessage("Al momento non hai ancora aggiunto alcun libro alla tua lista di ricerca, aggiungine uno col pulsante \"Cerca\" in alto a destra...!"),
@@ -52,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pen" : MessageLookupByLibrary.simpleMessage("Sul libro è stata utilizzata la penna o altro marcatore indelebile"),
     "pencil" : MessageLookupByLibrary.simpleMessage("Il libro è stato annotato in matita"),
     "phoneNumber" : MessageLookupByLibrary.simpleMessage("Numero di telefono"),
+    "position" : MessageLookupByLibrary.simpleMessage("Posizione"),
     "present" : MessageLookupByLibrary.simpleMessage("Presente"),
     "proceed" : MessageLookupByLibrary.simpleMessage("Procedi"),
     "proximitySearch" : MessageLookupByLibrary.simpleMessage("Ricerca di prossimità"),
@@ -69,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "undo" : MessageLookupByLibrary.simpleMessage("Annulla"),
     "usage" : MessageLookupByLibrary.simpleMessage("Utilizzo"),
     "whereIsBook" : MessageLookupByLibrary.simpleMessage("Dove si trova il libro?"),
+    "writeAMessage" : MessageLookupByLibrary.simpleMessage("Scrivi un messaggio..."),
     "wrongCode" : MessageLookupByLibrary.simpleMessage("Questo codice non è corretto, riprova"),
     "wrongField" : MessageLookupByLibrary.simpleMessage("Inserisci correttamente questo dato")
   };

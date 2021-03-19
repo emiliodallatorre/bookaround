@@ -48,5 +48,8 @@
   "soldBy": "Venduto da",
   "chats": "Conversazioni",
   "noChats": "Non hai ancora alcuna conversazione.\nCompariranno qui quelle che avvierai con gli altri utenti.",
-  "getInTouchWithSeller": "Contatta il venditore"
+  "getInTouchWithSeller": "Contatta il venditore",
+  "position": "Posizione",
+  "writeAMessage": "Scrivi un messaggio...",
+  "noMessages": "Nessun messaggio in questa chat, scrivine uno per iniziare!"
 }

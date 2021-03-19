@@ -48,6 +48,8 @@
   "soldBy": "Sold by",
   "chats": "Chat",
   "noChats": "You don't have any chat yet.\nHere will appear the chats you'll start with other users.",
-  "getInTouchWithSeller": "Get in touch with the seller"
-
+  "getInTouchWithSeller": "Get in touch with the seller",
+  "position": "Location",
+  "writeAMessage": "Write a message...",
+  "noMessages": "No message in this chat, send one to start!"
 }

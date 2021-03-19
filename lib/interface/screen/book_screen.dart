@@ -28,9 +28,7 @@ class BookScreen extends StatelessWidget {
           onPressed: () async {
             final ChatModel? chat = await ChatProvider.getChat(_book!.userUid!, Provider.of<UserModel>(context, listen: false).uid!);
 
-            if (chat != null) {
-              Navigator.of(context).pushNamed(ChatScreen.route);
-            }
+            if (chat != null) Navigator.of(context).pushNamed(ChatScreen.route, arguments: chat);
           },
         ),
       ],
@@ -43,8 +41,10 @@ class BookScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BookCover(book: _book!, horizontalPadding: false),
+
               Row(
                 children: [
                   Expanded(
@@ -76,7 +76,7 @@ class BookScreen extends StatelessWidget {
               if (_book!.note!.isNotEmpty) Text(S.current.note, style: Theme.of(context).textTheme.caption),
               if (_book!.note!.isNotEmpty) Text(_book!.note!),
               if (_book!.userUid != Provider.of<UserModel>(context).uid) _buildSellerInfo(context),
-              _buildSellerInfo(context),
+              // _buildSellerInfo(context),
               SizedBox(height: 16.0),
             ],
           ),

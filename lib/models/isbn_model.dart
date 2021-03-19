@@ -12,7 +12,9 @@ class IsbnModel {
   final String? authorUid;
 
   String get authorString {
-    if (this.authors!.isEmpty)
+    if (this.authors == null)
+      return "";
+    else if (this.authors!.isEmpty)
       return "";
     else
       return this.authors!.reduce((value, element) => "$value, $element");

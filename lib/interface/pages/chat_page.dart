@@ -1,5 +1,6 @@
 import 'package:bookaround/bloc/chat_bloc.dart';
 import 'package:bookaround/generated/l10n.dart';
+import 'package:bookaround/interface/screen/chat_screen.dart';
 import 'package:bookaround/interface/widget/centered_text.dart';
 import 'package:bookaround/models/messaging/chat_model.dart';
 import 'package:bookaround/models/user_model.dart';
@@ -9,7 +10,9 @@ import 'package:provider/provider.dart';
 class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final ChatBloc chatsBloc = ChatBloc(Provider.of<UserModel>(context, listen: false))..getUserChats()..listenForChats();
+    final ChatBloc chatsBloc = ChatBloc(Provider.of<UserModel>(context, listen: false))
+      ..getUserChats()
+      ..listenForChats();
 
     return StreamBuilder<List<ChatModel>>(
       stream: chatsBloc.chats,
@@ -21,6 +24,7 @@ class ChatPage extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) => ListTile(
                 title: Text(chatsSnapshot.data!.elementAt(index).recipient.displayName),
                 subtitle: Text(chatsSnapshot.data!.elementAt(index).lastMessage!.displayableBody),
+                onTap: () => Navigator.of(context).pushNamed(ChatScreen.route, arguments: chatsSnapshot.data!.elementAt(index)),
               ),
             );
           else

@@ -546,6 +546,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Location`
+  String get position {
+    return Intl.message(
+      'Location',
+      name: 'position',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Write a message...`
+  String get writeAMessage {
+    return Intl.message(
+      'Write a message...',
+      name: 'writeAMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No message in this chat, send one to start!`
+  String get noMessages {
+    return Intl.message(
+      'No message in this chat, send one to start!',
+      name: 'noMessages',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

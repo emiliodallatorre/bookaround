@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return IndexedStack(
       index: selectedIndex,
       children: [
-        BooksPage(),
+        BooksPage(type: BookType.SELLING),
         ChatPage(),
         SearchPage(),
       ],
