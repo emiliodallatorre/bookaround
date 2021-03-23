@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "getInTouchWithSeller" : MessageLookupByLibrary.simpleMessage("Contatta il venditore"),
     "highlight" : MessageLookupByLibrary.simpleMessage("Il libro presenta segni di evidenziatore"),
     "isbn" : MessageLookupByLibrary.simpleMessage("ISBN"),
+    "km" : MessageLookupByLibrary.simpleMessage("km"),
     "login" : MessageLookupByLibrary.simpleMessage("Accedi"),
     "logout" : MessageLookupByLibrary.simpleMessage("Logout"),
     "manualAdd" : MessageLookupByLibrary.simpleMessage("Aggiunta manuale"),

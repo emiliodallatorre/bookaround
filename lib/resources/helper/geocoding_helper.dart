@@ -2,6 +2,8 @@ import 'package:bookaround/references.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_geocoder/geocoder.dart';
 import 'package:geoflutterfire/geoflutterfire.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class GeocodingHelper {
   static Future<Map<String, dynamic>> decodeAddress(String address) async {
@@ -12,4 +14,6 @@ class GeocodingHelper {
 
     return GeoFirePoint(locations.first.coordinates.latitude!, locations.first.coordinates.longitude!).data;
   }
+
+  static double distanceBetween(LatLng a, LatLng b) => Geolocator.distanceBetween(a.latitude, a.longitude, b.latitude, b.longitude) / 1000;
 }

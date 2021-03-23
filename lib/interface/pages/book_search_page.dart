@@ -16,7 +16,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 
-class SearchPage extends StatelessWidget {
+class BookSearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!);
@@ -37,50 +37,46 @@ class SearchPage extends StatelessWidget {
                   if (locationProvider.permissionStatus == null)
                     locationProvider.getPermissionStatus();
                   else if (locationProvider.permissionStatus == PermissionStatus.granted) {
-                    if (locationProvider.lastKnownLocation == null)
-                      locationProvider.getLocation();
-                    else
-                      searchBookBloc.getNearbyBooks(locationProvider.lastKnownLocation!, Provider.of<UserModel>(context, listen: false).uid!);
+                    if (locationProvider.lastKnownLocation == null) locationProvider.getLocation();
                   }
 
                   return ListView(
                     children: [
                       if (locationProvider.permissionStatus == PermissionStatus.granted && locationProvider.lastKnownLocation != null)
-                        StreamBuilder<List<BookModel>>(
-                          stream: searchBookBloc.nearbyBooks,
-                          builder: (BuildContext context, AsyncSnapshot<List<BookModel>> nearbyBooksSnapshot) => Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: AspectRatio(
-                              aspectRatio: 4 / 3,
-                              child: GoogleMap(
-                                initialCameraPosition: CameraPosition(
-                                  target: locationProvider.lastKnownLocation!,
-                                  zoom: 11.0,
-                                ),
-                                myLocationEnabled: true,
-                                myLocationButtonEnabled: true,
-                                markers: nearbyBooksSnapshot.data
-                                        ?.map(
-                                          (BookModel book) => Marker(
-                                            markerId: MarkerId(book.id!),
-                                            position: LatLng(book.modelizedLocation.latitude, book.modelizedLocation.longitude),
-                                            icon: BitmapDescriptor.defaultMarkerWithHue(bookColors[book.sureIsbn]!.hue),
-                                            onTap: () async {
-                                              await Future.delayed(Duration(milliseconds: 256));
-                                              Navigator.of(context).pushNamed(BookScreen.route, arguments: book);
-                                            },
-                                          ),
-                                        )
-                                        .toSet() ??
-                                    <Marker>[].toSet(),
-                                onMapCreated: (GoogleMapController controller) {
-                                  if (Theme.of(context).brightness == Brightness.light)
-                                    controller.setMapStyle(MapStyles.lightMap);
-                                  else
-                                    controller.setMapStyle(MapStyles.darkMap);
-                                },
-                                gestureRecognizers: Set()..add(Factory<PanGestureRecognizer>(() => PanGestureRecognizer())),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: AspectRatio(
+                            aspectRatio: 4 / 3,
+                            child: GoogleMap(
+                              initialCameraPosition: CameraPosition(
+                                target: locationProvider.lastKnownLocation!,
+                                zoom: 11.0,
                               ),
+                              myLocationEnabled: true,
+                              myLocationButtonEnabled: true,
+                              markers: booksSnapshot.data
+                                      ?.map((BookModel book) => book.results)
+                                      .expand((List<BookModel> bookResults) => bookResults)
+                                      .map(
+                                        (BookModel book) => Marker(
+                                          markerId: MarkerId(book.id!),
+                                          position: LatLng(book.modelizedLocation.latitude, book.modelizedLocation.longitude),
+                                          icon: BitmapDescriptor.defaultMarkerWithHue(bookColors[book.sureIsbn]!.hue),
+                                          onTap: () async {
+                                            await Future.delayed(Duration(milliseconds: 256));
+                                            Navigator.of(context).pushNamed(BookScreen.route, arguments: book);
+                                          },
+                                        ),
+                                      )
+                                      .toSet() ??
+                                  <Marker>[].toSet(),
+                              onMapCreated: (GoogleMapController controller) {
+                                if (Theme.of(context).brightness == Brightness.light)
+                                  controller.setMapStyle(MapStyles.lightMap);
+                                else
+                                  controller.setMapStyle(MapStyles.darkMap);
+                              },
+                              gestureRecognizers: Set()..add(Factory<PanGestureRecognizer>(() => PanGestureRecognizer())),
                             ),
                           ),
                         ),
@@ -88,9 +84,10 @@ class SearchPage extends StatelessWidget {
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
                         itemCount: booksSnapshot.data!.length,
-                        itemBuilder: (BuildContext context, int index) => BookListElement(
+                        itemBuilder: (BuildContext context, int index) => BookListElement.wanted(
                           book: booksSnapshot.data!.elementAt(index),
                           color: bookColors[booksSnapshot.data!.elementAt(index).sureIsbn]!.toColor(),
+                          results: booksSnapshot.data!.elementAt(index).results,
                         ),
                       ),
                     ],

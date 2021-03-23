@@ -22,16 +22,18 @@ class BookScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: _buildBody(context),
-      persistentFooterButtons: [
-        ElevatedButton(
-          child: Text(S.current.getInTouchWithSeller),
-          onPressed: () async {
-            final ChatModel? chat = await ChatProvider.getChat(_book!.userUid, Provider.of<UserModel>(context, listen: false).uid!);
+      persistentFooterButtons: _book!.userUid != Provider.of<UserModel>(context).uid
+          ? [
+              ElevatedButton(
+                child: Text(S.current.getInTouchWithSeller),
+                onPressed: () async {
+                  final ChatModel? chat = await ChatProvider.getChat(_book!.userUid, Provider.of<UserModel>(context, listen: false).uid!);
 
-            if (chat != null) Navigator.of(context).pushNamed(ChatScreen.route, arguments: chat);
-          },
-        ),
-      ],
+                  if (chat != null) Navigator.of(context).pushNamed(ChatScreen.route, arguments: chat);
+                },
+              ),
+            ]
+          : null,
     );
   }
 

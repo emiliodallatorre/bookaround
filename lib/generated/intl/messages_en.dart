@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "getInTouchWithSeller" : MessageLookupByLibrary.simpleMessage("Get in touch with the seller"),
     "highlight" : MessageLookupByLibrary.simpleMessage("The book presents colored highlighting"),
     "isbn" : MessageLookupByLibrary.simpleMessage("ISBN"),
+    "km" : MessageLookupByLibrary.simpleMessage("kms"),
     "login" : MessageLookupByLibrary.simpleMessage("Login"),
     "logout" : MessageLookupByLibrary.simpleMessage("Logout"),
     "manualAdd" : MessageLookupByLibrary.simpleMessage("Manual add"),

@@ -51,5 +51,6 @@
   "getInTouchWithSeller": "Get in touch with the seller",
   "position": "Location",
   "writeAMessage": "Write a message...",
-  "noMessages": "No message in this chat, send one to start!"
+  "noMessages": "No message in this chat, send one to start!",
+  "km": "kms"
 }

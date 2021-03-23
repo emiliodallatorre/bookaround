@@ -58,6 +58,7 @@ dependencies:
   #     ref: update_deps
   geoflutterfire: ^3.0.0-nullsafety.1
   flutter_geocoder: ^0.2.2-nullsafety
+  geolocator: ^7.0.1
   google_maps_flutter: ^2.0.1
   location: ^4.1.1
 

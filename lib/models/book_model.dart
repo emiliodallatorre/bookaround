@@ -33,6 +33,9 @@ class BookModel extends ChangeNotifier {
   UserModel? user;
 
   @JsonKey(ignore: true)
+  List<BookModel> results = <BookModel>[];
+
+  @JsonKey(ignore: true)
   DocumentReference? reference;
 
   String get authorString => this.authors!.reduce((value, element) => "$value, $element");

@@ -1,3 +1,4 @@
+import 'package:bookaround/resources/helper/geocoding_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -41,5 +42,12 @@ class LocationProvider extends ChangeNotifier {
 
       return null;
     }
+  }
+
+  /// Restituisce la distanza in km da una certa posizione.
+  double getDistance(LatLng objective) {
+    assert(this.lastKnownLocation != null);
+
+    return GeocodingHelper.distanceBetween(this.lastKnownLocation!, objective);
   }
 }

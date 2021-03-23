@@ -27,11 +27,15 @@ class BookProvider {
     while (wanted.isNotEmpty) {
       rawBooks.addAll((await References.booksCollection.where("isbn", whereIn: wanted.take(10).toList()).get()).docs);
       rawBooks.addAll((await References.booksCollection.where("isbn13", whereIn: wanted.take(10).toList()).get()).docs);
-      wanted.take(10).forEach((String isbn) => wanted.remove(isbn));
+      List<String> tmp = <String>[]..addAll(wanted.take(10));
+      tmp.forEach((String isbn) => wanted.remove(isbn));
     }
 
     for (int index = 0; index < rawBooks.length; index++) {
       final BookModel book = BookModel.fromJson(rawBooks.elementAt(index).data()!);
+
+      if (book.type != BookType.SELLING) continue;
+
       book.reference = rawBooks.elementAt(index).reference;
       book.user = await UserProvider.getUserByUid(book.userUid);
 

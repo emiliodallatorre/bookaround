@@ -7,10 +7,10 @@ import 'package:bookaround/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class BooksPage extends StatelessWidget {
+class BookSellPage extends StatelessWidget {
   final BookType? type;
 
-  BooksPage({Key? key, this.type}) : super(key: key);
+  BookSellPage({Key? key, this.type}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class BooksPage extends StatelessWidget {
             if (booksSnapshot.data!.isNotEmpty)
               return ListView.builder(
                 itemCount: booksSnapshot.data!.length,
-                itemBuilder: (BuildContext context, int index) => BookListElement(book: booksSnapshot.data!.elementAt(index)),
+                itemBuilder: (BuildContext context, int index) => BookListElement.sell(book: booksSnapshot.data!.elementAt(index)),
               );
             else
               return CenteredText(label: S.current.noBooks);

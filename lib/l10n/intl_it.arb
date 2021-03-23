@@ -51,5 +51,6 @@
   "getInTouchWithSeller": "Contatta il venditore",
   "position": "Posizione",
   "writeAMessage": "Scrivi un messaggio...",
-  "noMessages": "Nessun messaggio in questa chat, scrivine uno per iniziare!"
+  "noMessages": "Nessun messaggio in questa chat, scrivine uno per iniziare!",
+  "km": "km"
 }

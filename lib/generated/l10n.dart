@@ -576,6 +576,16 @@ class S {
       args: [],
     );
   }
+
+  /// `kms`
+  String get km {
+    return Intl.message(
+      'kms',
+      name: 'km',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
