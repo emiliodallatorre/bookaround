@@ -47,7 +47,7 @@ class SearchResultListElement extends StatelessWidget {
             title: this.isbn!.title,
             coverUrl: this.isbn!.image,
             id: randomAlphaNumeric(20),
-            userUid: Provider.of<UserModel>(context, listen: false).uid,
+            userUid: Provider.of<UserModel>(context, listen: false).uid!,
             type: BookType.LOOKING,
           );
 

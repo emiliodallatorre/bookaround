@@ -89,6 +89,7 @@ flutter:
 flutter_intl:
   enabled: true
 
+
 flutter_icons:
   android: true
   ios: true

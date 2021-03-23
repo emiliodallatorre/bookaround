@@ -26,7 +26,7 @@ class BookScreen extends StatelessWidget {
         ElevatedButton(
           child: Text(S.current.getInTouchWithSeller),
           onPressed: () async {
-            final ChatModel? chat = await ChatProvider.getChat(_book!.userUid!, Provider.of<UserModel>(context, listen: false).uid!);
+            final ChatModel? chat = await ChatProvider.getChat(_book!.userUid, Provider.of<UserModel>(context, listen: false).uid!);
 
             if (chat != null) Navigator.of(context).pushNamed(ChatScreen.route, arguments: chat);
           },

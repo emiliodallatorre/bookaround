@@ -16,7 +16,7 @@ BookModel _$BookModelFromJson(Map<String, dynamic> json) {
         (json['authors'] as List<dynamic>?)?.map((e) => e as String).toList(),
     coverUrl: json['coverUrl'] as String?,
     type: _$enumDecodeNullable(_$BookTypeEnumMap, json['type']),
-    userUid: json['userUid'] as String?,
+    userUid: json['userUid'] as String,
     addedDateTime: json['addedDateTime'] == null
         ? null
         : DateTime.parse(json['addedDateTime'] as String),

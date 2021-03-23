@@ -16,7 +16,7 @@ class BookModel extends ChangeNotifier {
   final List<String>? authors;
   final String? coverUrl;
   final BookType? type;
-  final String? userUid;
+  final String userUid;
   final DateTime? addedDateTime;
 
   bool? highlighting, pencil, pen;
@@ -47,7 +47,7 @@ class BookModel extends ChangeNotifier {
     this.authors,
     this.coverUrl,
     this.type,
-    this.userUid,
+    required this.userUid,
     this.addedDateTime,
     this.reference,
     this.highlighting,

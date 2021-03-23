@@ -25,7 +25,7 @@ class Bookaround extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (BuildContext context) => UserModel()),
+        ChangeNotifierProvider(create: (BuildContext context) => UserModel(uid: "")),
         ChangeNotifierProvider(create: (BuildContext context) => SettingsModel()),
         ChangeNotifierProvider(create: (BuildContext context) => LocationProvider()),
       ],
