@@ -1,11 +1,9 @@
 import 'package:bookaround/interface/screen/home_screen.dart';
 import 'package:bookaround/interface/screen/login_screen.dart';
-import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/helper/init_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class SplashScreen extends StatelessWidget {
   static const String route = "/splashScreen";
@@ -15,12 +13,12 @@ class SplashScreen extends StatelessWidget {
     DateTime firstFrame = DateTime.now();
 
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
-      await InitHelper(context).initialize().whenComplete(() async {
+      await InitHelper(context).initialize().then((bool isLogged) async {
         // Fa durare la splash screen almeno 4 secondi.
         Duration elapsedTime = DateTime.now().difference(firstFrame);
         if (elapsedTime < Duration(seconds: 4)) await Future.delayed(Duration(seconds: 4) - elapsedTime);
 
-        if (Provider.of<UserModel>(context, listen: false).isLogged)
+        if (isLogged)
           Navigator.of(context).pushReplacementNamed(HomeScreen.route);
         else
           Navigator.of(context).pushReplacementNamed(LoginScreen.route);

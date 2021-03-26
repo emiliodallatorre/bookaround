@@ -15,7 +15,7 @@ class InitHelper {
 
   InitHelper(this.context);
 
-  Future<void> initialize() async {
+  Future<bool> initialize() async {
     await initializeFirebase();
 
     await initializeCrashlytics();
@@ -24,6 +24,8 @@ class InitHelper {
     if (isLogged) await NotificationsHelper.initializeNotifications(Provider.of<UserModel>(context, listen: false));
 
     await Provider.of<SettingsModel>(context, listen: false).updateFromMemory();
+
+    return isLogged;
   }
 
   Future<void> initializeFirebase() async => await Firebase.initializeApp();
