@@ -48,9 +48,13 @@ class ChatScreen extends StatelessWidget {
                   return CenteredText(label: S.current.noMessages);
                 else
                   return ListView.separated(
+                    padding: EdgeInsets.zero,
                     reverse: true,
                     itemCount: messagesSnapshot.data!.length,
-                    itemBuilder: (BuildContext context, int index) => Message(message: messagesSnapshot.data!.elementAt(index)),
+                    itemBuilder: (BuildContext context, int index) => Padding(
+                      padding: EdgeInsets.only(top: index == messagesSnapshot.data!.length - 1 ? 8.0 : 0.0),
+                      child: Message(message: messagesSnapshot.data!.elementAt(index)),
+                    ),
                     separatorBuilder: (BuildContext context, int index) => SizedBox(height: 8.0),
                   );
               }
