@@ -36,4 +36,7 @@ class BookHelper {
     debugPrint("Aggiunto alle ricerche ${book.sureIsbn}.");
     return book;
   }
+
+  /// Elimina un libro in vendita, se l'utente ha i permessi per farlo.
+  static Future<void> removeBookFromSell(String id) async => await References.booksCollection.doc(id).delete();
 }

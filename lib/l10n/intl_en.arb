@@ -58,5 +58,9 @@
   "removeBookBecauseOtherSell": "I sold this book out of Bookaround",
   "removeBookBecauseAlter": "Other",
   "editInsertion": "Edit insertion",
-  "bookState": "Book status"
+  "bookState": "Book status",
+  "noIsbnScanned": "No ISBN found",
+  "insertIsbn": "Insert ISBN",
+  "ok": "Ok",
+  "isbnLengthError": "ISBNs are 10 or 13 characters long"
 }

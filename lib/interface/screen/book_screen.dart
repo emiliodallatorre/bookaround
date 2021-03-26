@@ -1,3 +1,4 @@
+import 'package:bookaround/bloc/book_bloc.dart';
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/screen/book_editor_screen.dart';
 import 'package:bookaround/interface/screen/chat_screen.dart';
@@ -6,6 +7,7 @@ import 'package:bookaround/map_styles.dart';
 import 'package:bookaround/models/book_model.dart';
 import 'package:bookaround/models/messaging/chat_model.dart';
 import 'package:bookaround/models/user_model.dart';
+import 'package:bookaround/resources/helper/book_helper.dart';
 import 'package:bookaround/resources/provider/chat_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -23,27 +25,7 @@ class BookScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: _buildBody(context),
-      persistentFooterButtons: _book!.userUid != Provider.of<UserModel>(context).uid
-          ? [
-              ElevatedButton(
-                child: Text(S.current.getInTouchWithSeller),
-                onPressed: () async {
-                  final ChatModel? chat = await ChatProvider.getChat(_book!.userUid, Provider.of<UserModel>(context, listen: false).uid!);
-
-                  if (chat != null) Navigator.of(context).pushNamed(ChatScreen.route, arguments: chat);
-                },
-              ),
-            ]
-          : [
-              TextButton(
-                child: Text(S.current.editInsertion),
-                onPressed: () => Navigator.of(context).pushReplacementNamed(BookEditorScreen.route, arguments: this._book),
-              ),
-              ElevatedButton(
-                child: Text(S.current.removeBookFromSell),
-                onPressed: () {},
-              ),
-            ],
+      persistentFooterButtons: _buildPersistentFooterButtons(context),
     );
   }
 
@@ -83,7 +65,7 @@ class BookScreen extends StatelessWidget {
               if (_book!.note!.isNotEmpty) Text(S.current.note, style: Theme.of(context).textTheme.caption),
               if (_book!.note!.isNotEmpty) Text(_book!.note!),
               if (_book!.userUid != Provider.of<UserModel>(context).uid) _buildSellerInfo(context),
-               // _buildSellerInfo(context),
+              // _buildSellerInfo(context),
               SizedBox(height: 16.0),
             ],
           ),
@@ -129,5 +111,71 @@ class BookScreen extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  List<Widget> _buildPersistentFooterButtons(BuildContext context) {
+    if (_book!.userUid != Provider.of<UserModel>(context).uid)
+      return <Widget>[
+        ElevatedButton(
+          child: Text(S.current.getInTouchWithSeller),
+          onPressed: () async {
+            final ChatModel? chat = await ChatProvider.getChat(_book!.userUid, Provider.of<UserModel>(context, listen: false).uid!);
+
+            if (chat != null) Navigator.of(context).pushNamed(ChatScreen.route, arguments: chat);
+          },
+        ),
+      ];
+    else
+      return <Widget>[
+        TextButton(
+          child: Text(S.current.editInsertion),
+          onPressed: () => Navigator.of(context).pushReplacementNamed(BookEditorScreen.route, arguments: this._book),
+        ),
+        ElevatedButton(
+          child: Text(S.current.removeBookFromSell),
+          onPressed: () async {
+            bool delete = await showModalBottomSheet<bool>(
+                  context: context,
+                  builder: (BuildContext context) => ListView(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+                        child: Text(S.current.removeBookFromSell, style: Theme.of(context).textTheme.headline5),
+                      ),
+                      ListTile(
+                        title: Text(S.current.removeBookBecauseSell),
+                        onTap: () => Navigator.of(context).pop(true),
+                      ),
+                      ListTile(
+                        title: Text(S.current.removeBookBecauseOtherSell),
+                        onTap: () => Navigator.of(context).pop(true),
+                      ),
+                      ListTile(
+                        title: Text(S.current.removeBookBecauseAlter),
+                        onTap: () => Navigator.of(context).pop(true),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: ElevatedButton(
+                          child: Text(S.current.undo),
+                          onPressed: () => Navigator.of(context).pop(false),
+                        ),
+                      ),
+                    ],
+                  ),
+                ) ??
+                false;
+
+            if (delete) {
+              await BookHelper.removeBookFromSell(this._book!.id!);
+              await sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!);
+
+              Navigator.of(context).pop();
+            }
+          },
+        ),
+      ];
   }
 }

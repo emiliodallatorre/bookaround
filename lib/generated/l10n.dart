@@ -646,6 +646,46 @@ class S {
       args: [],
     );
   }
+
+  /// `No ISBN found`
+  String get noIsbnScanned {
+    return Intl.message(
+      'No ISBN found',
+      name: 'noIsbnScanned',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Insert ISBN`
+  String get insertIsbn {
+    return Intl.message(
+      'Insert ISBN',
+      name: 'insertIsbn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ok`
+  String get ok {
+    return Intl.message(
+      'Ok',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ISBNs are 10 or 13 characters long`
+  String get isbnLengthError {
+    return Intl.message(
+      'ISBNs are 10 or 13 characters long',
+      name: 'isbnLengthError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

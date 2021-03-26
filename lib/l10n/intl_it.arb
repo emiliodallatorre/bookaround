@@ -58,5 +58,9 @@
   "removeBookBecauseOtherSell": "Ho venduto questo libro esternamente a Bookaround",
   "removeBookBecauseAlter": "Altro",
   "editInsertion": "Modifica inserzione",
-  "bookState": "Stato del libro"
+  "bookState": "Stato del libro",
+  "noIsbnScanned": "Nessun ISBN trovato",
+  "insertIsbn": "Inserisci ISBN",
+  "ok": "Ok",
+  "isbnLengthError": "Gli ISBN sono di 10 o 13 caratteri"
 }

@@ -1,21 +1,19 @@
 import 'package:bookaround/generated/l10n.dart';
+import 'package:bookaround/interface/pages/book_search_page.dart';
 import 'package:bookaround/interface/pages/book_sell_page.dart';
 import 'package:bookaround/interface/pages/chat_page.dart';
-import 'package:bookaround/interface/pages/book_search_page.dart';
 import 'package:bookaround/interface/screen/book_editor_screen.dart';
 import 'package:bookaround/interface/screen/isbn_editor_screen.dart';
 import 'package:bookaround/interface/screen/profile_editor_screen.dart';
 import 'package:bookaround/interface/screen/search_screen.dart';
 import 'package:bookaround/interface/widget/user_avatar.dart';
 import 'package:bookaround/models/book_model.dart';
-import 'package:bookaround/models/settings_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/errors/book_not_found_error.dart';
 import 'package:bookaround/resources/helper/barcode_helper.dart';
 import 'package:bookaround/resources/helper/book_helper.dart';
 import 'package:bookaround/resources/helper/init_helper.dart';
-import 'package:bookaround/resources/provider/location_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -97,35 +95,56 @@ class _HomeScreenState extends State<HomeScreen> {
           setState(() => working = true);
 
           String? isbn;
-          try {
-            isbn = await BarcodeHelper.readBarcode(context);
-            // isbn = "97888089199222";
+          isbn = await BarcodeHelper.readBarcode(context);
+          // isbn = "97888089199222";
 
-            // L'utente ha scansionato un codice.
-            if (isbn != null) {
-              // Il libro esiste nel database.
-              BookModel book = await BookHelper.createBookSell(isbn, Provider.of<UserModel>(context, listen: false).uid!);
-              Navigator.of(context).pushNamed(BookEditorScreen.route, arguments: book);
-
-              setState(() => working = false);
-            } else
-              setState(() => working = false);
-          } on BookNotFoundError {
-            // Il libro non esiste nel database.
+          if (isbn != null)
+            await startBookSellCreation(isbn);
+          else {
             setState(() => working = false);
-
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(S.current.bookNotFoundError),
+              content: Text(S.current.noIsbnScanned),
               action: SnackBarAction(
-                label: S.current.add,
-                onPressed: () => Navigator.of(context).pushNamed(IsbnEditorScreen.route, arguments: isbn),
+                label: S.current.manualAdd,
+                onPressed: () async {
+                  String? isbn = await showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        final TextEditingController isbnTextEditingController = TextEditingController();
+                        final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+                        return AlertDialog(
+                          title: Text(S.current.insertIsbn),
+                          content: Form(
+                            key: formKey,
+                            child: TextFormField(keyboardType: TextInputType.number,
+                              validator: (String? value) {
+                                if (value != null) if (value.length == 10 || value.length == 13) return null;
+
+                                return S.current.isbnLengthError;
+                              },
+                              decoration: InputDecoration(hintText: "978..."),
+                              controller: isbnTextEditingController,
+                            ),
+                          ),
+                          actions: [
+                            ElevatedButton(
+                              child: Text(S.current.ok),
+                              onPressed: () {
+                                if (formKey.currentState!.validate()) {
+                                  Navigator.of(context).pop(isbnTextEditingController.text);
+                                }
+                              },
+                            ),
+                          ],
+                        )
+                      }
+                  );
+
+                  if (isbn != null) await startBookSellCreation(isbn);
+                },
               ),
             ));
-          } catch (e) {
-            // È comparso un errore sconosciuto.
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(S.current.bookError)));
-
-            setState(() => working = false);
           }
         } else if (selectedIndex == 2) {
           // TODO: Aggiungere libri alla ricerca.
@@ -140,11 +159,12 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Consumer<UserModel>(
-            builder: (BuildContext context, UserModel currentUser, Widget? child) => UserAccountsDrawerHeader(
-              currentAccountPicture: UserAvatar(user: currentUser),
-              accountName: Text(currentUser.displayName),
-              accountEmail: Text(currentUser.phoneNumber!),
-            ),
+            builder: (BuildContext context, UserModel currentUser, Widget? child) =>
+                UserAccountsDrawerHeader(
+                  currentAccountPicture: UserAvatar(user: currentUser),
+                  accountName: Text(currentUser.displayName),
+                  accountEmail: Text(currentUser.phoneNumber!),
+                ),
           ),
           ListTile(
             title: Text(S.current.editProfile),
@@ -152,7 +172,10 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Spacer(),
           Padding(
-            padding: EdgeInsets.only(left: 16.0, bottom: MediaQuery.of(context).viewPadding.bottom),
+            padding: EdgeInsets.only(left: 16.0, bottom: MediaQuery
+                .of(context)
+                .viewPadding
+                .bottom),
             child: Column(
               children: [
                 TextButton(
@@ -165,5 +188,31 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> startBookSellCreation(String isbn) async {
+    setState(() => working = true);
+    try {
+      // Il libro esiste nel database.
+      BookModel book = await BookHelper.createBookSell(isbn, Provider
+          .of<UserModel>(context, listen: false)
+          .uid!);
+      Navigator.of(context).pushNamed(BookEditorScreen.route, arguments: book);
+    } on BookNotFoundError {
+      // Il libro non esiste nel database.
+      setState(() => working = false);
+
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(S.current.bookNotFoundError),
+        action: SnackBarAction(
+          label: S.current.add,
+          onPressed: () => Navigator.of(context).pushNamed(IsbnEditorScreen.route, arguments: isbn),
+        ),
+      ));
+    } catch (e) {
+      // È comparso un errore sconosciuto.
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(S.current.bookError)));
+    }
+    setState(() => working = false);
   }
 }

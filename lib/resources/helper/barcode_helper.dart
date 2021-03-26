@@ -10,6 +10,7 @@ class BarcodeHelper {
       true,
       ScanMode.BARCODE,
     );
+    // debugPrint(newIsbn);
     if (newIsbn != "-1") {
       debugPrint("Scansionato $newIsbn.");
       return newIsbn;
