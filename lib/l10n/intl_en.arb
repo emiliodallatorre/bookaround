@@ -62,5 +62,7 @@
   "noIsbnScanned": "No ISBN found",
   "insertIsbn": "Insert ISBN",
   "ok": "Ok",
-  "isbnLengthError": "ISBNs are 10 or 13 characters long"
+  "isbnLengthError": "ISBNs are 10 or 13 characters long",
+  "editImage": "Edit image",
+  "deleteImage": "Delete image"
 }

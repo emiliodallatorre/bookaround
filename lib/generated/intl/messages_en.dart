@@ -33,6 +33,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "chooseSource" : MessageLookupByLibrary.simpleMessage("Choose image source"),
     "chooseSourceExtended" : MessageLookupByLibrary.simpleMessage("Please, take or upload a photo of the cover of the book you are inserting. This will be publicly visible."),
     "city" : MessageLookupByLibrary.simpleMessage("City"),
+    "deleteImage" : MessageLookupByLibrary.simpleMessage("Delete image"),
+    "editImage" : MessageLookupByLibrary.simpleMessage("Edit image"),
     "editInsertion" : MessageLookupByLibrary.simpleMessage("Edit insertion"),
     "editProfile" : MessageLookupByLibrary.simpleMessage("Edit profile"),
     "enable" : MessageLookupByLibrary.simpleMessage("Enable"),

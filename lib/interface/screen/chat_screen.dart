@@ -2,6 +2,7 @@ import 'package:bookaround/bloc/message_bloc.dart';
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/widget/centered_text.dart';
 import 'package:bookaround/interface/widget/message.dart';
+import 'package:bookaround/interface/widget/user_avatar.dart';
 import 'package:bookaround/models/messaging/chat_model.dart';
 import 'package:bookaround/models/messaging/message_model.dart';
 import 'package:bookaround/models/user_model.dart';
@@ -30,7 +31,16 @@ class ChatScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: false,
         title: Text(_chat!.recipient.displayName),
+        actions: _chat!.recipient.profileImageUrl != null
+            ? [
+                UserAvatar(user: _chat!.recipient),
+                SizedBox(
+                  width: 8.0,
+                ),
+              ]
+            : null,
       ),
       body: _buildBody(context),
     );

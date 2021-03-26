@@ -11,6 +11,7 @@ class References {
   static CollectionReference isbnsCollection = FirebaseFirestore.instance.collection("isbns");
 
   static Reference bookCovers = FirebaseStorage.instance.ref("bookCovers/");
+  static Reference userAvatars = FirebaseStorage.instance.ref("userAvatars/");
 
   static const String googleApiKey = "AIzaSyDTMDGyTZOPkaesYHW4vYfVMhUHafc8nl0";
 

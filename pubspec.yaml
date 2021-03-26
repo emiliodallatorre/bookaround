@@ -77,9 +77,15 @@ dev_dependencies:
   # flutter pub run flutter_launcher_icons:main
   flutter_launcher_icons: ^0.9.0
 
+  # flutter pub run r_flutter:generate
+  r_flutter: ^0.7.1
+
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/icons/
 
   fonts:
     - family: Poppins

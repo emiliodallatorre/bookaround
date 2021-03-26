@@ -779,6 +779,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  r_flutter:
+    dependency: "direct dev"
+    description:
+      name: r_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.7.1"
   random_string:
     dependency: "direct main"
     description:
@@ -786,6 +793,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.0-nullsafety"
+  recase:
+    dependency: transitive
+    description:
+      name: recase
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.0-nullsafety.0"
   rxdart:
     dependency: "direct main"
     description:

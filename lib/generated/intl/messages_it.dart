@@ -33,6 +33,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "chooseSource" : MessageLookupByLibrary.simpleMessage("Scegli sorgente immagine"),
     "chooseSourceExtended" : MessageLookupByLibrary.simpleMessage("Per favore, acquisisci o seleziona una sorgente per l\'immagine di copertina del libro. Quest\'immagine sarà pubblicamente visibile."),
     "city" : MessageLookupByLibrary.simpleMessage("Città"),
+    "deleteImage" : MessageLookupByLibrary.simpleMessage("Elimina immagine"),
+    "editImage" : MessageLookupByLibrary.simpleMessage("Modifica immagine"),
     "editInsertion" : MessageLookupByLibrary.simpleMessage("Modifica inserzione"),
     "editProfile" : MessageLookupByLibrary.simpleMessage("Modifica profilo"),
     "enable" : MessageLookupByLibrary.simpleMessage("Abilita"),

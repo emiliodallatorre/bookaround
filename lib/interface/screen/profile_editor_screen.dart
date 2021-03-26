@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/screen/home_screen.dart';
 import 'package:bookaround/interface/widget/user_avatar.dart';
 import 'package:bookaround/models/user_model.dart';
+import 'package:bookaround/resources/helper/image_helper.dart';
+import 'package:bookaround/resources/helper/profile_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +32,35 @@ class ProfileEditorScreen extends StatelessWidget {
               child: ListView(
                 padding: EdgeInsets.all(16.0),
                 children: [
-                  Row(children: [Spacer(), Expanded(child: UserAvatar(user: currentUser)), Spacer()]),
+                  Row(children: [Spacer(), Expanded(flex: 3, child: UserAvatar(user: currentUser, big: true)), Spacer()]),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                        child: Text(S.current.editImage),
+                        onPressed: () async {
+                          File? newProfilePicture = await ImageHelper.pickImage();
+
+                          if (newProfilePicture != null) {
+                            currentUser.profileImageUrl = await ProfileHelper.uploadProfilePicture(currentUser.uid!, newProfilePicture);
+                            await currentUser.updateOnServer();
+                          }
+                        },
+                      ),
+                      Visibility(
+                        visible: currentUser.profileImageUrl != null,
+                        child: TextButton(
+                          child: Text(S.current.deleteImage),
+                          onPressed: () async {
+                            await ProfileHelper.deleteProfilePicture(currentUser.uid!);
+                            currentUser.profileImageUrl = null;
+                            await currentUser.updateOnServer();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                   Form(
                     key: _formKey,
                     child: Column(
