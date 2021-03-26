@@ -3,7 +3,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 class References {
   static const String appName = "Bookaround";
-  static const String fox = "🦊";
 
   static CollectionReference usersCollection = FirebaseFirestore.instance.collection("users");
   static CollectionReference chatsCollection = FirebaseFirestore.instance.collection("chats");
