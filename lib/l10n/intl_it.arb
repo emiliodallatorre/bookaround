@@ -52,5 +52,11 @@
   "position": "Posizione",
   "writeAMessage": "Scrivi un messaggio...",
   "noMessages": "Nessun messaggio in questa chat, scrivine uno per iniziare!",
-  "km": "km"
+  "km": "km",
+  "removeBookFromSell": "Rimuovi dalla vendita",
+  "removeBookBecauseSell": "Ho venduto questo libro tramite Bookaround",
+  "removeBookBecauseOtherSell": "Ho venduto questo libro esternamente a Bookaround",
+  "removeBookBecauseAlter": "Altro",
+  "editInsertion": "Modifica inserzione",
+  "bookState": "Stato del libro"
 }

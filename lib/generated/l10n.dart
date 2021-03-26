@@ -586,6 +586,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Remove this insertion`
+  String get removeBookFromSell {
+    return Intl.message(
+      'Remove this insertion',
+      name: 'removeBookFromSell',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I sold this book on Bookaround`
+  String get removeBookBecauseSell {
+    return Intl.message(
+      'I sold this book on Bookaround',
+      name: 'removeBookBecauseSell',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I sold this book out of Bookaround`
+  String get removeBookBecauseOtherSell {
+    return Intl.message(
+      'I sold this book out of Bookaround',
+      name: 'removeBookBecauseOtherSell',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other`
+  String get removeBookBecauseAlter {
+    return Intl.message(
+      'Other',
+      name: 'removeBookBecauseAlter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit insertion`
+  String get editInsertion {
+    return Intl.message(
+      'Edit insertion',
+      name: 'editInsertion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Book status`
+  String get bookState {
+    return Intl.message(
+      'Book status',
+      name: 'bookState',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

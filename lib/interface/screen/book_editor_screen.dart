@@ -29,7 +29,10 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (book == null) book = ModalRoute.of(context)!.settings.arguments as BookModel;
+    if (book == null) {
+      book = ModalRoute.of(context)!.settings.arguments as BookModel;
+      if (book!.location != null) locationController.text = book!.location!.description!;
+    }
 
     return WillPopScope(
       onWillPop: () async {
@@ -112,6 +115,7 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
                 TextFormField(
                   decoration: InputDecoration(labelText: S.current.note, alignLabelWithHint: true),
                   textInputAction: TextInputAction.done,
+                  initialValue: book!.note,
                   onSaved: (String? value) => setState(() => book!.note = value!),
                   minLines: 4,
                   maxLines: 4,

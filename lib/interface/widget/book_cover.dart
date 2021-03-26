@@ -45,8 +45,16 @@ class BookCover extends StatelessWidget {
           ),
         ),
         Divider(),
-        Text(S.current.isbn + ": " + this.book!.sureIsbn),
-        if (this.book!.location != null) Text(S.current.position + ": " + this.book!.location!.description!),
+        Padding(
+          padding: this.horizontalPadding ? EdgeInsets.symmetric(horizontal: 16.0) : EdgeInsets.zero,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(S.current.isbn + ": " + this.book!.sureIsbn),
+              if (this.book!.location != null) Text(S.current.position + ": " + this.book!.location!.description!),
+            ],
+          ),
+        ),
         this.horizontalPadding ? Divider(indent: 16.0, endIndent: 16.0) : Divider(),
       ],
     );

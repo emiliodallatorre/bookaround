@@ -52,5 +52,11 @@
   "position": "Location",
   "writeAMessage": "Write a message...",
   "noMessages": "No message in this chat, send one to start!",
-  "km": "kms"
+  "km": "kms",
+  "removeBookFromSell": "Remove this insertion",
+  "removeBookBecauseSell": "I sold this book on Bookaround",
+  "removeBookBecauseOtherSell": "I sold this book out of Bookaround",
+  "removeBookBecauseAlter": "Other",
+  "editInsertion": "Edit insertion",
+  "bookState": "Book status"
 }
