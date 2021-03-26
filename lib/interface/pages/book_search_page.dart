@@ -19,10 +19,10 @@ import 'package:provider/provider.dart';
 class BookSearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!);
+    searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<LocationProvider>(context, listen: false).lastKnownLocation);
 
     return RefreshIndicator(
-      onRefresh: () => searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!),
+      onRefresh: () => searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<LocationProvider>(context, listen: false).lastKnownLocation),
       child: StreamBuilder<List<BookModel>>(
         stream: searchBookBloc.books,
         builder: (BuildContext context, AsyncSnapshot<List<BookModel>> booksSnapshot) {
@@ -37,7 +37,10 @@ class BookSearchPage extends StatelessWidget {
                   if (locationProvider.permissionStatus == null)
                     locationProvider.getPermissionStatus();
                   else if (locationProvider.permissionStatus == PermissionStatus.granted) {
-                    if (locationProvider.lastKnownLocation == null) locationProvider.getLocation();
+                    if (locationProvider.lastKnownLocation == null) {
+                      locationProvider.getLocation();
+                      searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<LocationProvider>(context, listen: false).lastKnownLocation);
+                    }
                   }
 
                   return ListView(

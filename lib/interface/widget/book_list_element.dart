@@ -119,7 +119,7 @@ class BookListElement extends StatelessWidget {
     return ListTile(
       title: Text(this.book.location!.description!),
       subtitle: Text(this.book.user!.displayName),
-      trailing: Text((Provider.of<LocationProvider>(context).getDistance(this.book.modelizedLocation).toStringAsFixed(1) + S.current.km)),
+      trailing: Text(this.book.distanceInKms!.toStringAsFixed(1) + S.current.km),
       onTap: () => Navigator.of(context).pushNamed(BookScreen.route, arguments: this.book),
     );
   }

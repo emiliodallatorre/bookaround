@@ -17,13 +17,13 @@ class BooksBloc {
 
   // Stream<List<BookModel>> get wantedBooks => _wantedBooksFetcher.stream;
 
-  Future<List<BookModel>> getUserBooks(String userUid) async {
+  Future<List<BookModel>> getUserBooks(String userUid, [LatLng? currentPosition]) async {
     final List<BookModel> books = await Repository.getUserBooks(userUid);
     books.removeWhere((element) => element.type != bookType);
 
     _booksFetcher.sink.add(books);
     if (bookType == BookType.LOOKING) {
-      final List<BookModel> wantedBooks = await getWantedBooks(userUid);
+      final List<BookModel> wantedBooks = await getWantedBooks(userUid, currentPosition);
 
       for (int index = 0; index < books.length; index++)
         books.elementAt(index).results.addAll(wantedBooks.where((element) => element.isbn == books.elementAt(index).isbn || element.isbn13 == books.elementAt(index).isbn13));
@@ -34,7 +34,7 @@ class BooksBloc {
     return books;
   }
 
-  Future<List<BookModel>> getWantedBooks(String userUid) async {
+  Future<List<BookModel>> getWantedBooks(String userUid, LatLng? currentPosition) async {
     assert(this.bookType == BookType.LOOKING);
 
     late List<String> wanted;
@@ -45,7 +45,7 @@ class BooksBloc {
       wanted = _booksFetcher.value!.map((e) => e.sureIsbn).toList();
     }
 
-    final List<BookModel> wantedBooks = await Repository.getWantedBooks(wanted);
+    final List<BookModel> wantedBooks = await Repository.getWantedBooks(wanted, currentPosition);
     // TODO: Riattivare a tempo debito.
     // wantedBooks.removeWhere((BookModel book) => book.userUid == userUid);
 

@@ -36,6 +36,9 @@ class BookModel extends ChangeNotifier {
   List<BookModel> results = <BookModel>[];
 
   @JsonKey(ignore: true)
+  double? distanceInKms;
+
+  @JsonKey(ignore: true)
   DocumentReference? reference;
 
   String get authorString => this.authors!.reduce((value, element) => "$value, $element");
@@ -57,6 +60,7 @@ class BookModel extends ChangeNotifier {
     this.pencil,
     this.pen,
     this.note,
+    this.distanceInKms,
     this.location,
   });
 

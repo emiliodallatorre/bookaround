@@ -1,5 +1,6 @@
 import 'package:bookaround/models/book_model.dart';
 import 'package:bookaround/references.dart';
+import 'package:bookaround/resources/helper/geocoding_helper.dart';
 import 'package:bookaround/resources/provider/user_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geoflutterfire/geoflutterfire.dart';
@@ -20,7 +21,7 @@ class BookProvider {
     return books;
   }
 
-  static Future<List<BookModel>> getWantedBooks(List<String> wanted) async {
+  static Future<List<BookModel>> getWantedBooks(List<String> wanted, LatLng? currentPosition) async {
     final List<BookModel> wantedBooks = <BookModel>[];
     final List<DocumentSnapshot> rawBooks = <DocumentSnapshot>[];
 
@@ -38,9 +39,12 @@ class BookProvider {
 
       book.reference = rawBooks.elementAt(index).reference;
       book.user = await UserProvider.getUserByUid(book.userUid);
+      if (currentPosition != null) book.distanceInKms = GeocodingHelper.distanceBetween(currentPosition, book.modelizedLocation);
 
       wantedBooks.add(book);
     }
+
+    if (currentPosition != null) wantedBooks.sort((a, b) => a.distanceInKms!.compareTo(b.distanceInKms!));
 
     return wantedBooks;
   }
