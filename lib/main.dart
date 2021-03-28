@@ -35,11 +35,11 @@ class Bookaround extends StatelessWidget {
         darkTheme: ThemeData(
           fontFamily: "Poppins",
           brightness: Brightness.dark,
-          primarySwatch: Colors.orange,
-          accentColor: Colors.orange[500],
-          toggleableActiveColor: Colors.orange[500],
+          primarySwatch: Colors.teal,
+          accentColor: Colors.teal[500],
+          toggleableActiveColor: Colors.teal[500],
           textSelectionTheme: TextSelectionThemeData(
-            selectionColor: Colors.orange[200],
+            selectionColor: Colors.teal[200],
           ),
         ),
         themeMode: ThemeMode.system,
