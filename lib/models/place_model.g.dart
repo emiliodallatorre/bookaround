@@ -15,7 +15,8 @@ PlaceModel _$PlaceModelFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$PlaceModelToJson(PlaceModel instance) => <String, dynamic>{
+Map<String, dynamic> _$PlaceModelToJson(PlaceModel instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'description': instance.description,
       'placeId': instance.placeId,
