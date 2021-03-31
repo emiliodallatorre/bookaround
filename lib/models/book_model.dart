@@ -62,6 +62,7 @@ class BookModel extends ChangeNotifier {
     this.note,
     this.distanceInKms,
     this.location,
+    this.user,
   });
 
   @override
