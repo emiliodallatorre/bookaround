@@ -53,6 +53,7 @@ class UserModel extends ChangeNotifier {
     this.name = updatedUser.name;
     this.surname = updatedUser.surname;
     this.city = updatedUser.city;
+    this.profileImageUrl = updatedUser.profileImageUrl;
 
     this.reference = updatedUserReference;
 
