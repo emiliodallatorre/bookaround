@@ -43,7 +43,7 @@ dependencies:
 
   # Utilità
   form_field_validator: ^1.1.0
-  cached_network_image: ^3.0.0-nullsafety
+  cached_network_image: ^3.0.0
   flutter_barcode_scanner: ^2.0.0-nullsafety.0
   random_string: ^2.2.0-nullsafety
   shared_preferences: ^2.0.5
@@ -59,11 +59,11 @@ dependencies:
   geoflutterfire: ^3.0.0-nullsafety.1
   flutter_geocoder: ^0.2.2-nullsafety
   geolocator: ^7.0.1
-  google_maps_flutter: ^2.0.1
+  google_maps_flutter: ^2.0.2
   location: ^4.1.1
 
   # File
-  image_picker: ^0.7.3
+  image_picker: ^0.7.4
 
 
 dev_dependencies:
