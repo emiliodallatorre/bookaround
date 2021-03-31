@@ -2,7 +2,7 @@
 
 Un'app per l'interscambio di libri - scolastici e non.
 
-[![Testa lo stato corrente](https://github.com/emiliodallatorre/bookaround/actions/workflows/test.yml/badge.svg)](https://github.com/emiliodallatorre/bookaround/actions/workflows/test.yml)
+[![Testa lo stato corrente](https://github.com/emiliodallatorre/bookaround/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/emiliodallatorre/bookaround/actions/workflows/test.yml)
 
 ## Funzionamento
 
