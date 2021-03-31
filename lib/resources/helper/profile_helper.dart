@@ -9,7 +9,7 @@ class ProfileHelper {
     await userProfilePictureReference.putFile(profilePicture);
     return await userProfilePictureReference.getDownloadURL();
   }
-  
+
   static Future<void> deleteProfilePicture(String userUid) async {
     Reference userProfilePictureReference = References.userAvatars.child(userUid);
     await userProfilePictureReference.delete();

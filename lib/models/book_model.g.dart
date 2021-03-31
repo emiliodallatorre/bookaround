@@ -12,21 +12,16 @@ BookModel _$BookModelFromJson(Map<String, dynamic> json) {
     isbn: json['isbn'] as String?,
     isbn13: json['isbn13'] as String?,
     title: json['title'] as String?,
-    authors:
-        (json['authors'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    authors: (json['authors'] as List<dynamic>?)?.map((e) => e as String).toList(),
     coverUrl: json['coverUrl'] as String?,
     type: _$enumDecodeNullable(_$BookTypeEnumMap, json['type']),
     userUid: json['userUid'] as String,
-    addedDateTime: json['addedDateTime'] == null
-        ? null
-        : DateTime.parse(json['addedDateTime'] as String),
+    addedDateTime: json['addedDateTime'] == null ? null : DateTime.parse(json['addedDateTime'] as String),
     highlighting: json['highlighting'] as bool?,
     pencil: json['pencil'] as bool?,
     pen: json['pen'] as bool?,
     note: json['note'] as String?,
-    location: json['location'] == null
-        ? null
-        : PlaceModel.fromJson(json['location'] as Map<String, dynamic>),
+    location: json['location'] == null ? null : PlaceModel.fromJson(json['location'] as Map<String, dynamic>),
   )..locationData = json['locationData'] as Map<String, dynamic>?;
 }
 

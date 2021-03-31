@@ -8,4 +8,3 @@ class Images {
   /// ![](file:///Users/emiliodallatorre/Documents/GitHub/bookaround/assets/icons/panda.png)
   static AssetImage get panda => const AssetImage("assets/icons/panda.png");
 }
-
