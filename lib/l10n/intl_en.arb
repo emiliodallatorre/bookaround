@@ -57,7 +57,7 @@
   "removeBookBecauseSell": "I sold this book on Bookaround",
   "removeBookBecauseOtherSell": "I sold this book out of Bookaround",
   "removeBookBecauseAlter": "Other",
-  "editInsertion": "Edit insertion",
+  "editInsertion": "Edit",
   "bookState": "Book status",
   "noIsbnScanned": "No ISBN found",
   "insertIsbn": "Insert ISBN",

@@ -627,10 +627,10 @@ class S {
     );
   }
 
-  /// `Edit insertion`
+  /// `Edit`
   String get editInsertion {
     return Intl.message(
-      'Edit insertion',
+      'Edit',
       name: 'editInsertion',
       desc: '',
       args: [],

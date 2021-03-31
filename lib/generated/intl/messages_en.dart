@@ -35,7 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "city" : MessageLookupByLibrary.simpleMessage("City"),
     "deleteImage" : MessageLookupByLibrary.simpleMessage("Delete image"),
     "editImage" : MessageLookupByLibrary.simpleMessage("Edit image"),
-    "editInsertion" : MessageLookupByLibrary.simpleMessage("Edit insertion"),
+    "editInsertion" : MessageLookupByLibrary.simpleMessage("Edit"),
     "editProfile" : MessageLookupByLibrary.simpleMessage("Edit profile"),
     "enable" : MessageLookupByLibrary.simpleMessage("Enable"),
     "enableProximityBooks" : MessageLookupByLibrary.simpleMessage("Do you want to enable proximity search?\nYou will be able to find nearby books.\nIf you won\'t enable it, you\'ll be able to enable it later in app settings."),
