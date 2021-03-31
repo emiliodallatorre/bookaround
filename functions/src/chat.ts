@@ -1,6 +1,6 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
-import { getUser } from "./users";
+import { getUser, UserModel } from "./users";
 
 
 /// Restituisce la corretta [chatId] all'utente che la chiede.
@@ -110,7 +110,7 @@ async function createChat(participants: string[]): Promise<string> {
 async function sendMessageNotification(message: functions.firestore.QueryDocumentSnapshot) {
     const recipients: string[] = ((await (message.ref.parent.parent as admin.firestore.DocumentReference).get()).data() as admin.firestore.DocumentData)["participants"]
 
-    const senderUser = await getUser(message.data()["senderUid"])
+    const senderUser: UserModel = await getUser(message.data()["senderUid"])
 
     const payload = {
         notification: {
@@ -121,7 +121,7 @@ async function sendMessageNotification(message: functions.firestore.QueryDocumen
     }
 
     for (const recipient of recipients)
-        await admin.messaging().sendToTopic(recipient, payload)
+        if (recipient !== senderUser.uid) await admin.messaging().sendToTopic(recipient, payload)
 
     console.log("Ho inviato le dovute notifiche.")
 }

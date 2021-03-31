@@ -36,6 +36,22 @@ export const deleteUser = functions.https.onCall(async (data, context) => {
     } else console.log("Non ho eliminato un account perché era completo.");
 });
 
-export async function getUser(uid: string): Promise<admin.firestore.DocumentData> {
-    return (await admin.firestore().collection("users").doc(uid).get()).data() as admin.firestore.DocumentData
+export async function getUser(uid: string): Promise<UserModel> {
+    return (await admin.firestore().collection("users").doc(uid).get()).data() as admin.firestore.DocumentData as UserModel
+}
+
+export interface UserModel {
+    /*
+      String? uid;
+      String? phoneNumber;
+      String? name, surname, city;
+      String? profileImageUrl;
+    */
+
+    uid: string,
+    phoneNumber: string,
+    name: string,
+    surname: string,
+    city: string,
+    profileImageUrl: string,
 }
