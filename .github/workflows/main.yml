@@ -2,7 +2,7 @@ on: push
 name: Testa, builda e rilascia un apk
 jobs:
   build:
-    name: Build APK
+    name: Genera l'apk
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
