@@ -29,7 +29,7 @@ jobs:
         echo "keyAlias=bookaround" >> android/key.properties
         echo "storeFile=../../$STORE_FILE" >> android/key.properties
         
-        gpg --quiet --batch --yes --decrypt --passphrase="$GPG_PASSWORD" --output $STORE_FILE Bookaround.jks.gpg
+        gpg --quiet --batch --yes --decrypt --passphrase="$GPG_PASSWORD" --output $STORE_FILE "$STORE_FILE.gpg"
     - run: flutter pub get
     - run: flutter test
     - run: flutter build apk
