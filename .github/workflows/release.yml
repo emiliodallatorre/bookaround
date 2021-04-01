@@ -27,9 +27,10 @@ jobs:
         echo "storePassword=$STORE_PASSWORD" >> android/key.properties
         echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
         echo "keyAlias=bookaround" >> android/key.properties
-        echo "storeFile=../../$STORE_FILE" >> android/key.properties
-
-        gpg --quiet --batch --yes --decrypt --passphrase="$GPG_PASSWORD" --output $STORE_FILE Bookaround.jks.gpg
+        echo "storeFile=$HOME/secrets/$STORE_FILE" >> android/key.properties
+        
+        mkdir $HOME/secrets
+        gpg --quiet --batch --yes --decrypt --passphrase="$GPG_PASSWORD" --output $HOME/secrets/$STORE_FILE Bookaround.jks.gpg
     - run: flutter pub get
     - run: flutter test
     - run: flutter build apk
