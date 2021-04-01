@@ -16,12 +16,12 @@ jobs:
     - uses: subosito/flutter-action@v1
       with:
         channel: 'stable'
+    - name: Prepara i file per la firma
       env:
         GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
         STORE_FILE: ${{ secrets.STORE_FILE }}
         STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
         KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-    - name: Prepara i file per la firma
       run: |
         touch android/key.properties
         echo "storePassword=$STORE_PASSWORD" >> android/key.properties
