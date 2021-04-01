@@ -16,11 +16,28 @@ jobs:
     - uses: subosito/flutter-action@v1
       with:
         channel: 'stable'
+      env:
+        GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
+        STORE_FILE: ${{ secrets.STORE_FILE }}
+        STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+        KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+    - run: |
+        touch android/key.properties
+        echo "storePassword=$STORE_PASSWORD" >> android/key.properties
+        echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
+        echo "keyAlias=bookaround" >> android/key.properties
+        echo "storeFile=../../$STORE_FILE" >> android/key.properties
+
+        gpg --quiet --batch --yes --decrypt --passphrase="$GPG_PASSWORD" --output $STORE_FILE Bookaround.jks.gpg
     - run: flutter pub get
     - run: flutter test
     - run: flutter build apk
+    - name: Elimina le tracce
+    - run: |
+        m $STORE_FILE
+        rm android/key.properties
     - name: Rilascia un apk
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "build/app/outputs/apk/debug/*.apk"
+        artifacts: "build/app/outputs/apk/release/*.apk"
         token: ${{ secrets.TOKEN }}
