@@ -27,16 +27,15 @@ jobs:
         echo "storePassword=$STORE_PASSWORD" >> android/key.properties
         echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
         echo "keyAlias=bookaround" >> android/key.properties
-        echo "storeFile=$HOME/secrets/$STORE_FILE" >> android/key.properties
+        echo "storeFile=../../$STORE_FILE" >> android/key.properties
         
-        mkdir $HOME/secrets
-        gpg --quiet --batch --yes --decrypt --passphrase="$GPG_PASSWORD" --output $HOME/secrets/$STORE_FILE Bookaround.jks.gpg
+        gpg --quiet --batch --yes --decrypt --passphrase="$GPG_PASSWORD" --output $STORE_FILE Bookaround.jks.gpg
     - run: flutter pub get
     - run: flutter test
     - run: flutter build apk
     - name: Elimina le tracce
       run: |
-        m $STORE_FILE
+        rm $STORE_FILE
         rm android/key.properties
     - name: Rilascia un apk
       uses: ncipollo/release-action@v1
