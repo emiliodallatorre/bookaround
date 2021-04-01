@@ -48,10 +48,12 @@ class InitHelper {
   }
 
   Future<void> initializeCrashlytics() async {
-    if (kDebugMode)
-      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(false);
-    else
-      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+    if (!kIsWeb) {
+      if (kDebugMode)
+        await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(false);
+      else
+        await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+    }
   }
 
   Future<void> deinitialize() async {

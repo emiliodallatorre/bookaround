@@ -4,6 +4,8 @@ import 'package:bookaround/interface/screen/profile_editor_screen.dart';
 import 'package:bookaround/resources/helper/auth_helper.dart';
 import 'package:bookaround/resources/helper/init_helper.dart';
 import 'package:code_field/code_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -92,10 +94,11 @@ class LoginScreen extends StatelessWidget {
                       ),
                       ElevatedButton(
                         child: Text(S.current.proceed),
-                        onPressed: () {
+                        onPressed: () async {
                           switch (state.loginStep) {
                             case LoginStep.SIGN_IN:
-                              AuthHelper.sendSmsCode("+39" + state.numberController.text, context);
+                              final ConfirmationResult? confirmationResult = await AuthHelper.sendSmsCode("+39" + state.numberController.text, context);
+                              if (kIsWeb) state.setConfirmationResult(confirmationResult);
                               break;
                             case LoginStep.INSERT_CODE:
                               state.loginWithCredential(context);
@@ -127,6 +130,8 @@ class LoginScreenState extends ChangeNotifier {
 
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
+  ConfirmationResult? confirmationResult;
+
   void setLoginStep(LoginStep newLoginStep) {
     this.loginStep = newLoginStep;
 
@@ -141,7 +146,9 @@ class LoginScreenState extends ChangeNotifier {
 
   Future<void> loginWithCredential(BuildContext context) async {
     try {
-      await AuthHelper.loginWithCredential(this.verificationCode!, this.codeController.value);
+      if (kIsWeb) debugPrint("L'ambiente è web, confirmationResult è $confirmationResult.");
+
+      await AuthHelper.loginWithCredential(this.verificationCode, this.codeController.value, confirmationResult);
       await InitHelper(context).initializeUser();
 
       Navigator.of(context).pushReplacementNamed(ProfileEditorScreen.route);
@@ -151,4 +158,6 @@ class LoginScreenState extends ChangeNotifier {
       codeController.clear();
     }
   }
+
+  void setConfirmationResult(ConfirmationResult? confirmationResult) => this.confirmationResult = confirmationResult;
 }
