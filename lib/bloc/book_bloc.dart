@@ -41,8 +41,9 @@ class BooksBloc {
     if (_booksFetcher.value != null)
       wanted = _booksFetcher.value!.map((e) => e.sureIsbn).toList();
     else {
-      await getUserBooks(userUid);
-      wanted = _booksFetcher.value!.map((e) => e.sureIsbn).toList();
+      final List<BookModel> books = await Repository.getUserWantedBooks(userUid);
+      _booksFetcher.sink.add(books);
+      wanted = books.map((BookModel wantedBook) => wantedBook.sureIsbn).toList();
     }
 
     final List<BookModel> wantedBooks = await Repository.getWantedBooks(wanted, currentPosition);

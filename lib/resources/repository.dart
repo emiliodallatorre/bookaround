@@ -10,6 +10,8 @@ class Repository {
   /// Funzioni da BookProvider.
   static Future<List<BookModel>> getUserBooks(String uid) async => await BookProvider.getUserBooks(uid);
 
+  static Future<List<BookModel>> getUserWantedBooks(String uid) async => await BookProvider.getUserWantedBooks( uid);
+
   static Future<List<BookModel>> getNearbyBooks(List<String>? wanted, LatLng rawLastKnownLocation) async => await BookProvider.getNearbyBooks(wanted, rawLastKnownLocation);
 
   static Future<List<BookModel>> getWantedBooks(List<String> wanted, LatLng? currentPosition) async => await BookProvider.getWantedBooks(wanted, currentPosition);

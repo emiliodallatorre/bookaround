@@ -77,4 +77,18 @@ class BookProvider {
 
     return foundBooks;
   }
+
+  static Future<List<BookModel>> getUserWantedBooks(String uid) async {
+    List<DocumentSnapshot> rawBooks = (await References.booksCollection.where("userUid", isEqualTo: uid).get()).docs;
+    List<BookModel> books = <BookModel>[];
+
+    rawBooks.forEach((DocumentSnapshot rawBook) {
+      BookModel book = BookModel.fromJson(rawBook.data()!);
+      book.reference = rawBook.reference;
+
+      if (book.type == BookType.LOOKING) books.add(book);
+    });
+
+    return books;
+  }
 }
