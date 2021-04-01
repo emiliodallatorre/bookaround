@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "619087397678-h9ckku3ab1coi53cmp373dl28oqsfu2i.apps.googleusercontent.com",
+          "client_id": "619087397678-hh3ptraaifdi4pdddc1qk0c5vo03sfcl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "it.emiliodallatorre.bookaround",
-            "certificate_hash": "4ee10d89c8cfb758aa8f680f23d56e793f920dbd"
+            "certificate_hash": "f575d169a849a1718cc31c0908537501a01920a7"
           }
         },
         {
@@ -37,6 +37,13 @@
             {
               "client_id": "619087397678-7c4b2suho49decd0nsp6aj680ubieckd.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "619087397678-narv4931t4dckbb2v5445u2r79lb48rs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "it.emiliodallatorre.bookaround"
+              }
             }
           ]
         }
