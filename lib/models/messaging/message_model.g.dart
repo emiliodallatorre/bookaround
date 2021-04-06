@@ -14,9 +14,6 @@ MessageModel _$MessageModelFromJson(Map<String, dynamic> json) {
     sentDateTime: json['sentDateTime'] == null
         ? null
         : DateTime.parse(json['sentDateTime'] as String),
-    receivedDateTime: json['receivedDateTime'] == null
-        ? null
-        : DateTime.parse(json['receivedDateTime'] as String),
     messageType:
         _$enumDecodeNullable(_$MessageTypeEnumMap, json['messageType']),
     videoThumbUrl: json['videoThumbUrl'] as String?,
@@ -29,7 +26,6 @@ Map<String, dynamic> _$MessageModelToJson(MessageModel instance) =>
       'senderUid': instance.senderUid,
       'body': instance.body,
       'sentDateTime': instance.sentDateTime?.toIso8601String(),
-      'receivedDateTime': instance.receivedDateTime?.toIso8601String(),
       'messageType': _$MessageTypeEnumMap[instance.messageType],
       'videoThumbUrl': instance.videoThumbUrl,
     };

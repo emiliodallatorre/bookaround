@@ -8,7 +8,7 @@ class MessageModel {
   String? id;
   String? senderUid;
   String? body;
-  DateTime? sentDateTime, receivedDateTime;
+  DateTime? sentDateTime;
   MessageType? messageType;
   String? videoThumbUrl;
 
@@ -23,7 +23,6 @@ class MessageModel {
     this.senderUid,
     this.body,
     this.sentDateTime,
-    this.receivedDateTime,
     this.messageType,
     this.videoThumbUrl,
   });

@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart';
 
 class Message extends StatelessWidget {
-  final MessageModel? message;
+  final MessageModel message;
 
-  Message({Key? key, @required this.message}) : super(key: key);
+  Message({Key? key, required this.message}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +25,9 @@ class Message extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(this.message!.body!),
+                    Text(this.message.body!),
                     SizedBox(height: 4.0),
-                    Align(alignment: AlignmentDirectional.bottomEnd, child: Text(format(this.message!.sentDateTime!), style: Theme.of(context).textTheme.caption)),
+                    Align(alignment: AlignmentDirectional.bottomEnd, child: Text(format(this.message.sentDateTime!), style: Theme.of(context).textTheme.caption)),
                   ],
                 ),
               ),
@@ -39,5 +39,5 @@ class Message extends StatelessWidget {
     );
   }
 
-  bool iAmTheSender(BuildContext context) => this.message!.senderUid == Provider.of<UserModel>(context, listen: false).uid!;
+  bool iAmTheSender(BuildContext context) => this.message.senderUid == Provider.of<UserModel>(context, listen: false).uid!;
 }
