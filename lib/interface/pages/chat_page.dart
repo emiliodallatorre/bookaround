@@ -10,12 +10,8 @@ import 'package:provider/provider.dart';
 class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final ChatBloc chatsBloc = ChatBloc(Provider.of<UserModel>(context, listen: false))
-      ..getUserChats()
-      ..listenForChats();
-
     return StreamBuilder<List<ChatModel>>(
-      stream: chatsBloc.chats,
+      stream: Provider.of<ChatBloc>(context).chats,
       builder: (BuildContext context, AsyncSnapshot<List<ChatModel>> chatsSnapshot) {
         if (chatsSnapshot.hasData) {
           if (chatsSnapshot.data!.isNotEmpty)
@@ -24,7 +20,15 @@ class ChatPage extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) => ListTile(
                 title: Text(chatsSnapshot.data!.elementAt(index).recipient.displayName),
                 subtitle: Text(chatsSnapshot.data!.elementAt(index).lastMessage!.displayableBody),
-                onTap: () => Navigator.of(context).pushNamed(ChatScreen.route, arguments: chatsSnapshot.data!.elementAt(index)),
+                trailing: chatsSnapshot.data!.elementAt(index).hasUnreadMessages(Provider.of<UserModel>(context, listen: false).uid!) ? Icon(Icons.circle_notifications) : null,
+                onTap: () {
+                  Provider.of<ChatBloc>(context, listen: false).chatsListener!.pause();
+                  debugPrint("Ho messo in pausa lo stream delle chat.");
+                  Navigator.of(context).pushNamed(ChatScreen.route, arguments: chatsSnapshot.data!.elementAt(index)).whenComplete(() {
+                    Provider.of<ChatBloc>(context, listen: false).chatsListener!.resume();
+                    debugPrint("Ho riavviato lo stream delle chat.");
+                  });
+                },
               ),
             );
           else

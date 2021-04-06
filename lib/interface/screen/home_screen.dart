@@ -1,3 +1,4 @@
+import 'package:bookaround/bloc/chat_bloc.dart';
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/pages/book_search_page.dart';
 import 'package:bookaround/interface/pages/book_sell_page.dart';
@@ -32,26 +33,31 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      appBar: AppBar(
-        title: Text(References.appName),
-        actions: [
-          Visibility(
-            visible: selectedIndex == 2,
-            child: IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () => Navigator.of(context).pushNamed(SearchScreen.route),
+    return Provider(
+        create: (BuildContext context) => ChatBloc(Provider.of<UserModel>(context, listen: false))..listenForChats(),
+        builder: (context, snapshot) {
+          return Scaffold(
+            key: scaffoldKey,
+            appBar: AppBar(
+              title: Text(References.appName),
+              actions: [
+                Visibility(
+                  visible: selectedIndex == 2,
+                  child: IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () => Navigator.of(context).pushNamed(SearchScreen.route),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
-      drawer: buildDrawer(context),
-      body: buildBody(context),
-      extendBody: true,
-      bottomNavigationBar: buildBottomNavigationBar(context),
-      floatingActionButton: buildFloatingActionButton(),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+            drawer: buildDrawer(context),
+            body: buildBody(context),
+            extendBody: true,
+            bottomNavigationBar: buildBottomNavigationBar(context),
+            floatingActionButton: buildFloatingActionButton(),
+            // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          );
+        }
     );
   }
 

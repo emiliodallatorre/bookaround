@@ -26,13 +26,13 @@ dependencies:
   google_fonts: ^2.0.0
 
   # Firebase
-  cloud_firestore: ^1.0.3
-  firebase_auth: ^1.0.1
-  firebase_core: ^1.0.2
-  cloud_functions: ^1.0.2
-  firebase_messaging: ^9.1.0
-  firebase_storage: ^8.0.1
-  firebase_crashlytics: ^1.0.0
+  cloud_firestore: ^1.0.4
+  firebase_auth: ^1.0.2
+  firebase_core: ^1.0.3
+  cloud_functions: ^1.0.3
+  firebase_messaging: ^9.1.1
+  firebase_storage: ^8.0.2
+  firebase_crashlytics: ^2.0.0
 
   # Logica
   provider: ^5.0.0
@@ -50,7 +50,7 @@ dependencies:
   timeago: ^3.0.2
 
   # Localizzazione
-  flutter_google_places_hoc081098: ^1.0.0-nullsafety.0
+  flutter_google_places_hoc081098: ^1.0.0-nullsafety.1
   google_maps_webservice: ^0.0.19
   # geoflutterfire:
   #   git:

@@ -11,12 +11,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:random_string/random_string.dart';
 
-class ChatScreen extends StatelessWidget {
+class ChatScreen extends StatefulWidget {
   static const String route = "/chatScreen";
 
+  @override
+  _ChatScreenState createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
 
   ChatModel? _chat;
+
   MessagesBloc? _messagesBloc;
 
   @override
@@ -25,7 +31,7 @@ class ChatScreen extends StatelessWidget {
       _chat = ModalRoute.of(context)!.settings.arguments as ChatModel;
       assert(_chat != null);
 
-      _messagesBloc = MessagesBloc(_chat!);
+      _messagesBloc = MessagesBloc(_chat!, Provider.of<UserModel>(context, listen: false).uid!);
       _messagesBloc!.listenForMessages();
     }
 
@@ -33,14 +39,7 @@ class ChatScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: false,
         title: Text(_chat!.recipient.displayName),
-        actions: _chat!.recipient.profileImageUrl != null
-            ? [
-                UserAvatar(user: _chat!.recipient),
-                SizedBox(
-                  width: 8.0,
-                ),
-              ]
-            : null,
+        actions: _chat!.recipient.profileImageUrl != null ? [UserAvatar(user: _chat!.recipient), SizedBox(width: 8.0)] : null,
       ),
       body: _buildBody(context),
     );
@@ -101,5 +100,12 @@ class ChatScreen extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    _messagesBloc?.dispose();
+
+    super.dispose();
   }
 }

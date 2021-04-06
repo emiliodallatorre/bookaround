@@ -2,6 +2,7 @@ import 'package:bookaround/models/messaging/chat_model.dart';
 import 'package:bookaround/models/messaging/message_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
+import 'package:bookaround/resources/helper/chat_helper.dart';
 import 'package:bookaround/resources/provider/user_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
@@ -26,6 +27,8 @@ class ChatProvider {
     chat.reference = rawChat.reference;
     chat.participants!.removeWhere((String participantUid) => participantUid == currentUserUid);
     chat.participantsUsers = <UserModel>[];
+    chat.lastAccess = DateTime.parse(rawChat.data()![ChatHelper.lastAccessKey(currentUserUid)]);
+
     for (String uid in chat.participants!) chat.participantsUsers!.add(await UserProvider.getUserByUid(uid));
 
     return chat;
@@ -53,6 +56,8 @@ class ChatProvider {
       chat.reference = rawChats.elementAt(index).reference;
       chat.participants!.removeWhere((String participantUid) => participantUid == user.uid);
       chat.participantsUsers = <UserModel>[];
+      chat.lastAccess = DateTime.parse(rawChats.elementAt(index).data()![ChatHelper.lastAccessKey(user.uid!)]);
+
       for (String uid in chat.participants!) chat.participantsUsers!.add(await UserProvider.getUserByUid(uid));
 
       chats.add(chat);

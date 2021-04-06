@@ -17,7 +17,7 @@ ChatModel _$ChatModelFromJson(Map<String, dynamic> json) {
         : DateTime.parse(json['lastMessageDateTime'] as String),
     participants: (json['participants'] as List<dynamic>?)
         ?.map((e) => e as String)
-        .toList(),
+        .toSet(),
     lastMessage: json['lastMessage'] == null
         ? null
         : MessageModel.fromJson(json['lastMessage'] as Map<String, dynamic>),
@@ -28,6 +28,6 @@ Map<String, dynamic> _$ChatModelToJson(ChatModel instance) => <String, dynamic>{
       'id': instance.id,
       'creationDateTime': instance.creationDateTime?.toIso8601String(),
       'lastMessageDateTime': instance.lastMessageDateTime?.toIso8601String(),
-      'participants': instance.participants,
-      'lastMessage': instance.lastMessage,
+      'participants': instance.participants?.toList(),
+      'lastMessage': SerializationHelper.messageToJson(instance.lastMessage),
     };

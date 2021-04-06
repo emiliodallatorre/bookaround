@@ -17,11 +17,14 @@ class ChatHelper {
     debugPrint("Ho inviato il messaggio ${message.id}.");
   }
 
-  static Stream<QuerySnapshot> listenForMessages(ChatModel chat) {
-    return chat.messagesReference.snapshots();
+  static Stream<QuerySnapshot> listenForMessages(ChatModel chat) => chat.messagesReference.snapshots();
+
+  static Stream<QuerySnapshot> listenForChats(UserModel user) => References.chatsCollection.where("participants", arrayContains: user.uid).snapshots();
+
+  static Future<void> setRead(ChatModel chat, String uid) async {
+    await chat.reference!.update({lastAccessKey(uid): DateTime.now().toIso8601String()});
+    debugPrint("Segnata la chat come letta.");
   }
 
-  static Stream<QuerySnapshot> listenForChats(UserModel user) {
-    return References.chatsCollection.where("participants", arrayContains: user.uid).snapshots();
-  }
+  static String lastAccessKey(String uid) => uid + "-lastAccess";
 }

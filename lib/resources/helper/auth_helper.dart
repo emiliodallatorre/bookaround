@@ -38,9 +38,7 @@ class AuthHelper {
   }
 
   static Future<void> loginWithCredential(String? verificationId, String smsCode, [ConfirmationResult? confirmationResult]) async {
-    // UserCredential userCredential = await confirmationResult.confirm('123456');
-
-    UserCredential credential;
+    UserCredential? credential;
     if (!kIsWeb) {
       assert(verificationId != null);
       final AuthCredential phoneAuthCredential = PhoneAuthProvider.credential(verificationId: verificationId!, smsCode: smsCode);
@@ -50,7 +48,6 @@ class AuthHelper {
       debugPrint("Confermiamo con $confirmationResult.");
       credential = await confirmationResult!.confirm(smsCode);
     }
-    debugPrint("L'utente è $credential.");
 
     while (!(await References.usersCollection.doc(credential.user!.uid).get()).exists) {
       await Future.delayed(Duration(seconds: 2));

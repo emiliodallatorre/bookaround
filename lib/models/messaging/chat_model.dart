@@ -1,5 +1,6 @@
 import 'package:bookaround/models/messaging/message_model.dart';
 import 'package:bookaround/models/user_model.dart';
+import 'package:bookaround/resources/helper/serialization_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -9,7 +10,8 @@ part 'chat_model.g.dart';
 class ChatModel {
   final String? id;
   final DateTime? creationDateTime, lastMessageDateTime;
-  final List<String>? participants;
+  final Set<String>? participants;
+  @JsonKey(toJson: SerializationHelper.messageToJson)
   final MessageModel? lastMessage;
 
   @JsonKey(ignore: true)
@@ -18,9 +20,17 @@ class ChatModel {
   @JsonKey(ignore: true)
   List<UserModel>? participantsUsers;
 
+  @JsonKey(ignore: true)
+  DateTime? lastAccess;
+
   CollectionReference get messagesReference => reference!.collection("messages");
 
   UserModel get recipient => participantsUsers!.single;
+
+  bool hasUnreadMessages(String uid) {
+    if (lastAccess != null && lastMessageDateTime != null) return lastAccess!.isBefore(lastMessageDateTime!);
+    return true;
+  }
 
   ChatModel({
     this.id,
@@ -28,6 +38,7 @@ class ChatModel {
     this.lastMessageDateTime,
     this.participants,
     this.lastMessage,
+    this.lastAccess,
   });
 
   @override
