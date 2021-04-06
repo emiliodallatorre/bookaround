@@ -2,16 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Bookaround utilizza la tua posizione per mostrare i libri in vendita intorno a te.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Bookaround utilizza la tua posizione per mostrare i libri in vendita intorno a te.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Bookaround ha bisogno del tuo permesso per utilizzare il microfono del tuo dispositivo.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Bookaround ha bisogno del tuo permesso per accedere alla galleria delle tue immagini.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Bookaround ha bisogno del tuo permesso per accedere alla fotocamera e leggere i codici a barre dei libri.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -43,6 +33,16 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Bookaround ha bisogno del tuo permesso per accedere alla fotocamera e leggere i codici a barre dei libri.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Bookaround utilizza la tua posizione per mostrare i libri in vendita intorno a te.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Bookaround utilizza la tua posizione per mostrare i libri in vendita intorno a te.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Bookaround ha bisogno del tuo permesso per utilizzare il microfono del tuo dispositivo.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Bookaround ha bisogno del tuo permesso per accedere alla galleria delle tue immagini.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
