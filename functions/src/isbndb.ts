@@ -2,7 +2,7 @@ import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import * as search from "./search";
 
-import { randomString } from "./chat"
+import { getCurrentDateAsString, randomString } from "./chat"
 
 export const createBookSell = functions.https.onCall(async (data, context) => {
     const isbn: string = data["isbn"] as string
@@ -26,7 +26,7 @@ export const createBookSell = functions.https.onCall(async (data, context) => {
         coverUrl: book["image"],
         type: "SELLING",
         userUid: userUid,
-        addedDateTime: new Date().toISOString(),
+        addedDateTime: getCurrentDateAsString(),
         highlighting: true,
         pen: true,
         pencil: true,

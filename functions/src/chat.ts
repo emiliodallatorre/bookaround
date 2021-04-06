@@ -77,7 +77,7 @@ export const updateChatModel = functions.firestore.document('/chats/{chatId}/mes
     const parentChat: admin.firestore.DocumentReference = snapshot.ref.parent.parent as admin.firestore.DocumentReference
 
     // Aggiorno la data di invio del messaggio.
-    const dateString: string = new Date().toISOString()
+    const dateString: string = getCurrentDateAsString()
     await snapshot.ref.update({ "receivedDateTime": dateString })
     const message: admin.firestore.DocumentData = (await snapshot.ref.get()).data() as admin.firestore.DocumentData
 
@@ -97,7 +97,7 @@ async function createChat(participants: string[]): Promise<string> {
     await admin.firestore().collection("chats").doc(chatId).set(
         {
             "id": chatId,
-            "creationDateTime": new Date().toISOString(),
+            "creationDateTime": getCurrentDateAsString(),
             "participants": participants,
         }
     )
@@ -133,4 +133,10 @@ export function randomString(length: number): string {
     let result: string = '';
     for (let i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
     return result;
+}
+
+export function getCurrentDateAsString(): string {
+    const currentDateTime: Date = new Date();
+    currentDateTime.setHours(currentDateTime.getHours() + 2);
+    return currentDateTime.toISOString();
 }
