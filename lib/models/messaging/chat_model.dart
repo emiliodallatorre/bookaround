@@ -2,6 +2,7 @@ import 'package:bookaround/models/messaging/message_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/resources/helper/serialization_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'chat_model.g.dart';
@@ -27,8 +28,11 @@ class ChatModel {
 
   UserModel get recipient => participantsUsers!.single;
 
-  bool hasUnreadMessages(String uid) {
+  bool get hasUnreadMessages {
+    if(!participants!.contains(lastMessage!.senderUid)) return false;
     if (lastAccess != null && lastMessageDateTime != null) return lastAccess!.isBefore(lastMessageDateTime!);
+
+    debugPrint("Segno la chat come non letta per insufficienza di dati.");
     return true;
   }
 

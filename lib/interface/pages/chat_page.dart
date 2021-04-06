@@ -3,7 +3,6 @@ import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/screen/chat_screen.dart';
 import 'package:bookaround/interface/widget/centered_text.dart';
 import 'package:bookaround/models/messaging/chat_model.dart';
-import 'package:bookaround/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +10,7 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<ChatModel>>(
-      stream: Provider.of<ChatBloc>(context).chats,
+      stream: Provider.of<ChatBloc>(context, listen: false).chats,
       builder: (BuildContext context, AsyncSnapshot<List<ChatModel>> chatsSnapshot) {
         if (chatsSnapshot.hasData) {
           if (chatsSnapshot.data!.isNotEmpty)
@@ -20,7 +19,7 @@ class ChatPage extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) => ListTile(
                 title: Text(chatsSnapshot.data!.elementAt(index).recipient.displayName),
                 subtitle: Text(chatsSnapshot.data!.elementAt(index).lastMessage!.displayableBody),
-                trailing: chatsSnapshot.data!.elementAt(index).hasUnreadMessages(Provider.of<UserModel>(context, listen: false).uid!) ? Icon(Icons.circle_notifications) : null,
+                trailing: chatsSnapshot.data!.elementAt(index).hasUnreadMessages ? Icon(Icons.circle_notifications, color: Theme.of(context).accentColor) : null,
                 onTap: () {
                   Provider.of<ChatBloc>(context, listen: false).chatsListener!.pause();
                   debugPrint("Ho messo in pausa lo stream delle chat.");

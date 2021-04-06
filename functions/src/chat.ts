@@ -134,6 +134,6 @@ export function randomString(length: number): string {
 
 export function getCurrentDateAsString(): string {
     const currentDateTime: Date = new Date();
-    currentDateTime.setHours(currentDateTime.getHours() + 2);
+    // currentDateTime.setHours(currentDateTime.getHours() + 2);
     return currentDateTime.toISOString();
 }
