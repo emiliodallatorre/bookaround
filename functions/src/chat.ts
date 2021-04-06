@@ -76,13 +76,10 @@ export const getChatId = functions.https.onCall(async (data, context) => {
 export const updateChatModel = functions.firestore.document('/chats/{chatId}/messages/{messageId}').onCreate(async (snapshot, context) => {
     const parentChat: admin.firestore.DocumentReference = snapshot.ref.parent.parent as admin.firestore.DocumentReference
 
-    // Aggiorno la data di invio del messaggio.
-    const dateString: string = getCurrentDateAsString()
-    await snapshot.ref.update({ "receivedDateTime": dateString })
     const message: admin.firestore.DocumentData = (await snapshot.ref.get()).data() as admin.firestore.DocumentData
 
     // Aggiorniamo la chat.
-    await parentChat.update({ "lastMessageDateTime": dateString, lastMessage: message })
+    await parentChat.update({ "lastMessageDateTime": getCurrentDateAsString(), lastMessage: message })
     console.log("Aggiorno l'ultimo messaggio inviato.")
 
     // Inviamo le dovute notifiche.
