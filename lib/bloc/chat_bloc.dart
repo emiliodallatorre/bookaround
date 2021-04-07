@@ -9,13 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:random_string/random_string.dart';
 import 'package:rxdart/rxdart.dart';
 
-class ChatBloc {
+class ChatBloc extends ChangeNotifier {
   final UserModel currentUser;
   final Stream<QuerySnapshot> chatStream;
 
   ChatBloc(this.currentUser) : chatStream = ChatHelper.listenForChats(currentUser);
 
-  final PublishSubject<List<ChatModel>> _chatsFetcher = PublishSubject<List<ChatModel>>();
+  final BehaviorSubject<List<ChatModel>> _chatsFetcher = BehaviorSubject<List<ChatModel>>();
 
   Stream<List<ChatModel>> get chats => _chatsFetcher.stream;
 
@@ -37,13 +37,24 @@ class ChatBloc {
     subscriptionId = randomString(4);
     chatsListener = chatStream.listen((event) async {
       debugPrint("Siamo nello stream $subscriptionId.");
+
+      bool condition = hasUnreadChats;
       getUserChats();
+      if (hasUnreadChats != condition) notifyListeners();
     });
   }
 
+  bool get hasUnreadChats {
+    if (_chatsFetcher.hasValue) return _chatsFetcher.value!.any((ChatModel chat) => chat.hasUnreadMessages);
+    return false;
+  }
+
+  @override
   void dispose() {
     chatsListener?.cancel();
     _chatsFetcher.close();
     debugPrint("Ho disposto il ChatBloc().");
+
+    super.dispose();
   }
 }

@@ -33,8 +33,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Provider(
-        create: (BuildContext context) => ChatBloc(Provider.of<UserModel>(context, listen: false))..listenForChats(),
+    return ChangeNotifierProvider(
+        create: (BuildContext context) =>
+        ChatBloc(Provider.of<UserModel>(context, listen: false))
+          ..listenForChats(),
         builder: (context, snapshot) {
           return Scaffold(
             key: scaffoldKey,
@@ -85,7 +87,9 @@ class _HomeScreenState extends State<HomeScreen> {
           onTap: (int newIndex) => setState(() => selectedIndex = newIndex),
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: S.current.sellBooks),
-            BottomNavigationBarItem(icon: Icon(Icons.chat), label: S.current.chats),
+            BottomNavigationBarItem(icon: Icon(Provider
+                .of<ChatBloc>(context)
+                .hasUnreadChats ? Icons.mark_chat_unread : Icons.chat), label: S.current.chats),
             BottomNavigationBarItem(icon: Icon(Icons.search), label: S.current.buyBooks),
           ],
         ),
