@@ -48,6 +48,7 @@ dependencies:
   random_string: ^2.2.0-nullsafety
   shared_preferences: ^2.0.5
   timeago: ^3.0.2
+  overlay_support: ^1.2.0
 
   # Localizzazione
   flutter_google_places_hoc081098: ^1.0.0-nullsafety.1
