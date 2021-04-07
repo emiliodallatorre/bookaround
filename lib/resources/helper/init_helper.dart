@@ -21,7 +21,7 @@ class InitHelper {
     await initializeCrashlytics();
 
     bool isLogged = await initializeUser();
-    if (isLogged) await NotificationsHelper.initializeNotifications(Provider.of<UserModel>(context, listen: false));
+    if (isLogged) await NotificationsHelper.initializeNotifications(Provider.of<UserModel>(context, listen: false), context);
 
     await Provider.of<SettingsModel>(context, listen: false).updateFromMemory();
 

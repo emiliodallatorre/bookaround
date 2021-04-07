@@ -83,7 +83,7 @@ export const updateChatModel = functions.firestore.document('/chats/{chatId}/mes
     console.log("Aggiorno l'ultimo messaggio inviato.")
 
     // Inviamo le dovute notifiche.
-    await sendMessageNotification(snapshot)
+    await sendMessageNotification(snapshot, context.params.chatId)
 });
 
 
@@ -104,16 +104,20 @@ async function createChat(participants: string[]): Promise<string> {
 
 
 // Invia una notifica per un messaggio.
-async function sendMessageNotification(message: functions.firestore.QueryDocumentSnapshot) {
+async function sendMessageNotification(message: functions.firestore.QueryDocumentSnapshot, chatId: string) {
     const recipients: string[] = ((await (message.ref.parent.parent as admin.firestore.DocumentReference).get()).data() as admin.firestore.DocumentData)["participants"]
 
     const senderUser: UserModel = await getUser(message.data()["senderUid"])
 
-    const payload = {
+    const payload: admin.messaging.MessagingPayload = {
         notification: {
             title: senderUser["name"] + " " + senderUser["surname"],
             body: message.data()["body"],
             sound: "default",
+        },
+        data: {
+            "type": "chat",
+            "id": chatId,
         },
     }
 
