@@ -57,8 +57,6 @@ class UserModel extends ChangeNotifier {
 
     this.reference = updatedUserReference;
 
-    if (initNotifications) await NotificationsHelper.initializeNotifications(this);
-
     notifyListeners();
   }
 

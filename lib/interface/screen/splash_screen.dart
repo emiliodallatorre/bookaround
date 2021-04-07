@@ -5,18 +5,23 @@ import 'package:bookaround/resources/helper/init_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   static const String route = "/splashScreen";
 
   @override
-  Widget build(BuildContext context) {
-    DateTime firstFrame = DateTime.now();
+  _SplashScreenState createState() => _SplashScreenState();
+}
 
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      final DateTime firstFrame = DateTime.now();
+
       await InitHelper(context).initialize().then((bool isLogged) async {
         // Fa durare la splash screen almeno 4 secondi.
         Duration elapsedTime = DateTime.now().difference(firstFrame);
-        if (elapsedTime < Duration(seconds: 4)) await Future.delayed(Duration(seconds: 4) - elapsedTime);
+        if (elapsedTime < Duration(seconds: 2)) await Future.delayed(Duration(seconds: 2) - elapsedTime);
 
         if (isLogged)
           Navigator.of(context).pushReplacementNamed(HomeScreen.route);
@@ -25,6 +30,11 @@ class SplashScreen extends StatelessWidget {
       });
     });
 
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: _buildBody(context),
     );

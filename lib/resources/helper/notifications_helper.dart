@@ -11,6 +11,10 @@ class NotificationsHelper {
     if (Platform.isIOS) await firebaseMessaging.requestPermission();
     await firebaseMessaging.subscribeToTopic(currentUser.uid!);
 
+    FirebaseMessaging.onMessage.listen((RemoteMessage event) {
+      debugPrint(event.toString());
+    });
+
     debugPrint("Inizializzate con successo le notifiche di Firebase.");
   }
 
