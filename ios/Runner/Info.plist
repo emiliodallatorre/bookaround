@@ -4,6 +4,10 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>FirebaseDynamicLinksCustomDomains</key>
+	<array>
+		<string>https://bookaround.app/inapp/test</string>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -26,6 +30,16 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.619087397678-narv4931t4dckbb2v5445u2r79lb48rs</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>dynamic_link</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>it.emiliodallatorre.bookaround</string>
 			</array>
 		</dict>
 	</array>

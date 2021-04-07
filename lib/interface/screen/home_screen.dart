@@ -14,7 +14,9 @@ import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/errors/book_not_found_error.dart';
 import 'package:bookaround/resources/helper/barcode_helper.dart';
 import 'package:bookaround/resources/helper/book_helper.dart';
+import 'package:bookaround/resources/helper/dynamic_link_helper.dart';
 import 'package:bookaround/resources/helper/init_helper.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,6 +32,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int selectedIndex = 0;
   bool working = false;
+
+  @override
+  void initState() {
+    this.listenForDynamicLinks();
+    super.initState();
+  }
+
+  Future<void> listenForDynamicLinks() async {
+    final PendingDynamicLinkData? initialDynamicLink = await FirebaseDynamicLinks.instance.getInitialLink();
+    if (initialDynamicLink != null) await DynamicLinkHelper.followLink(context, initialDynamicLink);
+
+    FirebaseDynamicLinks.instance.onLink(onSuccess: (PendingDynamicLinkData? dynamicLink) async => await DynamicLinkHelper.followLink(context, dynamicLink));
+  }
 
   @override
   Widget build(BuildContext context) {
