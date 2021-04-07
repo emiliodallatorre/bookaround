@@ -37,10 +37,8 @@ class ChatBloc extends ChangeNotifier {
     subscriptionId = randomString(4);
     chatsListener = chatStream.listen((event) async {
       debugPrint("Siamo nello stream $subscriptionId.");
-
-      bool condition = hasUnreadChats;
       getUserChats();
-      if (hasUnreadChats != condition) notifyListeners();
+      notifyListeners();
     });
   }
 

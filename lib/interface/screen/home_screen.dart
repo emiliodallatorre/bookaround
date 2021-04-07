@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Column buildBottomNavigationBar(BuildContext context) {
+  Widget buildBottomNavigationBar(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -87,9 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
           onTap: (int newIndex) => setState(() => selectedIndex = newIndex),
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: S.current.sellBooks),
-            BottomNavigationBarItem(icon: Icon(Provider
-                .of<ChatBloc>(context)
-                .hasUnreadChats ? Icons.mark_chat_unread : Icons.chat), label: S.current.chats),
+            BottomNavigationBarItem(icon: Icon(Icons.chat), label: S.current.chats),
             BottomNavigationBarItem(icon: Icon(Icons.search), label: S.current.buyBooks),
           ],
         ),
