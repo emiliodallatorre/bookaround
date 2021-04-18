@@ -27,7 +27,8 @@ class ChatProvider {
     chat.reference = rawChat.reference;
     chat.participants!.removeWhere((String participantUid) => participantUid == currentUserUid);
     chat.participantsUsers = <UserModel>[];
-    chat.lastAccess = DateTime.parse(rawChat.data()![ChatHelper.lastAccessKey(currentUserUid)]);
+    chat.lastAccess =
+        rawChat.data()![ChatHelper.lastAccessKey(currentUserUid)] == null ? DateTime(2021) : DateTime.parse(rawChat.data()![ChatHelper.lastAccessKey(currentUserUid)]);
 
     for (String uid in chat.participants!) chat.participantsUsers!.add(await UserProvider.getUserByUid(uid));
 
