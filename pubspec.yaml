@@ -24,16 +24,17 @@ dependencies:
   code_field:
     git: https://github.com/emiliodallatorre/code_field.git
   google_fonts: ^2.0.0
+  showcaseview: ^1.0.0
 
   # Firebase
-  cloud_firestore: ^1.0.4
-  firebase_auth: ^1.0.2
+  cloud_firestore: ^1.0.5
+  firebase_auth: ^1.1.0
   firebase_core: ^1.0.3
   cloud_functions: ^1.0.3
   firebase_messaging: ^9.1.1
-  firebase_storage: ^8.0.2
+  firebase_storage: ^8.0.3
   firebase_crashlytics: ^2.0.0
-  firebase_dynamic_links: ^2.0.0-dev.1
+  firebase_dynamic_links: ^2.0.0
 
   # Logica
   provider: ^5.0.0
@@ -60,8 +61,8 @@ dependencies:
   #     ref: update_deps
   geoflutterfire: ^3.0.0-nullsafety.1
   flutter_geocoder: ^0.2.2-nullsafety
-  geolocator: ^7.0.1
-  google_maps_flutter: ^2.0.2
+  geolocator: ^7.0.3
+  google_maps_flutter: ^2.0.3
   location: ^4.1.1
 
   # File

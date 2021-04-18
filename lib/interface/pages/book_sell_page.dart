@@ -2,15 +2,34 @@ import 'package:bookaround/bloc/book_bloc.dart';
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/widget/book_list_element.dart';
 import 'package:bookaround/interface/widget/centered_text.dart';
+import 'package:bookaround/keys.dart';
 import 'package:bookaround/models/book_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:showcaseview/showcaseview.dart';
 
-class BookSellPage extends StatelessWidget {
+class BookSellPage extends StatefulWidget {
   final BookType? type;
 
   BookSellPage({Key? key, this.type}) : super(key: key);
+
+  @override
+  _BookSellPageState createState() => _BookSellPageState();
+}
+
+class _BookSellPageState extends State<BookSellPage> {
+  @override
+  void initState() {
+    WidgetsBinding.instance!.addPostFrameCallback((_) => ShowCaseWidget.of(context)?.startShowCase([
+          Keys.floatingActionButtonKey,
+          Keys.chatKey,
+          Keys.searchBottomKey,
+          Keys.searchTopKey,
+        ]));
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

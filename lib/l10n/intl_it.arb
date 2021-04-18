@@ -66,5 +66,9 @@
   "editImage": "Modifica immagine",
   "deleteImage": "Elimina immagine",
   "removeBookSearch": "Rimuovere questo libro dalla ricerca?",
-  "removeBookSearchExtended": "Se rimuoverai questo libro dalla ricerca, non riceverai più notifiche quando un utente ne metterà in vendita una copia."
+  "removeBookSearchExtended": "Se rimuoverai questo libro dalla ricerca, non riceverai più notifiche quando un utente ne metterà in vendita una copia.",
+  "showcaseFloatingActionButton": "Usa questo pulsante per aggiungere i libri che vuoi vendere. Scansiona il relativo ISBN (il codice a barre) e Bookaround si occuperà di tutto.",
+  "showcaseChat": "In questa sezione potrai vedere le chat che hai iniziato con gli altri utenti",
+  "showcaseSearchBottom": "In questa sezione potrai aggiungere libri alla tua wishlist e vederne le copie in vendita nei dintorni",
+  "showcaseAddToWishlist": "Usa questo pulsante per cercare i libri che stai cercando (per titolo, autore o ISBN) ed aggiungerli alla lista desideri"
 }

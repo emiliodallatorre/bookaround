@@ -8,6 +8,7 @@ import 'package:bookaround/interface/screen/isbn_editor_screen.dart';
 import 'package:bookaround/interface/screen/profile_editor_screen.dart';
 import 'package:bookaround/interface/screen/search_screen.dart';
 import 'package:bookaround/interface/widget/user_avatar.dart';
+import 'package:bookaround/keys.dart';
 import 'package:bookaround/models/book_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
@@ -19,6 +20,7 @@ import 'package:bookaround/resources/helper/init_helper.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String route = "/homeScreen";
@@ -32,10 +34,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int selectedIndex = 0;
   bool working = false;
+  bool initialized = false;
 
   @override
   void initState() {
     this.listenForDynamicLinks();
+
     super.initState();
   }
 
@@ -49,44 +53,56 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (BuildContext context) =>
-        ChatBloc(Provider.of<UserModel>(context, listen: false))
-          ..listenForChats(),
-        builder: (context, snapshot) {
-          return Scaffold(
-            key: scaffoldKey,
-            appBar: AppBar(
-              title: Text(References.appName),
-              actions: [
-                Visibility(
-                  visible: selectedIndex == 2,
-                  child: IconButton(
-                    icon: Icon(Icons.search),
-                    onPressed: () => Navigator.of(context).pushNamed(SearchScreen.route),
+      create: (BuildContext context) =>
+      ChatBloc(Provider.of<UserModel>(context, listen: false))
+        ..listenForChats(),
+      builder: (BuildContext context, Widget? child) =>
+          ShowCaseWidget(
+            builder: Builder(builder: (BuildContext context) =>
+                Scaffold(
+                  key: scaffoldKey,
+                  appBar: AppBar(
+                    title: Text(References.appName),
+                    actions: [
+                      Visibility(
+                        visible: selectedIndex == 2,
+                        child: Showcase(
+                          key: Keys.searchTopKey,
+                          description: S.current.showcaseSearchBottom,
+                          shapeBorder: CircleBorder(),
+                          contentPadding: const EdgeInsets.all(16.0),
+                          // onTargetClick: () => Navigator.of(context).pushNamed(SearchScreen.route),
+                          // disposeOnTap: false,
+                          child: IconButton(
+                            icon: Icon(Icons.search),
+                            onPressed: () => Navigator.of(context).pushNamed(SearchScreen.route),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
+                  drawer: buildDrawer(context),
+                  body: buildBody(context),
+                  extendBody: true,
+                  bottomNavigationBar: buildBottomNavigationBar(context),
+                  floatingActionButton: buildFloatingActionButton(),
+                  // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
                 ),
-              ],
             ),
-            drawer: buildDrawer(context),
-            body: buildBody(context),
-            extendBody: true,
-            bottomNavigationBar: buildBottomNavigationBar(context),
-            floatingActionButton: buildFloatingActionButton(),
-            // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-          );
-        }
+          ),
     );
   }
 
   Widget buildBody(BuildContext context) {
-    return IndexedStack(
-      index: selectedIndex,
-      children: [
-        BookSellPage(type: BookType.SELLING),
-        ChatPage(),
-        BookSearchPage(),
-      ],
-    );
+    return
+      IndexedStack(
+        index: selectedIndex,
+        children: [
+          BookSellPage(type: BookType.SELLING),
+          ChatPage(),
+          BookSearchPage(),
+        ],
+      );
   }
 
   Widget buildBottomNavigationBar(BuildContext context) {
@@ -102,8 +118,32 @@ class _HomeScreenState extends State<HomeScreen> {
           onTap: (int newIndex) => setState(() => selectedIndex = newIndex),
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: S.current.sellBooks),
-            BottomNavigationBarItem(icon: Icon(Icons.chat), label: S.current.chats),
-            BottomNavigationBarItem(icon: Icon(Icons.search), label: S.current.buyBooks),
+            BottomNavigationBarItem(
+              icon: Showcase(
+                key: Keys.chatKey,
+                description: S.current.showcaseChat,
+                shapeBorder: CircleBorder(),
+                contentPadding: EdgeInsets.all(16.0),
+                onToolTipClick: () => setState(() => selectedIndex = 1),
+                onTargetClick: () => setState(() => selectedIndex = 1),
+                disposeOnTap: false,
+                child: Icon(Icons.chat),
+              ),
+              label: S.current.chats,
+            ),
+            BottomNavigationBarItem(
+              icon: Showcase(
+                key: Keys.searchBottomKey,
+                description: S.current.showcaseSearchBottom,
+                shapeBorder: CircleBorder(),
+                contentPadding: EdgeInsets.all(16.0),
+                onToolTipClick: () => setState(() => selectedIndex = 2),
+                onTargetClick: () => setState(() => selectedIndex = 2),
+                disposeOnTap: false,
+                child: Icon(Icons.search),
+              ),
+              label: S.current.buyBooks,
+            ),
           ],
         ),
       ],
@@ -113,68 +153,74 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget buildFloatingActionButton() {
     return Visibility(
       visible: selectedIndex == 0,
-      child: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () async {
-          if (selectedIndex == 0) {
-            setState(() => working = true);
+      child: Showcase(
+        key: Keys.floatingActionButtonKey,
+        description: S.current.showcaseFloatingActionButton,
+        shapeBorder: CircleBorder(),
+        contentPadding: const EdgeInsets.all(16.0),
+        child: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () async {
+            if (selectedIndex == 0) {
+              setState(() => working = true);
 
-            String? isbn;
-            isbn = await BarcodeHelper.readBarcode(context);
-            // isbn = "97888089199222";
+              String? isbn;
+              isbn = await BarcodeHelper.readBarcode(context);
+              // isbn = "97888089199222";
 
-            if (isbn != null)
-              await startBookSellCreation(isbn);
-            else {
-              setState(() => working = false);
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text(S.current.noIsbnScanned),
-                action: SnackBarAction(
-                  label: S.current.manualAdd,
-                  onPressed: () async {
-                    String? isbn = await showDialog<String>(
-                        context: context,
-                        builder: (BuildContext context) {
-                          final TextEditingController isbnTextEditingController = TextEditingController();
-                          final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+              if (isbn != null)
+                await startBookSellCreation(isbn);
+              else {
+                setState(() => working = false);
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text(S.current.noIsbnScanned),
+                  action: SnackBarAction(
+                    label: S.current.manualAdd,
+                    onPressed: () async {
+                      String? isbn = await showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            final TextEditingController isbnTextEditingController = TextEditingController();
+                            final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-                          return AlertDialog(
-                            title: Text(S.current.insertIsbn),
-                            content: Form(
-                              key: formKey,
-                              child: TextFormField(keyboardType: TextInputType.number,
-                                validator: (String? value) {
-                                  if (value != null) if (value.length == 10 || value.length == 13) return null;
+                            return AlertDialog(
+                              title: Text(S.current.insertIsbn),
+                              content: Form(
+                                key: formKey,
+                                child: TextFormField(keyboardType: TextInputType.number,
+                                  validator: (String? value) {
+                                    if (value != null) if (value.length == 10 || value.length == 13) return null;
 
-                                  return S.current.isbnLengthError;
-                                },
-                                decoration: InputDecoration(hintText: "978..."),
-                                controller: isbnTextEditingController,
+                                    return S.current.isbnLengthError;
+                                  },
+                                  decoration: InputDecoration(hintText: "978..."),
+                                  controller: isbnTextEditingController,
+                                ),
                               ),
-                            ),
-                            actions: [
-                              ElevatedButton(
-                                child: Text(S.current.ok),
-                                onPressed: () {
-                                  if (formKey.currentState!.validate()) {
-                                    Navigator.of(context).pop(isbnTextEditingController.text);
-                                  }
-                                },
-                              ),
-                            ],
-                          )
-                        }
-                    );
+                              actions: [
+                                ElevatedButton(
+                                  child: Text(S.current.ok),
+                                  onPressed: () {
+                                    if (formKey.currentState!.validate()) {
+                                      Navigator.of(context).pop(isbnTextEditingController.text);
+                                    }
+                                  },
+                                ),
+                              ],
+                            )
+                          }
+                      );
 
-                    if (isbn != null) await startBookSellCreation(isbn);
-                  },
-                ),
-              ));
+                      if (isbn != null) await startBookSellCreation(isbn);
+                    },
+                  ),
+                ));
+              }
+            } else if (selectedIndex == 2) {
+              // TODO: Aggiungere libri alla ricerca.
             }
-          } else if (selectedIndex == 2) {
-            // TODO: Aggiungere libri alla ricerca.
-          }
-        },
+          },
+        ),
       ),
     );
   }

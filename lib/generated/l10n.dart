@@ -726,6 +726,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Use this button to add books you wanna sell.\nScan the corresponding ISBN (barcode) and Bookaround will get away with it.`
+  String get showcaseFloatingActionButton {
+    return Intl.message(
+      'Use this button to add books you wanna sell.\nScan the corresponding ISBN (barcode) and Bookaround will get away with it.',
+      name: 'showcaseFloatingActionButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `In this tab you'll be able to see your chats`
+  String get showcaseChat {
+    return Intl.message(
+      'In this tab you\'ll be able to see your chats',
+      name: 'showcaseChat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `In this section you'll be able to add books to your wishlist and see sellers nearby`
+  String get showcaseSearchBottom {
+    return Intl.message(
+      'In this section you\'ll be able to add books to your wishlist and see sellers nearby',
+      name: 'showcaseSearchBottom',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use this button to find books you're looking for (by title, author or ISBN) and add them to your wishlist`
+  String get showcaseAddToWishlist {
+    return Intl.message(
+      'Use this button to find books you\'re looking for (by title, author or ISBN) and add them to your wishlist',
+      name: 'showcaseAddToWishlist',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
