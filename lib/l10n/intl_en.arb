@@ -64,5 +64,7 @@
   "ok": "Ok",
   "isbnLengthError": "ISBNs are 10 or 13 characters long",
   "editImage": "Edit image",
-  "deleteImage": "Delete image"
+  "deleteImage": "Delete image",
+  "removeBookSearch": "Remove this book from wishlist?",
+  "removeBookSearchExtended": "If you'll remove this book from your wishlist, you will stop receiving notifications if a user tries to sell a copy of it."
 }

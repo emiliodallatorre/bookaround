@@ -70,6 +70,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "removeBookBecauseOtherSell" : MessageLookupByLibrary.simpleMessage("I sold this book out of Bookaround"),
     "removeBookBecauseSell" : MessageLookupByLibrary.simpleMessage("I sold this book on Bookaround"),
     "removeBookFromSell" : MessageLookupByLibrary.simpleMessage("Remove this insertion"),
+    "removeBookSearch" : MessageLookupByLibrary.simpleMessage("Remove this book from wishlist?"),
+    "removeBookSearchExtended" : MessageLookupByLibrary.simpleMessage("If you\'ll remove this book from your wishlist, you will stop receiving notifications if a user tries to sell a copy of it."),
     "requiredField" : MessageLookupByLibrary.simpleMessage("This field is required"),
     "responsibleUse" : MessageLookupByLibrary.simpleMessage("Responsible use"),
     "responsibleUseExtended" : MessageLookupByLibrary.simpleMessage("When you manually define this ISBN data, you are accepting that the users who - by now - will scan this ISBN, will use this data.\nWe cannot check every book insertion: please, insert this data correctly."),

@@ -39,4 +39,7 @@ class BookHelper {
 
   /// Elimina un libro in vendita, se l'utente ha i permessi per farlo.
   static Future<void> removeBookFromSell(String id) async => await References.booksCollection.doc(id).delete();
+
+  /// Elimina una ricerca di libro, se l'utente ha i permessi per farlo.
+  static Future<void> removeBookFromSearch(String id) async => await References.booksCollection.doc(id).delete();
 }

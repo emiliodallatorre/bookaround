@@ -5,6 +5,7 @@ import 'package:bookaround/models/isbn_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/helper/book_helper.dart';
+import 'package:bookaround/resources/provider/location_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -52,7 +53,7 @@ class SearchResultListElement extends StatelessWidget {
           );
 
           await BookHelper.createBookSearch(searchingBook);
-          await sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!);
+          await searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<LocationProvider>(context, listen: false).lastKnownLocation);
 
           Navigator.of(context).pop();
         },

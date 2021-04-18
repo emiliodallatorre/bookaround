@@ -70,6 +70,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "removeBookBecauseOtherSell" : MessageLookupByLibrary.simpleMessage("Ho venduto questo libro esternamente a Bookaround"),
     "removeBookBecauseSell" : MessageLookupByLibrary.simpleMessage("Ho venduto questo libro tramite Bookaround"),
     "removeBookFromSell" : MessageLookupByLibrary.simpleMessage("Rimuovi dalla vendita"),
+    "removeBookSearch" : MessageLookupByLibrary.simpleMessage("Rimuovere questo libro dalla ricerca?"),
+    "removeBookSearchExtended" : MessageLookupByLibrary.simpleMessage("Se rimuoverai questo libro dalla ricerca, non riceverai più notifiche quando un utente ne metterà in vendita una copia."),
     "requiredField" : MessageLookupByLibrary.simpleMessage("Questo campo è necessario"),
     "responsibleUse" : MessageLookupByLibrary.simpleMessage("Uso responsabile"),
     "responsibleUseExtended" : MessageLookupByLibrary.simpleMessage("Nel definire manualmente i dati di questo ISBN, accetti che gli utenti che dopo di te lo scansioneranno, possano attingere ai dati che ora inserirai.\nNon abbiamo la possibilità di controllare che ogni libro venga inserito correttamente: per favore, inserisci questi dati con cura."),

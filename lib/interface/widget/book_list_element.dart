@@ -1,7 +1,11 @@
+import 'package:bookaround/bloc/book_bloc.dart';
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/screen/book_screen.dart';
+import 'package:bookaround/interface/widget/confirm_search_removal_bottom_sheet.dart';
 import 'package:bookaround/models/book_model.dart';
+import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
+import 'package:bookaround/resources/helper/book_helper.dart';
 import 'package:bookaround/resources/provider/location_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -89,29 +93,43 @@ class BookListElement extends StatelessWidget {
   }
 
   Widget buildExpandableWidget(BuildContext context) {
-    return ExpansionTile(
-      title: Text(this.book.title!),
-      subtitle: Text(this.book.authorString),
-      leading: AspectRatio(
-        aspectRatio: 1.0,
-        child: CachedNetworkImage(
-          imageUrl: this.book.coverUrl!,
-          // Ignora i potenziali errori di immagine.
-          errorWidget: (BuildContext context, String stackTrace, dynamic error) => CachedNetworkImage(imageUrl: References.noCover),
-          placeholder: (BuildContext context, String imageUrl) => Center(child: CircularProgressIndicator()),
-        ),
-      ),
-      children: <Widget>[
-        if (this.results!.isEmpty)
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(S.current.noResults),
+    return GestureDetector(
+      onLongPress: () async {
+        bool wantsToRemove = (await showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          builder: (BuildContext context) => ConfirmSearchRemovalBottomSheet(book: this.book),
+        )) ?? false;
+
+        if (wantsToRemove) {
+          await BookHelper.removeBookFromSearch(this.book.id!);
+          await searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<LocationProvider>(context, listen: false).lastKnownLocation);
+        }
+      },
+      child: ExpansionTile(
+        title: Text(this.book.title!),
+        subtitle: Text(this.book.authorString),
+        leading: AspectRatio(
+          aspectRatio: 1.0,
+          child: CachedNetworkImage(
+            imageUrl: this.book.coverUrl!,
+            // Ignora i potenziali errori di immagine.
+            errorWidget: (BuildContext context, String stackTrace, dynamic error) => CachedNetworkImage(imageUrl: References.noCover),
+            placeholder: (BuildContext context, String imageUrl) => Center(child: CircularProgressIndicator()),
           ),
-        ...List.generate(
-          this.results!.length,
-          (int index) => BookListElement.result(book: this.results!.elementAt(index)),
         ),
-      ],
+        children: <Widget>[
+          if (this.results!.isEmpty)
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(S.current.noResults),
+            ),
+          ...List.generate(
+            this.results!.length,
+            (int index) => BookListElement.result(book: this.results!.elementAt(index)),
+          ),
+        ],
+      ),
     );
   }
 

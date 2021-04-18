@@ -64,5 +64,7 @@
   "ok": "Ok",
   "isbnLengthError": "Gli ISBN sono di 10 o 13 caratteri",
   "editImage": "Modifica immagine",
-  "deleteImage": "Elimina immagine"
+  "deleteImage": "Elimina immagine",
+  "removeBookSearch": "Rimuovere questo libro dalla ricerca?",
+  "removeBookSearchExtended": "Se rimuoverai questo libro dalla ricerca, non riceverai più notifiche quando un utente ne metterà in vendita una copia."
 }

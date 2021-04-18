@@ -706,6 +706,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Remove this book from wishlist?`
+  String get removeBookSearch {
+    return Intl.message(
+      'Remove this book from wishlist?',
+      name: 'removeBookSearch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If you'll remove this book from your wishlist, you will stop receiving notifications if a user tries to sell a copy of it.`
+  String get removeBookSearchExtended {
+    return Intl.message(
+      'If you\'ll remove this book from your wishlist, you will stop receiving notifications if a user tries to sell a copy of it.',
+      name: 'removeBookSearchExtended',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
