@@ -42,7 +42,8 @@
               "client_id": "619087397678-narv4931t4dckbb2v5445u2r79lb48rs.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "it.emiliodallatorre.bookaround"
+                "bundle_id": "it.emiliodallatorre.bookaround",
+                "app_store_id": "1551784127"
               }
             }
           ]
