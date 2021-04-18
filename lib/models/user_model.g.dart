@@ -14,6 +14,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
     surname: json['surname'] as String?,
     city: json['city'] as String?,
     profileImageUrl: json['profileImageUrl'] as String?,
+    hasGoneThroughShowcase: json['hasGoneThroughShowcase'] as bool?,
   );
 }
 
@@ -24,4 +25,5 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'surname': instance.surname,
       'city': instance.city,
       'profileImageUrl': instance.profileImageUrl,
+      'hasGoneThroughShowcase': instance.hasGoneThroughShowcase,
     };

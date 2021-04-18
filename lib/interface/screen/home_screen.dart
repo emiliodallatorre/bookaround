@@ -58,6 +58,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ..listenForChats(),
       builder: (BuildContext context, Widget? child) =>
           ShowCaseWidget(
+            autoPlay: true,
+            autoPlayDelay: Duration(seconds: 6),
             builder: Builder(builder: (BuildContext context) =>
                 Scaffold(
                   key: scaffoldKey,
@@ -68,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         visible: selectedIndex == 2,
                         child: Showcase(
                           key: Keys.searchTopKey,
-                          description: S.current.showcaseSearchBottom,
+                          description: S.current.showcaseAddToWishlist,
                           shapeBorder: CircleBorder(),
                           contentPadding: const EdgeInsets.all(16.0),
                           // onTargetClick: () => Navigator.of(context).pushNamed(SearchScreen.route),
@@ -89,6 +91,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
                 ),
             ),
+            onFinish: () async {
+
+            },
+            onStart: (int? _, GlobalKey __) async {
+              debugPrint("Lo showcase è iniziato, lo segnalo.");
+              Provider
+                  .of<UserModel>(context, listen: false)
+                  .hasGoneThroughShowcase = true;
+              await Provider.of<UserModel>(context, listen: false).updateOnServer();
+            },
           ),
     );
   }
@@ -124,9 +136,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 description: S.current.showcaseChat,
                 shapeBorder: CircleBorder(),
                 contentPadding: EdgeInsets.all(16.0),
-                onToolTipClick: () => setState(() => selectedIndex = 1),
-                onTargetClick: () => setState(() => selectedIndex = 1),
-                disposeOnTap: false,
+                // onToolTipClick: () => setState(() => selectedIndex = 1),
+                // onTargetClick: () => setState(() => selectedIndex = 1),
+                // disposeOnTap: false,
                 child: Icon(Icons.chat),
               ),
               label: S.current.chats,
@@ -137,9 +149,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 description: S.current.showcaseSearchBottom,
                 shapeBorder: CircleBorder(),
                 contentPadding: EdgeInsets.all(16.0),
-                onToolTipClick: () => setState(() => selectedIndex = 2),
-                onTargetClick: () => setState(() => selectedIndex = 2),
-                disposeOnTap: false,
+                // onToolTipClick: () => setState(() => selectedIndex = 2),
+                // onTargetClick: () => setState(() => selectedIndex = 2),
+                // disposeOnTap: false,
                 child: Icon(Icons.search),
               ),
               label: S.current.buyBooks,
@@ -151,75 +163,77 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget buildFloatingActionButton() {
-    return Visibility(
-      visible: selectedIndex == 0,
-      child: Showcase(
-        key: Keys.floatingActionButtonKey,
-        description: S.current.showcaseFloatingActionButton,
-        shapeBorder: CircleBorder(),
-        contentPadding: const EdgeInsets.all(16.0),
-        child: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () async {
-            if (selectedIndex == 0) {
-              setState(() => working = true);
+    return SafeArea(
+      child: Visibility(
+        visible: selectedIndex == 0,
+        child: Showcase(
+          key: Keys.floatingActionButtonKey,
+          description: S.current.showcaseFloatingActionButton,
+          shapeBorder: CircleBorder(),
+          contentPadding: const EdgeInsets.all(16.0),
+          child: FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: () async {
+              if (selectedIndex == 0) {
+                setState(() => working = true);
 
-              String? isbn;
-              isbn = await BarcodeHelper.readBarcode(context);
-              // isbn = "97888089199222";
+                String? isbn;
+                isbn = await BarcodeHelper.readBarcode(context);
+                // isbn = "97888089199222";
 
-              if (isbn != null)
-                await startBookSellCreation(isbn);
-              else {
-                setState(() => working = false);
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text(S.current.noIsbnScanned),
-                  action: SnackBarAction(
-                    label: S.current.manualAdd,
-                    onPressed: () async {
-                      String? isbn = await showDialog<String>(
-                          context: context,
-                          builder: (BuildContext context) {
-                            final TextEditingController isbnTextEditingController = TextEditingController();
-                            final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+                if (isbn != null)
+                  await startBookSellCreation(isbn);
+                else {
+                  setState(() => working = false);
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(S.current.noIsbnScanned),
+                    action: SnackBarAction(
+                      label: S.current.manualAdd,
+                      onPressed: () async {
+                        String? isbn = await showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) {
+                              final TextEditingController isbnTextEditingController = TextEditingController();
+                              final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-                            return AlertDialog(
-                              title: Text(S.current.insertIsbn),
-                              content: Form(
-                                key: formKey,
-                                child: TextFormField(keyboardType: TextInputType.number,
-                                  validator: (String? value) {
-                                    if (value != null) if (value.length == 10 || value.length == 13) return null;
+                              return AlertDialog(
+                                title: Text(S.current.insertIsbn),
+                                content: Form(
+                                  key: formKey,
+                                  child: TextFormField(keyboardType: TextInputType.number,
+                                    validator: (String? value) {
+                                      if (value != null) if (value.length == 10 || value.length == 13) return null;
 
-                                    return S.current.isbnLengthError;
-                                  },
-                                  decoration: InputDecoration(hintText: "978..."),
-                                  controller: isbnTextEditingController,
+                                      return S.current.isbnLengthError;
+                                    },
+                                    decoration: InputDecoration(hintText: "978..."),
+                                    controller: isbnTextEditingController,
+                                  ),
                                 ),
-                              ),
-                              actions: [
-                                ElevatedButton(
-                                  child: Text(S.current.ok),
-                                  onPressed: () {
-                                    if (formKey.currentState!.validate()) {
-                                      Navigator.of(context).pop(isbnTextEditingController.text);
-                                    }
-                                  },
-                                ),
-                              ],
-                            )
-                          }
-                      );
+                                actions: [
+                                  ElevatedButton(
+                                    child: Text(S.current.ok),
+                                    onPressed: () {
+                                      if (formKey.currentState!.validate()) {
+                                        Navigator.of(context).pop(isbnTextEditingController.text);
+                                      }
+                                    },
+                                  ),
+                                ],
+                              )
+                            }
+                        );
 
-                      if (isbn != null) await startBookSellCreation(isbn);
-                    },
-                  ),
-                ));
+                        if (isbn != null) await startBookSellCreation(isbn);
+                      },
+                    ),
+                  ));
+                }
+              } else if (selectedIndex == 2) {
+                // TODO: Aggiungere libri alla ricerca.
               }
-            } else if (selectedIndex == 2) {
-              // TODO: Aggiungere libri alla ricerca.
-            }
-          },
+            },
+          ),
         ),
       ),
     );

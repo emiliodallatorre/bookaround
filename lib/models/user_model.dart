@@ -12,6 +12,7 @@ class UserModel extends ChangeNotifier {
   String? phoneNumber;
   String? name, surname, city;
   String? profileImageUrl;
+  bool? hasGoneThroughShowcase;
 
   @JsonKey(ignore: true)
   DocumentReference? reference;
@@ -24,6 +25,7 @@ class UserModel extends ChangeNotifier {
     this.city,
     this.profileImageUrl,
     this.reference,
+    this.hasGoneThroughShowcase,
   });
 
   bool get isLogged => this.uid != null;
@@ -54,6 +56,7 @@ class UserModel extends ChangeNotifier {
     this.surname = updatedUser.surname;
     this.city = updatedUser.city;
     this.profileImageUrl = updatedUser.profileImageUrl;
+    this.hasGoneThroughShowcase = updatedUser.hasGoneThroughShowcase;
 
     this.reference = updatedUserReference;
 

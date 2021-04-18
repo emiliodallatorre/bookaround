@@ -21,12 +21,13 @@ class BookSellPage extends StatefulWidget {
 class _BookSellPageState extends State<BookSellPage> {
   @override
   void initState() {
-    WidgetsBinding.instance!.addPostFrameCallback((_) => ShowCaseWidget.of(context)?.startShowCase([
-          Keys.floatingActionButtonKey,
-          Keys.chatKey,
-          Keys.searchBottomKey,
-          Keys.searchTopKey,
-        ]));
+    if (!Provider.of<UserModel>(context, listen: false).hasGoneThroughShowcase!)
+      WidgetsBinding.instance!.addPostFrameCallback((_) => ShowCaseWidget.of(context)?.startShowCase([
+            Keys.floatingActionButtonKey,
+            Keys.chatKey,
+            Keys.searchBottomKey,
+            Keys.searchTopKey,
+          ]));
 
     super.initState();
   }
