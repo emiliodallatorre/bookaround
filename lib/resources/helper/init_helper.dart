@@ -57,7 +57,7 @@ class InitHelper {
   }
 
   Future<void> deinitialize() async {
-    await Navigator.of(context).pushNamedAndRemoveUntil(LoginScreen.route, (route) => false);
+    Navigator.of(context).pushNamedAndRemoveUntil(LoginScreen.route, (route) => false);
 
     await FirebaseAuth.instance.signOut();
     await FirebaseMessaging.instance.deleteToken();

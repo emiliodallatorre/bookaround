@@ -1,5 +1,4 @@
 import 'package:bookaround/references.dart';
-import 'package:bookaround/resources/helper/notifications_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -60,7 +59,7 @@ class UserModel extends ChangeNotifier {
 
     this.reference = updatedUserReference;
 
-    notifyListeners();
+    if (!empty) notifyListeners();
   }
 
   Future<void> updateOnServer() => this.reference!.update(this.toJson()).whenComplete(notifyListeners);
