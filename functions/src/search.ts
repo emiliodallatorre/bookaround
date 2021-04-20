@@ -56,7 +56,7 @@ export async function searchIsbnInIsbndb(isbn: string): Promise<any> {
 }
 
 export async function searchIsbnInFirebase(isbn: string): Promise<any> {
-    const query = await admin.firestore().collection("isbns").where(isbn.length == 13 ? "isbn13" : "isbn", "==", isbn).get();
+    const query = await admin.firestore().collection("isbns").where(isbn.length === 13 ? "isbn13" : "isbn", "==", isbn).get();
 
     if (query.docs.length === 0) {
         console.log("Il libro", isbn, "non è nel nostro database.");
