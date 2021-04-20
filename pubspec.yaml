@@ -27,14 +27,14 @@ dependencies:
   showcaseview: ^1.0.0
 
   # Firebase
-  cloud_firestore: ^1.0.5
-  firebase_auth: ^1.1.0
-  firebase_core: ^1.0.3
-  cloud_functions: ^1.0.3
-  firebase_messaging: ^9.1.1
-  firebase_storage: ^8.0.3
-  firebase_crashlytics: ^2.0.0
-  firebase_dynamic_links: ^2.0.0
+  cloud_firestore: ^1.0.6
+  firebase_auth: ^1.1.1
+  firebase_core: ^1.0.4
+  cloud_functions: ^1.0.4
+  firebase_messaging: ^9.1.2
+  firebase_storage: ^8.0.4
+  firebase_crashlytics: ^2.0.1
+  firebase_dynamic_links: ^2.0.1
 
   # Logica
   provider: ^5.0.0
@@ -50,7 +50,7 @@ dependencies:
   random_string: ^2.2.0-nullsafety
   shared_preferences: ^2.0.5
   timeago: ^3.0.2
-  overlay_support: ^1.2.0
+  overlay_support: ^1.2.1
 
   # Localizzazione
   flutter_google_places_hoc081098: ^1.0.0-nullsafety.1
