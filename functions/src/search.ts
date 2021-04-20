@@ -46,8 +46,11 @@ export async function searchIsbnInIsbndb(isbn: string): Promise<any> {
         return null;
     }
     else {
+        const jsonData = (await response.json());
+        if (jsonData["errorMessage"] !== undefined) return null;
+
         console.log("Il libro", isbn, "è su isbndb.");
-        const result = (await response.json())["book"];
+        const result = jsonData["book"];
         return result;
     }
 }
