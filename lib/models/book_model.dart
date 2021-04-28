@@ -41,7 +41,14 @@ class BookModel extends ChangeNotifier {
   @JsonKey(ignore: true)
   DocumentReference? reference;
 
-  String get authorString => this.authors!.reduce((value, element) => "$value, $element");
+  String get authorString {
+    if (this.authors!.isEmpty)
+      return "";
+    else if (this.authors!.length == 1)
+      return this.authors!.single;
+    else
+      return this.authors!.reduce((value, element) => "$value, $element");
+  }
 
   String get sureIsbn => this.isbn13 ?? this.isbn ?? "";
 
