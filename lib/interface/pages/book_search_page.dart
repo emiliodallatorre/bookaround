@@ -30,7 +30,7 @@ class BookSearchPage extends StatelessWidget {
             if (booksSnapshot.data!.isNotEmpty) {
               // Assegna i colori a caso
               final Map<String, HSVColor> bookColors = <String, HSVColor>{};
-              booksSnapshot.data!.forEach((element) => bookColors[element.sureIsbn] = HSVColor.fromAHSV(1.0, Random().nextDouble() * 360.0, 1.0, 1.0));
+              booksSnapshot.data!.forEach((element) => bookColors[element.secureIsbn] = HSVColor.fromAHSV(1.0, Random().nextDouble() * 360.0, 1.0, 1.0));
 
               return Consumer<LocationProvider>(
                 builder: (BuildContext context, LocationProvider locationProvider, Widget? child) {
@@ -64,7 +64,7 @@ class BookSearchPage extends StatelessWidget {
                                         (BookModel book) => Marker(
                                           markerId: MarkerId(book.id!),
                                           position: LatLng(book.modelizedLocation.latitude, book.modelizedLocation.longitude),
-                                          icon: BitmapDescriptor.defaultMarkerWithHue(bookColors[book.sureIsbn]!.hue),
+                                          icon: BitmapDescriptor.defaultMarkerWithHue(bookColors[book.secureIsbn]!.hue),
                                           onTap: () async {
                                             await Future.delayed(Duration(milliseconds: 256));
                                             Navigator.of(context).pushNamed(BookScreen.route, arguments: book);
@@ -89,7 +89,7 @@ class BookSearchPage extends StatelessWidget {
                         itemCount: booksSnapshot.data!.length,
                         itemBuilder: (BuildContext context, int index) => BookListElement.wanted(
                           book: booksSnapshot.data!.elementAt(index),
-                          color: bookColors[booksSnapshot.data!.elementAt(index).sureIsbn]!.toColor(),
+                          color: bookColors[booksSnapshot.data!.elementAt(index).secureIsbn]!.toColor(),
                           results: booksSnapshot.data!.elementAt(index).results,
                         ),
                       ),

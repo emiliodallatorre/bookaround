@@ -50,7 +50,7 @@ class BookCover extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(S.current.isbn + ": " + this.book!.sureIsbn),
+              Text(S.current.isbn + ": " + this.book!.secureIsbn),
               if (this.book!.location != null) Text(S.current.position + ": " + this.book!.location!.description!),
             ],
           ),

@@ -33,7 +33,7 @@ class BookHelper {
 
     book.reference = bookReference;
 
-    debugPrint("Aggiunto alle ricerche ${book.sureIsbn}.");
+    debugPrint("Aggiunto alle ricerche ${book.secureIsbn}.");
     return book;
   }
 
