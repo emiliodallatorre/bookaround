@@ -14,6 +14,7 @@ class AuthHelper {
     if (!kIsWeb)
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: phoneNumber,
+        // forceResendingToken: ,
         verificationCompleted: (PhoneAuthCredential credential) {
           debugPrint("La verifica è andata a buon fine!");
         },
@@ -23,7 +24,7 @@ class AuthHelper {
           // Provider.of<LoginScreenState>(context, listen: false).setLoginStep(LoginStep.ERROR);
         },
         codeSent: (String verificationId, int? resendToken) {
-          debugPrint("Il codice è stato spedito!");
+          debugPrint("Il codice è stato spedito, il codice di verifica è $verificationId!");
           Provider.of<LoginScreenState>(context, listen: false).setVerificationCode(verificationId);
         },
         codeAutoRetrievalTimeout: (String verificationId) {
