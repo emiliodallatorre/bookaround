@@ -29,7 +29,7 @@ class ChatModel {
   UserModel get recipient => participantsUsers!.single;
 
   bool get hasUnreadMessages {
-    if(!participants!.contains(lastMessage!.senderUid)) return false;
+    if (!participants!.contains(lastMessage!.senderUid)) return false;
     if (lastAccess != null && lastMessageDateTime != null) return lastAccess!.isBefore(lastMessageDateTime!);
 
     debugPrint("Segno la chat come non letta per insufficienza di dati.");
