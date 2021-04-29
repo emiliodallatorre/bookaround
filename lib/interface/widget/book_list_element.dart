@@ -96,10 +96,11 @@ class BookListElement extends StatelessWidget {
     return GestureDetector(
       onLongPress: () async {
         bool wantsToRemove = (await showModalBottomSheet(
-          context: context,
-          isScrollControlled: true,
-          builder: (BuildContext context) => ConfirmSearchRemovalBottomSheet(book: this.book),
-        )) ?? false;
+              context: context,
+              isScrollControlled: true,
+              builder: (BuildContext context) => ConfirmSearchRemovalBottomSheet(book: this.book),
+            )) ??
+            false;
 
         if (wantsToRemove) {
           await BookHelper.removeBookFromSearch(this.book.id!);

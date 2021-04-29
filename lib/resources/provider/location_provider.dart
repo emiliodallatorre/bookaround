@@ -30,6 +30,7 @@ class LocationProvider extends ChangeNotifier {
 
   /// Restituisce la location o null in caso di errori.
   bool isLoadingLocation = false;
+
   Future<LatLng?> getLocation() async {
     try {
       debugPrint("Richiedo la localizzazione.");

@@ -6,17 +6,14 @@ part of 'notification_data_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-NotificationDataModel _$NotificationDataModelFromJson(
-    Map<String, dynamic> json) {
+NotificationDataModel _$NotificationDataModelFromJson(Map<String, dynamic> json) {
   return NotificationDataModel(
     type: _$enumDecode(_$NotificationTypeEnumMap, json['type']),
     notificationData: json['notificationData'] as String,
   );
 }
 
-Map<String, dynamic> _$NotificationDataModelToJson(
-        NotificationDataModel instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$NotificationDataModelToJson(NotificationDataModel instance) => <String, dynamic>{
       'type': _$NotificationTypeEnumMap[instance.type],
       'notificationData': instance.notificationData,
     };

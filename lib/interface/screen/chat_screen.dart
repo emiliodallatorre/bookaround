@@ -8,7 +8,6 @@ import 'package:bookaround/models/messaging/message_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/resources/helper/chat_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:random_string/random_string.dart';
 

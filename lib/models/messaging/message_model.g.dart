@@ -11,17 +11,13 @@ MessageModel _$MessageModelFromJson(Map<String, dynamic> json) {
     id: json['id'] as String?,
     senderUid: json['senderUid'] as String?,
     body: json['body'] as String?,
-    sentDateTime: json['sentDateTime'] == null
-        ? null
-        : DateTime.parse(json['sentDateTime'] as String),
-    messageType:
-        _$enumDecodeNullable(_$MessageTypeEnumMap, json['messageType']),
+    sentDateTime: json['sentDateTime'] == null ? null : DateTime.parse(json['sentDateTime'] as String),
+    messageType: _$enumDecodeNullable(_$MessageTypeEnumMap, json['messageType']),
     videoThumbUrl: json['videoThumbUrl'] as String?,
   );
 }
 
-Map<String, dynamic> _$MessageModelToJson(MessageModel instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$MessageModelToJson(MessageModel instance) => <String, dynamic>{
       'id': instance.id,
       'senderUid': instance.senderUid,
       'body': instance.body,
