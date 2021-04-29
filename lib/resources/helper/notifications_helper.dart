@@ -25,7 +25,6 @@ class NotificationsHelper {
 
     switch (notificationData.type) {
       case NotificationType.CHAT:
-        // TODO: Rendere clickabile.
         showSimpleNotification(
           Text(event.notification!.title!),
           subtitle: Text(event.notification!.body!),

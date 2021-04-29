@@ -30,7 +30,7 @@ class Bookaround extends StatelessWidget {
         ChangeNotifierProvider(create: (BuildContext context) => SettingsModel()),
         ChangeNotifierProvider(create: (BuildContext context) => LocationProvider()),
       ],
-      builder: (BuildContext context, Widget? child) => OverlaySupport(
+      builder: (BuildContext context, Widget? child) => OverlaySupport.global(
         child: MaterialApp(
           title: References.appName,
           theme: ThemeData(primarySwatch: Colors.teal, fontFamily: "Poppins"),

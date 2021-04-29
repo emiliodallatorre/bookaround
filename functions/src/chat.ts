@@ -76,7 +76,7 @@ export const getChatId = functions.https.onCall(async (data, context) => {
 export const updateChatModel = functions.firestore.document('/chats/{chatId}/messages/{messageId}').onCreate(async (snapshot, context) => {
     const parentChat: admin.firestore.DocumentReference = snapshot.ref.parent.parent as admin.firestore.DocumentReference
 
-    const message: admin.firestore.DocumentData = (await snapshot.ref.get()).data() as admin.firestore.DocumentData
+    const message: admin.firestore.DocumentData = (await snapshot.ref.parent.orderBy("sentDateTime", "desc").get()).docs[0].data()
 
     // Aggiorniamo la chat.
     await parentChat.update({ "lastMessageDateTime": getCurrentDateAsString(), lastMessage: message })
@@ -116,8 +116,8 @@ async function sendMessageNotification(message: functions.firestore.QueryDocumen
             sound: "default",
         },
         data: {
-            "type": "chat",
-            "id": chatId,
+            "type": "CHAT",
+            "notificationData": chatId,
         },
     }
 

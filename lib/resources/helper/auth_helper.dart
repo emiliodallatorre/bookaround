@@ -16,7 +16,6 @@ class AuthHelper {
         phoneNumber: phoneNumber,
         verificationCompleted: (PhoneAuthCredential credential) {
           debugPrint("La verifica è andata a buon fine!");
-          // TODO: Implementare meglio.
         },
         verificationFailed: (FirebaseAuthException e) {
           debugPrint("La verifica automatica non è andata a buon fine!");
