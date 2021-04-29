@@ -37,7 +37,7 @@ class BookSearchPage extends StatelessWidget {
                   if (locationProvider.permissionStatus == null)
                     locationProvider.getPermissionStatus();
                   else if (locationProvider.permissionStatus == PermissionStatus.granted) {
-                    if (locationProvider.lastKnownLocation == null) {
+                    if (locationProvider.lastKnownLocation == null && !locationProvider.isLoadingLocation) {
                       locationProvider.getLocation();
                       searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<LocationProvider>(context, listen: false).lastKnownLocation);
                     }

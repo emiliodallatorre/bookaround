@@ -29,13 +29,19 @@ class LocationProvider extends ChangeNotifier {
   Future<PermissionStatus> requestLocationPermission() async => await location.requestPermission();
 
   /// Restituisce la location o null in caso di errori.
+  bool isLoadingLocation = false;
   Future<LatLng?> getLocation() async {
     try {
+      debugPrint("Richiedo la localizzazione.");
+      isLoadingLocation = true;
       final LocationData locationData = await location.getLocation();
       final LatLng lastKnownLocation = LatLng(locationData.latitude!, locationData.longitude!);
 
       this.lastKnownLocation = lastKnownLocation;
+
+      debugPrint("Ho ottenuto la localizzazione.");
       notifyListeners();
+      isLoadingLocation = false;
       return lastKnownLocation;
     } catch (e) {
       debugPrint(e.toString());
