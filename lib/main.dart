@@ -8,6 +8,7 @@ import 'package:bookaround/interface/screen/login_screen.dart';
 import 'package:bookaround/interface/screen/profile_editor_screen.dart';
 import 'package:bookaround/interface/screen/search_screen.dart';
 import 'package:bookaround/interface/screen/splash_screen.dart';
+import 'package:bookaround/interface/screen/web_view_screen.dart';
 import 'package:bookaround/models/settings_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
@@ -64,6 +65,7 @@ class Bookaround extends StatelessWidget {
             SearchScreen.route: (BuildContext context) => SearchScreen(),
             BookScreen.route: (BuildContext context) => BookScreen(),
             ChatScreen.route: (BuildContext context) => ChatScreen(),
+            WebViewScreen.route: (BuildContext context) => WebViewScreen(),
           },
         ),
       ),

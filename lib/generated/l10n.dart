@@ -769,6 +769,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Terms and conditions`
+  String get termsAndConditions {
+    return Intl.message(
+      'Terms and conditions',
+      name: 'termsAndConditions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Privacy policy`
+  String get privacyPolicy {
+    return Intl.message(
+      'Privacy policy',
+      name: 'privacyPolicy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Before logging in read our`
+  String get beforeLogin {
+    return Intl.message(
+      'Before logging in read our',
+      name: 'beforeLogin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `and our`
+  String get andOur {
+    return Intl.message(
+      'and our',
+      name: 'andOur',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

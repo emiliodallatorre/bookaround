@@ -15,4 +15,7 @@ class References {
   static const String googleApiKey = "AIzaSyDTMDGyTZOPkaesYHW4vYfVMhUHafc8nl0";
 
   static const String noCover = "https://firebasestorage.googleapis.com/v0/b/bookaround-firebase.appspot.com/o/noCover.jpg?alt=media&token=2dc45426-45cf-4333-93a1-dd3e9ed415b2";
+
+  static const String privacyPolicyUrl = "https://bookaround.app/privacy.html";
+  static const String termsAndConditionsUrl = "https://bookaround.app/terms.html";
 }

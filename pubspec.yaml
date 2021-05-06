@@ -51,6 +51,8 @@ dependencies:
   shared_preferences: ^2.0.5
   timeago: ^3.0.2
   overlay_support: ^1.2.1
+  webview_flutter: ^2.0.4
+  tuple: ^2.0.0
 
   # Localizzazione
   flutter_google_places_hoc081098: ^1.0.0-nullsafety.1

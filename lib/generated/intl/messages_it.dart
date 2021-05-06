@@ -23,8 +23,11 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "add": MessageLookupByLibrary.simpleMessage("Aggiungi"),
         "addImage": MessageLookupByLibrary.simpleMessage("Aggiungi immagine"),
+        "andOur": MessageLookupByLibrary.simpleMessage("e i nostri"),
         "authors": MessageLookupByLibrary.simpleMessage(
             "Autori, separati da una virgola"),
+        "beforeLogin": MessageLookupByLibrary.simpleMessage(
+            "Prima di accedere consulta la nostra"),
         "bookError": MessageLookupByLibrary.simpleMessage(
             "C\'è stato un errore con questo libro"),
         "bookNotFoundError":
@@ -84,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Numero di telefono"),
         "position": MessageLookupByLibrary.simpleMessage("Posizione"),
         "present": MessageLookupByLibrary.simpleMessage("Presente"),
+        "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy policy"),
         "proceed": MessageLookupByLibrary.simpleMessage("Procedi"),
         "proximitySearch":
             MessageLookupByLibrary.simpleMessage("Ricerca di prossimità"),
@@ -119,6 +123,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "sourceCamera": MessageLookupByLibrary.simpleMessage("Fotocamera"),
         "sourceGallery": MessageLookupByLibrary.simpleMessage("Galleria"),
         "surname": MessageLookupByLibrary.simpleMessage("Cognome"),
+        "termsAndConditions":
+            MessageLookupByLibrary.simpleMessage("Termini e condizioni"),
         "title": MessageLookupByLibrary.simpleMessage("Titolo del libro"),
         "undo": MessageLookupByLibrary.simpleMessage("Annulla"),
         "usage": MessageLookupByLibrary.simpleMessage("Utilizzo"),

@@ -23,8 +23,11 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "add": MessageLookupByLibrary.simpleMessage("Add"),
         "addImage": MessageLookupByLibrary.simpleMessage("Add image"),
+        "andOur": MessageLookupByLibrary.simpleMessage("and our"),
         "authors": MessageLookupByLibrary.simpleMessage(
             "Authors, separated by a comma"),
+        "beforeLogin":
+            MessageLookupByLibrary.simpleMessage("Before logging in read our"),
         "bookError": MessageLookupByLibrary.simpleMessage(
             "An error occurred with this book"),
         "bookNotFoundError":
@@ -81,6 +84,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number"),
         "position": MessageLookupByLibrary.simpleMessage("Location"),
         "present": MessageLookupByLibrary.simpleMessage("Present"),
+        "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy policy"),
         "proceed": MessageLookupByLibrary.simpleMessage("Proceed"),
         "proximitySearch":
             MessageLookupByLibrary.simpleMessage("Proximity search"),
@@ -116,6 +120,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "sourceCamera": MessageLookupByLibrary.simpleMessage("Camera"),
         "sourceGallery": MessageLookupByLibrary.simpleMessage("Gallery"),
         "surname": MessageLookupByLibrary.simpleMessage("Surname"),
+        "termsAndConditions":
+            MessageLookupByLibrary.simpleMessage("Terms and conditions"),
         "title": MessageLookupByLibrary.simpleMessage("Book title"),
         "undo": MessageLookupByLibrary.simpleMessage("Undo"),
         "usage": MessageLookupByLibrary.simpleMessage("Usage"),

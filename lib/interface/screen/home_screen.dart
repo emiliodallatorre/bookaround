@@ -7,6 +7,7 @@ import 'package:bookaround/interface/screen/book_editor_screen.dart';
 import 'package:bookaround/interface/screen/isbn_editor_screen.dart';
 import 'package:bookaround/interface/screen/profile_editor_screen.dart';
 import 'package:bookaround/interface/screen/search_screen.dart';
+import 'package:bookaround/interface/screen/web_view_screen.dart';
 import 'package:bookaround/interface/widget/user_avatar.dart';
 import 'package:bookaround/keys.dart';
 import 'package:bookaround/models/book_model.dart';
@@ -21,6 +22,7 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:showcaseview/showcaseview.dart';
+import 'package:tuple/tuple.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String route = "/homeScreen";
@@ -255,6 +257,15 @@ class _HomeScreenState extends State<HomeScreen> {
           ListTile(
             title: Text(S.current.editProfile),
             onTap: () => Navigator.of(context).pushNamed(ProfileEditorScreen.route),
+          ),
+          ListTile(
+            title: Text(S.current.privacyPolicy),
+            onTap: () => Navigator.of(context).pushNamed(WebViewScreen.route, arguments: Tuple2<String, String>(S.current.privacyPolicy, References.privacyPolicyUrl)),
+          ),
+          ListTile(
+            title: Text(S.current.termsAndConditions),
+            onTap: () => Navigator.of(context).pushNamed(WebViewScreen.route, arguments: Tuple2<String, String>(S.current.termsAndConditions, References.termsAndConditionsUrl)),
+
           ),
           Spacer(),
           Padding(

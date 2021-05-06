@@ -70,5 +70,9 @@
   "showcaseFloatingActionButton": "Usa questo pulsante per aggiungere i libri che vuoi vendere. Scansiona il relativo ISBN (il codice a barre) e Bookaround si occuperà di tutto.",
   "showcaseChat": "In questa sezione potrai vedere le chat che hai iniziato con gli altri utenti",
   "showcaseSearchBottom": "In questa sezione potrai aggiungere libri alla tua wishlist e vederne le copie in vendita nei dintorni",
-  "showcaseAddToWishlist": "Usa questo pulsante per cercare i libri che stai cercando (per titolo, autore o ISBN) ed aggiungerli alla lista desideri"
+  "showcaseAddToWishlist": "Usa questo pulsante per cercare i libri che stai cercando (per titolo, autore o ISBN) ed aggiungerli alla lista desideri",
+  "termsAndConditions": "Termini e condizioni",
+  "privacyPolicy": "Privacy policy",
+  "beforeLogin": "Prima di accedere consulta la nostra",
+  "andOur": "e i nostri"
 }
