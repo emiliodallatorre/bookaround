@@ -265,7 +265,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ListTile(
             title: Text(S.current.termsAndConditions),
             onTap: () => Navigator.of(context).pushNamed(WebViewScreen.route, arguments: Tuple2<String, String>(S.current.termsAndConditions, References.termsAndConditionsUrl)),
-
           ),
           Spacer(),
           Padding(

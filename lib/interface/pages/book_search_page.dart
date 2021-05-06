@@ -74,9 +74,7 @@ class BookSearchPage extends StatelessWidget {
                                       .toSet() ??
                                   <Marker>[].toSet(),
                               onMapCreated: (GoogleMapController controller) {
-                                if (Theme.of(context).brightness == Brightness.light)
-                                  controller.setMapStyle(MapStyles.lightMap);
-                                else
+                                if (Theme.of(context).brightness != Brightness.light)
                                   controller.setMapStyle(MapStyles.darkMap);
                               },
                               gestureRecognizers: Set()..add(Factory<PanGestureRecognizer>(() => PanGestureRecognizer())),

@@ -102,9 +102,7 @@ class BookScreen extends StatelessWidget {
             myLocationButtonEnabled: false,
             markers: <Marker>[Marker(markerId: MarkerId(_book!.id!), position: _book!.modelizedLocation)].toSet(),
             onMapCreated: (GoogleMapController controller) {
-              if (Theme.of(context).brightness == Brightness.light)
-                controller.setMapStyle(MapStyles.lightMap);
-              else
+              if (Theme.of(context).brightness != Brightness.light)
                 controller.setMapStyle(MapStyles.darkMap);
             },
           ),
