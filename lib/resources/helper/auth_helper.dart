@@ -38,6 +38,8 @@ class AuthHelper {
   }
 
   static Future<void> loginWithCredential(String? verificationId, String smsCode, [ConfirmationResult? confirmationResult]) async {
+    debugPrint("Provo a verificare $smsCode.");
+
     UserCredential? credential;
     if (!kIsWeb) {
       assert(verificationId != null);
