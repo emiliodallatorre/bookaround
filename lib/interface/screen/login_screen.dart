@@ -1,8 +1,10 @@
 import 'package:bookaround/assets.dart';
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/screen/profile_editor_screen.dart';
+import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/resources/helper/auth_helper.dart';
 import 'package:bookaround/resources/helper/init_helper.dart';
+import 'package:bookaround/resources/helper/notifications_helper.dart';
 import 'package:code_field/code_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -150,6 +152,7 @@ class LoginScreenState extends ChangeNotifier {
 
       await AuthHelper.loginWithCredential(this.verificationCode, this.codeController.value, confirmationResult);
       await InitHelper(context).initializeUser();
+      await NotificationsHelper.initializeNotifications(Provider.of<UserModel>(context, listen: false), context);
 
       Navigator.of(context).pushReplacementNamed(ProfileEditorScreen.route);
     } catch (e) {
