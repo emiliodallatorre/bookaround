@@ -72,7 +72,7 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Expanded(child: Image(image: Images.panda)),
+                          Expanded(child: Image(image: Images.logo)),
                           Spacer(
                             flex: 3,
                           ),
