@@ -25,6 +25,8 @@ void main() {
 class Bookaround extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final MaterialColor mainColor = Colors.teal;
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (BuildContext context) => UserModel(uid: "")),
@@ -34,16 +36,14 @@ class Bookaround extends StatelessWidget {
       builder: (BuildContext context, Widget? child) => OverlaySupport.global(
         child: MaterialApp(
           title: References.appName,
-          theme: ThemeData(primarySwatch: Colors.teal, fontFamily: "Poppins"),
+          theme: ThemeData(primarySwatch: mainColor, fontFamily: "Poppins"),
           darkTheme: ThemeData(
             fontFamily: "Poppins",
             brightness: Brightness.dark,
-            primarySwatch: Colors.teal,
-            accentColor: Colors.teal[500],
-            toggleableActiveColor: Colors.teal[500],
-            textSelectionTheme: TextSelectionThemeData(
-              selectionColor: Colors.teal[200],
-            ),
+            primarySwatch: mainColor,
+            accentColor: mainColor[500],
+            toggleableActiveColor: mainColor[500],
+            textSelectionTheme: TextSelectionThemeData(selectionColor: mainColor[200]),
           ),
           themeMode: ThemeMode.system,
           initialRoute: SplashScreen.route,
@@ -51,9 +51,6 @@ class Bookaround extends StatelessWidget {
           localizationsDelegates: <LocalizationsDelegate>[
             S.delegate,
             GlobalMaterialLocalizations.delegate,
-            /*
-              GlobalCupertinoLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,*/
           ],
           routes: <String, Widget Function(BuildContext)>{
             SplashScreen.route: (BuildContext context) => SplashScreen(),
