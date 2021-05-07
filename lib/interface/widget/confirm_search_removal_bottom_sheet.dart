@@ -10,22 +10,24 @@ class ConfirmSearchRemovalBottomSheet<bool> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      shrinkWrap: true,
-      children: [
-        BookCover(book: book, horizontalPadding: false),
-        Text(S.current.removeBookSearch, style: Theme.of(context).textTheme.headline6),
-        Text(S.current.removeBookSearchExtended),
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Spacer(),
-            TextButton(child: Text(S.current.undo), onPressed: () => Navigator.of(context).pop(false)),
-            ElevatedButton(child: Text(S.current.ok), onPressed: () => Navigator.of(context).pop(true)),
-          ],
-        ),
-      ],
+    return SafeArea(
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        shrinkWrap: true,
+        children: [
+          BookCover(book: book, horizontalPadding: false),
+          Text(S.current.removeBookSearch, style: Theme.of(context).textTheme.headline6),
+          Text(S.current.removeBookSearchExtended),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Spacer(),
+              TextButton(child: Text(S.current.undo), onPressed: () => Navigator.of(context).pop(false)),
+              ElevatedButton(child: Text(S.current.ok), onPressed: () => Navigator.of(context).pop(true)),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

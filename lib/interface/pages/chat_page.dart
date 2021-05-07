@@ -18,7 +18,7 @@ class ChatPage extends StatelessWidget {
               itemCount: chatsSnapshot.data!.length,
               itemBuilder: (BuildContext context, int index) => ListTile(
                 title: Text(chatsSnapshot.data!.elementAt(index).recipient.displayName),
-                subtitle: Text(chatsSnapshot.data!.elementAt(index).lastMessage!.displayableBody),
+                subtitle: Text(chatsSnapshot.data!.elementAt(index).lastMessage!.displayableBody, maxLines: 2, overflow: TextOverflow.ellipsis),
                 trailing: chatsSnapshot.data!.elementAt(index).hasUnreadMessages ? Icon(Icons.circle_notifications, color: Theme.of(context).accentColor) : null,
                 onTap: () {
                   Provider.of<ChatBloc>(context, listen: false).chatsListener!.pause();
