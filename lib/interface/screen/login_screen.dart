@@ -88,10 +88,18 @@ class LoginScreen extends StatelessWidget {
                                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 decoration: InputDecoration(labelText: S.current.phoneNumber, prefixText: "+39"),
                               )
-                            : InputCodeField(
-                                control: state.codeController,
-                                autofocus: true,
-                                decoration: InputCodeDecoration(textStyle: Theme.of(context).textTheme.headline5),
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  InputCodeField(
+                                    control: state.codeController,
+                                    autofocus: true,
+                                    decoration: InputCodeDecoration(textStyle: Theme.of(context).textTheme.headline5),
+                                  ),
+                                  SizedBox(height: 8.0),
+                                  Text(S.current.insertSmsCode, style: Theme.of(context).textTheme.caption),
+                                ],
                               ),
                       ),
                       ElevatedButton(

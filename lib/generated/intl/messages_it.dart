@@ -53,6 +53,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "highlight": MessageLookupByLibrary.simpleMessage(
             "Il libro presenta segni di evidenziatore"),
         "insertIsbn": MessageLookupByLibrary.simpleMessage("Inserisci ISBN"),
+        "insertSmsCode": MessageLookupByLibrary.simpleMessage(
+            "Inserisci il codice che hai ricevuto tramite SMS"),
         "isbn": MessageLookupByLibrary.simpleMessage("ISBN"),
         "isbnLengthError": MessageLookupByLibrary.simpleMessage(
             "Gli ISBN sono di 10 o 13 caratteri"),

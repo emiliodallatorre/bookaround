@@ -809,6 +809,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Insert the code you received by SMS`
+  String get insertSmsCode {
+    return Intl.message(
+      'Insert the code you received by SMS',
+      name: 'insertSmsCode',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -74,5 +74,6 @@
   "termsAndConditions": "Terms and conditions",
   "privacyPolicy": "Privacy policy",
   "beforeLogin": "Before logging in read our",
-  "andOur": "and our"
+  "andOur": "and our",
+  "insertSmsCode": "Insert the code you received by SMS"
 }
