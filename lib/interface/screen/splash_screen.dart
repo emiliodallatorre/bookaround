@@ -1,9 +1,12 @@
 import 'package:bookaround/interface/screen/home_screen.dart';
 import 'package:bookaround/interface/screen/login_screen.dart';
+import 'package:bookaround/interface/screen/profile_editor_screen.dart';
+import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/helper/init_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String route = "/splashScreen";
@@ -23,8 +26,10 @@ class _SplashScreenState extends State<SplashScreen> {
         Duration elapsedTime = DateTime.now().difference(firstFrame);
         if (elapsedTime < Duration(seconds: 2)) await Future.delayed(Duration(seconds: 2) - elapsedTime);
 
-        if (isLogged)
+        if (isLogged && Provider.of<UserModel>(context, listen: false).name != null)
           Navigator.of(context).pushReplacementNamed(HomeScreen.route);
+        else if (isLogged && Provider.of<UserModel>(context, listen: false).name == null)
+          Navigator.of(context).pushReplacementNamed(ProfileEditorScreen.route);
         else
           Navigator.of(context).pushReplacementNamed(LoginScreen.route);
       });

@@ -15,8 +15,15 @@ class AuthHelper {
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: phoneNumber,
         // forceResendingToken: ,
-        verificationCompleted: (PhoneAuthCredential credential) {
+        verificationCompleted: (PhoneAuthCredential credential) async {
           debugPrint("La verifica è andata a buon fine!");
+
+          final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+
+          context.read<LoginScreenState>().codeController.value = credential.smsCode;
+          context.read<LoginScreenState>().autoVerification = true;
+          await waitForUser(userCredential.user!.uid);
+          await context.read<LoginScreenState>().goHome(context);
         },
         verificationFailed: (FirebaseAuthException e) {
           debugPrint("La verifica automatica non è andata a buon fine!");
@@ -51,10 +58,14 @@ class AuthHelper {
       credential = await confirmationResult!.confirm(smsCode);
     }
 
-    while (!(await References.usersCollection.doc(credential.user!.uid).get()).exists) {
-      await Future.delayed(Duration(seconds: 2));
-    }
+    await waitForUser(credential.user!.uid);
 
     debugPrint("Login effettuato con successo.");
+  }
+
+  static Future<void> waitForUser(final String uid) async {
+    while (!(await References.usersCollection.doc(uid).get()).exists) {
+      await Future.delayed(Duration(seconds: 2));
+    }
   }
 }

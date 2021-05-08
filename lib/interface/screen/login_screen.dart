@@ -137,6 +137,7 @@ class LoginScreenState extends ChangeNotifier {
   InputCodeControl codeController = InputCodeControl();
 
   String? verificationCode;
+  bool autoVerification = false;
 
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -155,19 +156,25 @@ class LoginScreenState extends ChangeNotifier {
   }
 
   Future<void> loginWithCredential(BuildContext context) async {
+    if (this.autoVerification) return;
+
     try {
       if (kIsWeb) debugPrint("L'ambiente è web, confirmationResult è $confirmationResult.");
 
       await AuthHelper.loginWithCredential(this.verificationCode, this.codeController.value, confirmationResult);
-      await InitHelper(context).initializeUser();
-      await NotificationsHelper.initializeNotifications(Provider.of<UserModel>(context, listen: false), context);
-
-      Navigator.of(context).pushReplacementNamed(ProfileEditorScreen.route);
+      await goHome(context);
     } catch (e) {
       debugPrint(e.toString());
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(S.current.wrongCode)));
       codeController.clear();
     }
+  }
+
+  Future<void> goHome(BuildContext context) async {
+    await InitHelper(context).initializeUser();
+    await NotificationsHelper.initializeNotifications(Provider.of<UserModel>(context, listen: false), context);
+
+    Navigator.of(context).pushReplacementNamed(ProfileEditorScreen.route);
   }
 
   void setConfirmationResult(ConfirmationResult? confirmationResult) => this.confirmationResult = confirmationResult;
