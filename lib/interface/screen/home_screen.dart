@@ -21,6 +21,7 @@ import 'package:bookaround/resources/helper/init_helper.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:share/share.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:tuple/tuple.dart';
 
@@ -255,8 +256,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
           ),
           ListTile(
+            leading: Icon(Icons.account_circle),
             title: Text(S.current.editProfile),
             onTap: () => Navigator.of(context).pushNamed(ProfileEditorScreen.route),
+          ),
+          ListTile(
+            leading: Icon(Icons.person_add),
+            title: Text(S.current.inviteAFriend),
+            onTap: () => Share.share(References.sharableAppLink),
           ),
           ListTile(
             title: Text(S.current.privacyPolicy),

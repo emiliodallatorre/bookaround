@@ -75,5 +75,6 @@
   "privacyPolicy": "Privacy policy",
   "beforeLogin": "Before logging in read our",
   "andOur": "and our",
-  "insertSmsCode": "Insert the code you received by SMS"
+  "insertSmsCode": "Insert the code you received by SMS",
+  "inviteAFriend": "Invite a friend"
 }

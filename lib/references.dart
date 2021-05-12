@@ -18,4 +18,6 @@ class References {
 
   static const String privacyPolicyUrl = "https://bookaround.app/privacy.html";
   static const String termsAndConditionsUrl = "https://bookaround.app/terms.html";
+
+  static const String sharableAppLink = "https://bookaround.app/inapp/get";
 }
