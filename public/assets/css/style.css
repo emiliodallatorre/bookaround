@@ -1,0 +1,42 @@
+html * {
+  font-family: Poppins, Roboto, Helvetica;
+}
+
+div.feature-item i {
+  background: #009688 !important;
+  -webkit-background-clip: text !important;
+}
+
+li.social-linkedin a {
+  background-color: #0E76A8;
+}
+
+.navbar-brand {
+  font-weight: bold !important;
+  /*color: white !important;*/
+}
+
+@media (min-width: 992px) {
+  .navbar-brand {
+    color: white !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .navbar-brand {
+    color: black !important;
+  }
+}
+
+.navbar-shrink div.container a.navbar-brand {
+  color: black !important;
+}
+
+#mainNav .navbar-nav > li > a.active {
+  color: #009688 !important;
+}
+
+#mainNav .navbar-nav > li > a:hover {
+  color: #009688 !important;
+}
+
