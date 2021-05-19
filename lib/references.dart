@@ -20,4 +20,5 @@ class References {
   static const String termsAndConditionsUrl = "https://bookaround.app/terms.html";
 
   static const String sharableAppLink = "https://bookaround.app/inapp/get";
+  static const String copyrightString = "\u{a9} 2021 Emilio Dalla Torre";
 }

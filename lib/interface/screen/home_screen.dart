@@ -1,3 +1,4 @@
+import 'package:bookaround/assets.dart';
 import 'package:bookaround/bloc/chat_bloc.dart';
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/pages/book_search_page.dart';
@@ -272,6 +273,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ListTile(
             title: Text(S.current.termsAndConditions),
             onTap: () => Navigator.of(context).pushNamed(WebViewScreen.route, arguments: Tuple2<String, String>(S.current.termsAndConditions, References.termsAndConditionsUrl)),
+          ),
+          AboutListTile(
+            icon: const Icon(Icons.info),
+            applicationIcon: Center(child: Image(image: Images.logo)),
+            applicationName: References.appName,
+            applicationLegalese: References.copyrightString,
           ),
           Spacer(),
           Padding(
