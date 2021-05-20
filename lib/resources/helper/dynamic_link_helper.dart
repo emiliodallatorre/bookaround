@@ -1,3 +1,9 @@
+/*
+ * Created by Emilio Dalla Torre on 20/05/21, 10:07
+ * Copyright (c) 2021. All rights reserved.
+ * Last modified 18/04/21, 19:45
+ */
+
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 

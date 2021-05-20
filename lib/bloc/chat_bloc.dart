@@ -1,3 +1,9 @@
+/*
+ * Created by Emilio Dalla Torre on 20/05/21, 10:07
+ * Copyright (c) 2021. All rights reserved.
+ * Last modified 07/04/21, 19:17
+ */
+
 import 'dart:async';
 
 import 'package:bookaround/models/messaging/chat_model.dart';

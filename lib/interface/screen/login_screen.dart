@@ -1,3 +1,9 @@
+/*
+ * Created by Emilio Dalla Torre on 20/05/21, 10:07
+ * Copyright (c) 2021. All rights reserved.
+ * Last modified 08/05/21, 12:28
+ */
+
 import 'package:bookaround/assets.dart';
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/screen/profile_editor_screen.dart';

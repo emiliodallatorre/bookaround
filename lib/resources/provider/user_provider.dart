@@ -1,3 +1,9 @@
+/*
+ * Created by Emilio Dalla Torre on 20/05/21, 10:07
+ * Copyright (c) 2021. All rights reserved.
+ * Last modified 18/04/21, 20:01
+ */
+
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

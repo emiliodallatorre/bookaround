@@ -1,3 +1,9 @@
+/*
+ * Created by Emilio Dalla Torre on 20/05/21, 10:07
+ * Copyright (c) 2021. All rights reserved.
+ * Last modified 28/04/21, 22:11
+ */
+
 import 'package:bookaround/models/book_model.dart';
 import 'package:bookaround/resources/repository.dart';
 import 'package:flutter/material.dart';

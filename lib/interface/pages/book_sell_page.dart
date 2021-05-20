@@ -1,3 +1,9 @@
+/*
+ * Created by Emilio Dalla Torre on 20/05/21, 10:07
+ * Copyright (c) 2021. All rights reserved.
+ * Last modified 18/04/21, 20:03
+ */
+
 import 'package:bookaround/bloc/book_bloc.dart';
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/widget/book_list_element.dart';
