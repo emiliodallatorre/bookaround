@@ -1,7 +1,7 @@
 /*
- * Created by Emilio Dalla Torre on 20/05/21, 10:07
+ * Created by Emilio Dalla Torre on 20/05/21, 10:13.
  * Copyright (c) 2021. All rights reserved.
- * Last modified 01/04/21, 11:41
+ * Last modified 20/05/21, 10:07.
  */
 
 import 'package:bookaround/models/book_model.dart';

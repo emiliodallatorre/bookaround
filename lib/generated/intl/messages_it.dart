@@ -1,7 +1,7 @@
 /*
- * Created by Emilio Dalla Torre on 20/05/21, 10:07
+ * Created by Emilio Dalla Torre on 20/05/21, 10:13.
  * Copyright (c) 2021. All rights reserved.
- * Last modified 12/05/21, 17:36
+ * Last modified 20/05/21, 10:07.
  */
 
 // DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
