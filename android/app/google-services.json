@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "619087397678-stc5drfsf1p5ae325aul7qied7ug8ktf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "it.emiliodallatorre.bookaround",
+            "certificate_hash": "926fb4df7184eb282003b964e8084c8fd8ad3375"
+          }
+        },
+        {
           "client_id": "619087397678-7c4b2suho49decd0nsp6aj680ubieckd.apps.googleusercontent.com",
           "client_type": 3
         }
