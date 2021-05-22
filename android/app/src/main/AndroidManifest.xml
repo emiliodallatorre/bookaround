@@ -5,7 +5,7 @@
 
     <application
         android:icon="@mipmap/ic_launcher"
-        android:label="bookaround"
+        android:label="Bookaround"
         android:requestLegacyExternalStorage="true">
 
         <meta-data
