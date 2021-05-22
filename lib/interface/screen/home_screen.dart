@@ -279,7 +279,7 @@ class _HomeScreenState extends State<HomeScreen> {
             applicationName: References.appName,
             applicationLegalese: References.copyrightString,
             // TODO: Tenere aggiornata questa stringa.
-            applicationVersion: "v0.3.0",
+            applicationVersion: "v0.3.1",
             aboutBoxChildren: [
               Text(S.current.appAbout),
             ],
