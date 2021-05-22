@@ -27,6 +27,7 @@ import 'package:bookaround/resources/helper/dynamic_link_helper.dart';
 import 'package:bookaround/resources/helper/init_helper.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 import 'package:showcaseview/showcaseview.dart';
@@ -272,6 +273,18 @@ class _HomeScreenState extends State<HomeScreen> {
             title: Text(S.current.inviteAFriend),
             onTap: () => Share.share(References.sharableAppLink),
           ),
+          AboutListTile(
+            icon: const Icon(Icons.info),
+            applicationIcon: SvgPicture.asset(Assets.logo, width: 64, height: 64, fit: BoxFit.cover,),
+            applicationName: References.appName,
+            applicationLegalese: References.copyrightString,
+            // TODO: Tenere aggiornata questa stringa.
+            applicationVersion: "v0.1.0",
+            aboutBoxChildren: [
+              Text(S.current.appAbout),
+            ],
+          ),
+          Spacer(),
           ListTile(
             title: Text(S.current.privacyPolicy),
             onTap: () => Navigator.of(context).pushNamed(WebViewScreen.route, arguments: Tuple2<String, String>(S.current.privacyPolicy, References.privacyPolicyUrl)),
@@ -280,15 +293,8 @@ class _HomeScreenState extends State<HomeScreen> {
             title: Text(S.current.termsAndConditions),
             onTap: () => Navigator.of(context).pushNamed(WebViewScreen.route, arguments: Tuple2<String, String>(S.current.termsAndConditions, References.termsAndConditionsUrl)),
           ),
-          AboutListTile(
-            icon: const Icon(Icons.info),
-            applicationIcon: Center(child: Image(image: Images.logo)),
-            applicationName: References.appName,
-            applicationLegalese: References.copyrightString,
-          ),
-          Spacer(),
           Padding(
-            padding: EdgeInsets.only(left: 16.0, bottom: MediaQuery
+            padding: EdgeInsets.only(left: 8.0, bottom: MediaQuery
                 .of(context)
                 .viewPadding
                 .bottom),

@@ -1,13 +1,12 @@
-/*
- * Created by Emilio Dalla Torre on 20/05/21, 10:13.
- * Copyright (c) 2021. All rights reserved.
- * Last modified 20/05/21, 10:07.
- */
-
 import 'package:flutter/widgets.dart';
 
 class Fonts {
   static const String poppins = "Poppins";
+}
+
+class Assets {
+  /// ![](file:///Users/emiliodallatorre/Documents/GitHub/bookaround/assets/logo.svg)
+  static const String logo = "assets/logo.svg";
 }
 
 class Images {
@@ -19,7 +18,5 @@ class Images {
   static AssetImage get icLauncherWhite => const AssetImage("assets/ic_launcher_white.png");
   /// ![](file:///Users/emiliodallatorre/Documents/GitHub/bookaround/assets/icons/panda.png)
   static AssetImage get panda => const AssetImage("assets/icons/panda.png");
-  /// ![](file:///Users/emiliodallatorre/Documents/GitHub/bookaround/assets/logo.png)
-  static AssetImage get logo => const AssetImage("assets/logo.png");
 }
 

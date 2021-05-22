@@ -1,9 +1,3 @@
-/*
- * Created by Emilio Dalla Torre on 20/05/21, 10:13.
- * Copyright (c) 2021. All rights reserved.
- * Last modified 20/05/21, 10:07.
- */
-
 // DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
 // This is a library that provides messages for a it locale. All the
 // messages from the main program should be duplicated here with the same
@@ -30,6 +24,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "add": MessageLookupByLibrary.simpleMessage("Aggiungi"),
         "addImage": MessageLookupByLibrary.simpleMessage("Aggiungi immagine"),
         "andOur": MessageLookupByLibrary.simpleMessage("e i nostri"),
+        "appAbout": MessageLookupByLibrary.simpleMessage(
+            "Bookaround è gratuita e lo sarà sempre, perché crediamo fermamente nella Cultura accessibile a tutti come fonte di libertà.\nPer quest\'app devo l\'ispirazione a mia madre."),
         "authors": MessageLookupByLibrary.simpleMessage(
             "Autori, separati da una virgola"),
         "beforeLogin": MessageLookupByLibrary.simpleMessage(

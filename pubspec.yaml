@@ -55,6 +55,9 @@ dependencies:
   tuple: ^2.0.0
   share: ^2.0.1
 
+  # Grafica
+  flutter_svg: ^0.22.0
+
   # Localizzazione
   flutter_google_places_hoc081098: ^1.0.0-nullsafety.1
   google_maps_webservice: ^0.0.19

@@ -1,9 +1,3 @@
-/*
- * Created by Emilio Dalla Torre on 20/05/21, 10:13.
- * Copyright (c) 2021. All rights reserved.
- * Last modified 20/05/21, 10:07.
- */
-
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -831,6 +825,16 @@ class S {
     return Intl.message(
       'Invite a friend',
       name: 'inviteAFriend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bookaround is free and will always be this way, we believe in Culture to be accessible to everyone as a source of freedom.\nI owe the inspiration for this app to my mother.`
+  String get appAbout {
+    return Intl.message(
+      'Bookaround is free and will always be this way, we believe in Culture to be accessible to everyone as a source of freedom.\nI owe the inspiration for this app to my mother.',
+      name: 'appAbout',
       desc: '',
       args: [],
     );

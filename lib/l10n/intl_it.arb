@@ -76,5 +76,6 @@
   "beforeLogin": "Prima di accedere consulta la nostra",
   "andOur": "e i nostri",
   "insertSmsCode": "Inserisci il codice che hai ricevuto tramite SMS",
-  "inviteAFriend": "Invita un amico"
+  "inviteAFriend": "Invita un amico",
+  "appAbout": "Bookaround è gratuita e lo sarà sempre, perché crediamo fermamente nella Cultura accessibile a tutti come fonte di libertà.\nPer quest'app devo l'ispirazione a mia madre."
 }

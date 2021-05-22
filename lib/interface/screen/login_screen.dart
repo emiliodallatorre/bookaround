@@ -16,6 +16,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -71,56 +72,57 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 4.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Row(
-                        children: [
-                          Expanded(child: Image(image: Images.logo)),
-                          Spacer(
-                            flex: 3,
-                          ),
-                        ],
-                      ),
-                      Text(S.current.login, style: Theme.of(context).textTheme.headline5),
+                      SvgPicture.asset(Assets.logo, fit: BoxFit.fitWidth, width: MediaQuery.of(context).size.width / 4),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 16.0),
-                        child: state.loginStep == LoginStep.SIGN_IN
-                            ? TextField(
-                                controller: state.numberController,
-                                keyboardType: TextInputType.phone,
-                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                                decoration: InputDecoration(labelText: S.current.phoneNumber, prefixText: "+39"),
-                              )
-                            : Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  InputCodeField(
-                                    control: state.codeController,
-                                    autofocus: true,
-                                    decoration: InputCodeDecoration(textStyle: Theme.of(context).textTheme.headline5),
-                                  ),
-                                  SizedBox(height: 8.0),
-                                  Text(S.current.insertSmsCode, style: Theme.of(context).textTheme.caption),
-                                ],
-                              ),
-                      ),
-                      ElevatedButton(
-                        child: Text(S.current.proceed),
-                        onPressed: () async {
-                          switch (state.loginStep) {
-                            case LoginStep.SIGN_IN:
-                              final ConfirmationResult? confirmationResult = await AuthHelper.sendSmsCode("+39" + state.numberController.text, context);
-                              if (kIsWeb) state.setConfirmationResult(confirmationResult);
-                              break;
-                            case LoginStep.INSERT_CODE:
-                              state.loginWithCredential(context);
-                              break;
-                          }
-                        },
+                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(S.current.login, style: Theme.of(context).textTheme.headline5),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: state.loginStep == LoginStep.SIGN_IN
+                                  ? TextField(
+                                      controller: state.numberController,
+                                      keyboardType: TextInputType.phone,
+                                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                      decoration: InputDecoration(labelText: S.current.phoneNumber, prefixText: "+39"),
+                                    )
+                                  : Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        InputCodeField(
+                                          control: state.codeController,
+                                          autofocus: true,
+                                          decoration: InputCodeDecoration(textStyle: Theme.of(context).textTheme.headline5),
+                                        ),
+                                        SizedBox(height: 8.0),
+                                        Text(S.current.insertSmsCode, style: Theme.of(context).textTheme.caption),
+                                      ],
+                                    ),
+                            ),
+                            ElevatedButton(
+                              child: Text(S.current.proceed),
+                              onPressed: () async {
+                                switch (state.loginStep) {
+                                  case LoginStep.SIGN_IN:
+                                    final ConfirmationResult? confirmationResult = await AuthHelper.sendSmsCode("+39" + state.numberController.text, context);
+                                    if (kIsWeb) state.setConfirmationResult(confirmationResult);
+                                    break;
+                                  case LoginStep.INSERT_CODE:
+                                    state.loginWithCredential(context);
+                                    break;
+                                }
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
