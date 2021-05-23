@@ -5,7 +5,7 @@ description: Un'app per l'interscambio di libri - scolastici e non.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 
-version: 0.3.2+28
+version: 0.3.3+29
 
 
 environment:
