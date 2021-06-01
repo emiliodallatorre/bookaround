@@ -19,6 +19,8 @@ import 'package:bookaround/models/settings_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/provider/location_provider.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -38,6 +40,7 @@ class Bookaround extends StatelessWidget {
     ]);
 
     final MaterialColor mainColor = Colors.teal;
+    final FirebaseAnalytics analytics = FirebaseAnalytics();
 
     return MultiProvider(
       providers: [
@@ -76,6 +79,9 @@ class Bookaround extends StatelessWidget {
             ChatScreen.route: (BuildContext context) => ChatScreen(),
             WebViewScreen.route: (BuildContext context) => WebViewScreen(),
           },
+          navigatorObservers: [
+            FirebaseAnalyticsObserver(analytics: analytics),
+          ],
         ),
       ),
     );

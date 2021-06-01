@@ -35,6 +35,7 @@ dependencies:
   firebase_storage: ^8.1.0
   firebase_crashlytics: ^2.0.4
   firebase_dynamic_links: ^2.0.4
+  firebase_analytics: ^8.1.0
 
   # Logica
   provider: ^5.0.0
@@ -48,12 +49,13 @@ dependencies:
   cached_network_image: ^3.0.0
   flutter_barcode_scanner: ^2.0.0
   random_string: ^2.2.0-nullsafety
-  shared_preferences: ^2.0.5
+  shared_preferences: ^2.0.6
   timeago: ^3.0.2
   overlay_support: ^1.2.1
-  webview_flutter: ^2.0.7
+  webview_flutter: ^2.0.8
   tuple: ^2.0.0
-  share: ^2.0.1
+  share: ^2.0.4
+  package_info: ^2.0.2
 
   # Grafica
   flutter_svg: ^0.22.0
@@ -68,11 +70,11 @@ dependencies:
   geoflutterfire: ^3.0.0-nullsafety.1
   flutter_geocoder: ^0.2.2-nullsafety
   geolocator: ^7.0.3
-  google_maps_flutter: ^2.0.5
+  google_maps_flutter: ^2.0.6
   location: ^4.1.1
 
   # File
-  image_picker: ^0.7.5+2
+  image_picker: ^0.8.0
 
 
 dev_dependencies:
