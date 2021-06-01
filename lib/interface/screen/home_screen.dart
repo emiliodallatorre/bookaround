@@ -28,6 +28,7 @@ import 'package:bookaround/resources/helper/init_helper.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 import 'package:showcaseview/showcaseview.dart';
@@ -273,16 +274,20 @@ class _HomeScreenState extends State<HomeScreen> {
             title: Text(S.current.inviteAFriend),
             onTap: () => Share.share(References.sharableAppLink),
           ),
-          AboutListTile(
-            icon: const Icon(Icons.info),
-            applicationIcon: SvgPicture.asset(Assets.logo, width: 64, height: 64, fit: BoxFit.cover,),
-            applicationName: References.appName,
-            applicationLegalese: References.copyrightString,
-            // TODO: Tenere aggiornata questa stringa.
-            applicationVersion: "v0.3.3",
-            aboutBoxChildren: [
-              Text(S.current.appAbout),
-            ],
+          FutureBuilder<PackageInfo>(
+            future: PackageInfo.fromPlatform(),
+            builder: (BuildContext context, AsyncSnapshot<PackageInfo> infoSnapshot) =>
+                AboutListTile(
+                  icon: const Icon(Icons.info),
+                  applicationIcon: SvgPicture.asset(Assets.logo, width: 64, height: 64, fit: BoxFit.cover,),
+                  applicationName: References.appName,
+                  applicationLegalese: References.copyrightString,
+                  // TODO: Tenere aggiornata questa stringa.
+                  applicationVersion: infoSnapshot.hasData ? ("v" + infoSnapshot.data!.version) : "",
+                  aboutBoxChildren: [
+                    Text(S.current.appAbout),
+                  ],
+                ),
           ),
           Spacer(),
           ListTile(
