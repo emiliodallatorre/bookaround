@@ -6,7 +6,8 @@
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="Bookaround"
-        android:requestLegacyExternalStorage="true">
+        android:requestLegacyExternalStorage="true"
+        android:usesCleartextTraffic="true">
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

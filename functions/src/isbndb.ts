@@ -52,7 +52,7 @@ export const findBook = functions.https.onCall(async (data, context) => {
     const resultsFromIsbndb: Array<any> = await search.searchTextInIsbndb(query);
     const resultsFromFirebase: Array<any> = await search.searchTextInFirebase(query);
 
-    console.log("Ho trovato", resultsFromFirebase.length, "risultati in Firebase e", resultsFromIsbndb.length, "risultati in ISBNdb.");
+    console.log("Ho trovato", resultsFromFirebase.length, "risultati in Firebase e", resultsFromIsbndb.length, "risultati in ISBNdb. Restituisco.");
 
     result = result.concat(resultsFromFirebase, resultsFromIsbndb);
     return JSON.stringify(result);

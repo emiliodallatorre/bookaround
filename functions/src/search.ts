@@ -21,9 +21,13 @@ export async function searchTextInIsbndb(query: string): Promise<Array<any>> {
 }
 
 export async function searchTextInFirebase(query: string): Promise<Array<any>> {
-    const result: Array<any> = Array<any>();
+    let result: Array<any> = Array<any>();
     const allIsbns: Array<admin.firestore.DocumentSnapshot> = (await admin.firestore().collection("isbns").get()).docs;
 
+    console.log("Cerco fra", allIsbns.length, "ISBN locali.");
+
+    const rawResult: Array<any> = Array<any>();
+    const queryTerms: string[] = getTerms([query]);
     for (const rawIsbn of allIsbns) {
         const data: admin.firestore.DocumentData = rawIsbn.data() as admin.firestore.DocumentData;
 
@@ -31,8 +35,17 @@ export async function searchTextInFirebase(query: string): Promise<Array<any>> {
         const authors: string = (data["authors"] as string[]).toString();
         const isbn: string = data["isbn"];
 
-        if (cleanString(title + authors + isbn).includes(cleanString(query))) result.push(rawIsbn.data());
+        const terms: string[] = [];
+        terms.push(title);
+        terms.push(authors);
+        terms.push(isbn);
+
+        const isbnTerms: string[] = getTerms(terms);
+
+        if (compareTerms(queryTerms, isbnTerms) > 0) rawResult.push([compareTerms(queryTerms, isbnTerms), rawIsbn.data()]);
     }
+    rawResult.sort((b, a) => a[0] - b[0]);
+    result = result.concat(rawResult.slice(0, 6).map(x => x[1]));
 
     return result;
 }
@@ -67,6 +80,29 @@ export async function searchIsbnInFirebase(isbn: string): Promise<any> {
     }
 }
 
-function cleanString(original: string): string {
-    return original.replace(/\W/g, '').replace(" ", "").toLowerCase()
+function cleanStrin(original: string): string {
+    return original.replace(/\W/g, '').toLowerCase()
+}
+
+function getTerms(original: string[]): string[] {
+    const result: string[] = [];
+    const words: string[] = [];
+
+    for (const part of original) if (part !== null) for (const word of part.split(" ")) words.push(word);
+
+    for (const word of words) {
+        const cleanWord: string = cleanStrin(word);
+        if (cleanWord != "") result.push(cleanWord);
+    }
+
+    return result;
+}
+
+function compareTerms(query: string[], terms: string[]): number {
+    const filteredArray: string[] = terms.filter(value => query.includes(value));
+
+    /* console.log("Comparo", JSON.stringify(query), "e", JSON.stringify(terms), ".");
+    console.log("Punteggio: ", (filteredArray.length / terms.length), "."); */
+
+    return (filteredArray.length / terms.length);
 }
