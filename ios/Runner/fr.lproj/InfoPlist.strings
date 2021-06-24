@@ -1,0 +1,12 @@
+/* 
+  InfoPlist.strings
+  Runner
+
+  Created by Emilio Dalla Torre on 24/06/21.
+  
+*/
+NSCameraUsageDescription = "Bookaround a besoin de votre autorisation pour accéder à la caméra et lire les codes-barres des livres.";
+NSLocationAlwaysUsageDescription = "Bookaround utilise votre emplacement pour afficher les livres à vendre autour de vous.";
+NSLocationWhenInUseUsageDescription = "Bookaround utilise votre emplacement pour afficher les livres à vendre autour de vous.";
+NSMicrophoneUsageDescription = "Bookaround a besoin de votre permission pour utiliser le microphone de votre appareil comme effet secondaire de l'utilisation de l'appareil photo pour le scanner.";
+NSPhotoLibraryUsageDescription = "Bookaround a besoin de votre autorisation pour accéder à votre galerie d'images et vous permettre de choisir une nouvelle photo de profil/insérer une couverture de livre à partir de la galerie.";
