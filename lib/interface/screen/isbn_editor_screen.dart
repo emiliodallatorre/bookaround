@@ -188,12 +188,12 @@ class _IsbnEditorScreenState extends State<IsbnEditorScreen> {
         ),
       );
 
-      // L'utente non ha selezionato con cosa acquisire l'immagine.
+      // L\'utente non ha selezionato con cosa acquisire l\'immagine.
       if (wantedSource == null) return;
 
       XFile? pickedFile = await ImagePicker().pickImage(source: wantedSource);
 
-      // L'utente non ha infine acquisito l'immagine.
+      // L\'utente non ha infine acquisito l\'immagine.
       if (pickedFile == null) return;
 
       setState(() => working = true);
