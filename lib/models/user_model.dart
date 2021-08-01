@@ -45,7 +45,7 @@ class UserModel extends ChangeNotifier {
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
   Future<void> updateFromServer({@required uid, bool empty = false, bool initNotifications = false}) async {
-    final DocumentReference updatedUserReference = References.usersCollection.doc(uid ?? this.uid);
+    final DocumentReference<Map<String, dynamic>> updatedUserReference = References.usersCollection.doc(uid ?? this.uid);
 
     UserModel updatedUser;
     if (empty)

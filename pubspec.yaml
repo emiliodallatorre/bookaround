@@ -24,35 +24,35 @@ dependencies:
   code_field:
     git: https://github.com/emiliodallatorre/code_field.git
   google_fonts: ^2.1.0
-  showcaseview: ^1.0.0
+  showcaseview: ^1.1.0
 
   # Firebase
-  cloud_firestore: ^1.0.7
-  firebase_auth: ^1.2.0
-  firebase_core: ^1.2.0
-  cloud_functions: ^1.1.0
-  firebase_messaging: ^10.0.0
-  firebase_storage: ^8.1.0
-  firebase_crashlytics: ^2.0.4
-  firebase_dynamic_links: ^2.0.4
-  firebase_analytics: ^8.1.0
+  cloud_firestore: ^2.4.0
+  firebase_auth: ^3.0.1
+  firebase_core: ^1.4.0
+  cloud_functions: ^3.0.0
+  firebase_messaging: ^10.0.4
+  firebase_storage: ^10.0.1
+  firebase_crashlytics: ^2.1.1
+  firebase_dynamic_links: ^2.0.7
+  firebase_analytics: ^8.2.0
 
   # Logica
   provider: ^5.0.0
-  rxdart: ^0.26.0
+  rxdart: ^0.27.1
 
   # Modelli
-  json_annotation: ^4.0.1
+  json_annotation: ^4.1.0
 
   # Utilità
   form_field_validator: ^1.1.0
-  cached_network_image: ^3.0.0
+  cached_network_image: ^3.1.0
   flutter_barcode_scanner: ^2.0.0
-  random_string: ^2.2.0-nullsafety
+  random_string: ^2.3.1
   shared_preferences: ^2.0.6
-  timeago: ^3.0.2
+  timeago: ^3.1.0
   overlay_support: ^1.2.1
-  webview_flutter: ^2.0.8
+  webview_flutter: ^2.0.10
   tuple: ^2.0.0
   share: ^2.0.4
   package_info: ^2.0.2
@@ -61,20 +61,24 @@ dependencies:
   flutter_svg: ^0.22.0
 
   # Localizzazione
-  flutter_google_places_hoc081098: ^1.0.0-nullsafety.1
+  flutter_google_places_hoc081098: ^1.0.0-nullsafety.4
   google_maps_webservice: ^0.0.19
   # geoflutterfire:
   #   git:
   #     url: git://github.com/emiliodallatorre/GeoFlutterFire.git
   #     ref: update_deps
-  geoflutterfire: ^3.0.0-nullsafety.1
+  geoflutterfire: ^3.0.1
   flutter_geocoder: ^0.2.2-nullsafety
-  geolocator: ^7.0.3
+  geolocator: ^7.4.0
   google_maps_flutter: ^2.0.6
-  location: ^4.1.1
+  location: ^4.3.0
 
   # File
-  image_picker: ^0.8.0
+  image_picker: ^0.8.2
+
+
+dependency_overrides:
+  meta: 1.4.0
 
 
 dev_dependencies:
@@ -82,14 +86,14 @@ dev_dependencies:
     sdk: flutter
 
   # flutter pub run build_runner build --delete-conflicting-outputs
-  json_serializable: ^4.1.2
-  build_runner: ^1.12.2
+  json_serializable: ^5.0.0
+  build_runner: ^2.0.6
 
   # flutter pub run flutter_launcher_icons:main
-  flutter_launcher_icons: ^0.9.0
+  flutter_launcher_icons: ^0.9.1
 
   # flutter pub run r_flutter:generate
-  r_flutter: ^0.7.1
+  r_flutter: ^0.8.0
 
 
 flutter:

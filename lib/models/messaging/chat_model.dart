@@ -30,7 +30,7 @@ class ChatModel {
   @JsonKey(ignore: true)
   DateTime? lastAccess;
 
-  CollectionReference get messagesReference => reference!.collection("messages");
+  CollectionReference<Map<String, dynamic>> get messagesReference => reference!.collection("messages");
 
   UserModel get recipient => participantsUsers!.single;
 

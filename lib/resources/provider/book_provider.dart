@@ -14,10 +14,10 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class BookProvider {
   static Future<List<BookModel>> getUserBooks(String uid) async {
-    List<DocumentSnapshot> rawBooks = (await References.booksCollection.where("userUid", isEqualTo: uid).get()).docs;
+    List<DocumentSnapshot<Map<String, dynamic>>> rawBooks = (await References.booksCollection.where("userUid", isEqualTo: uid).get()).docs;
     List<BookModel> books = <BookModel>[];
 
-    rawBooks.forEach((DocumentSnapshot rawBook) {
+    rawBooks.forEach((DocumentSnapshot<Map<String, dynamic>> rawBook) {
       BookModel book = BookModel.fromJson(rawBook.data()!);
       book.reference = rawBook.reference;
 
@@ -29,7 +29,7 @@ class BookProvider {
 
   static Future<List<BookModel>> getWantedBooks(List<String> wanted, LatLng? currentPosition) async {
     final List<BookModel> wantedBooks = <BookModel>[];
-    final List<DocumentSnapshot> rawBooks = <DocumentSnapshot>[];
+    final List<DocumentSnapshot<Map<String, dynamic>>> rawBooks = <DocumentSnapshot<Map<String, dynamic>>>[];
 
     while (wanted.isNotEmpty) {
       rawBooks.addAll((await References.booksCollection.where("isbn", whereIn: wanted.take(10).toList()).get()).docs);
@@ -59,13 +59,13 @@ class BookProvider {
     final Geoflutterfire geoflutterfire = Geoflutterfire();
     final GeoFirePoint lastKnownLocation = GeoFirePoint(rawLastKnownLocation.latitude, rawLastKnownLocation.longitude);
 
-    Stream<List<DocumentSnapshot>> stream = geoflutterfire.collection(collectionRef: References.booksCollection).within(
+    Stream<List<DocumentSnapshot<Map<String, dynamic>>>> stream = geoflutterfire.collection(collectionRef: References.booksCollection).within(
           center: lastKnownLocation,
           radius: 10,
           field: "locationData",
         );
 
-    List<DocumentSnapshot> rawNearbyBooks = await stream.first;
+    List<DocumentSnapshot<Map<String, dynamic>>> rawNearbyBooks = await stream.first;
 
     /*stream.listen((List<DocumentSnapshot> rawNearbyBooks) async {
     });*/
@@ -85,10 +85,10 @@ class BookProvider {
   }
 
   static Future<List<BookModel>> getUserWantedBooks(String uid) async {
-    List<DocumentSnapshot> rawBooks = (await References.booksCollection.where("userUid", isEqualTo: uid).get()).docs;
+    List<DocumentSnapshot<Map<String, dynamic>>> rawBooks = (await References.booksCollection.where("userUid", isEqualTo: uid).get()).docs;
     List<BookModel> books = <BookModel>[];
 
-    rawBooks.forEach((DocumentSnapshot rawBook) {
+    rawBooks.forEach((DocumentSnapshot<Map<String, dynamic>> rawBook) {
       BookModel book = BookModel.fromJson(rawBook.data()!);
       book.reference = rawBook.reference;
 

@@ -10,10 +10,10 @@ import 'package:firebase_storage/firebase_storage.dart';
 class References {
   static const String appName = "Bookaround";
 
-  static CollectionReference usersCollection = FirebaseFirestore.instance.collection("users");
-  static CollectionReference chatsCollection = FirebaseFirestore.instance.collection("chats");
-  static CollectionReference booksCollection = FirebaseFirestore.instance.collection("books");
-  static CollectionReference isbnsCollection = FirebaseFirestore.instance.collection("isbns");
+  static CollectionReference<Map<String, dynamic>> usersCollection = FirebaseFirestore.instance.collection("users");
+  static CollectionReference<Map<String, dynamic>> chatsCollection = FirebaseFirestore.instance.collection("chats");
+  static CollectionReference<Map<String, dynamic>> booksCollection = FirebaseFirestore.instance.collection("books");
+  static CollectionReference<Map<String, dynamic>> isbnsCollection = FirebaseFirestore.instance.collection("isbns");
 
   static Reference bookCovers = FirebaseStorage.instance.ref("bookCovers/");
   static Reference userAvatars = FirebaseStorage.instance.ref("userAvatars/");

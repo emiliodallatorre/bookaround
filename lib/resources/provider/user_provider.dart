@@ -11,13 +11,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class UserProvider {
   /// Recupera un utente in base al suo [uid].
   static Future<UserModel> getUserByUid(final String uid) async {
-    DocumentSnapshot rawUser = await References.usersCollection.doc(uid).get();
+    DocumentSnapshot<Map<String, dynamic>> rawUser = await References.usersCollection.doc(uid).get();
     UserModel user = _deserializeUser(rawUser);
 
     return user;
   }
 
-  static UserModel _deserializeUser(DocumentSnapshot rawUser) {
+  static UserModel _deserializeUser(DocumentSnapshot<Map<String, dynamic>> rawUser) {
     UserModel user = UserModel.fromJson(rawUser.data()!);
     user.hasGoneThroughShowcase ??= false;
     user.reference = rawUser.reference;

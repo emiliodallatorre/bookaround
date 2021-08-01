@@ -27,7 +27,7 @@ class ChatProvider {
   }
 
   static Future<ChatModel> getChatById(String chatId, String currentUserUid) async {
-    final DocumentSnapshot rawChat = await References.chatsCollection.doc(chatId).get();
+    final DocumentSnapshot<Map<String, dynamic>> rawChat = await References.chatsCollection.doc(chatId).get();
     final ChatModel chat = ChatModel.fromJson(rawChat.data()!);
 
     chat.reference = rawChat.reference;
@@ -42,8 +42,8 @@ class ChatProvider {
   }
 
   static Future<List<MessageModel>> getChatMessages(ChatModel chat) async {
-    final List<DocumentSnapshot> rawMessages = (await chat.messagesReference.get()).docs;
-    final List<MessageModel> messages = rawMessages.map((DocumentSnapshot rawMessage) => MessageModel.fromJson(rawMessage.data()!)..reference = rawMessage.reference).toList();
+    final List<DocumentSnapshot<Map<String, dynamic>>> rawMessages = (await chat.messagesReference.get()).docs;
+    final List<MessageModel> messages = rawMessages.map((DocumentSnapshot<Map<String, dynamic>> rawMessage) => MessageModel.fromJson(rawMessage.data()!)..reference = rawMessage.reference).toList();
 
     messages.sort((b, a) => a.sentDateTime!.compareTo(b.sentDateTime!));
 
@@ -51,7 +51,7 @@ class ChatProvider {
   }
 
   static Future<List<ChatModel>> getUserChats(UserModel user) async {
-    final List<DocumentSnapshot> rawChats = (await References.chatsCollection.where("participants", arrayContains: user.uid).get()).docs;
+    final List<DocumentSnapshot<Map<String, dynamic>>> rawChats = (await References.chatsCollection.where("participants", arrayContains: user.uid).get()).docs;
     final List<ChatModel> chats = <ChatModel>[];
 
     for (int index = 0; index < rawChats.length; index++) {
