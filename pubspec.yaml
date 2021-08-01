@@ -56,6 +56,7 @@ dependencies:
   tuple: ^2.0.0
   share: ^2.0.4
   package_info: ^2.0.2
+  intl_phone_number_input: ^0.7.0+2
 
   # Grafica
   flutter_svg: ^0.22.0

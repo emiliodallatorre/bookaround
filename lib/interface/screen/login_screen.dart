@@ -15,8 +15,8 @@ import 'package:code_field/code_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -87,11 +87,21 @@ class LoginScreen extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(bottom: 8.0),
                               child: state.loginStep == LoginStep.SIGN_IN
-                                  ? TextField(
+                                  ? /* TextField(
                                       controller: state.numberController,
                                       keyboardType: TextInputType.phone,
                                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                       decoration: InputDecoration(labelText: S.current.phoneNumber, prefixText: "+39"),
+                                    ) */
+                                  InternationalPhoneNumberInput(
+                                      inputDecoration: InputDecoration(labelText: S.current.phoneNumber),
+                                      textFieldController: state.numberController,
+                                      countries: [
+                                        "IT", "FR"
+                                      ],
+                                      onInputChanged: (PhoneNumber phoneNumber) {
+                                        state.phoneNumber = phoneNumber.phoneNumber;
+                                      },
                                     )
                                   : Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,7 +122,7 @@ class LoginScreen extends StatelessWidget {
                               onPressed: () async {
                                 switch (state.loginStep) {
                                   case LoginStep.SIGN_IN:
-                                    final ConfirmationResult? confirmationResult = await AuthHelper.sendSmsCode("+39" + state.numberController.text, context);
+                                    final ConfirmationResult? confirmationResult = await AuthHelper.sendSmsCode(state.phoneNumber!, context);
                                     if (kIsWeb) state.setConfirmationResult(confirmationResult);
                                     break;
                                   case LoginStep.INSERT_CODE:
@@ -142,6 +152,7 @@ class LoginScreenState extends ChangeNotifier {
   LoginStep loginStep = LoginStep.SIGN_IN;
 
   TextEditingController numberController = TextEditingController();
+  String? phoneNumber;
   InputCodeControl codeController = InputCodeControl();
 
   String? verificationCode;
