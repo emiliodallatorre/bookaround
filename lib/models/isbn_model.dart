@@ -4,6 +4,7 @@
  * Last modified 20/05/21, 10:07.
  */
 
+import 'package:bookaround/references.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'isbn_model.g.dart';
@@ -14,6 +15,7 @@ class IsbnModel {
   final String? isbn, isbn13;
   String? title;
   List<String>? authors;
+  @Deprecated("Usare sureImage.")
   String? image;
   final String? authorUid;
 
@@ -27,6 +29,8 @@ class IsbnModel {
   }
 
   String get sureIsbn => this.isbn13 ?? this.isbn ?? "";
+
+  String get sureImage => this.image ?? References.noCover;
 
   IsbnModel({
     this.id,

@@ -37,7 +37,7 @@ class SearchResultListElement extends StatelessWidget {
       leading: AspectRatio(
         aspectRatio: 1.0,
         child: CachedNetworkImage(
-          imageUrl: this.isbn!.image!,
+          imageUrl: this.isbn!.sureImage,
           // Ignora i potenziali errori di immagine.
           errorWidget: (BuildContext context, String stackTrace, dynamic error) => CachedNetworkImage(imageUrl: References.noCover),
           placeholder: (BuildContext context, String imageUrl) => Center(child: CircularProgressIndicator()),
