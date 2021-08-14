@@ -42,6 +42,7 @@ class BookProvider {
       final BookModel book = BookModel.fromJson(rawBooks.elementAt(index).data()!);
 
       if (book.type != BookType.SELLING) continue;
+      if(book.locationData == null) continue;
 
       book.reference = rawBooks.elementAt(index).reference;
       book.user = await UserProvider.getUserByUid(book.userUid);
