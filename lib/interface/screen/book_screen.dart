@@ -37,21 +37,22 @@ class _BookScreenState extends State<BookScreen> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          PopupMenuButton(
-            itemBuilder: (BuildContext context) => <String>[S.current.reportBook]
-                .map((final String choice) => PopupMenuItem<String>(
-                      value: choice,
-                      child: Text(choice),
-                    ))
-                .toList(),
-            onSelected: (final String choice) async {
-              if (choice == S.current.reportBook) {
-                ReportHelper.reportBook(_book!.id!, Provider.of<UserModel>(context, listen: false).uid!).whenComplete(() {
-                  if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(S.current.reportedBook)));
-                });
-              }
-            },
-          ),
+          if (_book!.userUid != Provider.of<UserModel>(context).uid)
+            PopupMenuButton(
+              itemBuilder: (BuildContext context) => <String>[S.current.reportBook]
+                  .map((final String choice) => PopupMenuItem<String>(
+                        value: choice,
+                        child: Text(choice),
+                      ))
+                  .toList(),
+              onSelected: (final String choice) async {
+                if (choice == S.current.reportBook) {
+                  ReportHelper.reportBook(_book!.id!, Provider.of<UserModel>(context, listen: false).uid!).whenComplete(() {
+                    if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(S.current.reportedBook)));
+                  });
+                }
+              },
+            ),
         ],
       ),
       body: buildBody(),
