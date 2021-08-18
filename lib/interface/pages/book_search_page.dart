@@ -34,6 +34,8 @@ class BookSearchPage extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<List<BookModel>> booksSnapshot) {
           if (booksSnapshot.hasData) {
             if (booksSnapshot.data!.isNotEmpty) {
+              debugPrint(booksSnapshot.data!.map((e) => "${e.toString()} ${e.results.toString()}").toString());
+
               // Assegna i colori a caso
               final Map<String, HSVColor> bookColors = <String, HSVColor>{};
               booksSnapshot.data!.forEach((element) => bookColors[element.secureIsbn] = HSVColor.fromAHSV(1.0, Random().nextDouble() * 360.0, 1.0, 1.0));

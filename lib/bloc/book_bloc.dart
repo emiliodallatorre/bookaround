@@ -32,7 +32,9 @@ class BooksBloc {
       final List<BookModel> wantedBooks = await getWantedBooks(userUid, currentPosition);
 
       for (int index = 0; index < books.length; index++)
-        books.elementAt(index).results.addAll(wantedBooks.where((element) => element.isbn == books.elementAt(index).isbn || element.isbn13 == books.elementAt(index).isbn13));
+        books.elementAt(index).results.addAll(wantedBooks.where((element) =>
+            (element.isbn == books.elementAt(index).isbn && element.isbn != null) ||
+            (element.isbn13 == books.elementAt(index).isbn13) && element.isbn13 != null));
     }
     _booksFetcher.sink.add(books);
     debugPrint("Inviate al sink tutte le ricerche.");

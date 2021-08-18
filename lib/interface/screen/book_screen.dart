@@ -34,6 +34,8 @@ class _BookScreenState extends State<BookScreen> {
   Widget build(BuildContext context) {
     if (_book == null) _book = ModalRoute.of(context)!.settings.arguments as BookModel;
 
+    debugPrint(_book!.userUid);
+
     return Scaffold(
       appBar: AppBar(
         actions: [
