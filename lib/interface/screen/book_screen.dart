@@ -54,12 +54,12 @@ class _BookScreenState extends State<BookScreen> {
           ),
         ],
       ),
-      body: _buildBody(context),
-      persistentFooterButtons: _buildPersistentFooterButtons(context),
+      body: buildBody(),
+      persistentFooterButtons: buildPersistentFooterButtons(),
     );
   }
 
-  Widget _buildBody(BuildContext context) {
+  Widget buildBody() {
     return ListView(
       children: [
         Padding(
@@ -140,7 +140,7 @@ class _BookScreenState extends State<BookScreen> {
     );
   }
 
-  List<Widget> _buildPersistentFooterButtons(BuildContext context) {
+  List<Widget> buildPersistentFooterButtons() {
     if (_book!.userUid != Provider.of<UserModel>(context).uid)
       return <Widget>[
         ElevatedButton(
