@@ -105,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Remove this book from wishlist?"),
         "removeBookSearchExtended": MessageLookupByLibrary.simpleMessage(
             "If you\'ll remove this book from your wishlist, you will stop receiving notifications if a user tries to sell a copy of it."),
+        "reportBook": MessageLookupByLibrary.simpleMessage("Report book"),
         "requiredField":
             MessageLookupByLibrary.simpleMessage("This field is required"),
         "responsibleUse":

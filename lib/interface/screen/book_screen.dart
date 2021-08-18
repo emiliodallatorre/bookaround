@@ -14,6 +14,7 @@ import 'package:bookaround/models/book_model.dart';
 import 'package:bookaround/models/messaging/chat_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/resources/helper/book_helper.dart';
+import 'package:bookaround/resources/helper/report_helper.dart';
 import 'package:bookaround/resources/provider/chat_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -34,7 +35,24 @@ class _BookScreenState extends State<BookScreen> {
     if (_book == null) _book = ModalRoute.of(context)!.settings.arguments as BookModel;
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          PopupMenuButton(
+            itemBuilder: (BuildContext context) => <String>[S.current.reportBook]
+                .map((final String choice) => PopupMenuItem<String>(
+                      value: choice,
+                      child: Text(choice),
+                    ))
+                .toList(),
+            onSelected: (final String choice) async {
+              if (choice == S.current.reportBook) {
+                ReportHelper.reportBook(_book!.id!, Provider.of<UserModel>(context, listen: false).uid!);
+                Navigator.of(context).pop();
+              }
+            },
+          ),
+        ],
+      ),
       body: _buildBody(context),
       persistentFooterButtons: _buildPersistentFooterButtons(context),
     );
@@ -113,8 +131,7 @@ class _BookScreenState extends State<BookScreen> {
             myLocationButtonEnabled: false,
             markers: <Marker>[Marker(markerId: MarkerId(_book!.id!), position: _book!.modelizedLocation)].toSet(),
             onMapCreated: (GoogleMapController controller) {
-              if (Theme.of(context).brightness != Brightness.light)
-                controller.setMapStyle(MapStyles.darkMap);
+              if (Theme.of(context).brightness != Brightness.light) controller.setMapStyle(MapStyles.darkMap);
             },
           ),
         ),

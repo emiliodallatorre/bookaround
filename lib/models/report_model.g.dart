@@ -10,6 +10,7 @@ ReportModel _$ReportModelFromJson(Map<String, dynamic> json) => ReportModel(
       id: json['id'] as String,
       type: _$enumDecode(_$ReportTypeEnumMap, json['type']),
       content: json['content'] as String,
+      reporterUid: json['reporterUid'] as String,
     );
 
 Map<String, dynamic> _$ReportModelToJson(ReportModel instance) =>
@@ -17,6 +18,7 @@ Map<String, dynamic> _$ReportModelToJson(ReportModel instance) =>
       'id': instance.id,
       'type': _$ReportTypeEnumMap[instance.type],
       'content': instance.content,
+      'reporterUid': instance.reporterUid,
     };
 
 K _$enumDecode<K, V>(
