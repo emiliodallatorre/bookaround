@@ -14,6 +14,7 @@ class References {
   static CollectionReference<Map<String, dynamic>> chatsCollection = FirebaseFirestore.instance.collection("chats");
   static CollectionReference<Map<String, dynamic>> booksCollection = FirebaseFirestore.instance.collection("books");
   static CollectionReference<Map<String, dynamic>> isbnsCollection = FirebaseFirestore.instance.collection("isbns");
+  static CollectionReference<Map<String, dynamic>> reportsCollection = FirebaseFirestore.instance.collection("reports");
 
   static Reference bookCovers = FirebaseStorage.instance.ref("bookCovers/");
   static Reference userAvatars = FirebaseStorage.instance.ref("userAvatars/");

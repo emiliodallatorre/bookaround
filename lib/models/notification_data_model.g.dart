@@ -1,9 +1,3 @@
-/*
- * Created by Emilio Dalla Torre on 20/05/21, 10:13.
- * Copyright (c) 2021. All rights reserved.
- * Last modified 20/05/21, 10:07.
- */
-
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'notification_data_model.dart';
@@ -12,14 +6,16 @@ part of 'notification_data_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-NotificationDataModel _$NotificationDataModelFromJson(Map<String, dynamic> json) {
-  return NotificationDataModel(
-    type: _$enumDecode(_$NotificationTypeEnumMap, json['type']),
-    notificationData: json['notificationData'] as String,
-  );
-}
+NotificationDataModel _$NotificationDataModelFromJson(
+        Map<String, dynamic> json) =>
+    NotificationDataModel(
+      type: _$enumDecode(_$NotificationTypeEnumMap, json['type']),
+      notificationData: json['notificationData'] as String,
+    );
 
-Map<String, dynamic> _$NotificationDataModelToJson(NotificationDataModel instance) => <String, dynamic>{
+Map<String, dynamic> _$NotificationDataModelToJson(
+        NotificationDataModel instance) =>
+    <String, dynamic>{
       'type': _$NotificationTypeEnumMap[instance.type],
       'notificationData': instance.notificationData,
     };

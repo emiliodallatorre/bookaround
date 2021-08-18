@@ -1,9 +1,3 @@
-/*
- * Created by Emilio Dalla Torre on 20/05/21, 10:13.
- * Copyright (c) 2021. All rights reserved.
- * Last modified 20/05/21, 10:07.
- */
-
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'isbn_model.dart';
@@ -12,17 +6,16 @@ part of 'isbn_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-IsbnModel _$IsbnModelFromJson(Map<String, dynamic> json) {
-  return IsbnModel(
-    id: json['id'] as String?,
-    isbn: json['isbn'] as String?,
-    isbn13: json['isbn13'] as String?,
-    title: json['title'] as String?,
-    authors: (json['authors'] as List<dynamic>?)?.map((e) => e as String).toList(),
-    image: json['image'] as String?,
-    authorUid: json['authorUid'] as String?,
-  );
-}
+IsbnModel _$IsbnModelFromJson(Map<String, dynamic> json) => IsbnModel(
+      id: json['id'] as String?,
+      isbn: json['isbn'] as String?,
+      isbn13: json['isbn13'] as String?,
+      title: json['title'] as String?,
+      authors:
+          (json['authors'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      image: json['image'] as String?,
+      authorUid: json['authorUid'] as String?,
+    );
 
 Map<String, dynamic> _$IsbnModelToJson(IsbnModel instance) => <String, dynamic>{
       'id': instance.id,

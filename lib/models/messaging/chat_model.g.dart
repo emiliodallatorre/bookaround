@@ -1,9 +1,3 @@
-/*
- * Created by Emilio Dalla Torre on 20/05/21, 10:13.
- * Copyright (c) 2021. All rights reserved.
- * Last modified 20/05/21, 10:07.
- */
-
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'chat_model.dart';
@@ -12,15 +6,21 @@ part of 'chat_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ChatModel _$ChatModelFromJson(Map<String, dynamic> json) {
-  return ChatModel(
-    id: json['id'] as String?,
-    creationDateTime: json['creationDateTime'] == null ? null : DateTime.parse(json['creationDateTime'] as String),
-    lastMessageDateTime: json['lastMessageDateTime'] == null ? null : DateTime.parse(json['lastMessageDateTime'] as String),
-    participants: (json['participants'] as List<dynamic>?)?.map((e) => e as String).toSet(),
-    lastMessage: json['lastMessage'] == null ? null : MessageModel.fromJson(json['lastMessage'] as Map<String, dynamic>),
-  );
-}
+ChatModel _$ChatModelFromJson(Map<String, dynamic> json) => ChatModel(
+      id: json['id'] as String?,
+      creationDateTime: json['creationDateTime'] == null
+          ? null
+          : DateTime.parse(json['creationDateTime'] as String),
+      lastMessageDateTime: json['lastMessageDateTime'] == null
+          ? null
+          : DateTime.parse(json['lastMessageDateTime'] as String),
+      participants: (json['participants'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toSet(),
+      lastMessage: json['lastMessage'] == null
+          ? null
+          : MessageModel.fromJson(json['lastMessage'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$ChatModelToJson(ChatModel instance) => <String, dynamic>{
       'id': instance.id,

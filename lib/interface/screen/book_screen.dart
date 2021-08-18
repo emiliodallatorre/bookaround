@@ -19,9 +19,14 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
-class BookScreen extends StatelessWidget {
+class BookScreen extends StatefulWidget {
   static const String route = "/bookScreen";
 
+  @override
+  _BookScreenState createState() => _BookScreenState();
+}
+
+class _BookScreenState extends State<BookScreen> {
   BookModel? _book;
 
   @override

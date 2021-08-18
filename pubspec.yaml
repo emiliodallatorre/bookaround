@@ -27,15 +27,15 @@ dependencies:
   showcaseview: ^1.1.0
 
   # Firebase
-  cloud_firestore: ^2.4.0
-  firebase_auth: ^3.0.1
-  firebase_core: ^1.4.0
-  cloud_functions: ^3.0.0
-  firebase_messaging: ^10.0.4
-  firebase_storage: ^10.0.1
-  firebase_crashlytics: ^2.1.1
-  firebase_dynamic_links: ^2.0.7
-  firebase_analytics: ^8.2.0
+  cloud_firestore: ^2.5.0
+  firebase_auth: ^3.0.2
+  firebase_core: ^1.5.0
+  cloud_functions: ^3.0.1
+  firebase_messaging: ^10.0.5
+  firebase_storage: ^10.0.2
+  firebase_crashlytics: ^2.2.0
+  firebase_dynamic_links: ^2.0.8
+  firebase_analytics: ^8.3.0
 
   # Logica
   provider: ^5.0.0
@@ -52,7 +52,7 @@ dependencies:
   shared_preferences: ^2.0.6
   timeago: ^3.1.0
   overlay_support: ^1.2.1
-  webview_flutter: ^2.0.10
+  webview_flutter: ^2.0.12
   tuple: ^2.0.0
   share: ^2.0.4
   package_info: ^2.0.2
@@ -75,11 +75,11 @@ dependencies:
   location: ^4.3.0
 
   # File
-  image_picker: ^0.8.2
+  image_picker: ^0.8.3+2
 
 
 dependency_overrides:
-  meta: 1.4.0
+  meta: ^1.7.0
 
 
 dev_dependencies:
@@ -88,7 +88,7 @@ dev_dependencies:
 
   # flutter pub run build_runner build --delete-conflicting-outputs
   json_serializable: ^5.0.0
-  build_runner: ^2.0.6
+  build_runner: ^2.1.1
 
   # flutter pub run flutter_launcher_icons:main
   flutter_launcher_icons: ^0.9.1
@@ -96,6 +96,7 @@ dev_dependencies:
   # flutter pub run r_flutter:generate
   r_flutter: ^0.8.0
 
+  analyzer: ^2.0.0
 
 flutter:
   uses-material-design: true

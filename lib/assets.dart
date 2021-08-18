@@ -16,6 +16,8 @@ class Images {
   static AssetImage get icLauncherAndroid => const AssetImage("assets/ic_launcher_android.png");
   /// ![](file:///Users/emiliodallatorre/Documents/GitHub/bookaround/assets/ic_launcher_white.png)
   static AssetImage get icLauncherWhite => const AssetImage("assets/ic_launcher_white.png");
+  /// ![](file:///Users/emiliodallatorre/Documents/GitHub/bookaround/assets/ic_play_store.png)
+  static AssetImage get icPlayStore => const AssetImage("assets/ic_play_store.png");
   /// ![](file:///Users/emiliodallatorre/Documents/GitHub/bookaround/assets/icons/panda.png)
   static AssetImage get panda => const AssetImage("assets/icons/panda.png");
 }

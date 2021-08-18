@@ -1,9 +1,3 @@
-/*
- * Created by Emilio Dalla Torre on 20/05/21, 10:13.
- * Copyright (c) 2021. All rights reserved.
- * Last modified 20/05/21, 10:07.
- */
-
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'message_model.dart';
@@ -12,18 +6,20 @@ part of 'message_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-MessageModel _$MessageModelFromJson(Map<String, dynamic> json) {
-  return MessageModel(
-    id: json['id'] as String?,
-    senderUid: json['senderUid'] as String?,
-    body: json['body'] as String?,
-    sentDateTime: json['sentDateTime'] == null ? null : DateTime.parse(json['sentDateTime'] as String),
-    messageType: _$enumDecodeNullable(_$MessageTypeEnumMap, json['messageType']),
-    videoThumbUrl: json['videoThumbUrl'] as String?,
-  );
-}
+MessageModel _$MessageModelFromJson(Map<String, dynamic> json) => MessageModel(
+      id: json['id'] as String?,
+      senderUid: json['senderUid'] as String?,
+      body: json['body'] as String?,
+      sentDateTime: json['sentDateTime'] == null
+          ? null
+          : DateTime.parse(json['sentDateTime'] as String),
+      messageType:
+          _$enumDecodeNullable(_$MessageTypeEnumMap, json['messageType']),
+      videoThumbUrl: json['videoThumbUrl'] as String?,
+    );
 
-Map<String, dynamic> _$MessageModelToJson(MessageModel instance) => <String, dynamic>{
+Map<String, dynamic> _$MessageModelToJson(MessageModel instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'senderUid': instance.senderUid,
       'body': instance.body,
