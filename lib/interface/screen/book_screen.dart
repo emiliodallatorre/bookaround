@@ -46,8 +46,9 @@ class _BookScreenState extends State<BookScreen> {
                 .toList(),
             onSelected: (final String choice) async {
               if (choice == S.current.reportBook) {
-                ReportHelper.reportBook(_book!.id!, Provider.of<UserModel>(context, listen: false).uid!);
-                Navigator.of(context).pop();
+                ReportHelper.reportBook(_book!.id!, Provider.of<UserModel>(context, listen: false).uid!).whenComplete(() {
+                  if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(S.current.reportedBook)));
+                });
               }
             },
           ),
