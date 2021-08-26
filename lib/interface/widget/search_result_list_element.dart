@@ -58,8 +58,8 @@ class SearchResultListElement extends StatelessWidget {
             type: BookType.LOOKING,
           );
 
-          await BookHelper.createBookSearch(searchingBook);
-          await searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<UserModel>(context, listen: false).blockedUids!, Provider.of<LocationProvider>(context, listen: false).lastKnownLocation);
+          BookHelper.createBookSearch(searchingBook);
+          searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<UserModel>(context, listen: false).blockedUids!, Provider.of<LocationProvider>(context, listen: false).lastKnownLocation);
 
           Navigator.of(context).pop();
         },
