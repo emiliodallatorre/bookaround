@@ -122,7 +122,13 @@ async function sendMessageNotification(message: functions.firestore.QueryDocumen
     }
 
     for (const recipient of recipients)
-        if (recipient !== senderUser.uid) await admin.messaging().sendToTopic(recipient, payload)
+        if (recipient !== senderUser.uid) {
+            const recipientUser: UserModel = await getUser(recipient);
+
+            if (recipientUser.blockedUids !== undefined && recipientUser.blockedUids !== null) if (recipientUser.blockedUids.includes(senderUser.uid)) continue;
+
+            await admin.messaging().sendToTopic(recipient, payload)
+        }
 
     console.log("Ho inviato le dovute notifiche.")
 }

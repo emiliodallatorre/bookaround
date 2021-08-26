@@ -92,7 +92,7 @@ function getTerms(original: string[]): string[] {
 
     for (const word of words) {
         const cleanWord: string = cleanStrin(word);
-        if (cleanWord != "") result.push(cleanWord);
+        if (cleanWord !== "") result.push(cleanWord);
     }
 
     return result;

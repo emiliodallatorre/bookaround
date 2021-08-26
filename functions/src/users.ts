@@ -54,4 +54,5 @@ export interface UserModel {
     surname: string,
     city: string,
     profileImageUrl: string,
+    blockedUids: string[],
 }
