@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Autori, separati da una virgola"),
         "beforeLogin": MessageLookupByLibrary.simpleMessage(
             "Prima di accedere consulta la nostra"),
+        "blockUser":
+            MessageLookupByLibrary.simpleMessage("Blocca questo utente"),
         "bookError": MessageLookupByLibrary.simpleMessage(
             "C\'è stato un errore con questo libro"),
         "bookNotFoundError":

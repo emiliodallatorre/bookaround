@@ -79,5 +79,6 @@
   "inviteAFriend": "Invite a friend",
   "appAbout": "Bookaround is free and will always be this way, we believe in Culture to be accessible to everyone as a source of freedom.\nI owe the inspiration for this app to my mother.",
   "reportBook": "Report book",
-  "reportedBook": "Book reported correctly"
+  "reportedBook": "Book reported correctly",
+  "blockUser": "Block this user"
 }

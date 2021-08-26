@@ -4,15 +4,16 @@
  * Last modified 20/05/21, 10:07.
  */
 
+import 'package:bookaround/bloc/chat_bloc.dart';
 import 'package:bookaround/bloc/message_bloc.dart';
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/widget/centered_text.dart';
 import 'package:bookaround/interface/widget/message.dart';
-import 'package:bookaround/interface/widget/user_avatar.dart';
 import 'package:bookaround/models/messaging/chat_model.dart';
 import 'package:bookaround/models/messaging/message_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/resources/helper/chat_helper.dart';
+import 'package:bookaround/resources/helper/localization_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:random_string/random_string.dart';
@@ -27,25 +28,45 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
 
-  ChatModel? _chat;
+  ChatModel? chat;
 
-  MessagesBloc? _messagesBloc;
+  MessagesBloc? messagesBloc;
 
   @override
   Widget build(BuildContext context) {
-    if (_chat == null) {
-      _chat = ModalRoute.of(context)!.settings.arguments as ChatModel;
-      assert(_chat != null);
+    if (chat == null) {
+      chat = ModalRoute.of(context)!.settings.arguments as ChatModel;
+      assert(chat != null);
 
-      _messagesBloc = MessagesBloc(_chat!, Provider.of<UserModel>(context, listen: false).uid!);
-      _messagesBloc!.listenForMessages();
+      messagesBloc = MessagesBloc(chat!, Provider.of<UserModel>(context, listen: false).uid!);
+      messagesBloc!.listenForMessages();
     }
 
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Text(_chat!.recipient.displayName),
-        actions: _chat!.recipient.profileImageUrl != null ? [UserAvatar(user: _chat!.recipient), SizedBox(width: 8.0)] : null,
+        title: Text(chat!.recipient.displayName),
+        actions: [
+          PopupMenuButton<ChatAction>(
+            itemBuilder: (BuildContext context) => ChatAction.values
+                .map((final ChatAction action) => PopupMenuItem<ChatAction>(
+                      value: action,
+                      child: Text(LocalizationHelper.localizeChatAction(context, action)),
+                    ))
+                .toList(),
+            onSelected: (final ChatAction action) {
+              switch (action) {
+                case ChatAction.BLOCK_USER:
+                  Provider.of<UserModel>(context, listen: false).blockedUids!.add(chat!.recipient.uid!);
+                  Provider.of<UserModel>(context, listen: false).updateOnServer();
+                  Navigator.of(context).pop();
+                  Provider.of<ChatBloc>(context, listen: false).getUserChats();
+
+                  break;
+              }
+            },
+          ),
+        ],
       ),
       body: _buildBody(context),
     );
@@ -56,7 +77,7 @@ class _ChatScreenState extends State<ChatScreen> {
       children: [
         Expanded(
           child: StreamBuilder<List<MessageModel>>(
-            stream: _messagesBloc!.messages,
+            stream: messagesBloc!.messages,
             builder: (BuildContext context, AsyncSnapshot<List<MessageModel>> messagesSnapshot) {
               if (messagesSnapshot.hasData) {
                 if (messagesSnapshot.data!.isEmpty)
@@ -96,7 +117,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       body: _messageController.text,
                     );
 
-                    await ChatHelper.sendMessage(_chat!, message, Provider.of<UserModel>(context, listen: false).uid!);
+                    await ChatHelper.sendMessage(chat!, message, Provider.of<UserModel>(context, listen: false).uid!);
                     _messageController.clear();
                   }
                 },
@@ -110,8 +131,10 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   void dispose() {
-    _messagesBloc?.dispose();
+    messagesBloc?.dispose();
 
     super.dispose();
   }
 }
+
+enum ChatAction { BLOCK_USER }
