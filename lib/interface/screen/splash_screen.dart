@@ -25,7 +25,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    debugPrint(S.delegate.supportedLocales.toString());
+    // debugPrint(S.delegate.supportedLocales.toString());
 
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
       final DateTime firstFrame = DateTime.now();

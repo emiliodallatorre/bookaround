@@ -4,7 +4,6 @@
  * Last modified 20/05/21, 10:07.
  */
 
-import 'package:bookaround/bloc/chat_bloc.dart';
 import 'package:bookaround/bloc/message_bloc.dart';
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/widget/centered_text.dart';
@@ -48,6 +47,7 @@ class _ChatScreenState extends State<ChatScreen> {
         title: Text(chat!.recipient.displayName),
         actions: [
           PopupMenuButton<ChatAction>(
+            icon: Icon(Icons.more_vert),
             itemBuilder: (BuildContext context) => ChatAction.values
                 .map((final ChatAction action) => PopupMenuItem<ChatAction>(
                       value: action,
@@ -60,7 +60,6 @@ class _ChatScreenState extends State<ChatScreen> {
                   Provider.of<UserModel>(context, listen: false).blockedUids!.add(chat!.recipient.uid!);
                   Provider.of<UserModel>(context, listen: false).updateOnServer();
                   Navigator.of(context).pop();
-                  Provider.of<ChatBloc>(context, listen: false).getUserChats();
 
                   break;
               }

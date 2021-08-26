@@ -58,7 +58,7 @@ class BookListElement extends StatelessWidget {
       case BookListElementType.SELL:
         return buildClassicWidget(context);
       case BookListElementType.WANTED:
-        debugPrint(results.toString());
+        // debugPrint(results.toString());
         return buildExpandableWidget(context);
       case BookListElementType.RESULT_WANTED:
         return buildResultWidget(context);
