@@ -14,6 +14,9 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       city: json['city'] as String?,
       profileImageUrl: json['profileImageUrl'] as String?,
       hasGoneThroughShowcase: json['hasGoneThroughShowcase'] as bool?,
+      blockedUids: (json['blockedUids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toSet(),
     );
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
@@ -24,4 +27,5 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'city': instance.city,
       'profileImageUrl': instance.profileImageUrl,
       'hasGoneThroughShowcase': instance.hasGoneThroughShowcase,
+      'blockedUids': instance.blockedUids?.toList(),
     };

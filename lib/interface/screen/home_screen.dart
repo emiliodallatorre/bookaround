@@ -10,6 +10,7 @@ import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/pages/book_search_page.dart';
 import 'package:bookaround/interface/pages/book_sell_page.dart';
 import 'package:bookaround/interface/pages/chat_page.dart';
+import 'package:bookaround/interface/screen/blocked_screen.dart';
 import 'package:bookaround/interface/screen/book_editor_screen.dart';
 import 'package:bookaround/interface/screen/isbn_editor_screen.dart';
 import 'package:bookaround/interface/screen/profile_editor_screen.dart';
@@ -270,6 +271,11 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () => Navigator.of(context).pushNamed(ProfileEditorScreen.route),
           ),
           ListTile(
+            leading: Icon(Icons.block),
+            title: Text(S.current.blockedUsers),
+            onTap: () => Navigator.of(context).pushNamed(BlockedScreen.route),
+          ),
+          ListTile(
             leading: Icon(Icons.person_add),
             title: Text(S.current.inviteAFriend),
             onTap: () => Share.share(References.sharableAppLink),
@@ -292,11 +298,14 @@ class _HomeScreenState extends State<HomeScreen> {
           Spacer(),
           ListTile(
             title: Text(S.current.privacyPolicy),
-            onTap: () => Navigator.of(context).pushNamed(WebViewScreen.route, arguments: Tuple2<String, String>(S.current.privacyPolicy, References.privacyPolicyUrl)),
+            onTap: () =>
+                Navigator.of(context).pushNamed(WebViewScreen.route, arguments: Tuple2<String, String>(S.current.privacyPolicy, References.privacyPolicyUrl)),
           ),
           ListTile(
             title: Text(S.current.termsAndConditions),
-            onTap: () => Navigator.of(context).pushNamed(WebViewScreen.route, arguments: Tuple2<String, String>(S.current.termsAndConditions, References.termsAndConditionsUrl)),
+            onTap: () =>
+                Navigator.of(context).pushNamed(
+                    WebViewScreen.route, arguments: Tuple2<String, String>(S.current.termsAndConditions, References.termsAndConditionsUrl)),
           ),
           Padding(
             padding: EdgeInsets.only(left: 8.0, bottom: MediaQuery

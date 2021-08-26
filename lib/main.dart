@@ -5,6 +5,7 @@
  */
 
 import 'package:bookaround/generated/l10n.dart';
+import 'package:bookaround/interface/screen/blocked_screen.dart';
 import 'package:bookaround/interface/screen/book_editor_screen.dart';
 import 'package:bookaround/interface/screen/book_screen.dart';
 import 'package:bookaround/interface/screen/chat_screen.dart';
@@ -78,6 +79,7 @@ class Bookaround extends StatelessWidget {
             BookScreen.route: (BuildContext context) => BookScreen(),
             ChatScreen.route: (BuildContext context) => ChatScreen(),
             WebViewScreen.route: (BuildContext context) => WebViewScreen(),
+            BlockedScreen.route: (BuildContext context) => BlockedScreen(),
           },
           navigatorObservers: [
             FirebaseAnalyticsObserver(analytics: analytics),

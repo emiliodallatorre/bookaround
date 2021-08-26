@@ -7,6 +7,7 @@
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class UserProvider {
   /// Recupera un utente in base al suo [uid].
@@ -15,6 +16,15 @@ class UserProvider {
     UserModel user = _deserializeUser(rawUser);
 
     return user;
+  }
+
+  /// Recupera diversi utenti, dati gli [uids].
+  static Future<List<UserModel>> getMultipleUsers(final Set<String> uids) async {
+    debugPrint("Recupero gli utenti $uids.");
+
+    final List<UserModel> users = <UserModel>[];
+    for (String uid in uids) users.add(await getUserByUid(uid));
+    return users;
   }
 
   static UserModel _deserializeUser(DocumentSnapshot<Map<String, dynamic>> rawUser) {

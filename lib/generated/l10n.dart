@@ -869,6 +869,36 @@ class S {
       args: [],
     );
   }
+
+  /// `At the moment, you haven't blocked any user.\nUse the options button in a chat screen to block a user.`
+  String get noBlocked {
+    return Intl.message(
+      'At the moment, you haven\'t blocked any user.\nUse the options button in a chat screen to block a user.',
+      name: 'noBlocked',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Blocked users`
+  String get blockedUsers {
+    return Intl.message(
+      'Blocked users',
+      name: 'blockedUsers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unblock`
+  String get unblockUser {
+    return Intl.message(
+      'Unblock',
+      name: 'unblockUser',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

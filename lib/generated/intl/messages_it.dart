@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Prima di accedere consulta la nostra"),
         "blockUser":
             MessageLookupByLibrary.simpleMessage("Blocca questo utente"),
+        "blockedUsers": MessageLookupByLibrary.simpleMessage("Utenti bloccati"),
         "bookError": MessageLookupByLibrary.simpleMessage(
             "C\'è stato un errore con questo libro"),
         "bookNotFoundError":
@@ -71,6 +72,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "name": MessageLookupByLibrary.simpleMessage("Nome"),
         "nearbyBooks":
             MessageLookupByLibrary.simpleMessage("Libri nei dintorni"),
+        "noBlocked": MessageLookupByLibrary.simpleMessage(
+            "Al momento, non hai bloccato nessun utente.\nUtilizza il pulsante delle opzioni in una chat per bloccare un utente."),
         "noBooks": MessageLookupByLibrary.simpleMessage(
             "Non c\'è ancora nessun libro in questa sezione, aggiungilo con l\'apposito pulsante...!"),
         "noChats": MessageLookupByLibrary.simpleMessage(
@@ -138,6 +141,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "termsAndConditions":
             MessageLookupByLibrary.simpleMessage("Termini e condizioni"),
         "title": MessageLookupByLibrary.simpleMessage("Titolo del libro"),
+        "unblockUser": MessageLookupByLibrary.simpleMessage("Sblocca"),
         "undo": MessageLookupByLibrary.simpleMessage("Annulla"),
         "usage": MessageLookupByLibrary.simpleMessage("Utilizzo"),
         "whereIsBook":

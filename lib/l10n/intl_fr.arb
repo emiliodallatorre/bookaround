@@ -80,5 +80,8 @@
   "appAbout": "Bookaround est gratuit et le sera toujours ainsi, nous croyons que la Culture est accessible à tous comme source de liberté.\nJe dois l'inspiration pour cette application à ma mère.",
   "reportBook": "Signaler ce livre",
   "reportedBook": "Livre signalé correctement",
-  "blockUser": "Bloquer cet utilisateur"
+  "blockUser": "Bloquer cet utilisateur",
+  "noBlocked": "Pour le moment, vous n'avez bloqué aucun utilisateur.\nUtilisez le bouton d'options dans un écran de discussion pour bloquer un utilisateur.",
+  "blockedUsers": "Utilisateurs bloqués",
+  "unblockUser": "Déverrouiller"
 }

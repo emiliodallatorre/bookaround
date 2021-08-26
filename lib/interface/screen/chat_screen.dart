@@ -54,7 +54,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       child: Text(LocalizationHelper.localizeChatAction(context, action)),
                     ))
                 .toList(),
-            onSelected: (final ChatAction action) {
+            onSelected: (final ChatAction action) async {
               switch (action) {
                 case ChatAction.BLOCK_USER:
                   Provider.of<UserModel>(context, listen: false).blockedUids!.add(chat!.recipient.uid!);

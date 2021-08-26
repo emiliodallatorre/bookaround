@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "beforeLogin":
             MessageLookupByLibrary.simpleMessage("Before logging in read our"),
         "blockUser": MessageLookupByLibrary.simpleMessage("Block this user"),
+        "blockedUsers": MessageLookupByLibrary.simpleMessage("Blocked users"),
         "bookError": MessageLookupByLibrary.simpleMessage(
             "An error occurred with this book"),
         "bookNotFoundError":
@@ -69,6 +70,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "manualAdd": MessageLookupByLibrary.simpleMessage("Manual add"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "nearbyBooks": MessageLookupByLibrary.simpleMessage("Nearby books"),
+        "noBlocked": MessageLookupByLibrary.simpleMessage(
+            "At the moment, you haven\'t blocked any user.\nUse the options button in a chat screen to block a user."),
         "noBooks": MessageLookupByLibrary.simpleMessage(
             "There aren\'t any book here yet, add one with the \"add\" button...!"),
         "noChats": MessageLookupByLibrary.simpleMessage(
@@ -133,6 +136,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "termsAndConditions":
             MessageLookupByLibrary.simpleMessage("Terms and conditions"),
         "title": MessageLookupByLibrary.simpleMessage("Book title"),
+        "unblockUser": MessageLookupByLibrary.simpleMessage("Unblock"),
         "undo": MessageLookupByLibrary.simpleMessage("Undo"),
         "usage": MessageLookupByLibrary.simpleMessage("Usage"),
         "whereIsBook":
