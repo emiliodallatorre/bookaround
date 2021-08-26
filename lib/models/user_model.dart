@@ -18,6 +18,7 @@ class UserModel extends ChangeNotifier {
   String? name, surname, city;
   String? profileImageUrl;
   bool? hasGoneThroughShowcase;
+  Set<String>? blockedUids;
 
   @JsonKey(ignore: true)
   DocumentReference? reference;
@@ -31,6 +32,7 @@ class UserModel extends ChangeNotifier {
     this.profileImageUrl,
     this.reference,
     this.hasGoneThroughShowcase,
+    this.blockedUids,
   });
 
   bool get isLogged => this.uid != null;
@@ -62,6 +64,7 @@ class UserModel extends ChangeNotifier {
     this.city = updatedUser.city;
     this.profileImageUrl = updatedUser.profileImageUrl;
     this.hasGoneThroughShowcase = updatedUser.hasGoneThroughShowcase ?? false;
+    this.blockedUids = updatedUser.blockedUids ?? Set<String>();
 
     this.reference = updatedUserReference;
 

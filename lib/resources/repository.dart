@@ -18,9 +18,11 @@ class Repository {
 
   static Future<List<BookModel>> getUserWantedBooks(String uid) async => await BookProvider.getUserWantedBooks(uid);
 
-  static Future<List<BookModel>> getNearbyBooks(List<String>? wanted, LatLng rawLastKnownLocation) async => await BookProvider.getNearbyBooks(wanted, rawLastKnownLocation);
+  static Future<List<BookModel>> getNearbyBooks(List<String>? wanted, LatLng rawLastKnownLocation, Set<String> unwantedUids) async =>
+      await BookProvider.getNearbyBooks(wanted, rawLastKnownLocation, unwantedUids);
 
-  static Future<List<BookModel>> getWantedBooks(List<String> wanted, LatLng? currentPosition) async => await BookProvider.getWantedBooks(wanted, currentPosition);
+  static Future<List<BookModel>> getWantedBooks(List<String> wanted, LatLng? currentPosition, Set<String> unwantedUids) async =>
+      await BookProvider.getWantedBooks(wanted, currentPosition, unwantedUids);
 
   /// Funzioni da ChatProvider.
   static Future<ChatModel> getChat(String recipientUid, String currentUserUid) async => await ChatProvider.getChat(recipientUid, currentUserUid);

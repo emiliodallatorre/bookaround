@@ -60,6 +60,9 @@ class ChatProvider {
       // Ignoriamo le chat vuote di cui abbiamo solo un id.
       if (chat.lastMessage == null) continue;
 
+      // Ignoriamo le chat che contengono un utente bloccato
+      if(chat.participants!.any((final String uid) => user.blockedUids!.contains(uid))) continue;
+
       chat.reference = rawChats.elementAt(index).reference;
       chat.participants!.removeWhere((String participantUid) => participantUid == user.uid);
       chat.participantsUsers = <UserModel>[];

@@ -41,7 +41,8 @@ class _BookSellPageState extends State<BookSellPage> {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
-      onRefresh: () async => await sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!),
+      onRefresh: () async =>
+          await sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<UserModel>(context, listen: false).blockedUids!),
       child: StreamBuilder<List<BookModel>>(
         stream: sellBooksBloc.books,
         builder: (BuildContext context, AsyncSnapshot<List<BookModel>> booksSnapshot) {
@@ -55,7 +56,7 @@ class _BookSellPageState extends State<BookSellPage> {
               return CenteredText(label: S.current.noBooks);
           }
 
-          sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!);
+          sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<UserModel>(context, listen: false).blockedUids!);
           return Center(child: CircularProgressIndicator());
         },
       ),

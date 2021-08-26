@@ -200,7 +200,7 @@ class _BookScreenState extends State<BookScreen> {
 
             if (delete) {
               await BookHelper.removeBookFromSell(this._book!.id!);
-              await sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!);
+              await sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!,Provider.of<UserModel>(context, listen: false).blockedUids!);
 
               Navigator.of(context).pop();
             }

@@ -25,10 +25,12 @@ import 'package:provider/provider.dart';
 class BookSearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<LocationProvider>(context, listen: false).lastKnownLocation);
+    searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<UserModel>(context, listen: false).blockedUids!,
+        Provider.of<LocationProvider>(context, listen: false).lastKnownLocation);
 
     return RefreshIndicator(
-      onRefresh: () => searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<LocationProvider>(context, listen: false).lastKnownLocation),
+      onRefresh: () => searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!,
+          Provider.of<UserModel>(context, listen: false).blockedUids!, Provider.of<LocationProvider>(context, listen: false).lastKnownLocation),
       child: StreamBuilder<List<BookModel>>(
         stream: searchBookBloc.books,
         builder: (BuildContext context, AsyncSnapshot<List<BookModel>> booksSnapshot) {
@@ -47,7 +49,8 @@ class BookSearchPage extends StatelessWidget {
                   else if (locationProvider.permissionStatus == PermissionStatus.granted) {
                     if (locationProvider.lastKnownLocation == null && !locationProvider.isLoadingLocation) {
                       locationProvider.getLocation();
-                      searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<LocationProvider>(context, listen: false).lastKnownLocation);
+                      searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!,
+                          Provider.of<UserModel>(context, listen: false).blockedUids!, Provider.of<LocationProvider>(context, listen: false).lastKnownLocation);
                     }
                   }
 
@@ -82,8 +85,7 @@ class BookSearchPage extends StatelessWidget {
                                       .toSet() ??
                                   <Marker>[].toSet(),
                               onMapCreated: (GoogleMapController controller) {
-                                if (Theme.of(context).brightness != Brightness.light)
-                                  controller.setMapStyle(MapStyles.darkMap);
+                                if (Theme.of(context).brightness != Brightness.light) controller.setMapStyle(MapStyles.darkMap);
                               },
                               gestureRecognizers: Set()..add(Factory<PanGestureRecognizer>(() => PanGestureRecognizer())),
                             ),

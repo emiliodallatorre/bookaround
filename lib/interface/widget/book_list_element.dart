@@ -111,7 +111,7 @@ class BookListElement extends StatelessWidget {
 
         if (wantsToRemove) {
           await BookHelper.removeBookFromSearch(this.book.id!);
-          await searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<LocationProvider>(context, listen: false).lastKnownLocation);
+          await searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<UserModel>(context, listen: false).blockedUids!, Provider.of<LocationProvider>(context, listen: false).lastKnownLocation);
         }
       },
       child: ExpansionTile(

@@ -23,13 +23,13 @@ class BooksBloc {
 
   // Stream<List<BookModel>> get wantedBooks => _wantedBooksFetcher.stream;
 
-  Future<List<BookModel>> getUserBooks(String userUid, [LatLng? currentPosition]) async {
+  Future<List<BookModel>> getUserBooks(String userUid, Set<String> unwantedUids, [LatLng? currentPosition]) async {
     final List<BookModel> books = await Repository.getUserBooks(userUid);
     books.removeWhere((element) => element.type != bookType);
 
     _booksFetcher.sink.add(books);
     if (bookType == BookType.LOOKING) {
-      final List<BookModel> wantedBooks = await getWantedBooks(userUid, currentPosition);
+      final List<BookModel> wantedBooks = await getWantedBooks(userUid, currentPosition, unwantedUids);
 
       for (int index = 0; index < books.length; index++)
         books.elementAt(index).results.addAll(wantedBooks.where((element) =>
@@ -42,7 +42,7 @@ class BooksBloc {
     return books;
   }
 
-  Future<List<BookModel>> getWantedBooks(String userUid, LatLng? currentPosition) async {
+  Future<List<BookModel>> getWantedBooks(String userUid, LatLng? currentPosition, Set<String> unwantedUids) async {
     assert(this.bookType == BookType.LOOKING);
 
     late List<String> wanted;
@@ -54,7 +54,7 @@ class BooksBloc {
       wanted = books.map((BookModel wantedBook) => wantedBook.secureIsbn).toList();
     }
 
-    final List<BookModel> wantedBooks = await Repository.getWantedBooks(wanted, currentPosition);
+    final List<BookModel> wantedBooks = await Repository.getWantedBooks(wanted, currentPosition, unwantedUids);
     // TODO: Riattivare a tempo debito.
     // wantedBooks.removeWhere((BookModel book) => book.userUid == userUid);
 
@@ -63,18 +63,18 @@ class BooksBloc {
   }
 
   @Deprecated("Sostituito con [getWantedBooks].")
-  Future<List<BookModel>> getNearbyBooks(LatLng rawLastKnownLocation, String userUid) async {
+  Future<List<BookModel>> getNearbyBooks(LatLng rawLastKnownLocation, String userUid, Set<String> unwantedUids) async {
     assert(this.bookType == BookType.LOOKING);
 
     late List<String> wanted;
     if (_booksFetcher.value != null)
       wanted = _booksFetcher.value!.map((e) => e.secureIsbn).toList();
     else {
-      await getUserBooks(userUid);
+      await getUserBooks(userUid, unwantedUids);
       wanted = _booksFetcher.value!.map((e) => e.secureIsbn).toList();
     }
 
-    final List<BookModel> nearbyBooks = await Repository.getNearbyBooks(wanted, rawLastKnownLocation);
+    final List<BookModel> nearbyBooks = await Repository.getNearbyBooks(wanted, rawLastKnownLocation, unwantedUids);
 
     // _wantedBooksFetcher.sink.add(nearbyBooks);
     return nearbyBooks;

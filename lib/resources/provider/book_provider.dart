@@ -27,7 +27,7 @@ class BookProvider {
     return books;
   }
 
-  static Future<List<BookModel>> getWantedBooks(List<String> wanted, LatLng? currentPosition) async {
+  static Future<List<BookModel>> getWantedBooks(List<String> wanted, LatLng? currentPosition, Set<String> unwantedUids) async {
     final List<BookModel> wantedBooks = <BookModel>[];
     final List<DocumentSnapshot<Map<String, dynamic>>> rawBooks = <DocumentSnapshot<Map<String, dynamic>>>[];
 
@@ -40,9 +40,10 @@ class BookProvider {
 
     for (int index = 0; index < rawBooks.length; index++) {
       final BookModel book = BookModel.fromJson(rawBooks.elementAt(index).data()!);
+      if (unwantedUids.contains(book.userUid)) continue;
 
       if (book.type != BookType.SELLING) continue;
-      if(book.locationData == null) continue;
+      if (book.locationData == null) continue;
 
       book.reference = rawBooks.elementAt(index).reference;
       book.user = await UserProvider.getUserByUid(book.userUid);
@@ -56,7 +57,7 @@ class BookProvider {
     return wantedBooks;
   }
 
-  static Future<List<BookModel>> getNearbyBooks(List<String>? wanted, LatLng rawLastKnownLocation) async {
+  static Future<List<BookModel>> getNearbyBooks(List<String>? wanted, LatLng rawLastKnownLocation, Set<String> unwantedUids) async {
     final Geoflutterfire geoflutterfire = Geoflutterfire();
     final GeoFirePoint lastKnownLocation = GeoFirePoint(rawLastKnownLocation.latitude, rawLastKnownLocation.longitude);
 
@@ -73,11 +74,13 @@ class BookProvider {
 
     final List<BookModel> foundBooks = <BookModel>[];
     for (int index = 0; index < rawNearbyBooks.length; index++) {
-      BookModel bookModel = BookModel.fromJson(rawNearbyBooks.elementAt(index).data()!);
-      bookModel.reference = rawNearbyBooks.elementAt(index).reference;
-      bookModel.user = await UserProvider.getUserByUid(bookModel.userUid);
+      final BookModel book = BookModel.fromJson(rawNearbyBooks.elementAt(index).data()!);
+      if (unwantedUids.contains(book.userUid)) continue;
 
-      foundBooks.add(bookModel);
+      book.reference = rawNearbyBooks.elementAt(index).reference;
+      book.user = await UserProvider.getUserByUid(book.userUid);
+
+      foundBooks.add(book);
     }
 
     if (wanted != null) foundBooks.removeWhere((element) => !wanted.contains(element.isbn) && !wanted.contains(element.isbn13));
@@ -86,11 +89,11 @@ class BookProvider {
   }
 
   static Future<List<BookModel>> getUserWantedBooks(String uid) async {
-    List<DocumentSnapshot<Map<String, dynamic>>> rawBooks = (await References.booksCollection.where("userUid", isEqualTo: uid).get()).docs;
-    List<BookModel> books = <BookModel>[];
+    final List<DocumentSnapshot<Map<String, dynamic>>> rawBooks = (await References.booksCollection.where("userUid", isEqualTo: uid).get()).docs;
+    final List<BookModel> books = <BookModel>[];
 
     rawBooks.forEach((DocumentSnapshot<Map<String, dynamic>> rawBook) {
-      BookModel book = BookModel.fromJson(rawBook.data()!);
+      final BookModel book = BookModel.fromJson(rawBook.data()!);
       book.reference = rawBook.reference;
 
       if (book.type == BookType.LOOKING) books.add(book);
