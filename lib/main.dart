@@ -67,6 +67,7 @@ class Bookaround extends StatelessWidget {
           localizationsDelegates: <LocalizationsDelegate>[
             S.delegate,
             GlobalMaterialLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
           ],
           routes: <String, Widget Function(BuildContext)>{
             SplashScreen.route: (BuildContext context) => SplashScreen(),
