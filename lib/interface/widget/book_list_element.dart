@@ -63,8 +63,6 @@ class BookListElement extends StatelessWidget {
       case BookListElementType.RESULT_WANTED:
         return buildResultWidget(context);
     }
-
-    throw ("Qualcosa non va nel widget del libro!");
   }
 
   Widget buildClassicWidget(BuildContext context) {

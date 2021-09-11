@@ -4,6 +4,8 @@
  * Last modified 20/05/21, 10:07.
  */
 
+import 'dart:io';
+
 import 'package:bookaround/bloc/book_bloc.dart';
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/widget/book_cover.dart';
@@ -101,9 +103,10 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
                       context: context,
                       apiKey: References.googleApiKey,
                       mode: Mode.overlay,
-                      language: "it",
+                      language: Platform.localeName.split("_").first,
                       components: [
                         Component(Component.country, "it"),
+                        Component(Component.country, "fr"),
                       ],
                     );
 
@@ -139,7 +142,7 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
       formKey.currentState!.save();
 
       await BookHelper.updateBook(book!);
-      await sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!,Provider.of<UserModel>(context, listen: false).blockedUids!);
+      await sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<UserModel>(context, listen: false).blockedUids!);
 
       saved = true;
 

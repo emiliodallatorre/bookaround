@@ -4,7 +4,6 @@
  * Last modified 20/05/21, 10:07.
  */
 
-import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/screen/home_screen.dart';
 import 'package:bookaround/interface/screen/login_screen.dart';
 import 'package:bookaround/interface/screen/profile_editor_screen.dart';

@@ -49,7 +49,7 @@ class ChatBloc extends ChangeNotifier {
   }
 
   bool get hasUnreadChats {
-    if (_chatsFetcher.hasValue) return _chatsFetcher.value!.any((ChatModel chat) => chat.hasUnreadMessages);
+    if (_chatsFetcher.hasValue) return _chatsFetcher.value.any((ChatModel chat) => chat.hasUnreadMessages);
     return false;
   }
 

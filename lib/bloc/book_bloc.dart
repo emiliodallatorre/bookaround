@@ -47,7 +47,7 @@ class BooksBloc {
 
     late List<String> wanted;
     if (_booksFetcher.value != null)
-      wanted = _booksFetcher.value!.map((e) => e.secureIsbn).toList();
+      wanted = _booksFetcher.value.map((e) => e.secureIsbn).toList();
     else {
       final List<BookModel> books = await Repository.getUserWantedBooks(userUid);
       _booksFetcher.sink.add(books);
@@ -68,10 +68,10 @@ class BooksBloc {
 
     late List<String> wanted;
     if (_booksFetcher.value != null)
-      wanted = _booksFetcher.value!.map((e) => e.secureIsbn).toList();
+      wanted = _booksFetcher.value.map((e) => e.secureIsbn).toList();
     else {
       await getUserBooks(userUid, unwantedUids);
-      wanted = _booksFetcher.value!.map((e) => e.secureIsbn).toList();
+      wanted = _booksFetcher.value.map((e) => e.secureIsbn).toList();
     }
 
     final List<BookModel> nearbyBooks = await Repository.getNearbyBooks(wanted, rawLastKnownLocation, unwantedUids);
