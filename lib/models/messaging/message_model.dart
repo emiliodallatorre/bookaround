@@ -18,7 +18,7 @@ class MessageModel {
   MessageType? messageType;
   String? videoThumbUrl;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   DocumentReference? reference;
 
   // TODO: Modificare nel caso dei media allegati.

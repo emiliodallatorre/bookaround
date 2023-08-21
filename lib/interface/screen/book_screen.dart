@@ -72,7 +72,7 @@ class _BookScreenState extends State<BookScreen> {
             children: [
               BookCover(book: _book!, horizontalPadding: false),
 
-              Text(S.current.bookState, style: Theme.of(context).textTheme.headline4),
+              Text(S.current.bookState, style: Theme.of(context).textTheme.headlineMedium),
               Column(
                 children: [
                   Row(
@@ -95,7 +95,7 @@ class _BookScreenState extends State<BookScreen> {
                   ),
                 ],
               ),
-              if (_book!.note!.isNotEmpty) Text(S.current.note, style: Theme.of(context).textTheme.caption),
+              if (_book!.note!.isNotEmpty) Text(S.current.note, style: Theme.of(context).textTheme.bodySmall),
               if (_book!.note!.isNotEmpty) Text(_book!.note!),
               if (_book!.userUid != Provider.of<UserModel>(context).uid) _buildSellerInfo(context),
               // _buildSellerInfo(context),
@@ -113,15 +113,15 @@ class _BookScreenState extends State<BookScreen> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Divider(),
-        Text(S.current.soldBy, style: Theme.of(context).textTheme.headline4),
+        Text(S.current.soldBy, style: Theme.of(context).textTheme.headlineMedium),
         Row(
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(_book!.user!.displayName, style: Theme.of(context).textTheme.headline6),
-                Text(_book!.user!.city!, style: Theme.of(context).textTheme.caption),
+                Text(_book!.user!.displayName, style: Theme.of(context).textTheme.titleLarge),
+                Text(_book!.user!.city!, style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
           ],
@@ -172,7 +172,7 @@ class _BookScreenState extends State<BookScreen> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
-                        child: Text(S.current.removeBookFromSell, style: Theme.of(context).textTheme.headline5),
+                        child: Text(S.current.removeBookFromSell, style: Theme.of(context).textTheme.headlineSmall),
                       ),
                       ListTile(
                         title: Text(S.current.removeBookBecauseSell),

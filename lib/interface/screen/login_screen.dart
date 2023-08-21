@@ -83,7 +83,7 @@ class LoginScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(S.current.login, style: Theme.of(context).textTheme.headline5),
+                            Text(S.current.login, style: Theme.of(context).textTheme.headlineSmall),
                             Padding(
                               padding: const EdgeInsets.only(bottom: 8.0),
                               child: state.loginStep == LoginStep.SIGN_IN
@@ -110,10 +110,10 @@ class LoginScreen extends StatelessWidget {
                                         InputCodeField(
                                           control: state.codeController,
                                           autofocus: true,
-                                          decoration: InputCodeDecoration(textStyle: Theme.of(context).textTheme.headline5),
+                                          decoration: InputCodeDecoration(textStyle: Theme.of(context).textTheme.headlineSmall),
                                         ),
                                         SizedBox(height: 8.0),
-                                        Text(S.current.insertSmsCode, style: Theme.of(context).textTheme.caption),
+                                        Text(S.current.insertSmsCode, style: Theme.of(context).textTheme.bodySmall),
                                       ],
                                     ),
                             ),

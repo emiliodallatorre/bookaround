@@ -21,7 +21,6 @@ import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/provider/location_provider.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -56,8 +55,30 @@ class Bookaround extends StatelessWidget {
           darkTheme: ThemeData(
             fontFamily: "Poppins",
             brightness: Brightness.dark,
-            toggleableActiveColor: mainColor[500],
-            textSelectionTheme: TextSelectionThemeData(selectionColor: mainColor[200]), colorScheme: ColorScheme.fromSwatch(primarySwatch: mainColor).copyWith(secondary: mainColor[500]),
+            textSelectionTheme: TextSelectionThemeData(selectionColor: mainColor[200]), colorScheme: ColorScheme.fromSwatch(primarySwatch: mainColor).copyWith(secondary: mainColor[500]), checkboxTheme: CheckboxThemeData(
+ fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return mainColor[500]; }
+ return null;
+ }),
+ ), radioTheme: RadioThemeData(
+ fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return mainColor[500]; }
+ return null;
+ }),
+ ), switchTheme: SwitchThemeData(
+ thumbColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return mainColor[500]; }
+ return null;
+ }),
+ trackColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return mainColor[500]; }
+ return null;
+ }),
+ ),
           ),
           themeMode: ThemeMode.system,
           initialRoute: SplashScreen.route,

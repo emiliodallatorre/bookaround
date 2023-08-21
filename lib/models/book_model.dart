@@ -35,16 +35,16 @@ class BookModel extends ChangeNotifier {
 
   LatLng get modelizedLocation => LatLng((locationData!["geopoint"] as GeoPoint).latitude, (locationData!["geopoint"] as GeoPoint).longitude);
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   UserModel? user;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   List<BookModel> results = <BookModel>[];
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   double? distanceInKms;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   DocumentReference? reference;
 
   String get authorString {

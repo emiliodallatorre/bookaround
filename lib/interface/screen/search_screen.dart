@@ -44,7 +44,7 @@ class SearchScreen extends StatelessWidget {
           return Center(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Text(S.current.noSearch, style: Theme.of(context).textTheme.bodyText1, textAlign: TextAlign.center),
+              child: Text(S.current.noSearch, style: Theme.of(context).textTheme.bodyLarge, textAlign: TextAlign.center),
             ),
           );
         else {
@@ -54,7 +54,7 @@ class SearchScreen extends StatelessWidget {
             return Center(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Text(S.current.noResults, style: Theme.of(context).textTheme.bodyText1, textAlign: TextAlign.center),
+                child: Text(S.current.noResults, style: Theme.of(context).textTheme.bodyLarge, textAlign: TextAlign.center),
               ),
             );
           else

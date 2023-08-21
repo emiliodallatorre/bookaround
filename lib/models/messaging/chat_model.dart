@@ -21,13 +21,13 @@ class ChatModel {
   @JsonKey(toJson: SerializationHelper.messageToJson)
   final MessageModel? lastMessage;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   DocumentReference? reference;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   List<UserModel>? participantsUsers;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   DateTime? lastAccess;
 
   CollectionReference<Map<String, dynamic>> get messagesReference => reference!.collection("messages");

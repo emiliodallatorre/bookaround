@@ -47,7 +47,7 @@ class _IsbnEditorScreenState extends State<IsbnEditorScreen> {
         authorUid: Provider.of<UserModel>(context, listen: false).uid,
       );
 
-      WidgetsBinding.instance!.addPostFrameCallback((_) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!shownFirstFrame) {
           shownFirstFrame = true;
 
