@@ -13,7 +13,8 @@ class WebViewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Tuple2<String, String> dataDefinition = ModalRoute.of(context)!.settings.arguments as Tuple2<String, String>;
+    final Tuple2<String, String> dataDefinition =
+        ModalRoute.of(context)!.settings.arguments as Tuple2<String, String>;
 
     return Scaffold(
       appBar: AppBar(title: Text(dataDefinition.item1)),
@@ -22,8 +23,13 @@ class WebViewScreen extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context, String url) {
-    return WebView(
-      initialUrl: url,
+    final WebViewController controller = WebViewController();
+    controller.loadRequest(Uri.parse(url));
+
+    controller.setJavaScriptMode(JavaScriptMode.unrestricted);
+
+    return WebViewWidget(
+      controller: controller,
     );
   }
 }

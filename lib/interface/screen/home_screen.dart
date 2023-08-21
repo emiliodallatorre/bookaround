@@ -57,10 +57,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> listenForDynamicLinks() async {
-    final PendingDynamicLinkData? initialDynamicLink = await FirebaseDynamicLinks.instance.getInitialLink();
-    if (initialDynamicLink != null) await DynamicLinkHelper.followLink(context, initialDynamicLink);
+    final PendingDynamicLinkData? initialDynamicLink = await FirebaseDynamicLinks
+        .instance.getInitialLink();
+    if (initialDynamicLink != null) await DynamicLinkHelper.followLink(
+        context, initialDynamicLink);
 
-    FirebaseDynamicLinks.instance.onLink(onSuccess: (PendingDynamicLinkData? dynamicLink) async => await DynamicLinkHelper.followLink(context, dynamicLink));
+    FirebaseDynamicLinks.instance.onLink.listen((
+        PendingDynamicLinkData? dynamicLink) async =>
+    await DynamicLinkHelper.followLink(context, dynamicLink));
   }
 
   @override
@@ -84,13 +88,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Showcase(
                           key: Keys.searchTopKey,
                           description: S.current.showcaseAddToWishlist,
-                          shapeBorder: CircleBorder(),
-                          contentPadding: const EdgeInsets.all(16.0),
+                          targetShapeBorder: CircleBorder(),
+                          targetPadding: const EdgeInsets.all(16.0),
                           // onTargetClick: () => Navigator.of(context).pushNamed(SearchScreen.route),
                           // disposeOnTap: false,
                           child: IconButton(
                             icon: Icon(Icons.search),
-                            onPressed: () => Navigator.of(context).pushNamed(SearchScreen.route),
+                            onPressed: () =>
+                                Navigator.of(context).pushNamed(SearchScreen
+                                    .route),
                           ),
                         ),
                       ),
@@ -112,7 +118,8 @@ class _HomeScreenState extends State<HomeScreen> {
               Provider
                   .of<UserModel>(context, listen: false)
                   .hasGoneThroughShowcase = true;
-              await Provider.of<UserModel>(context, listen: false).updateOnServer();
+              await Provider.of<UserModel>(context, listen: false)
+                  .updateOnServer();
             },
           ),
     );
@@ -142,13 +149,15 @@ class _HomeScreenState extends State<HomeScreen> {
           currentIndex: selectedIndex,
           onTap: (int newIndex) => setState(() => selectedIndex = newIndex),
           items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: S.current.sellBooks),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.menu_book), label: S.current.sellBooks),
             BottomNavigationBarItem(
               icon: Showcase(
                 key: Keys.chatKey,
                 description: S.current.showcaseChat,
-                shapeBorder: CircleBorder(),
-                contentPadding: EdgeInsets.all(16.0),
+
+                targetShapeBorder: CircleBorder(),
+                targetPadding: EdgeInsets.all(16.0),
                 // onToolTipClick: () => setState(() => selectedIndex = 1),
                 // onTargetClick: () => setState(() => selectedIndex = 1),
                 // disposeOnTap: false,
@@ -160,8 +169,8 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Showcase(
                 key: Keys.searchBottomKey,
                 description: S.current.showcaseSearchBottom,
-                shapeBorder: CircleBorder(),
-                contentPadding: EdgeInsets.all(16.0),
+                targetShapeBorder: CircleBorder(),
+                targetPadding: EdgeInsets.all(16.0),
                 // onToolTipClick: () => setState(() => selectedIndex = 2),
                 // onTargetClick: () => setState(() => selectedIndex = 2),
                 // disposeOnTap: false,
@@ -182,8 +191,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Showcase(
           key: Keys.floatingActionButtonKey,
           description: S.current.showcaseFloatingActionButton,
-          shapeBorder: CircleBorder(),
-          contentPadding: const EdgeInsets.all(16.0),
+          targetShapeBorder: CircleBorder(),
+          targetPadding: const EdgeInsets.all(16.0),
           child: FloatingActionButton(
             child: Icon(Icons.add),
             onPressed: () async {
@@ -207,19 +216,24 @@ class _HomeScreenState extends State<HomeScreen> {
                             context: context,
                             builder: (BuildContext context) {
                               final TextEditingController isbnTextEditingController = TextEditingController();
-                              final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+                              final GlobalKey<FormState> formKey = GlobalKey<
+                                  FormState>();
 
                               return AlertDialog(
                                 title: Text(S.current.insertIsbn),
                                 content: Form(
                                   key: formKey,
-                                  child: TextFormField(keyboardType: TextInputType.number,
+                                  child: TextFormField(
+                                    keyboardType: TextInputType.number,
                                     validator: (String? value) {
-                                      if (value != null) if (value.length == 10 || value.length == 13) return null;
+                                      if (value != null)
+                                        if (value.length == 10 ||
+                                            value.length == 13) return null;
 
                                       return S.current.isbnLengthError;
                                     },
-                                    decoration: InputDecoration(hintText: "978..."),
+                                    decoration: InputDecoration(
+                                        hintText: "978..."),
                                     controller: isbnTextEditingController,
                                   ),
                                 ),
@@ -228,12 +242,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child: Text(S.current.ok),
                                     onPressed: () {
                                       if (formKey.currentState!.validate()) {
-                                        Navigator.of(context).pop(isbnTextEditingController.text);
+                                        Navigator.of(context).pop(
+                                            isbnTextEditingController.text);
                                       }
                                     },
                                   ),
                                 ],
-                              )
+                              );
                             }
                         );
 
@@ -258,7 +273,8 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Consumer<UserModel>(
-            builder: (BuildContext context, UserModel currentUser, Widget? child) =>
+            builder: (BuildContext context, UserModel currentUser,
+                Widget? child) =>
                 UserAccountsDrawerHeader(
                   currentAccountPicture: UserAvatar(user: currentUser),
                   accountName: Text(currentUser.displayName),
@@ -268,7 +284,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ListTile(
             leading: Icon(Icons.account_circle),
             title: Text(S.current.editProfile),
-            onTap: () => Navigator.of(context).pushNamed(ProfileEditorScreen.route),
+            onTap: () =>
+                Navigator.of(context).pushNamed(ProfileEditorScreen.route),
           ),
           ListTile(
             leading: Icon(Icons.block),
@@ -282,14 +299,17 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           FutureBuilder<PackageInfo>(
             future: PackageInfo.fromPlatform(),
-            builder: (BuildContext context, AsyncSnapshot<PackageInfo> infoSnapshot) =>
+            builder: (BuildContext context,
+                AsyncSnapshot<PackageInfo> infoSnapshot) =>
                 AboutListTile(
                   icon: const Icon(Icons.info),
-                  applicationIcon: SvgPicture.asset(Assets.logo, width: 64, height: 64, fit: BoxFit.cover,),
+                  applicationIcon: SvgPicture.asset(
+                    Assets.logo, width: 64, height: 64, fit: BoxFit.cover,),
                   applicationName: References.appName,
                   applicationLegalese: References.copyrightString,
                   // TODO: Tenere aggiornata questa stringa.
-                  applicationVersion: infoSnapshot.hasData ? ("v" + infoSnapshot.data!.version) : "",
+                  applicationVersion: infoSnapshot.hasData ? ("v" +
+                      infoSnapshot.data!.version) : "",
                   aboutBoxChildren: [
                     Text(S.current.appAbout),
                   ],
@@ -299,13 +319,17 @@ class _HomeScreenState extends State<HomeScreen> {
           ListTile(
             title: Text(S.current.privacyPolicy),
             onTap: () =>
-                Navigator.of(context).pushNamed(WebViewScreen.route, arguments: Tuple2<String, String>(S.current.privacyPolicy, References.privacyPolicyUrl)),
+                Navigator.of(context).pushNamed(WebViewScreen.route,
+                    arguments: Tuple2<String, String>(
+                        S.current.privacyPolicy, References.privacyPolicyUrl)),
           ),
           ListTile(
             title: Text(S.current.termsAndConditions),
             onTap: () =>
                 Navigator.of(context).pushNamed(
-                    WebViewScreen.route, arguments: Tuple2<String, String>(S.current.termsAndConditions, References.termsAndConditionsUrl)),
+                    WebViewScreen.route, arguments: Tuple2<String, String>(
+                    S.current.termsAndConditions,
+                    References.termsAndConditionsUrl)),
           ),
           Padding(
             padding: EdgeInsets.only(left: 8.0, bottom: MediaQuery
@@ -316,7 +340,8 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 TextButton(
                   child: Text(S.current.logout),
-                  onPressed: () async => await InitHelper(context).deinitialize(),
+                  onPressed: () async =>
+                  await InitHelper(context).deinitialize(),
                 ),
               ],
             ),
@@ -342,12 +367,15 @@ class _HomeScreenState extends State<HomeScreen> {
         content: Text(S.current.bookNotFoundError),
         action: SnackBarAction(
           label: S.current.add,
-          onPressed: () => Navigator.of(context).pushNamed(IsbnEditorScreen.route, arguments: isbn),
+          onPressed: () =>
+              Navigator.of(context).pushNamed(
+                  IsbnEditorScreen.route, arguments: isbn),
         ),
       ));
     } catch (e) {
       // È comparso un errore sconosciuto.
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(S.current.bookError)));
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(S.current.bookError)));
     }
     setState(() => working = false);
   }

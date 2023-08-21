@@ -23,63 +23,65 @@ dependencies:
   # cupertino_icons: ^1.0.2
   code_field:
     git: https://github.com/emiliodallatorre/code_field.git
-  google_fonts: ^2.1.0
-  showcaseview: ^1.1.1
+  google_fonts: ^5.1.0
+  showcaseview: ^2.0.3
 
   # Firebase
-  cloud_firestore: ^2.5.2
-  firebase_auth: ^3.1.1
-  firebase_core: ^1.6.0
-  cloud_functions: ^3.0.3
-  firebase_messaging: ^10.0.7
-  firebase_storage: ^10.0.3
-  firebase_crashlytics: ^2.2.1
-  firebase_dynamic_links: ^2.0.9
-  firebase_analytics: ^8.3.2
+  cloud_firestore: ^4.8.5
+  firebase_auth: ^4.7.3
+  firebase_core: ^2.15.1
+  cloud_functions: ^4.4.0
+  firebase_messaging: ^14.6.6
+  firebase_storage: ^11.2.6
+  firebase_crashlytics: ^3.3.5
+  firebase_dynamic_links: ^5.3.5
+  firebase_analytics: ^10.4.5
 
   # Logica
-  provider: ^6.0.0
-  rxdart: ^0.27.2
+  provider: ^6.0.5
+  rxdart: ^0.27.7
 
   # Modelli
-  json_annotation: ^4.1.0
+  json_annotation: ^4.8.1
 
   # Utilità
   form_field_validator: ^1.1.0
-  cached_network_image: ^3.1.0
+  cached_network_image: ^3.2.3
   flutter_barcode_scanner: ^2.0.0
   random_string: ^2.3.1
-  shared_preferences: ^2.0.7
-  timeago: ^3.1.0
-  overlay_support: ^1.2.1
-  webview_flutter: ^2.0.13
-  tuple: ^2.0.0
+  shared_preferences: ^2.2.0
+  timeago: ^3.5.0
+  overlay_support: ^2.1.0
+  webview_flutter: ^4.2.2
+  tuple: ^2.0.2
   share: ^2.0.4
   package_info: ^2.0.2
-  intl_phone_number_input: ^0.7.0+2
+  intl_phone_number_input: ^0.7.3+1
 
   # Grafica
-  flutter_svg: ^0.22.0
+  flutter_svg: ^2.0.7
 
   # Localizzazione
-  flutter_google_places_hoc081098: ^1.0.0-nullsafety.4
-  google_maps_webservice: ^0.0.19
+  flutter_google_places:
+    git: https://github.com/emiliodallatorre/flutter_google_places.git
+  google_maps_webservice:
+    git: https://github.com/shkvoretz/google_maps_webservice.git
   # geoflutterfire:
   #   git:
   #     url: git://github.com/emiliodallatorre/GeoFlutterFire.git
   #     ref: update_deps
-  geoflutterfire: ^3.0.1
+  geoflutterfire2: ^2.3.15
   flutter_geocoder: ^0.2.2-nullsafety
-  geolocator: ^7.6.0
-  google_maps_flutter: ^2.0.8
-  location: ^4.3.0
+  geolocator: ^10.0.0
+  google_maps_flutter: ^2.4.0
+  location: ^5.0.3
 
   # File
-  image_picker: ^0.8.4
+  image_picker: ^1.0.2
 
 
 dependency_overrides:
-  meta: ^1.7.0
+  meta: ^1.9.1
 
 
 dev_dependencies:
@@ -87,16 +89,16 @@ dev_dependencies:
     sdk: flutter
 
   # flutter pub run build_runner build --delete-conflicting-outputs
-  json_serializable: ^5.0.0
-  build_runner: ^2.1.2
+  json_serializable: ^6.7.1
+  build_runner: ^2.4.6
 
   # flutter pub run flutter_launcher_icons:main
-  flutter_launcher_icons: ^0.9.2
+  flutter_launcher_icons: ^0.13.1
 
   # flutter pub run r_flutter:generate
-  r_flutter: ^0.8.0
+  r_flutter: ^0.9.0
 
-  analyzer: ^2.2.0
+  analyzer: ^6.2.0
 
 flutter:
   uses-material-design: true

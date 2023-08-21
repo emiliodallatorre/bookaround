@@ -9,7 +9,7 @@ import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/helper/geocoding_helper.dart';
 import 'package:bookaround/resources/provider/user_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:geoflutterfire/geoflutterfire.dart';
+import 'package:geoflutterfire2/geoflutterfire2.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class BookProvider {
@@ -58,14 +58,14 @@ class BookProvider {
   }
 
   static Future<List<BookModel>> getNearbyBooks(List<String>? wanted, LatLng rawLastKnownLocation, Set<String> unwantedUids) async {
-    final Geoflutterfire geoflutterfire = Geoflutterfire();
+    final GeoFlutterFire geoflutterfire = GeoFlutterFire();
     final GeoFirePoint lastKnownLocation = GeoFirePoint(rawLastKnownLocation.latitude, rawLastKnownLocation.longitude);
 
     Stream<List<DocumentSnapshot<Map<String, dynamic>>>> stream = geoflutterfire.collection(collectionRef: References.booksCollection).within(
           center: lastKnownLocation,
           radius: 10,
           field: "locationData",
-        );
+        ).cast<List<DocumentSnapshot<Map<String, dynamic>>>>();
 
     List<DocumentSnapshot<Map<String, dynamic>>> rawNearbyBooks = await stream.first;
 

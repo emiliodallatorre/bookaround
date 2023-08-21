@@ -41,7 +41,7 @@ class Bookaround extends StatelessWidget {
     ]);
 
     final MaterialColor mainColor = Colors.teal;
-    final FirebaseAnalytics analytics = FirebaseAnalytics();
+    final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
     return MultiProvider(
       providers: [
@@ -56,10 +56,8 @@ class Bookaround extends StatelessWidget {
           darkTheme: ThemeData(
             fontFamily: "Poppins",
             brightness: Brightness.dark,
-            primarySwatch: mainColor,
-            accentColor: mainColor[500],
             toggleableActiveColor: mainColor[500],
-            textSelectionTheme: TextSelectionThemeData(selectionColor: mainColor[200]),
+            textSelectionTheme: TextSelectionThemeData(selectionColor: mainColor[200]), colorScheme: ColorScheme.fromSwatch(primarySwatch: mainColor).copyWith(secondary: mainColor[500]),
           ),
           themeMode: ThemeMode.system,
           initialRoute: SplashScreen.route,
