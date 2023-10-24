@@ -60,7 +60,9 @@ class _HomeScreenState extends State<HomeScreen> {
     final PendingDynamicLinkData? initialDynamicLink = await FirebaseDynamicLinks.instance.getInitialLink();
     if (initialDynamicLink != null) await DynamicLinkHelper.followLink(context, initialDynamicLink);
 
-    FirebaseDynamicLinks.instance.onLink(onSuccess: (PendingDynamicLinkData? dynamicLink) async => await DynamicLinkHelper.followLink(context, dynamicLink));
+    FirebaseDynamicLinks.instance.onLink.listen((PendingDynamicLinkData? dynamicLink) async {
+      if (dynamicLink != null) await DynamicLinkHelper.followLink(context, dynamicLink);
+    });
   }
 
   @override
@@ -81,8 +83,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Showcase(
                     key: Keys.searchTopKey,
                     description: S.current.showcaseAddToWishlist,
-                    shapeBorder: CircleBorder(),
-                    contentPadding: const EdgeInsets.all(16.0),
+                    targetShapeBorder: CircleBorder(),
+                    targetPadding: const EdgeInsets.all(16.0),
                     // onTargetClick: () => Navigator.of(context).pushNamed(SearchScreen.route),
                     // disposeOnTap: false,
                     child: IconButton(
@@ -139,8 +141,9 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Showcase(
                 key: Keys.chatKey,
                 description: S.current.showcaseChat,
-                shapeBorder: CircleBorder(),
-                contentPadding: EdgeInsets.all(16.0),
+                targetShapeBorder: CircleBorder(),
+                targetPadding: EdgeInsets.all(16.0),
+
                 // onToolTipClick: () => setState(() => selectedIndex = 1),
                 // onTargetClick: () => setState(() => selectedIndex = 1),
                 // disposeOnTap: false,
@@ -152,8 +155,8 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Showcase(
                 key: Keys.searchBottomKey,
                 description: S.current.showcaseSearchBottom,
-                shapeBorder: CircleBorder(),
-                contentPadding: EdgeInsets.all(16.0),
+                targetShapeBorder: CircleBorder(),
+                targetPadding: EdgeInsets.all(16.0),
                 // onToolTipClick: () => setState(() => selectedIndex = 2),
                 // onTargetClick: () => setState(() => selectedIndex = 2),
                 // disposeOnTap: false,
@@ -174,8 +177,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Showcase(
           key: Keys.floatingActionButtonKey,
           description: S.current.showcaseFloatingActionButton,
-          shapeBorder: CircleBorder(),
-          contentPadding: const EdgeInsets.all(16.0),
+          targetShapeBorder: CircleBorder(),
+          targetPadding: const EdgeInsets.all(16.0),
           child: FloatingActionButton(
             child: Icon(Icons.add),
             onPressed: () async {

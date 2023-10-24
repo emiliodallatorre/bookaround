@@ -56,9 +56,49 @@ class Bookaround extends StatelessWidget {
             fontFamily: "Poppins",
             brightness: Brightness.dark,
             primarySwatch: mainColor,
-            accentColor: mainColor[500],
-            toggleableActiveColor: mainColor[500],
             textSelectionTheme: TextSelectionThemeData(selectionColor: mainColor[200]),
+            checkboxTheme: CheckboxThemeData(
+              fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return null;
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return mainColor[500];
+                }
+                return null;
+              }),
+            ),
+            radioTheme: RadioThemeData(
+              fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return null;
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return mainColor[500];
+                }
+                return null;
+              }),
+            ),
+            switchTheme: SwitchThemeData(
+              thumbColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return null;
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return mainColor[500];
+                }
+                return null;
+              }),
+              trackColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return null;
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return mainColor[500];
+                }
+                return null;
+              }),
+            ),
           ),
           themeMode: ThemeMode.system,
           initialRoute: SplashScreen.route,
