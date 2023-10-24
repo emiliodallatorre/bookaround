@@ -9,7 +9,7 @@ import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/helper/geocoding_helper.dart';
 import 'package:bookaround/resources/provider/user_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:geoflutterfire/geoflutterfire.dart';
+import 'package:geoflutterfire_plus/geoflutterfire_plus.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class BookProvider {
@@ -58,26 +58,21 @@ class BookProvider {
   }
 
   static Future<List<BookModel>> getNearbyBooks(List<String>? wanted, LatLng rawLastKnownLocation, Set<String> unwantedUids) async {
-    final Geoflutterfire geoflutterfire = Geoflutterfire();
-    final GeoFirePoint lastKnownLocation = GeoFirePoint(rawLastKnownLocation.latitude, rawLastKnownLocation.longitude);
+    final GeoFirePoint lastKnownLocation = GeoFirePoint(GeoPoint(rawLastKnownLocation.latitude, rawLastKnownLocation.longitude));
 
-    Stream<List<DocumentSnapshot<Map<String, dynamic>>>> stream = geoflutterfire.collection(collectionRef: References.booksCollection).within(
-          center: lastKnownLocation,
-          radius: 10,
-          field: "locationData",
-        );
-
-    List<DocumentSnapshot<Map<String, dynamic>>> rawNearbyBooks = await stream.first;
-
-    /*stream.listen((List<DocumentSnapshot> rawNearbyBooks) async {
-    });*/
+    List<GeoDocumentSnapshot<Map<String, dynamic>>> rawNearbyBooks = await GeoCollectionReference(References.booksCollection).fetchWithinWithDistance(
+      center: GeoFirePoint(GeoPoint(lastKnownLocation.latitude, lastKnownLocation.longitude)),
+      radiusInKm: 10,
+      geopointFrom: (Map<String, dynamic> rawDocument) => rawDocument["locationData"]["geopoint"],
+      field: "locationData",
+    );
 
     final List<BookModel> foundBooks = <BookModel>[];
     for (int index = 0; index < rawNearbyBooks.length; index++) {
-      final BookModel book = BookModel.fromJson(rawNearbyBooks.elementAt(index).data()!);
+      final BookModel book = BookModel.fromJson(rawNearbyBooks.elementAt(index).documentSnapshot.data()!);
       if (unwantedUids.contains(book.userUid)) continue;
 
-      book.reference = rawNearbyBooks.elementAt(index).reference;
+      book.reference = rawNearbyBooks.elementAt(index).documentSnapshot.reference;
       book.user = await UserProvider.getUserByUid(book.userUid);
 
       foundBooks.add(book);

@@ -5,9 +5,10 @@
  */
 
 import 'package:bookaround/references.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_geocoder/geocoder.dart';
-import 'package:geoflutterfire/geoflutterfire.dart';
+import 'package:geoflutterfire_plus/geoflutterfire_plus.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -18,7 +19,7 @@ class GeocodingHelper {
     List<Address> locations = await Geocoder.google(References.googleApiKey).findAddressesFromQuery(address);
     if (locations.isEmpty) throw "Indirizzo non trovato.";
 
-    return GeoFirePoint(locations.first.coordinates.latitude!, locations.first.coordinates.longitude!).data;
+    return GeoFirePoint(GeoPoint(locations.first.coordinates.latitude!, locations.first.coordinates.longitude!)).data;
   }
 
   static double distanceBetween(LatLng a, LatLng b) => Geolocator.distanceBetween(a.latitude, a.longitude, b.latitude, b.longitude) / 1000;

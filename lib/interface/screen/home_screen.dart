@@ -29,9 +29,9 @@ import 'package:bookaround/resources/helper/init_helper.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:tuple/tuple.dart';
 
@@ -66,68 +66,60 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (BuildContext context) =>
-      ChatBloc(Provider.of<UserModel>(context, listen: false))
-        ..listenForChats(),
-      builder: (BuildContext context, Widget? child) =>
-          ShowCaseWidget(
-            autoPlay: true,
-            autoPlayDelay: Duration(seconds: 6),
-            builder: Builder(builder: (BuildContext context) =>
-                Scaffold(
-                  key: scaffoldKey,
-                  appBar: AppBar(
-                    title: Text(References.appName),
-                    actions: [
-                      Visibility(
-                        visible: selectedIndex == 2,
-                        child: Showcase(
-                          key: Keys.searchTopKey,
-                          description: S.current.showcaseAddToWishlist,
-                          shapeBorder: CircleBorder(),
-                          contentPadding: const EdgeInsets.all(16.0),
-                          // onTargetClick: () => Navigator.of(context).pushNamed(SearchScreen.route),
-                          // disposeOnTap: false,
-                          child: IconButton(
-                            icon: Icon(Icons.search),
-                            onPressed: () => Navigator.of(context).pushNamed(SearchScreen.route),
-                          ),
-                        ),
-                      ),
-                    ],
+      create: (BuildContext context) => ChatBloc(Provider.of<UserModel>(context, listen: false))..listenForChats(),
+      builder: (BuildContext context, Widget? child) => ShowCaseWidget(
+        autoPlay: true,
+        autoPlayDelay: Duration(seconds: 6),
+        builder: Builder(
+          builder: (BuildContext context) => Scaffold(
+            key: scaffoldKey,
+            appBar: AppBar(
+              title: Text(References.appName),
+              actions: [
+                Visibility(
+                  visible: selectedIndex == 2,
+                  child: Showcase(
+                    key: Keys.searchTopKey,
+                    description: S.current.showcaseAddToWishlist,
+                    shapeBorder: CircleBorder(),
+                    contentPadding: const EdgeInsets.all(16.0),
+                    // onTargetClick: () => Navigator.of(context).pushNamed(SearchScreen.route),
+                    // disposeOnTap: false,
+                    child: IconButton(
+                      icon: Icon(Icons.search),
+                      onPressed: () => Navigator.of(context).pushNamed(SearchScreen.route),
+                    ),
                   ),
-                  drawer: buildDrawer(context),
-                  body: buildBody(context),
-                  extendBody: true,
-                  bottomNavigationBar: buildBottomNavigationBar(context),
-                  floatingActionButton: buildFloatingActionButton(),
-                  // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
                 ),
+              ],
             ),
-            onFinish: () async {
-
-            },
-            onStart: (int? _, GlobalKey __) async {
-              debugPrint("Lo showcase è iniziato, lo segnalo.");
-              Provider
-                  .of<UserModel>(context, listen: false)
-                  .hasGoneThroughShowcase = true;
-              await Provider.of<UserModel>(context, listen: false).updateOnServer();
-            },
+            drawer: buildDrawer(context),
+            body: buildBody(context),
+            extendBody: true,
+            bottomNavigationBar: buildBottomNavigationBar(context),
+            floatingActionButton: buildFloatingActionButton(),
+            // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           ),
+        ),
+        onFinish: () async {},
+        onStart: (int? _, GlobalKey __) async {
+          debugPrint("Lo showcase è iniziato, lo segnalo.");
+          Provider.of<UserModel>(context, listen: false).hasGoneThroughShowcase = true;
+          await Provider.of<UserModel>(context, listen: false).updateOnServer();
+        },
+      ),
     );
   }
 
   Widget buildBody(BuildContext context) {
-    return
-      IndexedStack(
-        index: selectedIndex,
-        children: [
-          BookSellPage(type: BookType.SELLING),
-          ChatPage(),
-          BookSearchPage(),
-        ],
-      );
+    return IndexedStack(
+      index: selectedIndex,
+      children: [
+        BookSellPage(type: BookType.SELLING),
+        ChatPage(),
+        BookSearchPage(),
+      ],
+    );
   }
 
   Widget buildBottomNavigationBar(BuildContext context) {
@@ -213,7 +205,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 title: Text(S.current.insertIsbn),
                                 content: Form(
                                   key: formKey,
-                                  child: TextFormField(keyboardType: TextInputType.number,
+                                  child: TextFormField(
+                                    keyboardType: TextInputType.number,
                                     validator: (String? value) {
                                       if (value != null) if (value.length == 10 || value.length == 13) return null;
 
@@ -233,9 +226,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     },
                                   ),
                                 ],
-                              )
-                            }
-                        );
+                              );
+                            });
 
                         if (isbn != null) await startBookSellCreation(isbn);
                       },
@@ -258,12 +250,11 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Consumer<UserModel>(
-            builder: (BuildContext context, UserModel currentUser, Widget? child) =>
-                UserAccountsDrawerHeader(
-                  currentAccountPicture: UserAvatar(user: currentUser),
-                  accountName: Text(currentUser.displayName),
-                  accountEmail: Text(currentUser.phoneNumber!),
-                ),
+            builder: (BuildContext context, UserModel currentUser, Widget? child) => UserAccountsDrawerHeader(
+              currentAccountPicture: UserAvatar(user: currentUser),
+              accountName: Text(currentUser.displayName),
+              accountEmail: Text(currentUser.phoneNumber!),
+            ),
           ),
           ListTile(
             leading: Icon(Icons.account_circle),
@@ -282,18 +273,22 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           FutureBuilder<PackageInfo>(
             future: PackageInfo.fromPlatform(),
-            builder: (BuildContext context, AsyncSnapshot<PackageInfo> infoSnapshot) =>
-                AboutListTile(
-                  icon: const Icon(Icons.info),
-                  applicationIcon: SvgPicture.asset(Assets.logo, width: 64, height: 64, fit: BoxFit.cover,),
-                  applicationName: References.appName,
-                  applicationLegalese: References.copyrightString,
-                  // TODO: Tenere aggiornata questa stringa.
-                  applicationVersion: infoSnapshot.hasData ? ("v" + infoSnapshot.data!.version) : "",
-                  aboutBoxChildren: [
-                    Text(S.current.appAbout),
-                  ],
-                ),
+            builder: (BuildContext context, AsyncSnapshot<PackageInfo> infoSnapshot) => AboutListTile(
+              icon: const Icon(Icons.info),
+              applicationIcon: SvgPicture.asset(
+                Assets.logo,
+                width: 64,
+                height: 64,
+                fit: BoxFit.cover,
+              ),
+              applicationName: References.appName,
+              applicationLegalese: References.copyrightString,
+              // TODO: Tenere aggiornata questa stringa.
+              applicationVersion: infoSnapshot.hasData ? ("v" + infoSnapshot.data!.version) : "",
+              aboutBoxChildren: [
+                Text(S.current.appAbout),
+              ],
+            ),
           ),
           Spacer(),
           ListTile(
@@ -303,15 +298,11 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           ListTile(
             title: Text(S.current.termsAndConditions),
-            onTap: () =>
-                Navigator.of(context).pushNamed(
-                    WebViewScreen.route, arguments: Tuple2<String, String>(S.current.termsAndConditions, References.termsAndConditionsUrl)),
+            onTap: () => Navigator.of(context)
+                .pushNamed(WebViewScreen.route, arguments: Tuple2<String, String>(S.current.termsAndConditions, References.termsAndConditionsUrl)),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 8.0, bottom: MediaQuery
-                .of(context)
-                .viewPadding
-                .bottom),
+            padding: EdgeInsets.only(left: 8.0, bottom: MediaQuery.of(context).viewPadding.bottom),
             child: Column(
               children: [
                 TextButton(
@@ -330,9 +321,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() => working = true);
     try {
       // Il libro esiste nel database.
-      BookModel book = await BookHelper.createBookSell(isbn, Provider
-          .of<UserModel>(context, listen: false)
-          .uid!);
+      BookModel book = await BookHelper.createBookSell(isbn, Provider.of<UserModel>(context, listen: false).uid!);
       Navigator.of(context).pushNamed(BookEditorScreen.route, arguments: book);
     } on BookNotFoundError {
       // Il libro non esiste nel database.
