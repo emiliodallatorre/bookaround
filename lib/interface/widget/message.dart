@@ -25,7 +25,7 @@ class Message extends StatelessWidget {
           Expanded(
             flex: 3,
             child: Container(
-              color: Theme.of(context).backgroundColor.withOpacity(iAmTheSender(context) ? 1.0 : 0.5),
+              color: Theme.of(context).colorScheme.background.withOpacity(iAmTheSender(context) ? 1.0 : 0.5),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -33,7 +33,7 @@ class Message extends StatelessWidget {
                   children: [
                     Text(this.message.body!),
                     SizedBox(height: 4.0),
-                    Align(alignment: AlignmentDirectional.bottomEnd, child: Text(format(this.message.sentDateTime!), style: Theme.of(context).textTheme.caption)),
+                    Align(alignment: AlignmentDirectional.bottomEnd, child: Text(format(this.message.sentDateTime!), style: Theme.of(context).textTheme.bodySmall)),
                   ],
                 ),
               ),

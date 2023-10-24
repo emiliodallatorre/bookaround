@@ -13,5 +13,6 @@ class ImageHelper {
     XFile? pickedImage = await ImagePicker().pickImage(source: source);
 
     if (pickedImage != null) return File(pickedImage.path);
+    return null;
   }
 }

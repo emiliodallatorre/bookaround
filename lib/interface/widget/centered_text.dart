@@ -16,7 +16,7 @@ class CenteredText extends StatelessWidget {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Text(this.label!, style: Theme.of(context).textTheme.bodyText1, textAlign: TextAlign.center),
+        child: Text(this.label!, style: Theme.of(context).textTheme.bodyLarge, textAlign: TextAlign.center),
       ),
     );
   }

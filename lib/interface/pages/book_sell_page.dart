@@ -28,7 +28,7 @@ class _BookSellPageState extends State<BookSellPage> {
   @override
   void initState() {
     if (!Provider.of<UserModel>(context, listen: false).hasGoneThroughShowcase!)
-      WidgetsBinding.instance!.addPostFrameCallback((_) => ShowCaseWidget.of(context)?.startShowCase([
+      WidgetsBinding.instance.addPostFrameCallback((_) => ShowCaseWidget.of(context).startShowCase([
             Keys.floatingActionButtonKey,
             Keys.chatKey,
             Keys.searchBottomKey,

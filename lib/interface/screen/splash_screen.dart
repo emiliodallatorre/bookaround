@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // debugPrint(S.delegate.supportedLocales.toString());
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       final DateTime firstFrame = DateTime.now();
 
       await InitHelper(context).initialize().then((bool isLogged) async {
@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text(References.appName, style: GoogleFonts.lobster(textStyle: Theme.of(context).textTheme.headline5!.copyWith(fontSize: 64.0))),
+            Text(References.appName, style: GoogleFonts.lobster(textStyle: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 64.0))),
             CircularProgressIndicator(),
           ],
         ),

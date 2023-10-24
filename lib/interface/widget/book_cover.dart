@@ -42,8 +42,8 @@ class BookCover extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(this.book!.title!, style: Theme.of(context).textTheme.headline6),
-                    Text(this.book!.authorString, style: Theme.of(context).textTheme.bodyText1),
+                    Text(this.book!.title!, style: Theme.of(context).textTheme.titleLarge),
+                    Text(this.book!.authorString, style: Theme.of(context).textTheme.bodyLarge),
                   ],
                 ),
               ),

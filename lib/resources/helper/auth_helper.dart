@@ -48,6 +48,7 @@ class AuthHelper {
       final ConfirmationResult confirmationResult = await FirebaseAuth.instance.signInWithPhoneNumber(phoneNumber);
       return confirmationResult;
     }
+    return null;
   }
 
   static Future<void> loginWithCredential(String? verificationId, String smsCode, [ConfirmationResult? confirmationResult]) async {

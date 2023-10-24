@@ -22,7 +22,7 @@ class ConfirmSearchRemovalBottomSheet<bool> extends StatelessWidget {
         shrinkWrap: true,
         children: [
           BookCover(book: book, horizontalPadding: false),
-          Text(S.current.removeBookSearch, style: Theme.of(context).textTheme.headline6),
+          Text(S.current.removeBookSearch, style: Theme.of(context).textTheme.titleLarge),
           Text(S.current.removeBookSearchExtended),
           Row(
             mainAxisSize: MainAxisSize.max,
