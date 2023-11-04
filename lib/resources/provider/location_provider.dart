@@ -45,10 +45,10 @@ class LocationProvider extends ChangeNotifier {
       final LatLng lastKnownLocation = LatLng(locationData.latitude!, locationData.longitude!);
 
       this.lastKnownLocation = lastKnownLocation;
-
       debugPrint("Ho ottenuto la localizzazione.");
-      notifyListeners();
       isLoadingLocation = false;
+
+      notifyListeners();
       return lastKnownLocation;
     } catch (e) {
       debugPrint(e.toString());

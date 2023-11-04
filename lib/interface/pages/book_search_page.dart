@@ -22,12 +22,22 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 
-class BookSearchPage extends StatelessWidget {
+class BookSearchPage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
+  State<BookSearchPage> createState() => _BookSearchPageState();
+}
+
+class _BookSearchPageState extends State<BookSearchPage> {
+  @override
+  void initState() {
     searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<UserModel>(context, listen: false).blockedUids!,
         Provider.of<LocationProvider>(context, listen: false).lastKnownLocation);
 
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () => searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!,
           Provider.of<UserModel>(context, listen: false).blockedUids!, Provider.of<LocationProvider>(context, listen: false).lastKnownLocation),
@@ -42,13 +52,14 @@ class BookSearchPage extends StatelessWidget {
 
               return Consumer<LocationProvider>(
                 builder: (BuildContext context, LocationProvider locationProvider, Widget? child) {
-                  if (locationProvider.permissionStatus == null)
+                  if (locationProvider.permissionStatus == null) {
                     locationProvider.getPermissionStatus();
-                  else if (locationProvider.permissionStatus == PermissionStatus.granted) {
+                  } else if (locationProvider.permissionStatus == PermissionStatus.granted) {
                     if (locationProvider.lastKnownLocation == null && !locationProvider.isLoadingLocation) {
-                      locationProvider.getLocation();
-                      searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!,
-                          Provider.of<UserModel>(context, listen: false).blockedUids!, Provider.of<LocationProvider>(context, listen: false).lastKnownLocation);
+                      locationProvider.getLocation().whenComplete(() => searchBookBloc.getUserBooks(
+                          Provider.of<UserModel>(context, listen: false).uid!,
+                          Provider.of<UserModel>(context, listen: false).blockedUids!,
+                          Provider.of<LocationProvider>(context, listen: false).lastKnownLocation));
                     }
                   }
 

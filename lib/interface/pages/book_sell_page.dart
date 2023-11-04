@@ -35,6 +35,8 @@ class _BookSellPageState extends State<BookSellPage> {
             Keys.searchTopKey,
           ]));
 
+    sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<UserModel>(context, listen: false).blockedUids!);
+
     super.initState();
   }
 
@@ -56,7 +58,6 @@ class _BookSellPageState extends State<BookSellPage> {
               return CenteredText(label: S.current.noBooks);
           }
 
-          sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<UserModel>(context, listen: false).blockedUids!);
           return Center(child: CircularProgressIndicator());
         },
       ),

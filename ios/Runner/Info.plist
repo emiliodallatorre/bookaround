@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -62,7 +64,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Bookaround utilizza la tua posizione per mostrare i libri in vendita intorno a te.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Bookaround ha bisogno del tuo permesso per utilizzare il microfono del tuo dispositivo in quanto effetto collaterale dell'uso della fotocamera per lo scanner.</string>
+	<string>Bookaround ha bisogno del tuo permesso per utilizzare il microfono del tuo dispositivo in quanto effetto collaterale dell&apos;uso della fotocamera per lo scanner.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Bookaround ha bisogno del tuo permesso per accedere alla galleria delle tue immagini e consentirti di scegliere una nuova foto profilo / inserire una copertina dei libri dalla galleria.</string>
 	<key>UIBackgroundModes</key>
