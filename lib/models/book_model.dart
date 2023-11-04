@@ -6,9 +6,11 @@
 
 import 'package:bookaround/models/place_model.dart';
 import 'package:bookaround/models/user_model.dart';
+import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/helper/location_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:geoflutterfire_plus/geoflutterfire_plus.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -31,9 +33,14 @@ class BookModel extends ChangeNotifier {
   @JsonKey(toJson: LocationHelper.locationToJson)
   PlaceModel? location;
 
-  Map<String, dynamic>? locationData;
+  @JsonKey(toJson: LocationHelper.geoFirePointToJson, fromJson: LocationHelper.geoFirePointFromJson)
+  GeoFirePoint? locationData;
 
-  LatLng get modelizedLocation => LatLng((locationData!["geopoint"] as GeoPoint).latitude, (locationData!["geopoint"] as GeoPoint).longitude);
+  LatLng? get modelizedLocation {
+    if (this.locationData == null) return null;
+
+    return LatLng(this.locationData!.latitude, this.locationData!.longitude);
+  }
 
   @JsonKey(ignore: true)
   UserModel? user;
@@ -44,8 +51,7 @@ class BookModel extends ChangeNotifier {
   @JsonKey(ignore: true)
   double? distanceInKms;
 
-  @JsonKey(ignore: true)
-  DocumentReference? reference;
+  DocumentReference get reference => References.booksCollection.doc(id);
 
   String get authorString {
     if (this.authors!.isEmpty)
@@ -68,7 +74,6 @@ class BookModel extends ChangeNotifier {
     this.type,
     required this.userUid,
     this.addedDateTime,
-    this.reference,
     this.highlighting,
     this.pencil,
     this.pen,

@@ -28,18 +28,23 @@ class BookScreen extends StatefulWidget {
 }
 
 class _BookScreenState extends State<BookScreen> {
-  BookModel? _book;
+  late BookModel book;
+
+  bool initialized = false;
 
   @override
   Widget build(BuildContext context) {
-    if (_book == null) _book = ModalRoute.of(context)!.settings.arguments as BookModel;
+    if (!initialized) {
+      book = ModalRoute.of(context)!.settings.arguments as BookModel;
+      initialized = true;
+    }
 
-    debugPrint(_book!.userUid);
+    debugPrint(book.userUid);
 
     return Scaffold(
       appBar: AppBar(
         actions: [
-          if (_book!.userUid != Provider.of<UserModel>(context).uid)
+          if (book.userUid != Provider.of<UserModel>(context).uid)
             PopupMenuButton(
               itemBuilder: (BuildContext context) => <String>[S.current.reportBook]
                   .map((final String choice) => PopupMenuItem<String>(
@@ -49,7 +54,7 @@ class _BookScreenState extends State<BookScreen> {
                   .toList(),
               onSelected: (final String choice) async {
                 if (choice == S.current.reportBook) {
-                  ReportHelper.reportBook(_book!.id!, Provider.of<UserModel>(context, listen: false).uid!).whenComplete(() {
+                  ReportHelper.reportBook(book.id!, Provider.of<UserModel>(context, listen: false).uid!).whenComplete(() {
                     if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(S.current.reportedBook)));
                   });
                 }
@@ -70,7 +75,7 @@ class _BookScreenState extends State<BookScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BookCover(book: _book!, horizontalPadding: false),
+              BookCover(book: book, horizontalPadding: false),
 
               Text(S.current.bookState, style: Theme.of(context).textTheme.headlineMedium),
               Column(
@@ -78,26 +83,26 @@ class _BookScreenState extends State<BookScreen> {
                   Row(
                     children: [
                       Expanded(child: Text(S.current.pencil)),
-                      Checkbox(value: _book!.pencil, onChanged: null),
+                      Checkbox(value: book.pencil, onChanged: null),
                     ],
                   ),
                   Row(
                     children: [
                       Expanded(child: Text(S.current.pen)),
-                      Checkbox(value: _book!.pen, onChanged: null),
+                      Checkbox(value: book.pen, onChanged: null),
                     ],
                   ),
                   Row(
                     children: [
                       Expanded(child: Text(S.current.highlight)),
-                      Checkbox(value: _book!.highlighting, onChanged: null),
+                      Checkbox(value: book.highlighting, onChanged: null),
                     ],
                   ),
                 ],
               ),
-              if (_book!.note!.isNotEmpty) Text(S.current.note, style: Theme.of(context).textTheme.bodySmall),
-              if (_book!.note!.isNotEmpty) Text(_book!.note!),
-              if (_book!.userUid != Provider.of<UserModel>(context).uid) _buildSellerInfo(context),
+              if (book.note!.isNotEmpty) Text(S.current.note, style: Theme.of(context).textTheme.bodySmall),
+              if (book.note!.isNotEmpty) Text(book.note!),
+              if (book.userUid != Provider.of<UserModel>(context).uid) _buildSellerInfo(context),
               // _buildSellerInfo(context),
               SizedBox(height: 16.0),
             ],
@@ -120,8 +125,8 @@ class _BookScreenState extends State<BookScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(_book!.user!.displayName, style: Theme.of(context).textTheme.titleLarge),
-                Text(_book!.user!.city!, style: Theme.of(context).textTheme.bodySmall),
+                Text(book.user!.displayName, style: Theme.of(context).textTheme.titleLarge),
+                Text(book.user!.city!, style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
           ],
@@ -130,10 +135,10 @@ class _BookScreenState extends State<BookScreen> {
         AspectRatio(
           aspectRatio: 4 / 3,
           child: GoogleMap(
-            initialCameraPosition: CameraPosition(target: _book!.modelizedLocation, zoom: 12.0),
+            initialCameraPosition: CameraPosition(target: book.modelizedLocation!, zoom: 12.0),
             myLocationEnabled: true,
             myLocationButtonEnabled: false,
-            markers: <Marker>[Marker(markerId: MarkerId(_book!.id!), position: _book!.modelizedLocation)].toSet(),
+            markers: <Marker>[Marker(markerId: MarkerId(book.id!), position: book.modelizedLocation!)].toSet(),
             onMapCreated: (GoogleMapController controller) {
               if (Theme.of(context).brightness != Brightness.light) controller.setMapStyle(MapStyles.darkMap);
             },
@@ -144,12 +149,12 @@ class _BookScreenState extends State<BookScreen> {
   }
 
   List<Widget> buildPersistentFooterButtons() {
-    if (_book!.userUid != Provider.of<UserModel>(context).uid)
+    if (book.userUid != Provider.of<UserModel>(context).uid)
       return <Widget>[
         ElevatedButton(
           child: Text(S.current.getInTouchWithSeller),
           onPressed: () async {
-            final ChatModel? chat = await ChatProvider.getChat(_book!.userUid, Provider.of<UserModel>(context, listen: false).uid!);
+            final ChatModel? chat = await ChatProvider.getChat(book.userUid, Provider.of<UserModel>(context, listen: false).uid!);
 
             if (chat != null) Navigator.of(context).pushNamed(ChatScreen.route, arguments: chat);
           },
@@ -159,7 +164,7 @@ class _BookScreenState extends State<BookScreen> {
       return <Widget>[
         TextButton(
           child: Text(S.current.editInsertion),
-          onPressed: () => Navigator.of(context).pushReplacementNamed(BookEditorScreen.route, arguments: this._book),
+          onPressed: () => Navigator.of(context).pushReplacementNamed(BookEditorScreen.route, arguments: this.book),
         ),
         ElevatedButton(
           child: Text(S.current.removeBookFromSell),
@@ -199,8 +204,9 @@ class _BookScreenState extends State<BookScreen> {
                 false;
 
             if (delete) {
-              await BookHelper.removeBookFromSell(this._book!.id!);
-              await sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!,Provider.of<UserModel>(context, listen: false).blockedUids!);
+              await BookHelper.removeBookFromSell(this.book.id!);
+              await sellBooksBloc.getUserBooks(
+                  Provider.of<UserModel>(context, listen: false).uid!, Provider.of<UserModel>(context, listen: false).blockedUids!);
 
               Navigator.of(context).pop();
             }

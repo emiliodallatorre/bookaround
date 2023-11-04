@@ -28,7 +28,7 @@ class BookListElement extends StatelessWidget {
   const BookListElement.sell({
     Key? key,
     required this.book,
-  })   : this.widgetType = BookListElementType.SELL,
+  })  : this.widgetType = BookListElementType.SELL,
         this.color = null,
         this.showPosition = false,
         this.results = null,
@@ -39,7 +39,7 @@ class BookListElement extends StatelessWidget {
     required this.book,
     required this.color,
     required this.results,
-  })   : this.widgetType = BookListElementType.WANTED,
+  })  : this.widgetType = BookListElementType.WANTED,
         this.showPosition = false,
         super(key: key);
 
@@ -86,7 +86,8 @@ class BookListElement extends StatelessWidget {
             case BookListElementType.WANTED:
               return Icon(Icons.circle, color: this.color);
             case BookListElementType.RESULT_WANTED:
-              if (this.showPosition) return Text(Provider.of<LocationProvider>(context).getDistance(this.book.modelizedLocation).toStringAsFixed(1) + S.current.km);
+              if (this.showPosition)
+                return Text(Provider.of<LocationProvider>(context).getDistance(this.book.modelizedLocation!).toStringAsFixed(1) + S.current.km);
               break;
           }
 
@@ -109,7 +110,8 @@ class BookListElement extends StatelessWidget {
 
         if (wantsToRemove) {
           await BookHelper.removeBookFromSearch(this.book.id!);
-          await searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<UserModel>(context, listen: false).blockedUids!, Provider.of<LocationProvider>(context, listen: false).lastKnownLocation);
+          await searchBookBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<UserModel>(context, listen: false).blockedUids!,
+              Provider.of<LocationProvider>(context, listen: false).lastKnownLocation);
         }
       },
       child: ExpansionTile(

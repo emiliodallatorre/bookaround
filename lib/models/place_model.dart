@@ -37,8 +37,8 @@ class PlaceModel {
   factory PlaceModel.fromAddress(Address address) => PlaceModel(
         id: address.featureName,
         description: address.locality ?? address.adminArea ?? address.countryName ?? address.addressLine,
-        placeId: address.featureName,
-        placeReference: address.featureName,
+        placeId: address.locality,
+        placeReference: address.adminArea,
       );
 
   factory PlaceModel.fromJson(Map<String, dynamic> parsedJson) => _$PlaceModelFromJson(parsedJson);

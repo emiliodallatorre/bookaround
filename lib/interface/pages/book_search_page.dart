@@ -69,10 +69,11 @@ class BookSearchPage extends StatelessWidget {
                               markers: booksSnapshot.data
                                       ?.map((BookModel book) => book.results)
                                       .expand((List<BookModel> bookResults) => bookResults)
+                                      .where((BookModel book) => book.modelizedLocation != null)
                                       .map(
                                         (BookModel book) => Marker(
                                           markerId: MarkerId(book.id!),
-                                          position: LatLng(book.modelizedLocation.latitude, book.modelizedLocation.longitude),
+                                          position: LatLng(book.modelizedLocation!.latitude, book.modelizedLocation!.longitude),
                                           icon: BitmapDescriptor.defaultMarkerWithHue(bookColors[book.secureIsbn]!.hue),
                                           onTap: () async {
                                             await Future.delayed(Duration(milliseconds: 256));

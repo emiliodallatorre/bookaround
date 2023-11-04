@@ -28,8 +28,6 @@ class GeocodingHelper {
     List<Address> locations = await Geocoder.google(References.googleApiKey).findAddressesFromQuery(zipCode.toString() + " Italy Europe");
     if (locations.isEmpty) throw "CAP non trovato.";
 
-    debugPrint(locations.first.toMap().toString());
-
     return (locations.first, GeoFirePoint(GeoPoint(locations.first.coordinates.latitude!, locations.first.coordinates.longitude!)));
   }
 

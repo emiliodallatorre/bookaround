@@ -19,7 +19,6 @@ class BookProvider {
 
     rawBooks.forEach((DocumentSnapshot<Map<String, dynamic>> rawBook) {
       BookModel book = BookModel.fromJson(rawBook.data()!);
-      book.reference = rawBook.reference;
 
       books.add(book);
     });
@@ -45,9 +44,8 @@ class BookProvider {
       if (book.type != BookType.SELLING) continue;
       if (book.locationData == null) continue;
 
-      book.reference = rawBooks.elementAt(index).reference;
       book.user = await UserProvider.getUserByUid(book.userUid);
-      if (currentPosition != null) book.distanceInKms = GeocodingHelper.distanceBetween(currentPosition, book.modelizedLocation);
+      if (currentPosition != null) book.distanceInKms = GeocodingHelper.distanceBetween(currentPosition, book.modelizedLocation!);
 
       wantedBooks.add(book);
     }
@@ -72,7 +70,6 @@ class BookProvider {
       final BookModel book = BookModel.fromJson(rawNearbyBooks.elementAt(index).documentSnapshot.data()!);
       if (unwantedUids.contains(book.userUid)) continue;
 
-      book.reference = rawNearbyBooks.elementAt(index).documentSnapshot.reference;
       book.user = await UserProvider.getUserByUid(book.userUid);
 
       foundBooks.add(book);
@@ -89,7 +86,6 @@ class BookProvider {
 
     rawBooks.forEach((DocumentSnapshot<Map<String, dynamic>> rawBook) {
       final BookModel book = BookModel.fromJson(rawBook.data()!);
-      book.reference = rawBook.reference;
 
       if (book.type == BookType.LOOKING) books.add(book);
     });

@@ -21,7 +21,6 @@ class BookHelper {
     if (result.data == null) throw BookNotFoundError();
 
     final BookModel response = BookModel.fromJson(jsonDecode(result.data));
-    response.reference = References.booksCollection.doc(response.id);
 
     debugPrint("Ho caricato nel database il libro $isbn per conto di $currentUserUid.");
     return response;
@@ -36,8 +35,6 @@ class BookHelper {
   static Future<BookModel> createBookSearch(BookModel book) async {
     final DocumentReference bookReference = References.booksCollection.doc(book.id);
     await bookReference.set(book.toJson());
-
-    book.reference = bookReference;
 
     debugPrint("Aggiunto alle ricerche ${book.secureIsbn}.");
     return book;

@@ -13,7 +13,8 @@ import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/resources/helper/book_helper.dart';
 import 'package:bookaround/resources/helper/geocoding_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_geocoder/geocoder.dart';
+import 'package:flutter_geocoder/model.dart';
+import 'package:geoflutterfire_plus/geoflutterfire_plus.dart';
 import 'package:provider/provider.dart';
 
 class BookEditorScreen extends StatefulWidget {
@@ -101,21 +102,29 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               children: [
-                TextFormField(
-                  key: locationKey,
-                  // readOnly: true,
-                  validator: (final String? value) {
-                    if (value == null || value.isEmpty) return S.current.requiredField;
-                    if (int.tryParse(value) == null || value.length != 5) return S.current.insertValidZipCode;
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        key: locationKey,
+                        // readOnly: true,
+                        validator: (final String? value) {
+                          if (!hasInsertedZipCode) {
+                            if (value == null || value.isEmpty) return S.current.requiredField;
+                            if (int.tryParse(value) == null || value.length != 5) return S.current.insertValidZipCode;
+                          }
 
-                    return null;
-                  },
-                  controller: locationController,
-                  textInputAction: TextInputAction.search,
-                  keyboardType: TextInputType.numberWithOptions(signed: true),
-                  decoration: InputDecoration(
-                    labelText: S.current.zipCodeOfBook,
-                    suffixIcon: IconButton(
+                          return null;
+                        },
+                        controller: locationController,
+                        textInputAction: TextInputAction.search,
+                        keyboardType: TextInputType.number,
+                        readOnly: hasInsertedZipCode,
+                        enabled: !hasInsertedZipCode,
+                        decoration: InputDecoration(labelText: S.current.zipCodeOfBook),
+                      ),
+                    ),
+                    IconButton(
                       icon: Icon(hasInsertedZipCode ? Icons.close : Icons.check),
                       onPressed: () async {
                         if (hasInsertedZipCode) {
@@ -128,42 +137,23 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
 
                           setState(() {});
                         } else {
+                          FocusScope.of(context).unfocus();
+
                           if (locationKey.currentState!.validate()) {
-                            final (Address, Map<String, dynamic>) zipGeocoding = await GeocodingHelper.decodeZipCode(int.parse(locationController.text));
+                            final (Address, GeoFirePoint) zipGeocoding = await GeocodingHelper.decodeZipCode(int.parse(locationController.text));
                             book.locationData = zipGeocoding.$2;
                             book.location = PlaceModel.fromAddress(zipGeocoding.$1);
 
                             debugPrint("Il libro si trova a ${book.location!.toJson().toString()}.");
-                            // locationController.text = zipGeocoding.$1.adminArea;
+                            locationController.text = book.location!.description!;
+                            hasInsertedZipCode = true;
 
                             setState(() {});
                           }
                         }
                       },
                     ),
-                  ),
-                  /*onTap: () async {
-                    Prediction? prediction = await PlacesAutocomplete.show(
-                      context: context,
-                      apiKey: References.googleApiKey,
-                      mode: Mode.overlay,
-                      language: Platform.localeName.split("_").first,
-                      components: [
-                        Component(Component.country, "it"),
-                        Component(Component.country, "fr"),
-                      ],
-                    );
-
-                    if (prediction != null) {
-                      debugPrint("Il libro si trova a ${prediction.description}.");
-                      locationController.text = prediction.description!;
-
-                      book!.location = PlaceModel.fromPrediction(prediction);
-                      book!.locationData = await GeocodingHelper.decodeAddress(book!.location!.description!);
-
-                      setState(() {});
-                    }
-                  },*/
+                  ],
                 ),
                 TextFormField(
                   decoration: InputDecoration(labelText: S.current.note, alignLabelWithHint: true),
@@ -184,6 +174,8 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
   Future<bool> saveBook() async {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
+
+      debugPrint(book.toJson().toString());
 
       await BookHelper.updateBook(book);
       await sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<UserModel>(context, listen: false).blockedUids!);

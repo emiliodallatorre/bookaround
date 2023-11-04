@@ -26,7 +26,8 @@ BookModel _$BookModelFromJson(Map<String, dynamic> json) => BookModel(
       location: json['location'] == null
           ? null
           : PlaceModel.fromJson(json['location'] as Map<String, dynamic>),
-    )..locationData = json['locationData'] as Map<String, dynamic>?;
+    )..locationData = LocationHelper.geoFirePointFromJson(
+        json['locationData'] as Map<String, dynamic>?);
 
 Map<String, dynamic> _$BookModelToJson(BookModel instance) => <String, dynamic>{
       'id': instance.id,
@@ -43,7 +44,7 @@ Map<String, dynamic> _$BookModelToJson(BookModel instance) => <String, dynamic>{
       'pen': instance.pen,
       'note': instance.note,
       'location': LocationHelper.locationToJson(instance.location),
-      'locationData': instance.locationData,
+      'locationData': LocationHelper.geoFirePointToJson(instance.locationData),
     };
 
 const _$BookTypeEnumMap = {
