@@ -330,6 +330,9 @@ class _HomeScreenState extends State<HomeScreen> {
       // Il libro non esiste nel database.
       setState(() => working = false);
 
+      Navigator.of(context).pushNamed(IsbnEditorScreen.route, arguments: isbn);
+      return;
+
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(S.current.bookNotFoundError),
         action: SnackBarAction(

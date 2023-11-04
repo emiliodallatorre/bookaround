@@ -8,6 +8,7 @@ import 'dart:io';
 
 import 'package:bookaround/models/notification_data_model.dart';
 import 'package:bookaround/models/user_model.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -27,15 +28,22 @@ class NotificationsHelper {
   static Future<void> deinitializeNotifications() async => await FirebaseMessaging.instance.deleteToken();
 
   static Future<void> onNotification(RemoteMessage event, BuildContext context) async {
-    final NotificationDataModel notificationData = NotificationDataModel.fromJson(event.data);
+    try {
+      final NotificationDataModel notificationData = NotificationDataModel.fromJson(event.data);
 
-    switch (notificationData.type) {
-      case NotificationType.CHAT:
-        showSimpleNotification(
-          Text(event.notification!.title!),
-          subtitle: Text(event.notification!.body!),
-        );
-        break;
+      switch (notificationData.type) {
+        case NotificationType.CHAT:
+          showSimpleNotification(
+            Text(event.notification!.title!),
+            subtitle: Text(event.notification!.body!),
+          );
+          break;
+      }
+    } catch (e, stack) {
+      debugPrint("Errore nella gestione delle notifiche: $e");
+      FirebaseCrashlytics.instance.recordError(e, stack);
+
+      debugPrint("Notifica ricevuta: ${event.data}");
     }
   }
 }

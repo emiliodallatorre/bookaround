@@ -13,7 +13,7 @@ part 'message_model.g.dart';
 class MessageModel {
   String? id;
   String? senderUid;
-  String? body;
+  String body;
   DateTime? sentDateTime;
   MessageType? messageType;
   String? videoThumbUrl;
@@ -22,12 +22,12 @@ class MessageModel {
   DocumentReference? reference;
 
   // TODO: Modificare nel caso dei media allegati.
-  String get displayableBody => body!;
+  String get displayableBody => body;
 
   MessageModel({
     this.id,
     this.senderUid,
-    this.body,
+    required this.body,
     this.sentDateTime,
     this.messageType,
     this.videoThumbUrl,

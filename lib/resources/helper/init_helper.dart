@@ -4,6 +4,7 @@
  * Last modified 20/05/21, 10:07.
  */
 
+import 'package:bookaround/firebase_options.dart';
 import 'package:bookaround/interface/screen/login_screen.dart';
 import 'package:bookaround/models/settings_model.dart';
 import 'package:bookaround/models/user_model.dart';
@@ -22,9 +23,11 @@ class InitHelper {
   InitHelper(this.context);
 
   Future<bool> initialize() async {
-    await initializeFirebase();
+    if (Firebase.apps.isEmpty) {
+      await initializeFirebase();
+    }
 
-    await initializeCrashlytics();
+    initializeCrashlytics();
 
     bool isLogged = await initializeUser();
     if (isLogged) await NotificationsHelper.initializeNotifications(Provider.of<UserModel>(context, listen: false), context);
@@ -34,7 +37,21 @@ class InitHelper {
     return isLogged;
   }
 
-  Future<void> initializeFirebase() async => await Firebase.initializeApp();
+  static void initializeCrashlytics() async {
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+    PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      return true;
+    };
+
+    debugPrint("Crashlytics inizializzato.");
+  }
+
+  static Future<void> initializeFirebase() async {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  }
 
   Future<bool> initializeUser() async {
     try {
@@ -50,15 +67,6 @@ class InitHelper {
       debugPrint(e.toString());
       debugPrint("L'utente non è loggato.");
       return false;
-    }
-  }
-
-  Future<void> initializeCrashlytics() async {
-    if (!kIsWeb) {
-      if (kDebugMode)
-        await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(false);
-      else
-        await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
     }
   }
 

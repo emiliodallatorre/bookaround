@@ -11,11 +11,11 @@ import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/resources/helper/auth_helper.dart';
 import 'package:bookaround/resources/helper/init_helper.dart';
 import 'package:bookaround/resources/helper/notifications_helper.dart';
-import 'package:code_field/code_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:input_code_field/input_code_field.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:provider/provider.dart';
 
@@ -96,9 +96,7 @@ class LoginScreen extends StatelessWidget {
                                   InternationalPhoneNumberInput(
                                       inputDecoration: InputDecoration(labelText: S.current.phoneNumber),
                                       textFieldController: state.numberController,
-                                      countries: [
-                                        "IT", "FR"
-                                      ],
+                                      countries: ["IT", "FR"],
                                       onInputChanged: (PhoneNumber phoneNumber) {
                                         state.phoneNumber = phoneNumber.phoneNumber;
                                       },

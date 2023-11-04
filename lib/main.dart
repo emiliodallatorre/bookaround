@@ -19,6 +19,7 @@ import 'package:bookaround/interface/screen/web_view_screen.dart';
 import 'package:bookaround/models/settings_model.dart';
 import 'package:bookaround/models/user_model.dart';
 import 'package:bookaround/references.dart';
+import 'package:bookaround/resources/helper/init_helper.dart';
 import 'package:bookaround/resources/provider/location_provider.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,12 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await InitHelper.initializeFirebase();
+  InitHelper.initializeCrashlytics();
+
   runApp(Bookaround());
 }
 
@@ -51,7 +57,7 @@ class Bookaround extends StatelessWidget {
       builder: (BuildContext context, Widget? child) => OverlaySupport.global(
         child: MaterialApp(
           title: References.appName,
-          theme: ThemeData(primarySwatch: mainColor, fontFamily: "Poppins"),
+          theme: ThemeData(colorSchemeSeed: mainColor, fontFamily: "Poppins", useMaterial3: false),
           darkTheme: ThemeData(
             fontFamily: "Poppins",
             brightness: Brightness.dark,

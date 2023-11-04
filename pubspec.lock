@@ -233,15 +233,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.7.0"
-  code_field:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "085d13d6f485ab9f46f1f5ccbbd2d81e27df2a84"
-      url: "https://github.com/emiliodallatorre/code_field.git"
-    source: git
-    version: "1.22.0"
   collection:
     dependency: transitive
     description:
@@ -856,6 +847,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.1+1"
+  input_code_field:
+    dependency: "direct main"
+    description:
+      name: input_code_field
+      sha256: "3ce3c05ce6cf27f597c82c48080aa1fa69c2a2b2cbb69d019a44d0ab45ef28bb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   intl:
     dependency: transitive
     description:

@@ -46,10 +46,15 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
       onWillPop: () async {
         debugPrint("Riflettiamo sul pop...");
 
-        if (saved)
+        if (saved) {
           return Future.value(true);
-        else
-          return await saveBook();
+        } else {
+          if (formKey.currentState!.validate()) {
+            return await saveBook();
+          }
+
+          return Future.value(true);
+        }
       },
       child: Scaffold(
         appBar: AppBar(),

@@ -21,11 +21,12 @@ class References {
 
   static const String googleApiKey = "AIzaSyDTMDGyTZOPkaesYHW4vYfVMhUHafc8nl0";
 
-  static const String noCover = "https://firebasestorage.googleapis.com/v0/b/bookaround-firebase.appspot.com/o/noCover.jpg?alt=media&token=2dc45426-45cf-4333-93a1-dd3e9ed415b2";
+  static const String noCover =
+      "https://firebasestorage.googleapis.com/v0/b/bookaround-firebase.appspot.com/o/noCover.jpg?alt=media&token=2dc45426-45cf-4333-93a1-dd3e9ed415b2";
 
   static const String privacyPolicyUrl = "https://bookaround.app/privacy.html";
   static const String termsAndConditionsUrl = "https://bookaround.app/terms.html";
 
   static const String sharableAppLink = "https://bookaround.app/";
-  static const String copyrightString = "\u{a9} 2021 Emilio Dalla Torre";
+  static const String copyrightString = "\u{a9} 2021 - 2023 Emilio Dalla Torre";
 }
