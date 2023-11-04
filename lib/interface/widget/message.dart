@@ -32,7 +32,7 @@ class Message extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      this.message.body!,
+                      this.message.body,
                       style: TextStyle(
                         color: iAmTheSender(context) ? Colors.white : Colors.black,
                       ),

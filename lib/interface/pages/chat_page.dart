@@ -28,6 +28,9 @@ class ChatPage extends StatelessWidget {
                 trailing: chatsSnapshot.data!.elementAt(index).hasUnreadMessages
                     ? Icon(Icons.circle_notifications, color: Theme.of(context).colorScheme.secondary)
                     : null,
+                leading: chatsSnapshot.data!.elementAt(index).recipient.profileImageUrl == null
+                    ? null
+                    : CircleAvatar(backgroundImage: NetworkImage(chatsSnapshot.data!.elementAt(index).recipient.profileImageUrl!)),
                 onTap: () {
                   Provider.of<ChatBloc>(context, listen: false).chatsListener!.pause();
                   debugPrint("Ho messo in pausa lo stream delle chat.");

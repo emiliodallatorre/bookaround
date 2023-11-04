@@ -61,6 +61,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "insertIsbn": MessageLookupByLibrary.simpleMessage("Inserisci ISBN"),
         "insertSmsCode": MessageLookupByLibrary.simpleMessage(
             "Inserisci il codice che hai ricevuto tramite SMS"),
+        "insertValidZipCode":
+            MessageLookupByLibrary.simpleMessage("Inserisci un CAP valido"),
         "inviteAFriend":
             MessageLookupByLibrary.simpleMessage("Invita un amico"),
         "isbn": MessageLookupByLibrary.simpleMessage("ISBN"),
@@ -152,6 +154,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "wrongCode": MessageLookupByLibrary.simpleMessage(
             "Questo codice non è corretto, riprova"),
         "wrongField": MessageLookupByLibrary.simpleMessage(
-            "Inserisci correttamente questo dato")
+            "Inserisci correttamente questo dato"),
+        "zipCodeOfBook":
+            MessageLookupByLibrary.simpleMessage("CAP dove si trova il libro")
       };
 }

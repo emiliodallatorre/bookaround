@@ -83,5 +83,7 @@
   "blockUser": "Blocca questo utente",
   "noBlocked": "Al momento, non hai bloccato nessun utente.\nUtilizza il pulsante delle opzioni in una chat per bloccare un utente.",
   "blockedUsers": "Utenti bloccati",
-  "unblockUser": "Sblocca"
+  "unblockUser": "Sblocca",
+  "zipCodeOfBook": "CAP dove si trova il libro",
+  "insertValidZipCode": "Inserisci un CAP valido"
 }

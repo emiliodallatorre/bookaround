@@ -83,5 +83,7 @@
   "blockUser": "Bloquer cet utilisateur",
   "noBlocked": "Pour le moment, vous n'avez bloqué aucun utilisateur.\nUtilisez le bouton d'options dans un écran de discussion pour bloquer un utilisateur.",
   "blockedUsers": "Utilisateurs bloqués",
-  "unblockUser": "Déverrouiller"
+  "unblockUser": "Déverrouiller",
+  "zipCodeOfBook": "Code postal ou est le livre",
+  "insertValidZipCode": "Insérez un code postal valide"
 }

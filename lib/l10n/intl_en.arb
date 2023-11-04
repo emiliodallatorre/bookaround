@@ -83,5 +83,7 @@
   "blockUser": "Block this user",
   "noBlocked": "At the moment, you haven't blocked any user.\nUse the options button in a chat screen to block a user.",
   "blockedUsers": "Blocked users",
-  "unblockUser": "Unblock"
+  "unblockUser": "Unblock",
+  "zipCodeOfBook": "Zip code of the book location",
+  "insertValidZipCode": "Insert a valid zip code"
 }

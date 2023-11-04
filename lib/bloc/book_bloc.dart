@@ -38,6 +38,7 @@ class BooksBloc {
     }
     _booksFetcher.sink.add(books);
     debugPrint("Inviate al sink tutte le ricerche.");
+    debugPrint(StackTrace.current.toString());
 
     return books;
   }

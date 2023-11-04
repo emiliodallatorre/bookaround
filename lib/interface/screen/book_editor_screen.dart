@@ -4,21 +4,16 @@
  * Last modified 20/05/21, 10:07.
  */
 
-import 'dart:io';
-
 import 'package:bookaround/bloc/book_bloc.dart';
 import 'package:bookaround/generated/l10n.dart';
 import 'package:bookaround/interface/widget/book_cover.dart';
 import 'package:bookaround/models/book_model.dart';
 import 'package:bookaround/models/place_model.dart';
 import 'package:bookaround/models/user_model.dart';
-import 'package:bookaround/references.dart';
 import 'package:bookaround/resources/helper/book_helper.dart';
 import 'package:bookaround/resources/helper/geocoding_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_google_places/flutter_google_places.dart';
-import 'package:form_field_validator/form_field_validator.dart';
-import 'package:google_maps_webservice/places.dart';
+import 'package:flutter_geocoder/geocoder.dart';
 import 'package:provider/provider.dart';
 
 class BookEditorScreen extends StatefulWidget {
@@ -29,17 +24,24 @@ class BookEditorScreen extends StatefulWidget {
 }
 
 class _BookEditorScreenState extends State<BookEditorScreen> {
-  BookModel? book;
+  final GlobalKey<FormFieldState> locationKey = GlobalKey<FormFieldState>();
+
+  late BookModel book;
+
   TextEditingController locationController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
   bool saved = false;
+  bool initialized = false;
+  bool hasInsertedZipCode = false;
 
   @override
   Widget build(BuildContext context) {
-    if (book == null) {
+    if (!initialized) {
       book = ModalRoute.of(context)!.settings.arguments as BookModel;
-      if (book!.location != null) locationController.text = book!.location!.description!;
+      if (book.location != null) {
+        locationController.text = book.location!.description!;
+        hasInsertedZipCode = true;
+      }
     }
 
     return WillPopScope(
@@ -75,21 +77,22 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
 
   Widget _buildBody(BuildContext context) {
     return ListView(
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       children: [
-        BookCover(book: book!),
+        BookCover(book: book),
         CheckboxListTile(
-          value: book!.pencil,
-          onChanged: (bool? value) => setState(() => book!.pencil = value!),
+          value: book.pencil,
+          onChanged: (bool? value) => setState(() => book.pencil = value!),
           title: Text(S.current.pencil),
         ),
         CheckboxListTile(
-          value: book!.highlighting,
-          onChanged: (bool? value) => setState(() => book!.highlighting = value!),
+          value: book.highlighting,
+          onChanged: (bool? value) => setState(() => book.highlighting = value!),
           title: Text(S.current.highlight),
         ),
         CheckboxListTile(
-          value: book!.pen,
-          onChanged: (bool? value) => setState(() => book!.pen = value!),
+          value: book.pen,
+          onChanged: (bool? value) => setState(() => book.pen = value!),
           title: Text(S.current.pen),
         ),
         Form(
@@ -99,11 +102,47 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
             child: Column(
               children: [
                 TextFormField(
-                  readOnly: true,
-                  validator: RequiredValidator(errorText: S.current.requiredField),
+                  key: locationKey,
+                  // readOnly: true,
+                  validator: (final String? value) {
+                    if (value == null || value.isEmpty) return S.current.requiredField;
+                    if (int.tryParse(value) == null || value.length != 5) return S.current.insertValidZipCode;
+
+                    return null;
+                  },
                   controller: locationController,
-                  decoration: InputDecoration(labelText: S.current.whereIsBook),
-                  onTap: () async {
+                  textInputAction: TextInputAction.search,
+                  keyboardType: TextInputType.numberWithOptions(signed: true),
+                  decoration: InputDecoration(
+                    labelText: S.current.zipCodeOfBook,
+                    suffixIcon: IconButton(
+                      icon: Icon(hasInsertedZipCode ? Icons.close : Icons.check),
+                      onPressed: () async {
+                        if (hasInsertedZipCode) {
+                          locationController.clear();
+
+                          book.location = null;
+                          book.locationData = null;
+
+                          hasInsertedZipCode = false;
+
+                          setState(() {});
+                        } else {
+                          if (locationKey.currentState!.validate()) {
+                            final (Address, Map<String, dynamic>) zipGeocoding = await GeocodingHelper.decodeZipCode(int.parse(locationController.text));
+                            book.locationData = zipGeocoding.$2;
+                            book.location = PlaceModel.fromAddress(zipGeocoding.$1);
+
+                            debugPrint("Il libro si trova a ${book.location!.toJson().toString()}.");
+                            // locationController.text = zipGeocoding.$1.adminArea;
+
+                            setState(() {});
+                          }
+                        }
+                      },
+                    ),
+                  ),
+                  /*onTap: () async {
                     Prediction? prediction = await PlacesAutocomplete.show(
                       context: context,
                       apiKey: References.googleApiKey,
@@ -124,13 +163,13 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
 
                       setState(() {});
                     }
-                  },
+                  },*/
                 ),
                 TextFormField(
                   decoration: InputDecoration(labelText: S.current.note, alignLabelWithHint: true),
                   textInputAction: TextInputAction.done,
-                  initialValue: book!.note,
-                  onSaved: (String? value) => setState(() => book!.note = value!),
+                  initialValue: book.note,
+                  onSaved: (String? value) => setState(() => book.note = value!),
                   minLines: 4,
                   maxLines: 4,
                 ),
@@ -146,7 +185,7 @@ class _BookEditorScreenState extends State<BookEditorScreen> {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
 
-      await BookHelper.updateBook(book!);
+      await BookHelper.updateBook(book);
       await sellBooksBloc.getUserBooks(Provider.of<UserModel>(context, listen: false).uid!, Provider.of<UserModel>(context, listen: false).blockedUids!);
 
       saved = true;

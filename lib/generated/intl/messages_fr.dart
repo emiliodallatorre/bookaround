@@ -63,6 +63,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "insertIsbn": MessageLookupByLibrary.simpleMessage("Insérer l\'ISBN"),
         "insertSmsCode": MessageLookupByLibrary.simpleMessage(
             "Insérez le code que vous avez reçu par SMS"),
+        "insertValidZipCode": MessageLookupByLibrary.simpleMessage(
+            "Insérez un code postal valide"),
         "inviteAFriend": MessageLookupByLibrary.simpleMessage("Invite un ami"),
         "isbn": MessageLookupByLibrary.simpleMessage("ISBN"),
         "isbnLengthError": MessageLookupByLibrary.simpleMessage(
@@ -154,6 +156,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "wrongCode": MessageLookupByLibrary.simpleMessage(
             "Ce code ne fonctionne pas, réessayez"),
         "wrongField": MessageLookupByLibrary.simpleMessage(
-            "Ce champ n\'est pas rempli correctement")
+            "Ce champ n\'est pas rempli correctement"),
+        "zipCodeOfBook":
+            MessageLookupByLibrary.simpleMessage("Code postal ou est le livre")
       };
 }

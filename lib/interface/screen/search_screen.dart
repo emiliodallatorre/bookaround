@@ -22,10 +22,8 @@ class SearchScreen extends StatelessWidget {
       builder: (BuildContext context, Widget? child) => Scaffold(
         appBar: AppBar(
           title: TextField(
-            style: TextStyle(color: Colors.white),
             decoration: InputDecoration.collapsed(
               hintText: S.current.searchBook,
-              hintStyle: TextStyle(color: Colors.white),
             ),
             textInputAction: TextInputAction.search,
             onSubmitted: (String query) async => await Provider.of<SearchScreenState>(context, listen: false).findBooks(query),

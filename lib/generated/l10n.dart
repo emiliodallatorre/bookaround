@@ -899,6 +899,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Zip code of the book location`
+  String get zipCodeOfBook {
+    return Intl.message(
+      'Zip code of the book location',
+      name: 'zipCodeOfBook',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Insert a valid zip code`
+  String get insertValidZipCode {
+    return Intl.message(
+      'Insert a valid zip code',
+      name: 'insertValidZipCode',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

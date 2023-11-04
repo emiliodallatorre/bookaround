@@ -57,7 +57,7 @@ class Bookaround extends StatelessWidget {
       builder: (BuildContext context, Widget? child) => OverlaySupport.global(
         child: MaterialApp(
           title: References.appName,
-          theme: ThemeData(colorSchemeSeed: mainColor, fontFamily: "Poppins", useMaterial3: false),
+          theme: ThemeData(colorSchemeSeed: mainColor, fontFamily: "Poppins", useMaterial3: true),
           darkTheme: ThemeData(
             fontFamily: "Poppins",
             brightness: Brightness.dark,
