@@ -42,13 +42,13 @@ class BookModel extends ChangeNotifier {
     return LatLng(this.locationData!.latitude, this.locationData!.longitude);
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   UserModel? user;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   List<BookModel> results = <BookModel>[];
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   double? distanceInKms;
 
   DocumentReference get reference => References.booksCollection.doc(id);

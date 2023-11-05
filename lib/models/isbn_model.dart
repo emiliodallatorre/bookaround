@@ -15,7 +15,7 @@ class IsbnModel {
   final String? isbn, isbn13;
   String? title;
   List<String>? authors;
-  @Deprecated("Usare sureImage.")
+
   String? image;
   final String? authorUid;
 

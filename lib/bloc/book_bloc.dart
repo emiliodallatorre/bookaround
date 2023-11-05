@@ -45,14 +45,7 @@ class BooksBloc {
   Future<List<BookModel>> getWantedBooks(String userUid, LatLng? currentPosition, Set<String> unwantedUids) async {
     assert(this.bookType == BookType.LOOKING);
 
-    late List<String> wanted;
-    if (_booksFetcher.value != null)
-      wanted = _booksFetcher.value.map((e) => e.secureIsbn).toList();
-    else {
-      final List<BookModel> books = await Repository.getUserWantedBooks(userUid);
-      _booksFetcher.sink.add(books);
-      wanted = books.map((BookModel wantedBook) => wantedBook.secureIsbn).toList();
-    }
+    late List<String> wanted = _booksFetcher.value.map((e) => e.secureIsbn).toList();
 
     final List<BookModel> wantedBooks = await Repository.getWantedBooks(wanted, currentPosition, unwantedUids);
     // TODO: Riattivare a tempo debito.
@@ -60,24 +53,6 @@ class BooksBloc {
 
     // _wantedBooksFetcher.sink.add(wantedBooks);
     return wantedBooks;
-  }
-
-  @Deprecated("Sostituito con [getWantedBooks].")
-  Future<List<BookModel>> getNearbyBooks(LatLng rawLastKnownLocation, String userUid, Set<String> unwantedUids) async {
-    assert(this.bookType == BookType.LOOKING);
-
-    late List<String> wanted;
-    if (_booksFetcher.value != null)
-      wanted = _booksFetcher.value.map((e) => e.secureIsbn).toList();
-    else {
-      await getUserBooks(userUid, unwantedUids);
-      wanted = _booksFetcher.value.map((e) => e.secureIsbn).toList();
-    }
-
-    final List<BookModel> nearbyBooks = await Repository.getNearbyBooks(wanted, rawLastKnownLocation, unwantedUids);
-
-    // _wantedBooksFetcher.sink.add(nearbyBooks);
-    return nearbyBooks;
   }
 
   void dispose() {

@@ -332,14 +332,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
       Navigator.of(context).pushNamed(IsbnEditorScreen.route, arguments: isbn);
       return;
-
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(S.current.bookNotFoundError),
-        action: SnackBarAction(
-          label: S.current.add,
-          onPressed: () => Navigator.of(context).pushNamed(IsbnEditorScreen.route, arguments: isbn),
-        ),
-      ));
     } catch (e) {
       // È comparso un errore sconosciuto.
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(S.current.bookError)));

@@ -27,7 +27,7 @@ class BookHelper {
   }
 
   static Future<void> updateBook(BookModel book) async {
-    await book.reference!.update(book.toJson());
+    await book.reference.update(book.toJson());
     debugPrint("Aggiornato il libro ${book.id}.");
   }
 

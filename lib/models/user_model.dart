@@ -20,7 +20,7 @@ class UserModel extends ChangeNotifier {
   bool? hasGoneThroughShowcase;
   Set<String>? blockedUids;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   DocumentReference? reference;
 
   UserModel({
