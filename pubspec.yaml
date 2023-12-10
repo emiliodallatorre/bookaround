@@ -21,20 +21,20 @@ dependencies:
 
   # Grafica
   # cupertino_icons: ^1.0.2
-  input_code_field: ^2.0.1
+  input_code_field: ^2.0.2
   google_fonts: ^6.1.0
   showcaseview: ^2.0.3
 
   # Firebase
-  cloud_firestore: ^4.11.0
-  firebase_auth: ^4.11.1
-  firebase_core: ^2.19.0
-  cloud_functions: ^4.5.1
-  firebase_messaging: ^14.7.1
-  firebase_storage: ^11.3.1
-  firebase_crashlytics: ^3.4.1
-  firebase_dynamic_links: ^5.4.1
-  firebase_analytics: ^10.6.1
+  cloud_firestore: ^4.13.5
+  firebase_auth: ^4.15.2
+  firebase_core: ^2.24.2
+  cloud_functions: ^4.5.8
+  firebase_messaging: ^14.7.8
+  firebase_storage: ^11.5.5
+  firebase_crashlytics: ^3.4.8
+  firebase_dynamic_links: ^5.4.8
+  firebase_analytics: ^10.7.4
 
   # Logica
   provider: ^6.0.5
@@ -49,16 +49,16 @@ dependencies:
   flutter_barcode_scanner: ^2.0.0
   random_string: ^2.3.1
   shared_preferences: ^2.2.2
-  timeago: ^3.5.0
+  timeago: ^3.6.0
   overlay_support: ^2.1.0
-  webview_flutter: ^4.4.1
+  webview_flutter: ^4.4.2
   tuple: ^2.0.2
   share_plus: ^7.2.1
   package_info_plus: ^4.2.0
-  intl_phone_number_input: ^0.7.3+1
+  intl_phone_number_input: ^0.7.4
 
   # Grafica
-  flutter_svg: ^2.0.7
+  flutter_svg: ^2.0.9
 
   # Localizzazione
   flutter_google_places:
@@ -87,7 +87,7 @@ dev_dependencies:
 
   # flutter pub run build_runner build --delete-conflicting-outputs
   json_serializable: ^6.7.1
-  build_runner: ^2.4.6
+  build_runner: ^2.4.7
 
   # flutter pub run flutter_launcher_icons:main
   flutter_launcher_icons: ^0.13.1
