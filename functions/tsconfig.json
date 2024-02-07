@@ -6,10 +6,15 @@
     "outDir": "lib",
     "sourceMap": true,
     "strict": true,
-    "target": "es2017"
+    "target": "es2017",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   },
   "compileOnSave": true,
   "include": [
-    "src"
-  ]
+    "src",
+    "src/**/*"
+  ],
+  "indent": 2
 }
