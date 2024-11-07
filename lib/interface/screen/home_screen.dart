@@ -57,56 +57,62 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> listenForDynamicLinks() async {
-    final PendingDynamicLinkData? initialDynamicLink = await FirebaseDynamicLinks.instance.getInitialLink();
-    if (initialDynamicLink != null) await DynamicLinkHelper.followLink(context, initialDynamicLink);
+    final PendingDynamicLinkData? initialDynamicLink =
+        await FirebaseDynamicLinks.instance.getInitialLink();
+    if (initialDynamicLink != null)
+      await DynamicLinkHelper.followLink(context, initialDynamicLink);
 
-    FirebaseDynamicLinks.instance.onLink.listen((PendingDynamicLinkData? dynamicLink) async {
-      if (dynamicLink != null) await DynamicLinkHelper.followLink(context, dynamicLink);
+    FirebaseDynamicLinks.instance.onLink
+        .listen((PendingDynamicLinkData? dynamicLink) async {
+      if (dynamicLink != null)
+        await DynamicLinkHelper.followLink(context, dynamicLink);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (BuildContext context) => ChatBloc(Provider.of<UserModel>(context, listen: false))..listenForChats(),
+      create: (BuildContext context) =>
+          ChatBloc(Provider.of<UserModel>(context, listen: false))
+            ..listenForChats(),
       builder: (BuildContext context, Widget? child) => ShowCaseWidget(
         autoPlay: true,
         autoPlayDelay: Duration(seconds: 6),
-        builder: Builder(
-          builder: (BuildContext context) => Scaffold(
-            key: scaffoldKey,
-            appBar: AppBar(
-              title: Text(References.appName),
-              actions: [
-                Visibility(
-                  visible: selectedIndex == 2,
-                  child: Showcase(
-                    key: Keys.searchTopKey,
-                    description: S.current.showcaseAddToWishlist,
-                    targetShapeBorder: CircleBorder(),
-                    targetPadding: const EdgeInsets.all(16.0),
-                    // onTargetClick: () => Navigator.of(context).pushNamed(SearchScreen.route),
-                    // disposeOnTap: false,
-                    child: IconButton(
-                      icon: Icon(Icons.search),
-                      onPressed: () => Navigator.of(context).pushNamed(SearchScreen.route),
-                    ),
+        builder: (BuildContext context) => Scaffold(
+          key: scaffoldKey,
+          appBar: AppBar(
+            title: Text(References.appName),
+            actions: [
+              Visibility(
+                visible: selectedIndex == 2,
+                child: Showcase(
+                  key: Keys.searchTopKey,
+                  description: S.current.showcaseAddToWishlist,
+                  targetShapeBorder: CircleBorder(),
+                  targetPadding: const EdgeInsets.all(16.0),
+                  // onTargetClick: () => Navigator.of(context).pushNamed(SearchScreen.route),
+                  // disposeOnTap: false,
+                  child: IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () =>
+                        Navigator.of(context).pushNamed(SearchScreen.route),
                   ),
                 ),
-              ],
-            ),
-            drawer: buildDrawer(context),
-            body: buildBody(context),
-            extendBody: true,
-            bottomNavigationBar: buildBottomNavigationBar(context),
-            floatingActionButton: buildFloatingActionButton(),
-            // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+              ),
+            ],
           ),
+          drawer: buildDrawer(context),
+          body: buildBody(context),
+          extendBody: true,
+          bottomNavigationBar: buildBottomNavigationBar(context),
+          floatingActionButton: buildFloatingActionButton(),
+          // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         ),
         onFinish: () async {},
         onStart: (int? _, GlobalKey __) async {
           debugPrint("Lo showcase è iniziato, lo segnalo.");
-          Provider.of<UserModel>(context, listen: false).hasGoneThroughShowcase = true;
+          Provider.of<UserModel>(context, listen: false)
+              .hasGoneThroughShowcase = true;
           await Provider.of<UserModel>(context, listen: false).updateOnServer();
         },
       ),
@@ -136,7 +142,8 @@ class _HomeScreenState extends State<HomeScreen> {
           currentIndex: selectedIndex,
           onTap: (int newIndex) => setState(() => selectedIndex = newIndex),
           items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: S.current.sellBooks),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.menu_book), label: S.current.sellBooks),
             BottomNavigationBarItem(
               icon: Showcase(
                 key: Keys.chatKey,
@@ -201,8 +208,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         String? isbn = await showDialog<String>(
                             context: context,
                             builder: (BuildContext context) {
-                              final TextEditingController isbnTextEditingController = TextEditingController();
-                              final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+                              final TextEditingController
+                                  isbnTextEditingController =
+                                  TextEditingController();
+                              final GlobalKey<FormState> formKey =
+                                  GlobalKey<FormState>();
 
                               return AlertDialog(
                                 title: Text(S.current.insertIsbn),
@@ -211,11 +221,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: TextFormField(
                                     keyboardType: TextInputType.number,
                                     validator: (String? value) {
-                                      if (value != null) if (value.length == 10 || value.length == 13) return null;
+                                      if (value != null) if (value.length ==
+                                              10 ||
+                                          value.length == 13) return null;
 
                                       return S.current.isbnLengthError;
                                     },
-                                    decoration: InputDecoration(hintText: "978..."),
+                                    decoration:
+                                        InputDecoration(hintText: "978..."),
                                     controller: isbnTextEditingController,
                                   ),
                                 ),
@@ -224,7 +237,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child: Text(S.current.ok),
                                     onPressed: () {
                                       if (formKey.currentState!.validate()) {
-                                        Navigator.of(context).pop(isbnTextEditingController.text);
+                                        Navigator.of(context).pop(
+                                            isbnTextEditingController.text);
                                       }
                                     },
                                   ),
@@ -253,7 +267,9 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Consumer<UserModel>(
-            builder: (BuildContext context, UserModel currentUser, Widget? child) => UserAccountsDrawerHeader(
+            builder:
+                (BuildContext context, UserModel currentUser, Widget? child) =>
+                    UserAccountsDrawerHeader(
               currentAccountPicture: UserAvatar(user: currentUser),
               accountName: Text(currentUser.displayName),
               accountEmail: Text(currentUser.phoneNumber!),
@@ -262,7 +278,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ListTile(
             leading: Icon(Icons.account_circle),
             title: Text(S.current.editProfile),
-            onTap: () => Navigator.of(context).pushNamed(ProfileEditorScreen.route),
+            onTap: () =>
+                Navigator.of(context).pushNamed(ProfileEditorScreen.route),
           ),
           ListTile(
             leading: Icon(Icons.block),
@@ -276,7 +293,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           FutureBuilder<PackageInfo>(
             future: PackageInfo.fromPlatform(),
-            builder: (BuildContext context, AsyncSnapshot<PackageInfo> infoSnapshot) => AboutListTile(
+            builder: (BuildContext context,
+                    AsyncSnapshot<PackageInfo> infoSnapshot) =>
+                AboutListTile(
               icon: const Icon(Icons.info),
               applicationIcon: SvgPicture.asset(
                 Assets.logo,
@@ -287,7 +306,9 @@ class _HomeScreenState extends State<HomeScreen> {
               applicationName: References.appName,
               applicationLegalese: References.copyrightString,
               // TODO: Tenere aggiornata questa stringa.
-              applicationVersion: infoSnapshot.hasData ? ("v" + infoSnapshot.data!.version) : "",
+              applicationVersion: infoSnapshot.hasData
+                  ? ("v" + infoSnapshot.data!.version)
+                  : "",
               aboutBoxChildren: [
                 Text(S.current.appAbout),
               ],
@@ -296,21 +317,25 @@ class _HomeScreenState extends State<HomeScreen> {
           Spacer(),
           ListTile(
             title: Text(S.current.privacyPolicy),
-            onTap: () =>
-                Navigator.of(context).pushNamed(WebViewScreen.route, arguments: Tuple2<String, String>(S.current.privacyPolicy, References.privacyPolicyUrl)),
+            onTap: () => Navigator.of(context).pushNamed(WebViewScreen.route,
+                arguments: Tuple2<String, String>(
+                    S.current.privacyPolicy, References.privacyPolicyUrl)),
           ),
           ListTile(
             title: Text(S.current.termsAndConditions),
-            onTap: () => Navigator.of(context)
-                .pushNamed(WebViewScreen.route, arguments: Tuple2<String, String>(S.current.termsAndConditions, References.termsAndConditionsUrl)),
+            onTap: () => Navigator.of(context).pushNamed(WebViewScreen.route,
+                arguments: Tuple2<String, String>(S.current.termsAndConditions,
+                    References.termsAndConditionsUrl)),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 8.0, bottom: MediaQuery.of(context).viewPadding.bottom),
+            padding: EdgeInsets.only(
+                left: 8.0, bottom: MediaQuery.of(context).viewPadding.bottom),
             child: Column(
               children: [
                 TextButton(
                   child: Text(S.current.logout),
-                  onPressed: () async => await InitHelper(context).deinitialize(),
+                  onPressed: () async =>
+                      await InitHelper(context).deinitialize(),
                 ),
               ],
             ),
@@ -324,7 +349,8 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() => working = true);
     try {
       // Il libro esiste nel database.
-      BookModel book = await BookHelper.createBookSell(isbn, Provider.of<UserModel>(context, listen: false).uid!);
+      BookModel book = await BookHelper.createBookSell(
+          isbn, Provider.of<UserModel>(context, listen: false).uid!);
       Navigator.of(context).pushNamed(BookEditorScreen.route, arguments: book);
     } on BookNotFoundError {
       // Il libro non esiste nel database.
@@ -334,7 +360,8 @@ class _HomeScreenState extends State<HomeScreen> {
       return;
     } catch (e) {
       // È comparso un errore sconosciuto.
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(S.current.bookError)));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(S.current.bookError)));
     }
     setState(() => working = false);
   }

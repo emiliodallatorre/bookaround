@@ -5,7 +5,7 @@
  */
 
 import 'package:flutter_geocoder/geocoder.dart';
-import 'package:google_maps_webservice/places.dart';
+import 'package:flutter_google_places_hoc081098/google_maps_webservice_places.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'place_model.g.dart';
@@ -36,12 +36,16 @@ class PlaceModel {
 
   factory PlaceModel.fromAddress(Address address) => PlaceModel(
         id: address.featureName,
-        description: address.locality ?? address.adminArea ?? address.countryName ?? address.addressLine,
+        description: address.locality ??
+            address.adminArea ??
+            address.countryName ??
+            address.addressLine,
         placeId: address.locality,
         placeReference: address.adminArea,
       );
 
-  factory PlaceModel.fromJson(Map<String, dynamic> parsedJson) => _$PlaceModelFromJson(parsedJson);
+  factory PlaceModel.fromJson(Map<String, dynamic> parsedJson) =>
+      _$PlaceModelFromJson(parsedJson);
 
   Map<String, dynamic> toJson() => _$PlaceModelToJson(this);
 }
