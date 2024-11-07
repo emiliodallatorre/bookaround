@@ -76,6 +76,7 @@ dependencies:
   image_picker: ^1.1.2
 
 
+  intl: any
 dependency_overrides:
   meta: ^1.16.0
 
