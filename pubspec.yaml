@@ -22,63 +22,62 @@ dependencies:
   # Grafica
   # cupertino_icons: ^1.0.2
   input_code_field: ^2.0.2
-  google_fonts: ^6.1.0
-  showcaseview: ^2.0.3
+  google_fonts: ^6.2.1
+  showcaseview: ^3.0.0
 
   # Firebase
-  cloud_firestore: ^4.13.5
-  firebase_auth: ^4.15.2
-  firebase_core: ^2.24.2
-  cloud_functions: ^4.5.8
-  firebase_messaging: ^14.7.8
-  firebase_storage: ^11.5.5
-  firebase_crashlytics: ^3.4.8
-  firebase_dynamic_links: ^5.4.8
-  firebase_analytics: ^10.7.4
+  cloud_firestore: ^5.4.5
+  firebase_auth: ^5.3.2
+  firebase_core: ^3.7.0
+  cloud_functions: ^5.1.4
+  firebase_messaging: ^15.1.4
+  firebase_storage: ^12.3.5
+  firebase_crashlytics: ^4.1.4
+  firebase_dynamic_links: ^6.0.9
+  firebase_analytics: ^11.3.4
 
   # Logica
-  provider: ^6.0.5
-  rxdart: ^0.27.7
+  provider: ^6.1.2
+  rxdart: ^0.28.0
 
   # Modelli
-  json_annotation: ^4.8.1
+  json_annotation: ^4.9.0
 
   # Utilità
   form_field_validator: ^1.1.0
-  cached_network_image: ^3.3.0
+  cached_network_image: ^3.4.1
   flutter_barcode_scanner: ^2.0.0
   random_string: ^2.3.1
-  shared_preferences: ^2.2.2
-  timeago: ^3.6.0
+  shared_preferences: ^2.3.2
+  timeago: ^3.7.0
   overlay_support: ^2.1.0
-  webview_flutter: ^4.4.2
+  webview_flutter: ^4.10.0
   tuple: ^2.0.2
-  share_plus: ^7.2.1
-  package_info_plus: ^4.2.0
+  share_plus: ^10.1.2
+  package_info_plus: ^8.1.1
   intl_phone_number_input: ^0.7.4
 
   # Grafica
-  flutter_svg: ^2.0.9
+  flutter_svg: ^2.0.14
 
   # Localizzazione
-  flutter_google_places:
-    git: https://github.com/emiliodallatorre/flutter_google_places.git
+  flutter_google_places_hoc081098: ^2.0.0
   # geoflutterfire:
   #   git:
   #     url: git://github.com/emiliodallatorre/GeoFlutterFire.git
   #     ref: update_deps
-  geoflutterfire_plus: ^0.0.19
+  geoflutterfire_plus: ^0.0.31
   flutter_geocoder: ^0.2.2-nullsafety
-  geolocator: ^10.1.0
-  google_maps_flutter: ^2.5.0
-  location: ^5.0.3
+  geolocator: ^13.0.1
+  google_maps_flutter: ^2.9.0
+  location: ^7.0.1
 
   # File
-  image_picker: ^1.0.4
+  image_picker: ^1.1.2
 
 
 dependency_overrides:
-  meta: ^1.11.0
+  meta: ^1.16.0
 
 
 dev_dependencies:
@@ -86,16 +85,16 @@ dev_dependencies:
     sdk: flutter
 
   # flutter pub run build_runner build --delete-conflicting-outputs
-  json_serializable: ^6.7.1
-  build_runner: ^2.4.7
+  json_serializable: ^6.8.0
+  build_runner: ^2.4.13
 
   # flutter pub run flutter_launcher_icons:main
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.14.1
 
   # flutter pub run r_flutter:generate
   r_flutter: ^0.9.0
 
-  analyzer: ^6.3.0
+  analyzer: ^6.7.0
 
 flutter:
   uses-material-design: true
