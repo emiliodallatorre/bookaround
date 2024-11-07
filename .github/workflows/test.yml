@@ -2,63 +2,39 @@ on:
   push:
     branches:
       - main
-
-<<<<<<< HEAD
-name: Test Flutter, Firebase Cloud Functions and Firebase rules builds
-jobs:
-  test_flutter_build:
-    name: Test Flutter build
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-java@v1
-      with:
-        java-version: '12.x'
-    - uses: subosito/flutter-action@v2
-      with:
-        channel: 'stable'
-    - run: flutter --version
-    - run: flutter pub get
-    - run: flutter test
-
-  test_firebase_functions:
-    name: Test Firebase functions
-=======
 name: Test build status
 jobs:
   flutter_test:
     name: Test with 'flutter test'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-java@v2
-      with:
-        distribution: 'microsoft'
-        java-version: '17.x'
-    - uses: subosito/flutter-action@v2
-      with:
-        channel: 'master'
-    - run: flutter pub get
-    - run: flutter test
-    
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v2
+        with:
+          distribution: "microsoft"
+          java-version: "17.x"
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Run Flutter test(s)
+        run: flutter test
+      - name: Install DCM
+        uses: CQLabs/setup-dcm@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run DCM
+        run: dcm analyze --ci-key="${{ secrets.DCM_CI_KEY }}" --email="${{ secrets.DCM_EMAIL }}" lib
   functions_test:
     name: Test build of Firebase Cloud Functions
->>>>>>> 2b8670ed4e00f79c8c146e0132caf597690d9805
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-node@v4
         with:
-<<<<<<< HEAD
           node-version: 16
       - run: |
           npm install
           npm run lint
           npm run build
         working-directory: functions
-=======
-          node-version: '16'
-      - run: npm install
-      - run: |
-          npm run lint
-          npm run build
->>>>>>> 2b8670ed4e00f79c8c146e0132caf597690d9805
