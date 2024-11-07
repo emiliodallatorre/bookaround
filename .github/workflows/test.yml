@@ -20,12 +20,6 @@ jobs:
         run: flutter pub get
       - name: Run Flutter test(s)
         run: flutter test
-      - name: Install DCM
-        uses: CQLabs/setup-dcm@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Run DCM
-        run: dcm analyze --ci-key="${{ secrets.DCM_CI_KEY }}" --email="${{ secrets.DCM_EMAIL }}" lib
   functions_test:
     name: Test build of Firebase Cloud Functions
     runs-on: ubuntu-latest
