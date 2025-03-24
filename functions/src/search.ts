@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 
 const baseUrl: string = "https://api2.isbndb.com/";
 const key: string = "45271_d1fdc77384e6af8828ce3a8530f70dcd";
-const headers = { "Content-Type": 'Application/Json', "Authorization": key };
+const headers = { "Content-Type": "Application/Json", "Authorization": key };
 
 export async function searchTextInIsbndb(query: string): Promise<Array<any>> {
     const apiUrl: string = baseUrl + "books/" + encodeURIComponent(query);
@@ -81,7 +81,7 @@ export async function searchIsbnInFirebase(isbn: string): Promise<any> {
 }
 
 function cleanStrin(original: string): string {
-    return original.replace(/\W/g, '').toLowerCase()
+    return original.replace(/\W/g, "").toLowerCase()
 }
 
 function getTerms(original: string[]): string[] {

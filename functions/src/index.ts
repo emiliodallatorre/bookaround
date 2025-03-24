@@ -1,7 +1,7 @@
-import * as admin from 'firebase-admin';
-import * as users from './users';
-import * as chat from './chat';
-import * as isbndb from './isbndb';
+import * as admin from "firebase-admin";
+import * as chat from "./chat";
+import * as isbndb from "./isbndb";
+import * as users from "./users";
 
 admin.initializeApp();
 
