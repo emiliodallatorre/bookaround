@@ -20,6 +20,13 @@ jobs:
         run: flutter pub get
       - name: Run Flutter test(s)
         run: flutter test
+  code_coverage:
+    name: Upload coverage reports to Codecov
+    runs-on: ubuntu-latest
+    steps:
+      - uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
   functions_test:
     name: Test build of Firebase Cloud Functions
     runs-on: ubuntu-latest
