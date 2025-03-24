@@ -74,9 +74,12 @@ dependencies:
 
   # File
   image_picker: ^1.1.2
-
-
   intl: any
+
+  # Coverage
+  coverage: ^1.11.1
+  
+
 dependency_overrides:
   meta: ^1.16.0
 

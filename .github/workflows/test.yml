@@ -19,7 +19,10 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
       - name: Run Flutter test(s)
-        run: flutter test
+        run: |
+          flutter test
+          dart pub global activate coverage
+          dart pub global run coverage:test_with_coverage
   code_coverage:
     name: Upload coverage reports to Codecov
     runs-on: ubuntu-latest
